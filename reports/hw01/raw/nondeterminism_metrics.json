@@ -1,0 +1,34 @@
+{
+  "0.7": {
+    "temperature": 0.7,
+    "runCount": 20,
+    "distinctTagSets": 11,
+    "tagsInAllRuns": [],
+    "tagsInExactlyOneRun": [
+      "academic_concentration",
+      "concentration_impact",
+      "concentration_metrics",
+      "concentration_outcomes",
+      "student_cognitive_function",
+      "student_concentration_studies",
+      "university_sleep_studies"
+    ],
+    "latencyP50Ms": 5526.03,
+    "latencyP95Ms": 7654.37,
+    "latencyP99Ms": 18532.39
+  },
+  "0.0": {
+    "temperature": 0.0,
+    "runCount": 20,
+    "distinctTagSets": 1,
+    "tagsInAllRuns": [
+      "academic_performance",
+      "concentration_effects",
+      "sleep_duration"
+    ],
+    "tagsInExactlyOneRun": [],
+    "latencyP50Ms": 5105.43,
+    "latencyP95Ms": 5529.57,
+    "latencyP99Ms": 7052.89
+  }
+}
