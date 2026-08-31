@@ -1,8 +1,10 @@
 .git
 .gitignore
 .vscode
+.venv
 reports
 src
 __pycache__
+**/__pycache__
 *.pyc
 *.pdf

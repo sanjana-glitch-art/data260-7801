@@ -1,10 +1,33 @@
-
 import json
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+
 from src.model_client import ModelClient
+
+
+MODEL_NAME = "qwen3:4b"
+
+AGENT_PATH = (
+    PROJECT_ROOT
+    / "AGENT.md"
+)
+
+TOKEN_LOG_PATH = (
+    PROJECT_ROOT
+    / "reports"
+    / "hw01"
+    / "raw"
+    / "client_token_counts.json"
+)
 
 
 BULLET_SCHEMA: dict[str, Any] = {
@@ -19,44 +42,56 @@ BULLET_SCHEMA: dict[str, Any] = {
             "maxItems": 8
         }
     },
-    "required": ["bullets"],
+    "required": [
+        "bullets"
+    ],
     "additionalProperties": False
 }
 
-TOKEN_LOG_PATH = Path(
-    "reports/hw01/raw/client_token_counts.json"
-)
 
 def load_system_prompt() -> str:
     """Load code-review instructions from AGENT.md."""
-    path = Path("AGENT.md")
-
-    if not path.exists():
+    if not AGENT_PATH.exists():
         raise FileNotFoundError(
-            "AGENT.md was not found."
+            f"AGENT.md was not found at "
+            f"{AGENT_PATH}."
         )
 
-    return path.read_text(
+    return AGENT_PATH.read_text(
         encoding="utf-8"
     ).strip()
 
 
-def render_bullets(content: str) -> str:
-    """Convert the structured model response into bullet lines."""
+def render_bullets(
+    content: str
+) -> str:
+    """Convert structured output into bullet lines."""
     parsed = json.loads(content)
-    raw_bullets = parsed.get("bullets", [])
+
+    raw_bullets = parsed.get(
+        "bullets",
+        []
+    )
 
     bullets: list[str] = []
 
     for raw_bullet in raw_bullets:
-        bullet = str(raw_bullet).strip()
+        bullet = str(
+            raw_bullet
+        ).strip()
 
-        # Prevent duplicate bullet markers.
-        bullet = bullet.removeprefix("-").strip()
-        bullet = bullet.removeprefix("*").strip()
+        bullet = bullet.removeprefix(
+            "-"
+        ).strip()
+
+        bullet = bullet.removeprefix(
+            "*"
+        ).strip()
 
         if bullet:
-            bullets.append(f"- {bullet}")
+            bullets.append(
+                f"- {bullet}"
+            )
 
     if not bullets:
         raise ValueError(
@@ -66,7 +101,9 @@ def render_bullets(content: str) -> str:
     return "\n".join(bullets)
 
 
-def is_bullet_only(text: str) -> bool:
+def is_bullet_only(
+    text: str
+) -> bool:
     """Verify every nonempty line begins with a bullet."""
     lines = [
         line
@@ -100,50 +137,68 @@ def print_stats(
     stats = client.get_stats()
 
     print("\n--- Statistics ---")
-    print(f'Model: {stats["model"]}')
-    print(f'Turn count: {stats["turn_count"]}')
+
+    print(
+        f'Model: {stats["model"]}'
+    )
+
+    print(
+        f'Turn count: '
+        f'{stats["turn_count"]}'
+    )
+
     print(
         "Cumulative input tokens:",
         stats["cumulative_input_tokens"]
     )
+
     print(
         "Cumulative output tokens:",
         stats["cumulative_output_tokens"]
     )
+
     print(
         "Cumulative total tokens:",
         stats["cumulative_total_tokens"]
     )
+
     print(
         "Serialized conversation-history length:",
-        serialized_history_length(history),
+        serialized_history_length(
+            history
+        ),
         "characters"
     )
+
 
 def save_token_records(
     records: list[dict[str, Any]]
 ) -> None:
-    """Save per-turn token counts as machine-readable JSON."""
+    """Save per-turn token counts as JSON."""
     TOKEN_LOG_PATH.parent.mkdir(
         parents=True,
         exist_ok=True
     )
 
     payload = {
-        "model": "qwen3:4b",
+        "model": MODEL_NAME,
         "turns": records
     }
 
     TOKEN_LOG_PATH.write_text(
-        json.dumps(payload, indent=2),
+        json.dumps(
+            payload,
+            indent=2
+        ),
         encoding="utf-8"
     )
+
 
 def main() -> None:
     system_prompt = load_system_prompt()
 
     client = ModelClient(
-        model="qwen3:4b",
+        model=MODEL_NAME,
         temperature=0.0,
         num_ctx=4096,
         num_predict=256
@@ -153,7 +208,7 @@ def main() -> None:
     token_records: list[dict[str, Any]] = []
 
     print("HW1 Local Code-Review Client")
-    print("Model: qwen3:4b")
+    print(f"Model: {MODEL_NAME}")
     print("Commands: /stats, /exit")
     print(
         "Enter code or a code-review question."
@@ -161,8 +216,13 @@ def main() -> None:
 
     while True:
         try:
-            user_input = input("\nYou: ").strip()
-        except (EOFError, KeyboardInterrupt):
+            user_input = input(
+                "\nYou: "
+            ).strip()
+        except (
+            EOFError,
+            KeyboardInterrupt
+        ):
             print()
             break
 
@@ -219,9 +279,11 @@ def main() -> None:
             ValueError
         ) as error:
             print(
-                "\nModel response could not be rendered:",
+                "\nModel response could not "
+                "be rendered:",
                 error
             )
+
             print("Raw response:")
             print(result.content)
             continue
@@ -229,21 +291,29 @@ def main() -> None:
         print("\nAssistant:")
         print(review)
 
-        bullet_check = is_bullet_only(review)
+        bullet_check = is_bullet_only(
+            review
+        )
 
         print(
             "\nBullet-only verification:",
-            "PASS" if bullet_check else "FAIL"
+            (
+                "PASS"
+                if bullet_check
+                else "FAIL"
+            )
         )
 
         print(
             "Input tokens:",
             result.input_tokens
         )
+
         print(
             "Output tokens:",
             result.output_tokens
         )
+
         print(
             "Total tokens:",
             result.total_tokens
@@ -266,27 +336,47 @@ def main() -> None:
             "timestamp": datetime.now(
                 timezone.utc
             ).isoformat(),
-            "input_tokens": result.input_tokens,
-            "output_tokens": result.output_tokens,
-            "total_tokens": result.total_tokens,
+            "input_tokens": (
+                result.input_tokens
+            ),
+            "output_tokens": (
+                result.output_tokens
+            ),
+            "total_tokens": (
+                result.total_tokens
+            ),
             "cumulative_input_tokens": (
-                stats["cumulative_input_tokens"]
+                stats[
+                    "cumulative_input_tokens"
+                ]
             ),
             "cumulative_output_tokens": (
-                stats["cumulative_output_tokens"]
+                stats[
+                    "cumulative_output_tokens"
+                ]
             ),
             "cumulative_total_tokens": (
-                stats["cumulative_total_tokens"]
+                stats[
+                    "cumulative_total_tokens"
+                ]
             ),
             "serialized_history_length": (
-                serialized_history_length(history)
+                serialized_history_length(
+                    history
+                )
             ),
-            "bullet_only_passed": bullet_check
+            "bullet_only_passed": (
+                bullet_check
+            )
         })
 
-        save_token_records(token_records)   
+        save_token_records(
+            token_records
+        )
 
-    print("\n=== Final Session Statistics ===")
+    print(
+        "\n=== Final Session Statistics ==="
+    )
 
     final_stats = client.get_stats()
 
@@ -294,27 +384,33 @@ def main() -> None:
         "Turn count:",
         final_stats["turn_count"]
     )
+
     print(
         "Cumulative input tokens:",
         final_stats[
             "cumulative_input_tokens"
         ]
     )
+
     print(
         "Cumulative output tokens:",
         final_stats[
             "cumulative_output_tokens"
         ]
     )
+
     print(
         "Cumulative total tokens:",
         final_stats[
             "cumulative_total_tokens"
         ]
     )
+
     print(
         "Serialized conversation-history length:",
-        serialized_history_length(history),
+        serialized_history_length(
+            history
+        ),
         "characters"
     )
 

@@ -1,11 +1,19 @@
 import csv
 import json
 import math
+import sys
 import time
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 
 from src.model_client import ModelClient
 
@@ -16,26 +24,39 @@ from agents_demo import (
 )
 
 
-INPUT_PATH = Path(
-    "reports/hw01/cases/nondeterminism_input.json"
+INPUT_PATH = (
+    PROJECT_ROOT
+    / "reports"
+    / "hw01"
+    / "cases"
+    / "nondeterminism_input.json"
 )
 
-RAW_DIRECTORY = Path("reports/hw01/raw")
+RAW_DIRECTORY = (
+    PROJECT_ROOT
+    / "reports"
+    / "hw01"
+    / "raw"
+)
 
 RESULTS_JSON_PATH = (
-    RAW_DIRECTORY / "nondeterminism_results.json"
+    RAW_DIRECTORY
+    / "nondeterminism_results.json"
 )
 
 RESULTS_CSV_PATH = (
-    RAW_DIRECTORY / "nondeterminism_results.csv"
+    RAW_DIRECTORY
+    / "nondeterminism_results.csv"
 )
 
 METRICS_JSON_PATH = (
-    RAW_DIRECTORY / "nondeterminism_metrics.json"
+    RAW_DIRECTORY
+    / "nondeterminism_metrics.json"
 )
 
 FAILURES_JSON_PATH = (
-    RAW_DIRECTORY / "nondeterminism_failures.json"
+    RAW_DIRECTORY
+    / "nondeterminism_failures.json"
 )
 
 MODEL_NAME = "qwen3:4b"
@@ -43,21 +64,29 @@ TEMPERATURES = [0.7, 0.0]
 RUNS_PER_TEMPERATURE = 20
 
 
-def save_json(path: Path, data: Any) -> None:
-    """Save JSON data using readable indentation."""
+def save_json(
+    path: Path,
+    data: Any
+) -> None:
+    """Save JSON data with readable indentation."""
     path.write_text(
-        json.dumps(data, indent=2),
+        json.dumps(
+            data,
+            indent=2
+        ),
         encoding="utf-8"
     )
 
 
 def load_existing_results() -> list[dict[str, Any]]:
-    """Resume safely if a previous experiment was interrupted."""
+    """Resume safely if an experiment was interrupted."""
     if not RESULTS_JSON_PATH.exists():
         return []
 
     return json.loads(
-        RESULTS_JSON_PATH.read_text(encoding="utf-8")
+        RESULTS_JSON_PATH.read_text(
+            encoding="utf-8"
+        )
     )
 
 
@@ -72,14 +101,23 @@ def percentile(
     ordered = sorted(values)
 
     if len(ordered) == 1:
-        return round(ordered[0], 2)
+        return round(
+            ordered[0],
+            2
+        )
 
-    position = (len(ordered) - 1) * percentage
+    position = (
+        len(ordered) - 1
+    ) * percentage
+
     lower_index = math.floor(position)
     upper_index = math.ceil(position)
 
     if lower_index == upper_index:
-        return round(ordered[lower_index], 2)
+        return round(
+            ordered[lower_index],
+            2
+        )
 
     lower_value = ordered[lower_index]
     upper_value = ordered[upper_index]
@@ -89,13 +127,16 @@ def percentile(
         upper_value - lower_value
     ) * fraction
 
-    return round(result, 2)
+    return round(
+        result,
+        2
+    )
 
 
 def normalized_tag_set(
     tags: list[str]
 ) -> tuple[str, ...]:
-    """Make tag-set comparison independent of tag order."""
+    """Make tag comparison independent of tag order."""
     return tuple(
         sorted(
             tag.strip().lower()
@@ -119,7 +160,8 @@ def run_pipeline(
     )
 
     planner_latency = (
-        time.perf_counter() - planner_start
+        time.perf_counter()
+        - planner_start
     ) * 1000
 
     reviewer_start = time.perf_counter()
@@ -132,7 +174,8 @@ def run_pipeline(
     )
 
     reviewer_latency = (
-        time.perf_counter() - reviewer_start
+        time.perf_counter()
+        - reviewer_start
     ) * 1000
 
     final_output = finalize_output(
@@ -154,7 +197,8 @@ def run_pipeline(
             2
         ),
         "latencyMs": round(
-            planner_latency + reviewer_latency,
+            planner_latency
+            + reviewer_latency,
             2
         )
     }
@@ -163,7 +207,7 @@ def run_pipeline(
 def calculate_metrics(
     results: list[dict[str, Any]]
 ) -> dict[str, Any]:
-    """Calculate all metrics required by the assignment."""
+    """Calculate all required experiment metrics."""
     metrics: dict[str, Any] = {}
 
     for temperature in TEMPERATURES:
@@ -174,27 +218,38 @@ def calculate_metrics(
         ]
 
         tag_sets = [
-            normalized_tag_set(result["tags"])
+            normalized_tag_set(
+                result["tags"]
+            )
             for result in temperature_results
         ]
 
-        distinct_tag_sets = set(tag_sets)
+        distinct_tag_sets = set(
+            tag_sets
+        )
 
         tag_counter: Counter[str] = Counter()
 
         for tag_set in tag_sets:
-            # Each tag counts at most once in each run.
-            tag_counter.update(set(tag_set))
+            tag_counter.update(
+                set(tag_set)
+            )
+
+        run_count = len(
+            temperature_results
+        )
 
         tags_in_all_runs = sorted(
             tag
-            for tag, count in tag_counter.items()
-            if count == len(temperature_results)
+            for tag, count
+            in tag_counter.items()
+            if count == run_count
         )
 
         tags_in_exactly_one_run = sorted(
             tag
-            for tag, count in tag_counter.items()
+            for tag, count
+            in tag_counter.items()
             if count == 1
         )
 
@@ -207,11 +262,13 @@ def calculate_metrics(
 
         metrics[key] = {
             "temperature": temperature,
-            "runCount": len(temperature_results),
+            "runCount": run_count,
             "distinctTagSets": len(
                 distinct_tag_sets
             ),
-            "tagsInAllRuns": tags_in_all_runs,
+            "tagsInAllRuns": (
+                tags_in_all_runs
+            ),
             "tagsInExactlyOneRun": (
                 tags_in_exactly_one_run
             ),
@@ -263,21 +320,33 @@ def save_csv(
 
         for result in results:
             writer.writerow({
-                "temperature": result["temperature"],
-                "runNumber": result["runNumber"],
-                "timestamp": result["timestamp"],
-                "model": result["model"],
+                "temperature": (
+                    result["temperature"]
+                ),
+                "runNumber": (
+                    result["runNumber"]
+                ),
+                "timestamp": (
+                    result["timestamp"]
+                ),
+                "model": (
+                    result["model"]
+                ),
                 "tags": json.dumps(
                     result["tags"]
                 ),
-                "summary": result["summary"],
+                "summary": (
+                    result["summary"]
+                ),
                 "plannerLatencyMs": (
                     result["plannerLatencyMs"]
                 ),
                 "reviewerLatencyMs": (
                     result["reviewerLatencyMs"]
                 ),
-                "latencyMs": result["latencyMs"],
+                "latencyMs": (
+                    result["latencyMs"]
+                ),
                 "reviewerChanged": (
                     result["reviewerChanged"]
                 )
@@ -291,7 +360,9 @@ def main() -> None:
     )
 
     fixed_input = json.loads(
-        INPUT_PATH.read_text(encoding="utf-8")
+        INPUT_PATH.read_text(
+            encoding="utf-8"
+        )
     )
 
     title = fixed_input["title"]
@@ -308,18 +379,28 @@ def main() -> None:
         )
 
     print("Fixed input loaded:")
-    print(json.dumps(fixed_input, indent=2))
-    print(f"\nModel: {MODEL_NAME}")
     print(
-        f"Target: {RUNS_PER_TEMPERATURE} runs "
-        "per temperature"
+        json.dumps(
+            fixed_input,
+            indent=2
+        )
+    )
+
+    print(
+        f"\nModel: {MODEL_NAME}"
+    )
+
+    print(
+        f"Target: {RUNS_PER_TEMPERATURE} "
+        "runs per temperature"
     )
 
     for temperature in TEMPERATURES:
         completed = sum(
             1
             for result in results
-            if result["temperature"] == temperature
+            if result["temperature"]
+            == temperature
         )
 
         print(
@@ -329,7 +410,9 @@ def main() -> None:
 
         model = ModelClient(
             model=MODEL_NAME,
-            base_url="http://localhost:11434",
+            base_url=(
+                "http://localhost:11434"
+            ),
             temperature=temperature,
             num_ctx=2048,
             num_predict=256
@@ -368,20 +451,29 @@ def main() -> None:
                         "model": MODEL_NAME,
                         "title": title,
                         "content": content,
-                        "tags": final_output["tags"],
+                        "tags": (
+                            final_output["tags"]
+                        ),
                         "summary": (
                             final_output["summary"]
                         ),
                         "planner": (
-                            pipeline_result["planner"]
+                            pipeline_result[
+                                "planner"
+                            ]
                         ),
                         "reviewer": (
-                            pipeline_result["reviewer"]
+                            pipeline_result[
+                                "reviewer"
+                            ]
                         ),
                         "reviewerChanged": (
                             pipeline_result[
                                 "reviewer"
-                            ].get("changed", False)
+                            ].get(
+                                "changed",
+                                False
+                            )
                         ),
                         "plannerLatencyMs": (
                             pipeline_result[
@@ -394,11 +486,14 @@ def main() -> None:
                             ]
                         ),
                         "latencyMs": (
-                            pipeline_result["latencyMs"]
+                            pipeline_result[
+                                "latencyMs"
+                            ]
                         )
                     }
 
                     results.append(result)
+
                     save_json(
                         RESULTS_JSON_PATH,
                         results
@@ -410,6 +505,7 @@ def main() -> None:
                             result["tags"]
                         )
                     )
+
                     print(
                         "Latency:",
                         f'{result["latencyMs"]} ms'
@@ -443,26 +539,49 @@ def main() -> None:
 
             if not success:
                 raise RuntimeError(
-                    f"Run {run_number} at temperature "
-                    f"{temperature} failed three times."
+                    f"Run {run_number} at "
+                    f"temperature {temperature} "
+                    "failed three times."
                 )
 
     save_csv(results)
 
-    metrics = calculate_metrics(results)
+    metrics = calculate_metrics(
+        results
+    )
 
     save_json(
         METRICS_JSON_PATH,
         metrics
     )
 
-    print("\n=== Experiment Metrics ===")
-    print(json.dumps(metrics, indent=2))
+    print(
+        "\n=== Experiment Metrics ==="
+    )
+
+    print(
+        json.dumps(
+            metrics,
+            indent=2
+        )
+    )
 
     print("\nFiles created:")
-    print(RESULTS_JSON_PATH)
-    print(RESULTS_CSV_PATH)
-    print(METRICS_JSON_PATH)
+    print(
+        RESULTS_JSON_PATH.relative_to(
+            PROJECT_ROOT
+        )
+    )
+    print(
+        RESULTS_CSV_PATH.relative_to(
+            PROJECT_ROOT
+        )
+    )
+    print(
+        METRICS_JSON_PATH.relative_to(
+            PROJECT_ROOT
+        )
+    )
 
 
 if __name__ == "__main__":

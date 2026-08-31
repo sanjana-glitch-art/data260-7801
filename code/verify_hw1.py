@@ -8,10 +8,13 @@ from pathlib import Path
 from typing import Any
 
 
-ROOT = Path(__file__).resolve().parent
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 OUTPUT_PATH = (
-    ROOT / "reports" / "hw01" / "verification.json"
+    PROJECT_ROOT
+    / "reports"
+    / "hw01"
+    / "verification.json"
 )
 
 checks: list[dict[str, Any]] = []
@@ -31,19 +34,27 @@ def record(
 
 
 def check_required_files() -> None:
+    """Verify all required deliverables exist."""
     required_files = [
         "AGENT.md",
         "DOMAIN_SCHEMA.md",
-        "Dockerfile",
         "README.md",
-        "agents_demo.py",
-        "hw1_client.py",
-        "index.html",
-        "script.js",
+        "requirements.txt",
+        "code/Dockerfile",
+        "code/agents_demo.py",
+        "code/hw1_client.py",
+        "code/run_nondeterminism.py",
+        "code/verify_hw1.py",
+        "code/web_application/index.html",
+        "code/web_application/script.js",
+        "src/__init__.py",
         "src/model_client.py",
         "reports/hw01/AI_USE.md",
         "reports/hw01/METRICS.md",
         "reports/hw01/RUN_LOG.txt",
+        "reports/hw01/report.pdf",
+        "reports/hw01/verification.json",
+        "reports/hw01/reproducible_run_instructions.md",
         "reports/hw01/cases/nondeterminism_input.json",
         "reports/hw01/raw/nondeterminism_results.json",
         "reports/hw01/raw/nondeterminism_results.csv",
@@ -54,7 +65,9 @@ def check_required_files() -> None:
     missing = [
         path
         for path in required_files
-        if not (ROOT / path).is_file()
+        if not (
+            PROJECT_ROOT / path
+        ).is_file()
     ]
 
     record(
@@ -69,10 +82,15 @@ def check_required_files() -> None:
 
 
 def check_python_version() -> None:
+    """Verify that Python 3.11 or 3.12 is active."""
     version = sys.version_info
+
     passed = (
         version.major == 3
-        and version.minor in {11, 12}
+        and version.minor in {
+            11,
+            12
+        }
     )
 
     record(
@@ -82,10 +100,72 @@ def check_python_version() -> None:
     )
 
 
+def check_python_sources() -> None:
+    """Verify that all Python source files compile."""
+    source_paths = [
+        (
+            PROJECT_ROOT
+            / "code"
+            / "agents_demo.py"
+        ),
+        (
+            PROJECT_ROOT
+            / "code"
+            / "run_nondeterminism.py"
+        ),
+        (
+            PROJECT_ROOT
+            / "code"
+            / "hw1_client.py"
+        ),
+        (
+            PROJECT_ROOT
+            / "src"
+            / "model_client.py"
+        )
+    ]
+
+    failures: list[str] = []
+
+    for path in source_paths:
+        try:
+            source = path.read_text(
+                encoding="utf-8"
+            )
+
+            compile(
+                source,
+                str(path),
+                "exec"
+            )
+        except Exception as error:
+            failures.append(
+                f"{path.name}: {error}"
+            )
+
+    record(
+        "python_source_compilation",
+        not failures,
+        (
+            "All Python source files compile."
+            if not failures
+            else f"Compilation failures: {failures}"
+        )
+    )
+
+
 def check_html() -> None:
-    html = (
-        ROOT / "index.html"
-    ).read_text(encoding="utf-8")
+    """Verify the required HTML form elements."""
+    html_path = (
+        PROJECT_ROOT
+        / "code"
+        / "web_application"
+        / "index.html"
+    )
+
+    html = html_path.read_text(
+        encoding="utf-8"
+    )
 
     requirements = {
         "correct title": (
@@ -99,7 +179,7 @@ def check_html() -> None:
         "primary field": (
             'id="trialTitle"' in html
         ),
-        "autofocus": (
+        "primary field autofocus": (
             "autofocus" in html
         ),
         "secondary field": (
@@ -125,7 +205,8 @@ def check_html() -> None:
 
     failed = [
         name
-        for name, passed in requirements.items()
+        for name, passed
+        in requirements.items()
         if not passed
     ]
 
@@ -138,7 +219,8 @@ def check_html() -> None:
 
     if option_count != 4:
         failed.append(
-            f"expected 4 phase options, found {option_count}"
+            "expected 4 phase options, "
+            f"found {option_count}"
         )
 
     record(
@@ -153,13 +235,22 @@ def check_html() -> None:
 
 
 def check_javascript() -> None:
-    script = (
-        ROOT / "script.js"
-    ).read_text(encoding="utf-8")
+    """Verify the required JavaScript concepts."""
+    script_path = (
+        PROJECT_ROOT
+        / "code"
+        / "web_application"
+        / "script.js"
+    )
+
+    script = script_path.read_text(
+        encoding="utf-8"
+    )
 
     requirements = {
         "arrow validation": (
-            "const validateForm = () =>" in script
+            "const validateForm = () =>"
+            in script
         ),
         "description length": (
             "trialDescription.length <= 25"
@@ -193,7 +284,8 @@ def check_javascript() -> None:
 
     failed = [
         name
-        for name, passed in requirements.items()
+        for name, passed
+        in requirements.items()
         if not passed
     ]
 
@@ -209,28 +301,62 @@ def check_javascript() -> None:
 
 
 def check_model_adapter() -> None:
-    agents_source = (
-        ROOT / "agents_demo.py"
-    ).read_text(encoding="utf-8")
+    """Verify all model calls use ModelClient."""
+    agents_path = (
+        PROJECT_ROOT
+        / "code"
+        / "agents_demo.py"
+    )
+
+    experiment_path = (
+        PROJECT_ROOT
+        / "code"
+        / "run_nondeterminism.py"
+    )
+
+    client_path = (
+        PROJECT_ROOT
+        / "code"
+        / "hw1_client.py"
+    )
+
+    agents_source = agents_path.read_text(
+        encoding="utf-8"
+    )
 
     experiment_source = (
-        ROOT / "run_nondeterminism.py"
-    ).read_text(encoding="utf-8")
+        experiment_path.read_text(
+            encoding="utf-8"
+        )
+    )
+
+    client_source = client_path.read_text(
+        encoding="utf-8"
+    )
+
+    sources = [
+        agents_source,
+        experiment_source,
+        client_source
+    ]
 
     passed = (
-        "from src.model_client import ModelClient"
-        in agents_source
-        and "from src.model_client import ModelClient"
-        in experiment_source
-        and "ChatOllama" not in agents_source
-        and "ChatOllama" not in experiment_source
+        all(
+            "from src.model_client import ModelClient"
+            in source
+            for source in sources
+        )
+        and all(
+            "ChatOllama" not in source
+            for source in sources
+        )
     )
 
     record(
         "model_adapter_usage",
         passed,
         (
-            "Agent and experiment calls use ModelClient."
+            "All application model calls use ModelClient."
             if passed
             else "A direct model call may remain."
         )
@@ -238,8 +364,9 @@ def check_model_adapter() -> None:
 
 
 def check_nondeterminism_results() -> None:
+    """Verify all 40 experiment results."""
     path = (
-        ROOT
+        PROJECT_ROOT
         / "reports"
         / "hw01"
         / "raw"
@@ -247,7 +374,9 @@ def check_nondeterminism_results() -> None:
     )
 
     results = json.loads(
-        path.read_text(encoding="utf-8")
+        path.read_text(
+            encoding="utf-8"
+        )
     )
 
     counts = Counter(
@@ -256,8 +385,23 @@ def check_nondeterminism_results() -> None:
     )
 
     schemas_valid = all(
-        len(result["tags"]) == 3
-        and len(result["summary"].split()) <= 25
+        isinstance(
+            result.get("tags"),
+            list
+        )
+        and len(result["tags"]) == 3
+        and len(
+            result.get(
+                "summary",
+                ""
+            ).split()
+        ) <= 25
+        and bool(
+            result.get(
+                "summary",
+                ""
+            ).strip()
+        )
         for result in results
     )
 
@@ -281,8 +425,9 @@ def check_nondeterminism_results() -> None:
 
 
 def check_token_results() -> None:
+    """Verify the saved five-turn token log."""
     path = (
-        ROOT
+        PROJECT_ROOT
         / "reports"
         / "hw01"
         / "raw"
@@ -290,22 +435,43 @@ def check_token_results() -> None:
     )
 
     data = json.loads(
-        path.read_text(encoding="utf-8")
+        path.read_text(
+            encoding="utf-8"
+        )
     )
 
-    turns = data.get("turns", [])
+    turns = data.get(
+        "turns",
+        []
+    )
+
+    bullet_checks_passed = all(
+        turn.get(
+            "bullet_only_passed"
+        )
+        for turn in turns
+    )
+
+    token_counts_present = all(
+        turn.get(
+            "input_tokens",
+            0
+        ) > 0
+        and turn.get(
+            "output_tokens",
+            0
+        ) > 0
+        and turn.get(
+            "total_tokens",
+            0
+        ) > 0
+        for turn in turns
+    )
 
     passed = (
         len(turns) == 5
-        and all(
-            turn.get("bullet_only_passed")
-            for turn in turns
-        )
-        and all(
-            turn.get("input_tokens", 0) > 0
-            and turn.get("output_tokens", 0) > 0
-            for turn in turns
-        )
+        and bullet_checks_passed
+        and token_counts_present
     )
 
     record(
@@ -314,14 +480,20 @@ def check_token_results() -> None:
         (
             f"Turns={len(turns)}, "
             "all bullet checks passed="
-            f"{all(turn.get('bullet_only_passed') for turn in turns)}"
+            f"{bullet_checks_passed}, "
+            "token counts present="
+            f"{token_counts_present}"
         )
     )
 
 
 def main() -> None:
+    """Run all Homework 1 verification checks."""
+    checks.clear()
+
     check_required_files()
     check_python_version()
+    check_python_sources()
     check_html()
     check_javascript()
     check_model_adapter()
@@ -334,8 +506,12 @@ def main() -> None:
     )
 
     result = {
-        "assignment": "DATA-260 Homework 1",
-        "student": "Sanjana Thummalapalli",
+        "assignment": (
+            "DATA-260 Homework 1"
+        ),
+        "student": (
+            "Sanjana Thummalapalli"
+        ),
         "sid4": 7801,
         "verifySeed": 267801,
         "timestamp": datetime.now(
@@ -345,12 +521,25 @@ def main() -> None:
         "checks": checks
     }
 
+    OUTPUT_PATH.parent.mkdir(
+        parents=True,
+        exist_ok=True
+    )
+
     OUTPUT_PATH.write_text(
-        json.dumps(result, indent=2),
+        json.dumps(
+            result,
+            indent=2
+        ),
         encoding="utf-8"
     )
 
-    print(json.dumps(result, indent=2))
+    print(
+        json.dumps(
+            result,
+            indent=2
+        )
+    )
 
     if not passed:
         raise SystemExit(1)

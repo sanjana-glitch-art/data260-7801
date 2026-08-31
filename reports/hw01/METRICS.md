@@ -5,7 +5,7 @@
 | Setting | Value |
 |---|---|
 | Model | qwen3:4b |
-| Fixed input file | reports/hw01/cases/nondeterminism_input.json |
+| Fixed input file | `reports/hw01/cases/nondeterminism_input.json` |
 | Runs at temperature 0.7 | 20 |
 | Runs at temperature 0.0 | 20 |
 | Total successful runs | 40 |
@@ -16,8 +16,8 @@
 | Metric | Temperature 0.7 | Temperature 0.0 |
 |---|---:|---:|
 | Distinct tag sets | 11 | 1 |
-| Tags appearing in all 20 runs | None | academic_performance, concentration_effects, sleep_duration |
-| Tags appearing in exactly one run | academic_concentration, concentration_impact, concentration_metrics, concentration_outcomes, student_cognitive_function, student_concentration_studies, university_sleep_studies | None |
+| Tags appearing in all 20 runs | None | `academic_performance`, `concentration_effects`, `sleep_duration` |
+| Tags appearing in exactly one run | `academic_concentration`, `concentration_impact`, `concentration_metrics`, `concentration_outcomes`, `student_cognitive_function`, `student_concentration_studies`, `university_sleep_studies` | None |
 
 ## Latency
 
@@ -43,8 +43,8 @@ tags for discovery or brainstorming because multiple descriptions may be
 equally useful.
 
 Variation is not acceptable when an output is used to determine clinical
-trial eligibility, safety status, or another consequential decision.
-Those cases require consistent rules, validation, and human review.
+trial eligibility, safety status, or another consequential decision. Those
+cases require consistent rules, validation, and human review.
 
 ## Raw Data
 
@@ -85,4 +85,3 @@ The complete per-run results are stored in:
 ### AGENT.md Verification
 
 All five model responses passed the strict bullet-only verification.
-

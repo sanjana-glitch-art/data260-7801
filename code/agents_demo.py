@@ -1,8 +1,17 @@
 import argparse
 import json
 import re
+import sys
 import time
+from pathlib import Path
 from typing import Any
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 
 from src.model_client import ModelClient
 
@@ -12,7 +21,9 @@ PLANNER_SCHEMA = {
     "properties": {
         "tags": {
             "type": "array",
-            "items": {"type": "string"},
+            "items": {
+                "type": "string"
+            },
             "minItems": 3,
             "maxItems": 3
         },
@@ -20,7 +31,10 @@ PLANNER_SCHEMA = {
             "type": "string"
         }
     },
-    "required": ["tags", "summary"],
+    "required": [
+        "tags",
+        "summary"
+    ],
     "additionalProperties": False
 }
 
@@ -30,7 +44,9 @@ REVIEWER_SCHEMA = {
     "properties": {
         "tags": {
             "type": "array",
-            "items": {"type": "string"},
+            "items": {
+                "type": "string"
+            },
             "minItems": 3,
             "maxItems": 3
         },
@@ -42,7 +58,9 @@ REVIEWER_SCHEMA = {
         },
         "changes": {
             "type": "array",
-            "items": {"type": "string"}
+            "items": {
+                "type": "string"
+            }
         }
     },
     "required": [
@@ -56,17 +74,21 @@ REVIEWER_SCHEMA = {
 
 
 def extract_json(text: str) -> dict[str, Any]:
-    """Extract and parse the first JSON object from a model response."""
+    """Extract and parse the first JSON object."""
     cleaned = text.strip()
 
-    # Remove optional Markdown code fences.
     cleaned = re.sub(
         r"^```(?:json)?",
         "",
         cleaned,
         flags=re.IGNORECASE
     )
-    cleaned = re.sub(r"```$", "", cleaned).strip()
+
+    cleaned = re.sub(
+        r"```$",
+        "",
+        cleaned
+    ).strip()
 
     start = cleaned.find("{")
     end = cleaned.rfind("}")
@@ -76,13 +98,22 @@ def extract_json(text: str) -> dict[str, Any]:
             "The model response did not contain a JSON object."
         )
 
-    return json.loads(cleaned[start : end + 1])
+    return json.loads(
+        cleaned[start : end + 1]
+    )
 
 
 def clean_tag(tag: Any) -> str:
     """Normalize one tag into a short readable string."""
-    cleaned = re.sub(r"\s+", " ", str(tag)).strip()
-    cleaned = cleaned.strip(".,;:!?\"'[]{}()")
+    cleaned = re.sub(
+        r"\s+",
+        " ",
+        str(tag)
+    ).strip()
+
+    cleaned = cleaned.strip(
+        ".,;:!?\"'[]{}()"
+    )
 
     return cleaned.lower()
 
@@ -92,8 +123,7 @@ def input_tag_candidates(
     content: str
 ) -> list[str]:
     """
-    Create fallback tags derived only from the supplied title
-    and content.
+    Create fallback tags derived only from the supplied input.
     """
     text = f"{title} {content}".lower()
 
@@ -149,8 +179,9 @@ def input_tag_candidates(
 
     candidates: list[str] = []
 
-    # Generate two-word candidates.
-    for index in range(len(useful_words) - 1):
+    for index in range(
+        len(useful_words) - 1
+    ):
         candidate = (
             f"{useful_words[index]} "
             f"{useful_words[index + 1]}"
@@ -159,7 +190,6 @@ def input_tag_candidates(
         if candidate not in candidates:
             candidates.append(candidate)
 
-    # Use individual words as additional fallbacks.
     for word in useful_words:
         if word not in candidates:
             candidates.append(word)
@@ -182,13 +212,16 @@ def normalize_tags(
             if tag and tag not in tags:
                 tags.append(tag)
 
-    # Add input-derived fallbacks if the model returned fewer
-    # than three valid tags.
-    for candidate in input_tag_candidates(title, content):
+    for candidate in input_tag_candidates(
+        title,
+        content
+    ):
         if len(tags) >= 3:
             break
 
-        cleaned_candidate = clean_tag(candidate)
+        cleaned_candidate = clean_tag(
+            candidate
+        )
 
         if (
             cleaned_candidate
@@ -211,8 +244,7 @@ def normalize_summary(
     content: str
 ) -> str:
     """
-    Guarantee a nonempty summary containing no more than
-    25 words.
+    Guarantee a nonempty summary with at most 25 words.
     """
     cleaned = re.sub(
         r"\s+",
@@ -221,29 +253,27 @@ def normalize_summary(
     ).strip()
 
     if not cleaned:
-        cleaned = f"{title}. {content}".strip()
+        cleaned = (
+            f"{title}. {content}"
+        ).strip()
 
     words = cleaned.split()
 
     if len(words) > 25:
-        cleaned = " ".join(words[:25])
+        cleaned = " ".join(
+            words[:25]
+        )
 
-    cleaned = cleaned.rstrip(" ,;:-")
+    cleaned = cleaned.rstrip(
+        " ,;:-"
+    )
 
-    if not cleaned.endswith((".", "!", "?")):
+    if not cleaned.endswith(
+        (".", "!", "?")
+    ):
         cleaned += "."
 
     return cleaned
-
-
-def model_content(response: Any) -> str:
-    """Convert a LangChain model response into plain text."""
-    content = response.content
-
-    if isinstance(content, str):
-        return content
-
-    return json.dumps(content)
 
 
 def call_planner(
@@ -280,7 +310,9 @@ def call_planner(
         response_format=PLANNER_SCHEMA
     )
 
-    return extract_json(result.content)
+    return extract_json(
+        result.content
+    )
 
 
 def call_reviewer(
@@ -337,16 +369,20 @@ def call_reviewer(
         tags_changed or summary_changed
     )
 
-    reviewer_output["changed"] = actually_changed
+    reviewer_output["changed"] = (
+        actually_changed
+    )
 
     if not actually_changed:
         reviewer_output["changes"] = []
     elif not reviewer_output.get("changes"):
         reviewer_output["changes"] = [
-            "The Reviewer modified the proposed tags or summary."
+            "The Reviewer modified the proposed "
+            "tags or summary."
         ]
 
     return reviewer_output
+
 
 def finalize_output(
     reviewer_output: dict[str, Any],
@@ -354,17 +390,22 @@ def finalize_output(
     content: str
 ) -> dict[str, Any]:
     """
-    Apply deterministic validation without creating a third
-    model agent.
+    Apply deterministic validation without a third model agent.
     """
     return {
         "tags": normalize_tags(
-            reviewer_output.get("tags", []),
+            reviewer_output.get(
+                "tags",
+                []
+            ),
             title,
             content
         ),
         "summary": normalize_summary(
-            reviewer_output.get("summary", ""),
+            reviewer_output.get(
+                "summary",
+                ""
+            ),
             title,
             content
         )
@@ -406,16 +447,14 @@ def main() -> None:
 
     args = parser.parse_args()
 
-    # Limit the context and response length for local hardware.
     model = ModelClient(
-    model=args.model,
-    base_url=args.base_url,
-    temperature=args.temperature,
-    num_ctx=2048,
-    num_predict=256
+        model=args.model,
+        base_url=args.base_url,
+        temperature=args.temperature,
+        num_ctx=2048,
+        num_predict=256
     )
 
-    # Planner agent
     planner_start = time.perf_counter()
 
     planner_output = call_planner(
@@ -425,17 +464,25 @@ def main() -> None:
     )
 
     planner_latency = round(
-        (time.perf_counter() - planner_start) * 1000,
+        (
+            time.perf_counter()
+            - planner_start
+        ) * 1000,
         2
     )
 
     print("\n--- Planner Output ---")
-    print(json.dumps(planner_output, indent=2))
     print(
-        f"Planner latency: {planner_latency} ms"
+        json.dumps(
+            planner_output,
+            indent=2
+        )
+    )
+    print(
+        f"Planner latency: "
+        f"{planner_latency} ms"
     )
 
-    # Reviewer agent
     reviewer_start = time.perf_counter()
 
     reviewer_output = call_reviewer(
@@ -446,17 +493,25 @@ def main() -> None:
     )
 
     reviewer_latency = round(
-        (time.perf_counter() - reviewer_start) * 1000,
+        (
+            time.perf_counter()
+            - reviewer_start
+        ) * 1000,
         2
     )
 
     print("\n--- Reviewer Output ---")
-    print(json.dumps(reviewer_output, indent=2))
     print(
-        f"Reviewer latency: {reviewer_latency} ms"
+        json.dumps(
+            reviewer_output,
+            indent=2
+        )
+    )
+    print(
+        f"Reviewer latency: "
+        f"{reviewer_latency} ms"
     )
 
-    # Non-agent finalization step
     finalized_output = finalize_output(
         reviewer_output,
         args.title,
@@ -464,7 +519,8 @@ def main() -> None:
     )
 
     total_latency = round(
-        planner_latency + reviewer_latency,
+        planner_latency
+        + reviewer_latency,
         2
     )
 
@@ -476,7 +532,6 @@ def main() -> None:
         )
     )
 
-    # Complete publish object
     publish_output = {
         "title": args.title,
         "content": args.content,
