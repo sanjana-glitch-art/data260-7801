@@ -4,8 +4,7 @@ import re
 import time
 from typing import Any
 
-from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_ollama import ChatOllama
+from src.model_client import ModelClient
 
 
 PLANNER_SCHEMA = {
@@ -248,14 +247,15 @@ def model_content(response: Any) -> str:
 
 
 def call_planner(
-    model: ChatOllama,
+    model: ModelClient,
     title: str,
     content: str
 ) -> dict[str, Any]:
     """Ask the Planner agent for an initial proposal."""
     messages = [
-        SystemMessage(
-            content=(
+        {
+            "role": "system",
+            "content": (
                 "You are the Planner agent. Analyze only the "
                 "supplied title and content. Propose exactly "
                 "three distinct topical tags and one summary "
@@ -263,43 +263,37 @@ def call_planner(
                 "fixed domain keywords. Return only valid JSON "
                 'with the keys "tags" and "summary".'
             )
-        ),
-        HumanMessage(
-            content=(
+        },
+        {
+            "role": "user",
+            "content": (
                 f"Title:\n{title}\n\n"
                 f"Content:\n{content}\n\n"
-                "Return this JSON structure:\n"
-                "{"
-                '"tags": ["tag 1", "tag 2", "tag 3"], '
-                '"summary": '
-                '"One sentence of at most 25 words."'
-                "}\n\n"
-                "/no_think"
+                "Return exactly three topical tags and one "
+                "summary containing at most 25 words."
             )
-        )
+        }
     ]
 
-    planner_model = model.bind(
-    format=PLANNER_SCHEMA
-)
-
-    response = planner_model.invoke(messages)
-
-    return extract_json(
-        model_content(response)
+    result = model.complete(
+        messages,
+        response_format=PLANNER_SCHEMA
     )
+
+    return extract_json(result.content)
 
 
 def call_reviewer(
-    model: ChatOllama,
+    model: ModelClient,
     title: str,
     content: str,
     planner_output: dict[str, Any]
 ) -> dict[str, Any]:
     """Ask the Reviewer to inspect and correct the proposal."""
     messages = [
-        SystemMessage(
-            content=(
+        {
+            "role": "system",
+            "content": (
                 "You are the Reviewer agent. Check whether the "
                 "proposed tags are distinct and topical and "
                 "whether the summary contains no more than "
@@ -308,35 +302,25 @@ def call_reviewer(
                 'only valid JSON with the keys "tags", "summary", '
                 '"changed", and "changes".'
             )
-        ),
-        HumanMessage(
-            content=(
+        },
+        {
+            "role": "user",
+            "content": (
                 f"Title:\n{title}\n\n"
                 f"Content:\n{content}\n\n"
                 "Planner proposal:\n"
-                f"{json.dumps(planner_output, indent=2)}\n\n"
-                "Return this JSON structure:\n"
-                "{"
-                '"tags": ["tag 1", "tag 2", "tag 3"], '
-                '"summary": '
-                '"One sentence of at most 25 words.", '
-                '"changed": true, '
-                '"changes": '
-                '["Description of each correction"]'
-                "}\n\n"
-                "/no_think"
+                f"{json.dumps(planner_output, indent=2)}"
             )
-        )
+        }
     ]
 
-    reviewer_model = model.bind(
-    format=REVIEWER_SCHEMA
-)
-
-    response = reviewer_model.invoke(messages)
+    result = model.complete(
+        messages,
+        response_format=REVIEWER_SCHEMA
+    )
 
     reviewer_output = extract_json(
-    model_content(response)
+        result.content
     )
 
     tags_changed = (
@@ -349,7 +333,9 @@ def call_reviewer(
         != planner_output.get("summary")
     )
 
-    actually_changed = tags_changed or summary_changed
+    actually_changed = (
+        tags_changed or summary_changed
+    )
 
     reviewer_output["changed"] = actually_changed
 
@@ -361,7 +347,6 @@ def call_reviewer(
         ]
 
     return reviewer_output
-
 
 def finalize_output(
     reviewer_output: dict[str, Any],
@@ -422,14 +407,12 @@ def main() -> None:
     args = parser.parse_args()
 
     # Limit the context and response length for local hardware.
-    model = ChatOllama(
-        model=args.model,
-        base_url=args.base_url,
-        temperature=args.temperature,
-        reasoning=False,
-        num_ctx=2048,
-        num_predict=256,
-        keep_alive="10m"
+    model = ModelClient(
+    model=args.model,
+    base_url=args.base_url,
+    temperature=args.temperature,
+    num_ctx=2048,
+    num_predict=256
     )
 
     # Planner agent

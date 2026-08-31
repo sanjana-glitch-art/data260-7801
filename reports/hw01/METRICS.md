@@ -53,3 +53,36 @@ The complete per-run results are stored in:
 - `reports/hw01/raw/nondeterminism_results.json`
 - `reports/hw01/raw/nondeterminism_results.csv`
 - `reports/hw01/raw/nondeterminism_metrics.json`
+
+## Model Client and Token Accounting
+
+### Per-Turn Results
+
+| Turn | Input Tokens | Output Tokens | Total Tokens | Cumulative Input | Cumulative Output | Serialized History Length |
+|---:|---:|---:|---:|---:|---:|---:|
+| 1 | 134 | 46 | 180 | 134 | 46 | 249 |
+| 2 | 191 | 33 | 224 | 325 | 79 | 469 |
+| 3 | 241 | 61 | 302 | 566 | 140 | 881 |
+| 4 | 313 | 73 | 386 | 879 | 213 | 1,298 |
+| 5 | 403 | 53 | 456 | 1,282 | 266 | 1,667 |
+
+### Statistics After Turn 3
+
+- Turn count: 3
+- Cumulative input tokens: 566
+- Cumulative output tokens: 140
+- Cumulative total tokens: 706
+- Serialized conversation-history length: 881 characters
+
+### Statistics After Turn 5
+
+- Turn count: 5
+- Cumulative input tokens: 1,282
+- Cumulative output tokens: 266
+- Cumulative total tokens: 1,548
+- Serialized conversation-history length: 1,667 characters
+
+### AGENT.md Verification
+
+All five model responses passed the strict bullet-only verification.
+

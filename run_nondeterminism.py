@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from langchain_ollama import ChatOllama
+from src.model_client import ModelClient
 
 from agents_demo import (
     call_planner,
@@ -105,7 +105,7 @@ def normalized_tag_set(
 
 
 def run_pipeline(
-    model: ChatOllama,
+    model: ModelClient,
     title: str,
     content: str
 ) -> dict[str, Any]:
@@ -327,14 +327,12 @@ def main() -> None:
             f"{completed} runs already completed."
         )
 
-        model = ChatOllama(
+        model = ModelClient(
             model=MODEL_NAME,
             base_url="http://localhost:11434",
             temperature=temperature,
-            reasoning=False,
             num_ctx=2048,
-            num_predict=256,
-            keep_alive="30m"
+            num_predict=256
         )
 
         for run_number in range(

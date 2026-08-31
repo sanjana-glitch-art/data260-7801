@@ -1,0 +1,65 @@
+{
+  "model": "qwen3:4b",
+  "turns": [
+    {
+      "turn": 1,
+      "timestamp": "2026-08-31T04:31:20.145766+00:00",
+      "input_tokens": 134,
+      "output_tokens": 46,
+      "total_tokens": 180,
+      "cumulative_input_tokens": 134,
+      "cumulative_output_tokens": 46,
+      "cumulative_total_tokens": 180,
+      "serialized_history_length": 249,
+      "bullet_only_passed": true
+    },
+    {
+      "turn": 2,
+      "timestamp": "2026-08-31T04:32:17.115821+00:00",
+      "input_tokens": 191,
+      "output_tokens": 33,
+      "total_tokens": 224,
+      "cumulative_input_tokens": 325,
+      "cumulative_output_tokens": 79,
+      "cumulative_total_tokens": 404,
+      "serialized_history_length": 469,
+      "bullet_only_passed": true
+    },
+    {
+      "turn": 3,
+      "timestamp": "2026-08-31T04:33:01.816488+00:00",
+      "input_tokens": 241,
+      "output_tokens": 61,
+      "total_tokens": 302,
+      "cumulative_input_tokens": 566,
+      "cumulative_output_tokens": 140,
+      "cumulative_total_tokens": 706,
+      "serialized_history_length": 881,
+      "bullet_only_passed": true
+    },
+    {
+      "turn": 4,
+      "timestamp": "2026-08-31T04:34:08.100533+00:00",
+      "input_tokens": 313,
+      "output_tokens": 73,
+      "total_tokens": 386,
+      "cumulative_input_tokens": 879,
+      "cumulative_output_tokens": 213,
+      "cumulative_total_tokens": 1092,
+      "serialized_history_length": 1298,
+      "bullet_only_passed": true
+    },
+    {
+      "turn": 5,
+      "timestamp": "2026-08-31T04:34:15.504507+00:00",
+      "input_tokens": 403,
+      "output_tokens": 53,
+      "total_tokens": 456,
+      "cumulative_input_tokens": 1282,
+      "cumulative_output_tokens": 266,
+      "cumulative_total_tokens": 1548,
+      "serialized_history_length": 1667,
+      "bullet_only_passed": true
+    }
+  ]
+}
