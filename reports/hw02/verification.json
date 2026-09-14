@@ -1,0 +1,114 @@
+{
+  "homework": 2,
+  "assignment": "DATA-260 Homework 2",
+  "student": "Sanjana Thummalapalli",
+  "sid4": 7801,
+  "commitHash": "4b48c86ffa7459aaf6de01dca14551a30d50a670",
+  "modelConfiguration": {
+    "experimentModel": "qwen3:4b",
+    "experimentTemperature": 0.7,
+    "interactiveTemperature": 0.0,
+    "numCtx": 4096,
+    "numPredict": 256,
+    "deploymentTurnCeiling": 2,
+    "portBase": 8601,
+    "graphSmokeTestClient": "deterministic test double",
+    "graphSmokeTestPurpose": "Verify graph routing, schema, state updates, and termination without nondeterministic model output."
+  },
+  "seed": 7801,
+  "verifySeed": 267801,
+  "timestamp": "2026-09-14T05:52:05.537732+00:00",
+  "passed": true,
+  "checks": [
+    {
+      "name": "required_files",
+      "passed": true,
+      "details": "All required pre-report files exist."
+    },
+    {
+      "name": "frontend_states",
+      "passed": true,
+      "details": "Loading, empty, and error states exist and are controlled by JavaScript."
+    },
+    {
+      "name": "responsive_375px",
+      "passed": true,
+      "details": "CSS contains a mobile layout applicable at 375px."
+    },
+    {
+      "name": "frontend_api_url",
+      "passed": true,
+      "details": "Frontend uses /api/trials."
+    },
+    {
+      "name": "model_adapter_usage",
+      "passed": true,
+      "details": "Planner and Reviewer use the injected ModelClient adapter."
+    },
+    {
+      "name": "fastapi_port",
+      "passed": true,
+      "details": "Temporary FastAPI application responded on port 8601."
+    },
+    {
+      "name": "fastapi_home",
+      "passed": true,
+      "details": "GET / returned HTTP 200."
+    },
+    {
+      "name": "fastapi_list",
+      "passed": true,
+      "details": "GET /api/trials returned 2 records."
+    },
+    {
+      "name": "fastapi_create_redirect",
+      "passed": true,
+      "details": "Form creation redirected home and added the record."
+    },
+    {
+      "name": "fastapi_update_id_1",
+      "passed": true,
+      "details": "Record ID 1 was updated and the form redirected home."
+    },
+    {
+      "name": "fastapi_search",
+      "passed": true,
+      "details": "Search returned 2 matching records."
+    },
+    {
+      "name": "fastapi_delete_highest",
+      "passed": true,
+      "details": "The highest-ID record was deleted and the form redirected home."
+    },
+    {
+      "name": "langgraph_finishes",
+      "passed": true,
+      "details": "Deterministic graph smoke test completed with status=completed, Planner attempts=1, model calls=2, latency=31.42 ms."
+    },
+    {
+      "name": "planner_schema_smoke_test",
+      "passed": true,
+      "details": "Deterministic Planner returned 3 tags and a 10-word summary."
+    },
+    {
+      "name": "experiment_counts",
+      "passed": true,
+      "details": "Schema=30, ceiling2=20, ceiling10=20, adversarial=5, total=75."
+    },
+    {
+      "name": "stored_normal_schemas",
+      "passed": true,
+      "details": "Invalid normal stored proposals: 0."
+    },
+    {
+      "name": "experiment_metrics",
+      "passed": true,
+      "details": "Metric files contain the required run counts and deployment choice."
+    },
+    {
+      "name": "adversarial_summary",
+      "passed": true,
+      "details": "Adversarial ceiling hits: 5/5."
+    }
+  ]
+}

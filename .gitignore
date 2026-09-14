@@ -1,11 +1,5 @@
-.git
-.gitignore
-.vscode
-.venv
-reports
-__pycache__
-**/__pycache__
+.venv/
+__pycache__/
+**/__pycache__/
 *.pyc
 *.pyo
-*.pdf
-*.zip

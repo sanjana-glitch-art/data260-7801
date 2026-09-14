@@ -1,0 +1,1784 @@
+{
+  "experiment": "schema_validation",
+  "student": "Sanjana Thummalapalli",
+  "sid4": 7801,
+  "seed": 7801,
+  "verifySeed": 267801,
+  "model": "qwen3:4b",
+  "temperature": 0.7,
+  "numCtx": 4096,
+  "numPredict": 256,
+  "updatedAt": "2026-09-14T03:58:45.523784+00:00",
+  "results": [
+    {
+      "experiment": "schema_validation",
+      "run": 1,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep quality impact",
+          "academic performance metrics",
+          "university student study"
+        ],
+        "summary": "Clinical trial examining sleep duration and quality effects on university students' concentration and academic outcomes."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 22081.3,
+          "input_tokens": 179,
+          "output_tokens": 53,
+          "total_tokens": 232
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1723.64,
+          "input_tokens": 286,
+          "output_tokens": 14,
+          "total_tokens": 300,
+          "summary_word_count": 15
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 465,
+        "cumulative_output_tokens": 67,
+        "cumulative_total_tokens": 532
+      },
+      "latency_ms": 23834.13,
+      "started_at": "2026-09-14T03:54:25.625317+00:00",
+      "finished_at": "2026-09-14T03:54:49.459396+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 2,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep_quality_student_academic",
+          "sleep_duration_concentration",
+          "academic_performance_sleep"
+        ],
+        "summary": "Clinical trial examines sleep quality and duration impact on university students' academic performance and cognitive functions."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 6236.79,
+          "input_tokens": 179,
+          "output_tokens": 56,
+          "total_tokens": 235
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1580.09,
+          "input_tokens": 289,
+          "output_tokens": 14,
+          "total_tokens": 303,
+          "summary_word_count": 16
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 468,
+        "cumulative_output_tokens": 70,
+        "cumulative_total_tokens": 538
+      },
+      "latency_ms": 7854.8,
+      "started_at": "2026-09-14T03:54:49.482760+00:00",
+      "finished_at": "2026-09-14T03:54:57.338145+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 3,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep_quality_academic",
+          "student_concentration",
+          "university_sleep_study"
+        ],
+        "summary": "Study links sleep quality to academic performance in university students."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 5647.1,
+          "input_tokens": 179,
+          "output_tokens": 46,
+          "total_tokens": 225
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1583.66,
+          "input_tokens": 281,
+          "output_tokens": 14,
+          "total_tokens": 295,
+          "summary_word_count": 10
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 460,
+        "cumulative_output_tokens": 60,
+        "cumulative_total_tokens": 520
+      },
+      "latency_ms": 7261.25,
+      "started_at": "2026-09-14T03:54:57.366133+00:00",
+      "finished_at": "2026-09-14T03:55:04.628263+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 4,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep_quality_academic",
+          "university_student_concentrati",
+          "sleep_duration_impact"
+        ],
+        "summary": "Clinical trial examining sleep quality and duration effects on university student academic performance."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 6568.7,
+          "input_tokens": 179,
+          "output_tokens": 54,
+          "total_tokens": 233
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1591.74,
+          "input_tokens": 288,
+          "output_tokens": 14,
+          "total_tokens": 302,
+          "summary_word_count": 13
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 467,
+        "cumulative_output_tokens": 68,
+        "cumulative_total_tokens": 535
+      },
+      "latency_ms": 8196.88,
+      "started_at": "2026-09-14T03:55:04.647427+00:00",
+      "finished_at": "2026-09-14T03:55:12.845197+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 5,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep_quality_student_concentr",
+          "academic_performance_sleep",
+          "university_sleep_study"
+        ],
+        "summary": "Clinical trial on sleep duration and quality impacts university students' concentration, memory, and academic performance."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 6747.31,
+          "input_tokens": 179,
+          "output_tokens": 56,
+          "total_tokens": 235
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1556.06,
+          "input_tokens": 291,
+          "output_tokens": 14,
+          "total_tokens": 305,
+          "summary_word_count": 15
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 470,
+        "cumulative_output_tokens": 70,
+        "cumulative_total_tokens": 540
+      },
+      "latency_ms": 8337.75,
+      "started_at": "2026-09-14T03:55:12.860427+00:00",
+      "finished_at": "2026-09-14T03:55:21.199128+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 6,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep_quality_impact",
+          "academic_performance",
+          "university_sleep_study"
+        ],
+        "summary": "Clinical trial examines sleep duration and quality effects on university students' concentration, memory, and academic outcomes."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 6144.93,
+          "input_tokens": 179,
+          "output_tokens": 54,
+          "total_tokens": 233
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1564.67,
+          "input_tokens": 289,
+          "output_tokens": 14,
+          "total_tokens": 303,
+          "summary_word_count": 16
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 468,
+        "cumulative_output_tokens": 68,
+        "cumulative_total_tokens": 536
+      },
+      "latency_ms": 7744.57,
+      "started_at": "2026-09-14T03:55:21.220616+00:00",
+      "finished_at": "2026-09-14T03:55:28.965002+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 7,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep_quality_academic",
+          "university_student_health",
+          "concentration_memory_study"
+        ],
+        "summary": "Clinical trial examines sleep duration and quality's impact on university students' concentration, memory, and academic performance."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 6425.75,
+          "input_tokens": 179,
+          "output_tokens": 57,
+          "total_tokens": 236
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1440.67,
+          "input_tokens": 292,
+          "output_tokens": 14,
+          "total_tokens": 306,
+          "summary_word_count": 16
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 471,
+        "cumulative_output_tokens": 71,
+        "cumulative_total_tokens": 542
+      },
+      "latency_ms": 7894.16,
+      "started_at": "2026-09-14T03:55:28.986763+00:00",
+      "finished_at": "2026-09-14T03:55:36.880841+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 8,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep quality impact",
+          "academic performance study",
+          "university student trial"
+        ],
+        "summary": "Clinical trial examining sleep duration and quality effects on university students' concentration, memory, and academic outcomes."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 6229.7,
+          "input_tokens": 179,
+          "output_tokens": 55,
+          "total_tokens": 234
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1385.29,
+          "input_tokens": 289,
+          "output_tokens": 14,
+          "total_tokens": 303,
+          "summary_word_count": 16
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 468,
+        "cumulative_output_tokens": 69,
+        "cumulative_total_tokens": 537
+      },
+      "latency_ms": 7645.61,
+      "started_at": "2026-09-14T03:55:36.897052+00:00",
+      "finished_at": "2026-09-14T03:55:44.544179+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 9,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep_quality_impact",
+          "academic_performance",
+          "university_sleep_study"
+        ],
+        "summary": "Clinical trial examining sleep duration and quality effects on university students' concentration, memory, and academic performance."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 6114.32,
+          "input_tokens": 179,
+          "output_tokens": 54,
+          "total_tokens": 233
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1448.02,
+          "input_tokens": 289,
+          "output_tokens": 14,
+          "total_tokens": 303,
+          "summary_word_count": 16
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 468,
+        "cumulative_output_tokens": 68,
+        "cumulative_total_tokens": 536
+      },
+      "latency_ms": 7583.56,
+      "started_at": "2026-09-14T03:55:44.559269+00:00",
+      "finished_at": "2026-09-14T03:55:52.142572+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 10,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep quality assessment",
+          "academic performance metrics",
+          "university student health"
+        ],
+        "summary": "Clinical trial examining sleep duration and quality impact on university students' concentration, memory, and academic performance."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 6103.18,
+          "input_tokens": 179,
+          "output_tokens": 54,
+          "total_tokens": 233
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1399.69,
+          "input_tokens": 289,
+          "output_tokens": 14,
+          "total_tokens": 303,
+          "summary_word_count": 16
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 468,
+        "cumulative_output_tokens": 68,
+        "cumulative_total_tokens": 536
+      },
+      "latency_ms": 7532.6,
+      "started_at": "2026-09-14T03:55:52.163582+00:00",
+      "finished_at": "2026-09-14T03:55:59.696336+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 11,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep_quality_student_academic",
+          "sleep_duration_concentration",
+          "academic_performance_memory"
+        ],
+        "summary": "Clinical trial examines sleep impact on university student academic performance and cognitive functions."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 6258.44,
+          "input_tokens": 179,
+          "output_tokens": 52,
+          "total_tokens": 231
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1580.95,
+          "input_tokens": 285,
+          "output_tokens": 14,
+          "total_tokens": 299,
+          "summary_word_count": 13
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 464,
+        "cumulative_output_tokens": 66,
+        "cumulative_total_tokens": 530
+      },
+      "latency_ms": 7858.36,
+      "started_at": "2026-09-14T03:55:59.709621+00:00",
+      "finished_at": "2026-09-14T03:56:07.568089+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 12,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep quality assessment",
+          "academic performance metrics",
+          "university student trials"
+        ],
+        "summary": "Clinical trial examining sleep duration and quality impacts on university students' concentration, memory, and academic performance."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 6160.86,
+          "input_tokens": 179,
+          "output_tokens": 54,
+          "total_tokens": 233
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1593.63,
+          "input_tokens": 289,
+          "output_tokens": 14,
+          "total_tokens": 303,
+          "summary_word_count": 16
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 468,
+        "cumulative_output_tokens": 68,
+        "cumulative_total_tokens": 536
+      },
+      "latency_ms": 7787.49,
+      "started_at": "2026-09-14T03:56:07.587636+00:00",
+      "finished_at": "2026-09-14T03:56:15.374943+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 13,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep quality impact",
+          "academic performance metrics",
+          "university student study"
+        ],
+        "summary": "Clinical trial examines sleep duration and quality effects on student concentration, memory, and academic outcomes."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 6513.79,
+          "input_tokens": 179,
+          "output_tokens": 52,
+          "total_tokens": 231
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1613.59,
+          "input_tokens": 287,
+          "output_tokens": 14,
+          "total_tokens": 301,
+          "summary_word_count": 15
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 466,
+        "cumulative_output_tokens": 66,
+        "cumulative_total_tokens": 532
+      },
+      "latency_ms": 8154.65,
+      "started_at": "2026-09-14T03:56:15.397884+00:00",
+      "finished_at": "2026-09-14T03:56:23.552719+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 14,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep quality assessment",
+          "academic performance metrics",
+          "university student focus"
+        ],
+        "summary": "Clinical trial examines sleep duration and quality impact on university students' concentration, memory, and academic outcomes."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 6319.67,
+          "input_tokens": 179,
+          "output_tokens": 54,
+          "total_tokens": 233
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 2230.22,
+          "input_tokens": 289,
+          "output_tokens": 14,
+          "total_tokens": 303,
+          "summary_word_count": 16
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 468,
+        "cumulative_output_tokens": 68,
+        "cumulative_total_tokens": 536
+      },
+      "latency_ms": 8569.83,
+      "started_at": "2026-09-14T03:56:23.562340+00:00",
+      "finished_at": "2026-09-14T03:56:32.136871+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 15,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep_quality_academic",
+          "university_student_performance",
+          "sleep_duration_impact"
+        ],
+        "summary": "Clinical trial examines sleep duration and quality effects on university students' concentration, memory, and academic performance."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 9518.25,
+          "input_tokens": 179,
+          "output_tokens": 56,
+          "total_tokens": 235
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 2841.64,
+          "input_tokens": 291,
+          "output_tokens": 14,
+          "total_tokens": 305,
+          "summary_word_count": 16
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 470,
+        "cumulative_output_tokens": 70,
+        "cumulative_total_tokens": 540
+      },
+      "latency_ms": 12403.51,
+      "started_at": "2026-09-14T03:56:32.184158+00:00",
+      "finished_at": "2026-09-14T03:56:44.588512+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 16,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep quality impact",
+          "academic performance metrics",
+          "university student study"
+        ],
+        "summary": "Clinical trial examines sleep duration and quality effects on university students' concentration, memory, and academic performance."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 6248.35,
+          "input_tokens": 179,
+          "output_tokens": 54,
+          "total_tokens": 233
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1595.3,
+          "input_tokens": 289,
+          "output_tokens": 14,
+          "total_tokens": 303,
+          "summary_word_count": 16
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 468,
+        "cumulative_output_tokens": 68,
+        "cumulative_total_tokens": 536
+      },
+      "latency_ms": 7871.29,
+      "started_at": "2026-09-14T03:56:44.612112+00:00",
+      "finished_at": "2026-09-14T03:56:52.483638+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 17,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep_quality_impact",
+          "academic_performance",
+          "university_student_concentr"
+        ],
+        "summary": "Clinical trial examining sleep duration and quality effects on university students' concentration, memory, and academic performance."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 6161.91,
+          "input_tokens": 179,
+          "output_tokens": 56,
+          "total_tokens": 235
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1389.95,
+          "input_tokens": 291,
+          "output_tokens": 14,
+          "total_tokens": 305,
+          "summary_word_count": 16
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 470,
+        "cumulative_output_tokens": 70,
+        "cumulative_total_tokens": 540
+      },
+      "latency_ms": 7577.71,
+      "started_at": "2026-09-14T03:56:52.504962+00:00",
+      "finished_at": "2026-09-14T03:57:00.088332+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 18,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep_quality_effect",
+          "academic_performance",
+          "university_student_study"
+        ],
+        "summary": "Clinical trial examining sleep duration and quality impacts on university students' academic performance."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 6531.36,
+          "input_tokens": 179,
+          "output_tokens": 50,
+          "total_tokens": 229
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1705.21,
+          "input_tokens": 283,
+          "output_tokens": 14,
+          "total_tokens": 297,
+          "summary_word_count": 13
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 462,
+        "cumulative_output_tokens": 64,
+        "cumulative_total_tokens": 526
+      },
+      "latency_ms": 8262.9,
+      "started_at": "2026-09-14T03:57:00.108680+00:00",
+      "finished_at": "2026-09-14T03:57:08.372610+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 19,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep_quality_impact",
+          "academic_performance",
+          "university_sleep_study"
+        ],
+        "summary": "Clinical trial examines sleep duration and quality effects on university students' concentration, memory, and academic performance."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 6127.7,
+          "input_tokens": 179,
+          "output_tokens": 54,
+          "total_tokens": 233
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1837.13,
+          "input_tokens": 289,
+          "output_tokens": 14,
+          "total_tokens": 303,
+          "summary_word_count": 16
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 468,
+        "cumulative_output_tokens": 68,
+        "cumulative_total_tokens": 536
+      },
+      "latency_ms": 8195.14,
+      "started_at": "2026-09-14T03:57:08.405556+00:00",
+      "finished_at": "2026-09-14T03:57:16.601329+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 20,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep quality assessment",
+          "academic performance metrics",
+          "university student trial"
+        ],
+        "summary": "Clinical trial examining sleep duration and quality impact on university students' concentration, memory, and academic performance."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 6341.3,
+          "input_tokens": 179,
+          "output_tokens": 56,
+          "total_tokens": 235
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1781.65,
+          "input_tokens": 289,
+          "output_tokens": 14,
+          "total_tokens": 303,
+          "summary_word_count": 16
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 468,
+        "cumulative_output_tokens": 70,
+        "cumulative_total_tokens": 538
+      },
+      "latency_ms": 8151.7,
+      "started_at": "2026-09-14T03:57:16.630091+00:00",
+      "finished_at": "2026-09-14T03:57:24.783135+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 21,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep_quality_academic_perform",
+          "university_student_sleep_study",
+          "sleep_duration_concentration"
+        ],
+        "summary": "Study examines sleep quality and academic performance in university students."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 6842.7,
+          "input_tokens": 179,
+          "output_tokens": 50,
+          "total_tokens": 229
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1652.76,
+          "input_tokens": 285,
+          "output_tokens": 14,
+          "total_tokens": 299,
+          "summary_word_count": 10
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 464,
+        "cumulative_output_tokens": 64,
+        "cumulative_total_tokens": 528
+      },
+      "latency_ms": 8528.89,
+      "started_at": "2026-09-14T03:57:24.855024+00:00",
+      "finished_at": "2026-09-14T03:57:33.385342+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 22,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep_quality_academic",
+          "university_student_concentr",
+          "sleep_duration_impact"
+        ],
+        "summary": "Clinical trial examining sleep effects on university students' academic performance."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 5983.99,
+          "input_tokens": 179,
+          "output_tokens": 50,
+          "total_tokens": 229
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1531.31,
+          "input_tokens": 285,
+          "output_tokens": 14,
+          "total_tokens": 299,
+          "summary_word_count": 10
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 464,
+        "cumulative_output_tokens": 64,
+        "cumulative_total_tokens": 528
+      },
+      "latency_ms": 7544.46,
+      "started_at": "2026-09-14T03:57:33.407315+00:00",
+      "finished_at": "2026-09-14T03:57:40.953519+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 23,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep_quality_academic",
+          "university_student_performance",
+          "sleep_duration_concentration"
+        ],
+        "summary": "Clinical trial examines sleep duration and quality impact on university students' academic performance and cognitive functions."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 6563.51,
+          "input_tokens": 179,
+          "output_tokens": 56,
+          "total_tokens": 235
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1677.49,
+          "input_tokens": 289,
+          "output_tokens": 14,
+          "total_tokens": 303,
+          "summary_word_count": 16
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 468,
+        "cumulative_output_tokens": 70,
+        "cumulative_total_tokens": 538
+      },
+      "latency_ms": 8270.06,
+      "started_at": "2026-09-14T03:57:40.981336+00:00",
+      "finished_at": "2026-09-14T03:57:49.251325+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 24,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep_quality_impact",
+          "academic_performance",
+          "university_student_trial"
+        ],
+        "summary": "Clinical trial assessing sleep duration and quality effects on university students' academic performance and cognitive functions."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 5956.75,
+          "input_tokens": 179,
+          "output_tokens": 52,
+          "total_tokens": 231
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1522.94,
+          "input_tokens": 287,
+          "output_tokens": 14,
+          "total_tokens": 301,
+          "summary_word_count": 16
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 466,
+        "cumulative_output_tokens": 66,
+        "cumulative_total_tokens": 532
+      },
+      "latency_ms": 7503.88,
+      "started_at": "2026-09-14T03:57:49.290516+00:00",
+      "finished_at": "2026-09-14T03:57:56.794666+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 25,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep_quality_impact",
+          "academic_performance",
+          "university_student_study"
+        ],
+        "summary": "Study examines sleep duration and quality effects on university students' concentration, memory, and academic performance."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 6169.43,
+          "input_tokens": 179,
+          "output_tokens": 53,
+          "total_tokens": 232
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1867.24,
+          "input_tokens": 288,
+          "output_tokens": 14,
+          "total_tokens": 302,
+          "summary_word_count": 15
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 467,
+        "cumulative_output_tokens": 67,
+        "cumulative_total_tokens": 534
+      },
+      "latency_ms": 8067.66,
+      "started_at": "2026-09-14T03:57:56.816097+00:00",
+      "finished_at": "2026-09-14T03:58:04.883807+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 26,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep_quality_impact",
+          "academic_performance",
+          "university_student_trial"
+        ],
+        "summary": "Clinical trial examines sleep duration and quality effects on student concentration, memory, and academic outcomes."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 6319.26,
+          "input_tokens": 179,
+          "output_tokens": 53,
+          "total_tokens": 232
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1515.51,
+          "input_tokens": 287,
+          "output_tokens": 14,
+          "total_tokens": 301,
+          "summary_word_count": 15
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 466,
+        "cumulative_output_tokens": 67,
+        "cumulative_total_tokens": 533
+      },
+      "latency_ms": 7868.48,
+      "started_at": "2026-09-14T03:58:04.913672+00:00",
+      "finished_at": "2026-09-14T03:58:12.781768+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 27,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep_quality_impact",
+          "academic_performance",
+          "university_sleep_study"
+        ],
+        "summary": "Clinical trial examines sleep duration and quality effects on university students' concentration, memory, and academic outcomes."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 6382.96,
+          "input_tokens": 179,
+          "output_tokens": 54,
+          "total_tokens": 233
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1669.35,
+          "input_tokens": 289,
+          "output_tokens": 14,
+          "total_tokens": 303,
+          "summary_word_count": 16
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 468,
+        "cumulative_output_tokens": 68,
+        "cumulative_total_tokens": 536
+      },
+      "latency_ms": 8079.31,
+      "started_at": "2026-09-14T03:58:12.798711+00:00",
+      "finished_at": "2026-09-14T03:58:20.879294+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 28,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep_quality_student_academic",
+          "sleep_duration_concentration",
+          "academic_performance_sleep"
+        ],
+        "summary": "Clinical trial examines sleep's impact on university students' concentration, memory, and academic performance."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 6380.7,
+          "input_tokens": 179,
+          "output_tokens": 55,
+          "total_tokens": 234
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1714.73,
+          "input_tokens": 289,
+          "output_tokens": 14,
+          "total_tokens": 303,
+          "summary_word_count": 13
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 468,
+        "cumulative_output_tokens": 69,
+        "cumulative_total_tokens": 537
+      },
+      "latency_ms": 8122.7,
+      "started_at": "2026-09-14T03:58:20.901685+00:00",
+      "finished_at": "2026-09-14T03:58:29.025017+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 29,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep_quality_effects",
+          "academic_performance_outcomes",
+          "university_student_sleep"
+        ],
+        "summary": "Clinical trial examines sleep duration and quality impact on university students' concentration, memory, and academic performance."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 6338.55,
+          "input_tokens": 179,
+          "output_tokens": 56,
+          "total_tokens": 235
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1707.62,
+          "input_tokens": 290,
+          "output_tokens": 14,
+          "total_tokens": 304,
+          "summary_word_count": 16
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 469,
+        "cumulative_output_tokens": 70,
+        "cumulative_total_tokens": 539
+      },
+      "latency_ms": 8081.51,
+      "started_at": "2026-09-14T03:58:29.044620+00:00",
+      "finished_at": "2026-09-14T03:58:37.126313+00:00"
+    },
+    {
+      "experiment": "schema_validation",
+      "run": 30,
+      "title": "Sleep Quality and Academic Performance Study",
+      "content": "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students.",
+      "email": "sanjana@example.edu",
+      "temperature": 0.7,
+      "turn_ceiling": 10,
+      "status": "completed",
+      "completed": true,
+      "abandoned": false,
+      "turn_count": 1,
+      "retry_count": 0,
+      "classification": "valid_first_attempt",
+      "planner_proposal": {
+        "tags": [
+          "sleep_quality_academic",
+          "university_student_concentrati",
+          "sleep_duration_performance"
+        ],
+        "summary": "Clinical trial examining sleep duration and quality impact on university students' academic performance and cognitive functions."
+      },
+      "reviewer_feedback": {
+        "approved": true,
+        "issues": []
+      },
+      "validation_error": "",
+      "trace": [
+        {
+          "node": "planner",
+          "turn": 1,
+          "valid": true,
+          "latency_ms": 6727.47,
+          "input_tokens": 179,
+          "output_tokens": 57,
+          "total_tokens": 236
+        },
+        {
+          "node": "reviewer",
+          "turn": 1,
+          "approved": true,
+          "latency_ms": 1601.61,
+          "input_tokens": 291,
+          "output_tokens": 14,
+          "total_tokens": 305,
+          "summary_word_count": 16
+        }
+      ],
+      "model_stats": {
+        "model": "qwen3:4b",
+        "turn_count": 2,
+        "cumulative_input_tokens": 470,
+        "cumulative_output_tokens": 71,
+        "cumulative_total_tokens": 541
+      },
+      "latency_ms": 8365.28,
+      "started_at": "2026-09-14T03:58:37.157370+00:00",
+      "finished_at": "2026-09-14T03:58:45.523784+00:00"
+    }
+  ]
+}

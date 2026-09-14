@@ -1,0 +1,28 @@
+{
+  "experiment": "ceiling_comparison",
+  "ceilings": {
+    "2": {
+      "turnCeiling": 2,
+      "runCount": 20,
+      "completedCount": 20,
+      "abandonedCount": 0,
+      "completionRatePercent": 100.0,
+      "meanLatencyMs": 8729.5,
+      "meanCompletedLatencyMs": 8729.5,
+      "meanPlannerAttempts": 1.0
+    },
+    "10": {
+      "turnCeiling": 10,
+      "runCount": 20,
+      "completedCount": 20,
+      "abandonedCount": 0,
+      "completionRatePercent": 100.0,
+      "meanLatencyMs": 6005.43,
+      "meanCompletedLatencyMs": 6005.43,
+      "meanPlannerAttempts": 1.0
+    }
+  },
+  "recommendedCeiling": 2,
+  "recommendationReason": "Ceiling 2 achieved an equal or higher completion rate while limiting correction-loop work.",
+  "generatedAt": "2026-09-14T04:09:00.778671+00:00"
+}

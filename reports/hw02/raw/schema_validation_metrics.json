@@ -1,0 +1,25 @@
+{
+  "experiment": "schema_validation",
+  "runCount": 30,
+  "turnCeiling": 10,
+  "outcomes": {
+    "valid_first_attempt": {
+      "count": 30,
+      "meanLatencyMs": 8638.34
+    },
+    "valid_after_one_retry": {
+      "count": 0,
+      "meanLatencyMs": null
+    },
+    "valid_after_two_or_more_retries": {
+      "count": 0,
+      "meanLatencyMs": null
+    },
+    "hit_turn_ceiling": {
+      "count": 0,
+      "meanLatencyMs": null
+    }
+  },
+  "overallMeanLatencyMs": 8638.34,
+  "generatedAt": "2026-09-14T04:09:00.761084+00:00"
+}

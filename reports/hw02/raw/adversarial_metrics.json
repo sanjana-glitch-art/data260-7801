@@ -1,0 +1,11 @@
+{
+  "experiment": "adversarial",
+  "runCount": 5,
+  "turnCeiling": 2,
+  "hitTurnCeilingCount": 5,
+  "hitTurnCeilingRatePercent": 100.0,
+  "preferredThresholdReached": true,
+  "completedCount": 0,
+  "meanLatencyMs": 29699.65,
+  "generatedAt": "2026-09-14T04:09:00.848869+00:00"
+}
