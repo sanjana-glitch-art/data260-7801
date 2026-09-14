@@ -1,106 +1,188 @@
-
 "use strict";
 
-// Get the form from the HTML page.
-const clinicalTrialForm = document.getElementById("clinicalTrialForm");
+const API_URL = "/api/trials";
 
-// Arrow function that validates the description and checkbox.
-const validateForm = () => {
-    const trialDescription = document
+const loadingState = document.getElementById("loadingState");
+const emptyState = document.getElementById("emptyState");
+const errorState = document.getElementById("errorState");
+const tableContainer = document.getElementById("tableContainer");
+const trialTableBody = document.getElementById("trialTableBody");
+const recordCount = document.getElementById("recordCount");
+const searchForm = document.getElementById("searchForm");
+const searchInput = document.getElementById("searchInput");
+const clearSearchButton = document.getElementById(
+    "clearSearchButton"
+);
+const createTrialForm = document.getElementById(
+    "createTrialForm"
+);
+const deleteHighestForm = document.getElementById(
+    "deleteHighestForm"
+);
+
+
+const showOnlyState = (stateName) => {
+    loadingState.hidden = stateName !== "loading";
+    emptyState.hidden = stateName !== "empty";
+    errorState.hidden = stateName !== "error";
+    tableContainer.hidden = stateName !== "table";
+};
+
+
+const addCell = (row, label, value) => {
+    const cell = document.createElement("td");
+    cell.dataset.label = label;
+    cell.textContent = value;
+    row.appendChild(cell);
+};
+
+
+const displayTrials = (trials) => {
+    trialTableBody.replaceChildren();
+
+    recordCount.textContent = (
+        `${trials.length} ${
+            trials.length === 1 ? "record" : "records"
+        }`
+    );
+
+    if (trials.length === 0) {
+        showOnlyState("empty");
+        return;
+    }
+
+    for (const trial of trials) {
+        const row = document.createElement("tr");
+
+        addCell(row, "ID", String(trial.id));
+        addCell(row, "Trial title", trial.trial_title);
+        addCell(row, "Sponsor", trial.sponsor_name);
+        addCell(row, "Phase", trial.trial_phase);
+
+        trialTableBody.appendChild(row);
+    }
+
+    showOnlyState("table");
+};
+
+
+const loadTrials = async (search = "") => {
+    showOnlyState("loading");
+
+    const query = new URLSearchParams();
+
+    if (search.trim()) {
+        query.set("search", search.trim());
+    }
+
+    const requestUrl = query.size
+        ? `${API_URL}?${query.toString()}`
+        : API_URL;
+
+    try {
+        const response = await fetch(requestUrl, {
+            cache: "no-store"
+        });
+
+        if (!response.ok) {
+            throw new Error(
+                `Request failed with status ${response.status}`
+            );
+        }
+
+        const trials = await response.json();
+        displayTrials(trials);
+    } catch (error) {
+        console.error("Unable to load trials:", error);
+        recordCount.textContent = "Unavailable";
+        showOnlyState("error");
+    }
+};
+
+
+const validateCreateForm = () => {
+    const description = document
         .getElementById("trialDescription")
         .value
         .trim();
 
-    const termsAccepted =
-        document.getElementById("termsAccepted").checked;
+    const termsAccepted = document
+        .getElementById("termsAccepted")
+        .checked;
 
-    // The description must contain more than 25 characters.
-    if (trialDescription.length <= 25) {
-        alert("The trial description must contain more than 25 characters.");
+    if (description.length <= 25) {
+        alert(
+            "The trial description must contain more than " +
+            "25 characters."
+        );
+
         return false;
     }
 
-    // The terms and conditions checkbox must be selected.
     if (!termsAccepted) {
-        alert("You must agree to the terms and conditions.");
+        alert(
+            "You must agree to the terms and conditions."
+        );
+
         return false;
     }
 
     return true;
 };
 
-// Closure that remembers the number of successful submissions.
-const createSubmissionCounter = () => {
-    let submissionCount = 0;
 
-    return () => {
-        submissionCount += 1;
-        return submissionCount;
-    };
-};
-
-const countSuccessfulSubmission = createSubmissionCounter();
-
-// Handle the form submission.
-clinicalTrialForm.addEventListener("submit", (event) => {
-    // Prevent the page from reloading.
+searchForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    // Stop if JavaScript validation fails.
-    if (!validateForm()) {
-        return;
+    const search = searchInput.value.trim();
+    const url = new URL(window.location.href);
+
+    if (search) {
+        url.searchParams.set("search", search);
+    } else {
+        url.searchParams.delete("search");
     }
 
-    // Collect the form values in an object.
-    const formData = {
-        trialTitle: document.getElementById("trialTitle").value.trim(),
-        sponsorName: document.getElementById("sponsorName").value.trim(),
-        submitterEmail: document
-            .getElementById("submitterEmail")
-            .value
-            .trim(),
-        trialDescription: document
-            .getElementById("trialDescription")
-            .value
-            .trim(),
-        trialPhase: document.getElementById("trialPhase").value,
-        termsAccepted: document.getElementById("termsAccepted").checked
-    };
+    window.history.replaceState({}, "", url);
+    loadTrials(search);
+});
 
-    // Convert the form object into a JSON string.
-    const jsonString = JSON.stringify(formData);
 
-    console.log("Form data as a JSON string:");
-    console.log(jsonString);
+clearSearchButton.addEventListener("click", () => {
+    searchInput.value = "";
 
-    // Convert the JSON string back into a JavaScript object.
-    const parsedObject = JSON.parse(jsonString);
+    const url = new URL(window.location.href);
+    url.searchParams.delete("search");
+    window.history.replaceState({}, "", url);
 
-    // Use object destructuring to extract the primary field and email.
-    const { trialTitle, submitterEmail } = parsedObject;
+    loadTrials();
+    searchInput.focus();
+});
 
-    console.log("Primary field - Trial title:", trialTitle);
-    console.log("Submitter email:", submitterEmail);
 
-    // Use the spread operator to add the current date and time.
-    const updatedParsedObject = {
-        ...parsedObject,
-        submissionDate: new Date().toISOString()
-    };
+createTrialForm.addEventListener("submit", (event) => {
+    if (!validateCreateForm()) {
+        event.preventDefault();
+    }
+});
 
-    console.log("Updated parsed object:");
-    console.log(updatedParsedObject);
 
-    // Increase the closure counter only after successful validation.
-    const submissionCount = countSuccessfulSubmission();
+deleteHighestForm.addEventListener("submit", (event) => {
+    const confirmed = window.confirm(
+        "Delete the clinical-trial record with the highest ID?"
+    );
 
-    console.log("Successful submission count:", submissionCount);
+    if (!confirmed) {
+        event.preventDefault();
+    }
+});
 
-    alert("Clinical trial listing submitted successfully!");
 
-    // Clear the form after a successful submission.
-    clinicalTrialForm.reset();
+document.addEventListener("DOMContentLoaded", () => {
+    const search = new URLSearchParams(
+        window.location.search
+    ).get("search") || "";
 
-    // Return focus to the primary field.
-    document.getElementById("trialTitle").focus();
+    searchInput.value = search;
+    loadTrials(search);
 });

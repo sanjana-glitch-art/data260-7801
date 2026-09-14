@@ -1,10 +1,20 @@
-FROM nginx:alpine
+FROM python:3.11-slim
 
-RUN rm -rf /usr/share/nginx/html/*
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
-COPY code/web_application/index.html /usr/share/nginx/html/index.html
-COPY code/web_application/script.js /usr/share/nginx/html/script.js
+WORKDIR /app
 
-EXPOSE 80
+COPY requirements.txt /app/requirements.txt
 
-CMD ["nginx", "-g", "daemon off;"]
+RUN python -m pip install --no-cache-dir --upgrade pip \
+    && python -m pip install --no-cache-dir -r /app/requirements.txt
+
+COPY code /app/code
+COPY src /app/src
+COPY AGENT.md /app/AGENT.md
+COPY DOMAIN_SCHEMA.md /app/DOMAIN_SCHEMA.md
+
+EXPOSE 8601
+
+CMD ["python", "-m", "uvicorn", "code.main:app", "--host", "0.0.0.0", "--port", "8601"]

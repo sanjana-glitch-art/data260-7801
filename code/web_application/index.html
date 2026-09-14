@@ -2,160 +2,281 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>HW1-Sanjana Thummalapalli</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <style>
-        body,
-        input,
-        textarea,
-        select,
-        button {
-            font-family: Arial, sans-serif;
-        }
+    <title>HW2 - Sanjana Thummalapalli</title>
 
-        body {
-            max-width: 700px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #f4f7fb;
-            color: #222;
-        }
-
-        h1 {
-            text-align: center;
-            color: #234a7c;
-        }
-
-        form {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        label {
-            display: block;
-            margin-top: 16px;
-            margin-bottom: 6px;
-            font-weight: bold;
-        }
-
-        input,
-        textarea,
-        select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #aaa;
-            border-radius: 5px;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-
-        textarea {
-            min-height: 130px;
-            resize: vertical;
-        }
-
-        .terms-group {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 18px;
-        }
-
-        .terms-group input {
-            width: auto;
-        }
-
-        .terms-group label {
-            margin: 0;
-            font-weight: normal;
-        }
-
-        button {
-            display: block;
-            width: 100%;
-            margin-top: 22px;
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            background-color: #234a7c;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #183554;
-        }
-    </style>
+    <link
+        rel="stylesheet"
+        href="/static/styles.css"
+    >
 </head>
 
 <body>
-    <h1>Clinical Trial Listing</h1>
+    <header class="page-header">
+        <div class="header-content">
+            <p class="eyebrow">DATA 260 · Homework 2</p>
+            <h1>Clinical Trial Listings</h1>
 
-    <form id="clinicalTrialForm">
-        <label for="trialTitle">Trial title</label>
-        <input
-            type="text"
-            id="trialTitle"
-            name="trialTitle"
-            placeholder="Enter the clinical trial title"
-            required
-            autofocus
-        >
-
-        <label for="sponsorName">Sponsor name</label>
-        <input
-            type="text"
-            id="sponsorName"
-            name="sponsorName"
-            placeholder="Enter the sponsoring organization"
-            required
-        >
-
-        <label for="submitterEmail">Submitter email</label>
-        <input
-            type="email"
-            id="submitterEmail"
-            name="submitterEmail"
-            placeholder="Enter the submitter's email address"
-            required
-        >
-
-        <label for="trialDescription">Trial description</label>
-        <textarea
-            id="trialDescription"
-            name="trialDescription"
-            placeholder="Describe the clinical trial, its purpose, and its participants"
-            required
-        ></textarea>
-
-        <label for="trialPhase">Trial phase</label>
-        <select id="trialPhase" name="trialPhase" required>
-            <option value="" disabled selected>Select a trial phase</option>
-            <option value="Phase I">Phase I</option>
-            <option value="Phase II">Phase II</option>
-            <option value="Phase III">Phase III</option>
-            <option value="Phase IV">Phase IV</option>
-        </select>
-
-        <div class="terms-group">
-            <input
-                type="checkbox"
-                id="termsAccepted"
-                name="termsAccepted"
-            >
-            <label for="termsAccepted">
-                I agree to the terms and conditions.
-            </label>
+            <p class="header-description">
+                Create, update, search, and manage clinical-trial
+                records through a FastAPI backend.
+            </p>
         </div>
+    </header>
 
-        <button type="submit">Submit Clinical Trial</button>
-    </form>
+    <main class="page-layout">
+        <section class="panel list-panel">
+            <div class="section-heading">
+                <div>
+                    <p class="section-label">Current records</p>
+                    <h2>Clinical trials</h2>
+                </div>
 
-    <script src="script.js"></script>
+                <span id="recordCount" class="record-count">
+                    0 records
+                </span>
+            </div>
+
+            <form
+                id="searchForm"
+                class="search-form"
+                role="search"
+            >
+                <label for="searchInput">
+                    Search by trial title or sponsor
+                </label>
+
+                <div class="search-controls">
+                    <input
+                        id="searchInput"
+                        name="search"
+                        type="search"
+                        placeholder="Example: Sleep or SJSU"
+                    >
+
+                    <button type="submit">
+                        Search
+                    </button>
+
+                    <button
+                        id="clearSearchButton"
+                        class="secondary-button"
+                        type="button"
+                    >
+                        Clear
+                    </button>
+                </div>
+            </form>
+
+            <div
+                id="loadingState"
+                class="state-message loading-state"
+                role="status"
+            >
+                Loading clinical-trial records…
+            </div>
+
+            <div
+                id="emptyState"
+                class="state-message empty-state"
+                role="status"
+                hidden
+            >
+                No clinical-trial records were found.
+            </div>
+
+            <div
+                id="errorState"
+                class="state-message error-state"
+                role="alert"
+                hidden
+            >
+                Records could not be loaded. Confirm that the
+                FastAPI server is running and try again.
+            </div>
+
+            <div
+                id="tableContainer"
+                class="table-container"
+                hidden
+            >
+                <table class="trial-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Trial title</th>
+                            <th scope="col">Sponsor</th>
+                            <th scope="col">Phase</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="trialTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel">
+            <p class="section-label">Add record</p>
+            <h2>Create a clinical trial</h2>
+
+            <form
+                id="createTrialForm"
+                action="/trials"
+                method="post"
+            >
+                <label for="trialTitle">
+                    Trial title
+                </label>
+
+                <input
+                    id="trialTitle"
+                    name="trial_title"
+                    type="text"
+                    required
+                    autofocus
+                    placeholder="Enter the clinical-trial title"
+                >
+
+                <label for="sponsorName">
+                    Sponsor name
+                </label>
+
+                <input
+                    id="sponsorName"
+                    name="sponsor_name"
+                    type="text"
+                    required
+                    placeholder="Enter the sponsoring organization"
+                >
+
+                <label for="submitterEmail">
+                    Submitter email
+                </label>
+
+                <input
+                    id="submitterEmail"
+                    name="submitter_email"
+                    type="email"
+                    required
+                    placeholder="name@example.edu"
+                >
+
+                <label for="trialDescription">
+                    Trial description
+                </label>
+
+                <textarea
+                    id="trialDescription"
+                    name="trial_description"
+                    required
+                    placeholder="Enter more than 25 characters"
+                ></textarea>
+
+                <label for="trialPhase">
+                    Trial phase
+                </label>
+
+                <select
+                    id="trialPhase"
+                    name="trial_phase"
+                    required
+                >
+                    <option value="Phase I">Phase I</option>
+                    <option value="Phase II">Phase II</option>
+                    <option value="Phase III">Phase III</option>
+                    <option value="Phase IV">Phase IV</option>
+                </select>
+
+                <div class="checkbox-row">
+                    <input
+                        id="termsAccepted"
+                        type="checkbox"
+                        required
+                    >
+
+                    <label for="termsAccepted">
+                        I agree to the terms and conditions.
+                    </label>
+                </div>
+
+                <button type="submit">
+                    Add clinical trial
+                </button>
+            </form>
+        </section>
+
+        <section class="panel">
+            <p class="section-label">Required update</p>
+            <h2>Update record ID 1</h2>
+
+            <p class="supporting-text">
+                Enter domain-appropriate values for the primary and
+                secondary fields.
+            </p>
+
+            <form
+                action="/trials/1/update"
+                method="post"
+            >
+                <label for="updateTrialTitle">
+                    New trial title
+                </label>
+
+                <input
+                    id="updateTrialTitle"
+                    name="trial_title"
+                    type="text"
+                    required
+                    placeholder="Updated clinical-trial title"
+                >
+
+                <label for="updateSponsorName">
+                    New sponsor name
+                </label>
+
+                <input
+                    id="updateSponsorName"
+                    name="sponsor_name"
+                    type="text"
+                    required
+                    placeholder="Updated sponsoring organization"
+                >
+
+                <button type="submit">
+                    Update record 1
+                </button>
+            </form>
+        </section>
+
+        <section class="panel danger-panel">
+            <p class="section-label">Required deletion</p>
+            <h2>Delete the highest-ID record</h2>
+
+            <p class="supporting-text">
+                This operation identifies and deletes the record
+                with the largest current ID.
+            </p>
+
+            <form
+                id="deleteHighestForm"
+                action="/trials/delete-highest"
+                method="post"
+            >
+                <button
+                    class="danger-button"
+                    type="submit"
+                >
+                    Delete highest-ID record
+                </button>
+            </form>
+        </section>
+    </main>
+
+    <script src="/static/script.js"></script>
 </body>
 </html>

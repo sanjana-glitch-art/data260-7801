@@ -1,14 +1,12 @@
-# DATA-260 Homework 1
+# DATA-260 Coursework Repository
 
-## Repository
+This repository contains the shared application code and homework evidence for
+DATA-260.
 
-- Repository: https://github.com/sanjana-glitch-art/data260-7801
-- Tagged submission: https://github.com/sanjana-glitch-art/data260-7801/tree/hw1
+## Student Information
 
-## Student Configuration
-
-| Value | Result |
-|---|---|
+| Setting | Value |
+|---|---:|
 | Student | Sanjana Thummalapalli |
 | SID4 | 7801 |
 | PORT_BASE | 8601 |
@@ -18,29 +16,56 @@
 | DOMAIN_ID | 1 |
 | Assigned domain | Clinical Trial Listings |
 
+## Repository
+
+GitHub repository:
+
+<https://github.com/sanjana-glitch-art/data260-7801>
+
+Required collaborators:
+
+- `Sbnikitha`
+- `supriyaselvanganesan`
+
 ## Hardware and Software
 
-- Operating system: Windows 11
-- Processor: AMD Ryzen 5 7535HS with Radeon Graphics
-- Memory: 8 GB RAM
-- Dedicated GPU: AMD Radeon RX 6550M, 4 GB
-- Integrated GPU: AMD Radeon Graphics
-- Python: 3.11
-- Ollama model: qwen3:4b
-- Local URL: http://localhost:8601
+| Item | Configuration |
+|---|---|
+| Operating system | Windows 11 |
+| Processor | AMD Ryzen 5 7535HS with Radeon Graphics |
+| Memory | 8 GB RAM |
+| Dedicated GPU | AMD Radeon RX 6550M, 4 GB |
+| Python | 3.11 |
+| Local model | qwen3:4b |
+| Application URL | `http://localhost:8601` |
+| FastAPI documentation | `http://localhost:8601/docs` |
 
-The requested qwen3:8b model was tested first. One Planner-Reviewer
+The originally requested `qwen3:8b` model was tested during Homework 1, but one
 pipeline run took approximately 519 seconds on this hardware. The smaller
-tool-capable qwen3:4b model was therefore used for the repeated experiment.
+tool-capable `qwen3:4b` model is therefore used as the documented local
+substitute.
 
 ## Repository Structure
 
 ```text
 data260-7801/
 ├── code/
+│   ├── __init__.py
 │   ├── web_application/
 │   │   ├── index.html
+│   │   ├── styles.css
 │   │   └── script.js
+│   ├── agent_graph/
+│   │   ├── __init__.py
+│   │   ├── state.py
+│   │   ├── schemas.py
+│   │   ├── nodes.py
+│   │   ├── router.py
+│   │   └── workflow.py
+│   ├── main.py
+│   ├── run_agent_graph.py
+│   ├── run_hw2_experiments.py
+│   ├── verify_hw2.py
 │   ├── agents_demo.py
 │   ├── hw1_client.py
 │   ├── run_nondeterminism.py
@@ -50,13 +75,14 @@ data260-7801/
 │   ├── __init__.py
 │   └── model_client.py
 ├── reports/
-│   └── hw01/
+│   ├── hw01/
+│   └── hw02/
 │       ├── cases/
 │       ├── raw/
 │       ├── screenshots/
-│       ├── AI_USE.md
-│       ├── METRICS.md
 │       ├── RUN_LOG.txt
+│       ├── METRICS.md
+│       ├── AI_USE.md
 │       ├── report.pdf
 │       ├── reproducible_run_instructions.md
 │       └── verification.json
@@ -66,14 +92,15 @@ data260-7801/
 └── requirements.txt
 ```
 
-The application code in `code/` and `src/` is shared and will be extended
-in future homework assignments. Homework-specific reports, evidence, logs,
-and raw results are stored under `reports/hw01/`.
+Application code is maintained in the shared `code/` and `src/` directories.
+Homework-specific reports, raw results, logs, and evidence are stored under
+`reports/hw01/` and `reports/hw02/`. Application code is not duplicated inside
+the report directories.
 
-## Web Application
+## Clinical Trial Listing Application
 
-The web application provides a form for clinical trial listings. It
-collects:
+The application manages Clinical Trial Listing records. Its main domain fields
+include:
 
 - Trial title
 - Sponsor name
@@ -82,55 +109,173 @@ collects:
 - Trial phase
 - Terms-and-conditions acceptance
 
-The JavaScript verifies that the description contains more than 25
-characters and that the terms checkbox is selected.
+The primary field is `trialTitle`, and the secondary field is `sponsorName`.
 
-After successful validation, the application:
+## Homework 1
 
-- Converts the form object into a JSON string
-- Parses the JSON string back into an object
-- Uses destructuring to extract the trial title and email
-- Uses the spread operator to add `submissionDate`
-- Uses a closure to count successful submissions
+Homework 1 established:
 
-## Prerequisites
+- The initial HTML and JavaScript clinical-trial form
+- Client-side form validation
+- JSON serialization and parsing
+- Object destructuring and spread syntax
+- A closure-based successful-submission counter
+- A local Docker deployment
+- A sequential Planner and Reviewer pipeline
+- A nondeterminism experiment
+- The reusable `src/model_client.py` adapter
+- A bullet-only local code-review client
+- Per-turn token accounting
 
-- Git
-- Python 3.11 or 3.12
-- Docker Desktop
-- Ollama
-- qwen3:4b
+Homework 1 evidence is stored in:
 
-## Python Setup
+```text
+reports/hw01/
+```
 
-Run all commands from the repository root.
+## Homework 2
+
+Homework 2 extends the same application with:
+
+- Responsive behavior at a width of 375 pixels
+- Visible loading, empty, and error states
+- A FastAPI backend running on port 8601
+- Clinical-trial creation
+- Updating record ID 1
+- Deleting the highest-ID record
+- Search by trial title or sponsor name
+- A stateful LangGraph Planner and Reviewer workflow
+- A Supervisor node and conditional routing
+- Reviewer-to-Planner correction loops
+- Turn-ceiling protection
+- Pydantic output validation
+- Schema-validation experiments
+- Turn-ceiling comparison experiments
+- Adversarial-input experiments
+- Objective smoke-test verification
+
+Homework 2 evidence is stored in:
+
+```text
+reports/hw02/
+```
+
+## FastAPI Endpoints
+
+| Method | Route | Purpose |
+|---|---|---|
+| GET | `/` | Serve the application |
+| GET | `/api/trials` | List or search clinical trials |
+| GET | `/api/trials/{trial_id}` | Retrieve one record |
+| POST | `/api/trials` | Create a JSON API record |
+| PUT | `/api/trials/{trial_id}` | Update a JSON API record |
+| DELETE | `/api/trials/{trial_id}` | Delete a JSON API record |
+| POST | `/trials` | Create through the HTML form |
+| POST | `/trials/1/update` | Update record ID 1 and redirect |
+| POST | `/trials/delete-highest` | Delete the highest-ID record |
+
+The application uses in-memory data for reproducibility. Restarting FastAPI
+restores the initial records.
+
+## Stateful Agent Graph
+
+The Homework 2 agent graph contains:
+
+- `AgentState`: shared graph memory
+- `supervisor_node`: increments the Planner-attempt counter
+- `planner_node`: produces tags and a summary
+- `reviewer_node`: reviews semantic relevance and factual support
+- Conditional routing: completes, retries, or stops at the turn ceiling
+- Pydantic validation: enforces the Planner output schema
+
+All Planner and Reviewer model calls use:
+
+```text
+src/model_client.py
+```
+
+The graph nodes do not call Ollama or LangChain model classes directly.
+
+## Planner Output Schema
+
+A valid Planner proposal requires:
+
+- Exactly three tags
+- Three distinct tags
+- Every tag to contain 3–30 characters
+- A summary containing no more than 25 whitespace-separated words
+- No unexpected JSON fields
+
+## Homework 2 Experiment Results
+
+### Schema validation
+
+| Outcome | Count | Mean latency |
+|---|---:|---:|
+| Valid first attempt | 30 | 8,638.34 ms |
+| Valid after one retry | 0 | N/A |
+| Valid after two or more retries | 0 | N/A |
+| Hit turn ceiling | 0 | N/A |
+
+### Turn-ceiling comparison
+
+| Metric | Ceiling 2 | Ceiling 10 |
+|---|---:|---:|
+| Runs | 20 | 20 |
+| Completed | 20 | 20 |
+| Completion rate | 100.00% | 100.00% |
+| Mean latency | 8,729.50 ms | 6,005.43 ms |
+| Mean Planner attempts | 1.00 | 1.00 |
+
+Deployment ceiling selected: **2**
+
+Both ceilings achieved the same completion rate and required the same average
+number of Planner attempts. Ceiling 2 provides a tighter upper bound on
+correction-loop work.
+
+### Adversarial input
+
+| Metric | Result |
+|---|---:|
+| Runs | 5 |
+| Hit turn ceiling | 5 |
+| Hit-ceiling rate | 100.00% |
+| Mean latency | 29,699.65 ms |
+
+The prompt-injection-style adversarial input reached the ceiling in all five
+observed runs. The result is reported as an experimental observation, not as a
+universal deterministic guarantee.
+
+## Environment Setup
+
+Create a Python 3.11 environment:
 
 ```powershell
 py -3.11 -m venv .venv
 .\.venv\Scripts\Activate.ps1
+```
+
+Install dependencies:
+
+```powershell
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
+```
+
+Confirm the local model:
+
+```powershell
 ollama pull qwen3:4b
+ollama list
 ```
 
-## Local Docker Deployment
-
-Build the image from the repository root:
+## Run the FastAPI Application
 
 ```powershell
-docker build -f code/Dockerfile -t data260-hw1:latest .
-```
-
-Create and run the container for the first time:
-
-```powershell
-docker run --name data260-hw1-7801 -d -p 8601:80 data260-hw1:latest
-```
-
-If the container already exists, restart it:
-
-```powershell
-docker start data260-hw1-7801
+python -m uvicorn code.main:app `
+    --host 0.0.0.0 `
+    --port 8601 `
+    --reload
 ```
 
 Open:
@@ -139,244 +284,110 @@ Open:
 http://localhost:8601
 ```
 
-Check its status:
+API documentation:
+
+```text
+http://localhost:8601/docs
+```
+
+## Run the Normal Agent Graph
 
 ```powershell
-docker ps --filter "name=data260-hw1-7801"
+python code\run_agent_graph.py `
+    --model qwen3:4b `
+    --temperature 0.0 `
+    --turn-ceiling 2
 ```
 
-Stop it when it is not needed:
+## Run the Correction-Loop Demonstration
 
 ```powershell
-docker stop data260-hw1-7801
+python code\run_agent_graph.py `
+    --model qwen3:4b `
+    --temperature 0.0 `
+    --turn-ceiling 2 `
+    --force-reviewer-issue
 ```
 
-## Agent Pipeline
+## Run Homework 2 Experiments
 
-The agent pipeline contains:
-
-1. Planner agent
-2. Reviewer agent
-3. Deterministic, non-agent finalization step
-
-All model calls pass through:
-
-```text
-src/model_client.py
-```
-
-Run:
+Run or resume all 75 experiments:
 
 ```powershell
-python code/agents_demo.py --model qwen3:4b --title "Sleep Quality and Academic Performance Study" --content "This clinical trial studies how sleep duration and sleep quality affect concentration, memory, and academic performance among university students."
+python code\run_hw2_experiments.py `
+    --experiment all `
+    --model qwen3:4b `
+    --temperature 0.7
 ```
 
-The pipeline prints:
-
-- Planner JSON
-- Reviewer JSON
-- Finalized JSON
-- Publish JSON
-- Planner and Reviewer latency
-
-The final output always contains exactly three tags and a summary of at
-most 25 words.
-
-## Nondeterminism Experiment
-
-The unchanged input is stored at:
-
-```text
-reports/hw01/cases/nondeterminism_input.json
-```
-
-Run:
+Individual experiment groups can be run with:
 
 ```powershell
-python code/run_nondeterminism.py
+python code\run_hw2_experiments.py --experiment schema
+python code\run_hw2_experiments.py --experiment ceilings
+python code\run_hw2_experiments.py --experiment adversarial
 ```
 
-The experiment performs:
-
-- 20 runs at temperature 0.7
-- 20 runs at temperature 0.0
-- 40 successful runs in total
-
-The script saves each successful run immediately and resumes from the
-existing results if interrupted.
-
-Raw outputs are stored in:
-
-```text
-reports/hw01/raw/nondeterminism_results.json
-reports/hw01/raw/nondeterminism_results.csv
-reports/hw01/raw/nondeterminism_metrics.json
-```
-
-## Experiment Results
-
-| Metric | Temperature 0.7 | Temperature 0.0 |
-|---|---:|---:|
-| Distinct tag sets | 11 | 1 |
-| Latency p50 | 5526.03 ms | 5105.43 ms |
-| Latency p95 | 7654.37 ms | 5529.57 ms |
-| Latency p99 | 18532.39 ms | 7052.89 ms |
-
-At temperature 0.7, identical inputs produced multiple related tag sets.
-At temperature 0.0, all 20 runs produced the same tag set.
-
-See `reports/hw01/METRICS.md` for the complete results.
-
-## Interactive Model Client
-
-Run:
+## Run Homework 2 Verification
 
 ```powershell
-python code/hw1_client.py
+python code\verify_hw2.py
 ```
 
-Commands:
+The verifier writes:
 
 ```text
-/stats
-/exit
+reports/hw02/verification.json
 ```
 
-After every model response, the client prints:
-
-- Input tokens
-- Output tokens
-- Total tokens
-- Bullet-only verification result
-
-The `/stats` command displays:
-
-- Turn count
-- Cumulative input tokens
-- Cumulative output tokens
-- Cumulative total tokens
-- Serialized conversation-history length
-
-`/stats` does not add anything to the conversation history.
-
-The saved five-turn token data is stored at:
+A successful final result contains:
 
 ```text
-reports/hw01/raw/client_token_counts.json
+"passed": true
 ```
 
-## Token Results
+## Reproducibility and Evidence
 
-| Turn | Input | Output | Total | Cumulative Input | Cumulative Output | History Length |
-|---:|---:|---:|---:|---:|---:|---:|
-| 1 | 134 | 46 | 180 | 134 | 46 | 249 |
-| 2 | 191 | 33 | 224 | 325 | 79 | 469 |
-| 3 | 241 | 61 | 302 | 566 | 140 | 881 |
-| 4 | 313 | 73 | 386 | 879 | 213 | 1298 |
-| 5 | 403 | 53 | 456 | 1282 | 266 | 1667 |
-
-All five displayed model responses passed bullet-only verification.
-
-## Model-Client Questions
-
-### Why is prior conversation context resent with every turn?
-
-A model request is normally stateless. The application must resend earlier
-messages so the model can understand references to previous questions and
-answers and continue the conversation coherently.
-
-### How is a system prompt different from a user message?
-
-A system prompt defines the model's overall role, behavioral constraints,
-and response format. A user message contains the specific request. System
-instructions have higher priority and remain applicable throughout the
-conversation.
-
-### Why do input tokens grow over a conversation?
-
-Every request contains the system prompt, earlier user messages, earlier
-assistant responses, and the newest user message. As the serialized
-history grows, the number of input tokens also grows.
-
-### What eventually limits that growth?
-
-The model's context-window limit restricts the number of tokens that can
-be included in one request. An application must eventually remove,
-summarize, or compress older conversation history.
-
-## Verification
-
-Run:
-
-```powershell
-python code/verify_hw1.py
-```
-
-The verification script checks:
-
-- Required files
-- Supported Python version
-- Python source compilation
-- HTML requirements
-- JavaScript requirements
-- Adapter-only model access
-- Forty nondeterminism results
-- Five-turn token accounting
-- Bullet-only verification
-
-The result is written to:
+Detailed reproduction instructions:
 
 ```text
-reports/hw01/verification.json
+reports/hw02/reproducible_run_instructions.md
 ```
 
-A successful result contains:
-
-```json
-{
-  "passed": true
-}
-```
-
-## Homework Artifacts
-
-The Homework 1 report and supporting files are located under:
+Machine-readable experiment results:
 
 ```text
-reports/hw01/
+reports/hw02/raw/
 ```
 
-Important files include:
+Real console output and timestamps:
 
-- `report.pdf`
-- `RUN_LOG.txt`
-- `METRICS.md`
-- `AI_USE.md`
-- `verification.json`
-- `reproducible_run_instructions.md`
-- `raw/nondeterminism_results.json`
-- `raw/nondeterminism_results.csv`
-- `raw/client_token_counts.json`
+```text
+reports/hw02/RUN_LOG.txt
+```
 
-## AWS ECS Status
+Experiment analysis:
 
-The local Docker deployment was completed successfully.
+```text
+reports/hw02/METRICS.md
+```
 
-My student AWS credits were exhausted. The TA approved attempting the ECS
-deployment through a classmate's AWS account, but account issues prevented
-the deployment from being completed during the available session. The
-report documents the deployment status accurately.
+AI-use disclosure:
 
-## Git Tag
+```text
+reports/hw02/AI_USE.md
+```
 
-The final Homework 1 submission is tagged:
+## Submission Tags
+
+Homework 1 uses:
 
 ```text
 hw1
 ```
 
-Tagged version:
+Homework 2 will use:
 
 ```text
-https://github.com/sanjana-glitch-art/data260-7801/tree/hw1
+hw2
 ```
