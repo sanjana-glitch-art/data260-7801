@@ -67,7 +67,7 @@ questions:
     expected_source_file: "fda_clinical_trial_endpoints.txt"
     source_specific: true
 
-    - id: q6
+  - id: q6
     question: >
       What should a clinical-trial sponsor do to protect
       participants and ensure that study results are reliable?
