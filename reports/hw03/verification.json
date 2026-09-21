@@ -1,0 +1,85 @@
+{
+  "assignment": "DATA-260 Homework 3",
+  "student": "Sanjana Thummalapalli",
+  "sid4": 7801,
+  "portBase": 8601,
+  "prefix": "s7801",
+  "seed": 7801,
+  "verifySeed": 267801,
+  "domainId": 1,
+  "domain": "Clinical Trial Listings",
+  "timestamp": "2026-09-21T08:50:09.508569+00:00",
+  "passed": true,
+  "checks": [
+    {
+      "name": "required_files",
+      "passed": true,
+      "details": "All required implementation and evidence files exist."
+    },
+    {
+      "name": "python_version",
+      "passed": true,
+      "details": "3.11.0"
+    },
+    {
+      "name": "dependencies",
+      "passed": true,
+      "details": "Required runtime modules are available."
+    },
+    {
+      "name": "authentication_source",
+      "passed": true,
+      "details": "Authentication and session requirements were found."
+    },
+    {
+      "name": "fastapi_routes",
+      "passed": true,
+      "details": "All required FastAPI routes are registered."
+    },
+    {
+      "name": "credential_validation",
+      "passed": true,
+      "details": "Valid credentials were accepted and invalid credentials were rejected."
+    },
+    {
+      "name": "bootstrap_templates",
+      "passed": true,
+      "details": "Bootstrap authentication templates passed."
+    },
+    {
+      "name": "corpus_manifest",
+      "passed": true,
+      "details": "Files=3, total bytes=350736, hashes and sizes valid."
+    },
+    {
+      "name": "questions",
+      "passed": true,
+      "details": "Questions=6, expected sources=3, invalid=[]"
+    },
+    {
+      "name": "question_preregistration",
+      "passed": true,
+      "details": "questions.yaml was committed before the retrieval results."
+    },
+    {
+      "name": "retrieval_results",
+      "passed": true,
+      "details": "Runs=18/18, rows=90/90, techniques=['semantic', 'sentence_window', 'token'], run fields valid=True, row fields valid=True"
+    },
+    {
+      "name": "retrieval_metrics",
+      "passed": true,
+      "details": "All three techniques contain the required metrics."
+    },
+    {
+      "name": "false_positive_candidate",
+      "passed": true,
+      "details": "Source mismatches=5, highest cosine=0.5353"
+    },
+    {
+      "name": "run_log",
+      "passed": true,
+      "details": "RUN_LOG.txt contains authentication and retrieval evidence."
+    }
+  ]
+}
