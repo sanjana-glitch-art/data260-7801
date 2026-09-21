@@ -66,3 +66,16 @@ questions:
       use an appropriate multiplicity-control strategy.
     expected_source_file: "fda_clinical_trial_endpoints.txt"
     source_specific: true
+
+    - id: q6
+    question: >
+      What should a clinical-trial sponsor do to protect
+      participants and ensure that study results are reliable?
+    expected_answer: >
+      The sponsor should use a risk-based monitoring approach
+      that focuses oversight on the critical data and processes
+      most important to participant safety and the reliability
+      of the trial results.
+    expected_source_file: "fda_risk_based_monitoring.txt"
+    source_specific: true
+    purpose: "Additional question for false-positive analysis"
