@@ -1,0 +1,34 @@
+{
+  "domainId": 1,
+  "domain": "Clinical Trial Listings",
+  "generatedAt": "2026-09-21",
+  "minimumRequiredBytes": 200000,
+  "totalTextBytes": 350736,
+  "meetsMinimumSize": true,
+  "files": [
+    {
+      "filename": "fda_informed_consent.txt",
+      "relativePath": "reports/hw03/corpus/fda_informed_consent.txt",
+      "sourceTitle": "FDA Informed Consent Guidance for IRBs, Clinical Investigators, and Sponsors",
+      "sourceUrl": "https://www.fda.gov/media/88915/download",
+      "byteSize": 194915,
+      "sha256": "587220824b10fea4fdf29b34a8fb23f5cba294de12a199a7010ef33211f7ec7f"
+    },
+    {
+      "filename": "fda_risk_based_monitoring.txt",
+      "relativePath": "reports/hw03/corpus/fda_risk_based_monitoring.txt",
+      "sourceTitle": "FDA Oversight of Clinical Investigations: A Risk-Based Approach to Monitoring",
+      "sourceUrl": "https://www.fda.gov/media/116754/download",
+      "byteSize": 67922,
+      "sha256": "2935b7f1590c7a32f0475088c7a14c35b7ba2e3ebbd3fbad78ceeb39e28b7732"
+    },
+    {
+      "filename": "fda_clinical_trial_endpoints.txt",
+      "relativePath": "reports/hw03/corpus/fda_clinical_trial_endpoints.txt",
+      "sourceTitle": "FDA Multiple Endpoints in Clinical Trials Guidance",
+      "sourceUrl": "https://www.fda.gov/media/162416/download",
+      "byteSize": 87899,
+      "sha256": "d8d26a1eaa1b8697f9203cf24a7e95be7361425b3e81f83373439a3d892f8bc0"
+    }
+  ]
+}

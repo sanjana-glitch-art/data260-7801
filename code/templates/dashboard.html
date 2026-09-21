@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard · Clinical Trial Portal
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-9">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4 p-md-5">
+                <span class="badge text-bg-success mb-3">
+                    Protected route
+                </span>
+
+                <h1 class="display-6 fw-bold">
+                    Welcome, {{ user.display_name }}
+                </h1>
+
+                <p class="lead text-secondary">
+                    Your session is active. This dashboard is
+                    available only to authenticated users.
+                </p>
+
+                <div class="row g-3 my-3">
+                    <div class="col-md-6">
+                        <div class="card h-100 border-primary">
+                            <div class="card-body">
+                                <h2 class="h5">
+                                    Clinical-trial listings
+                                </h2>
+
+                                <p class="text-secondary">
+                                    View and manage the existing
+                                    domain application.
+                                </p>
+
+                                <a
+                                    class="btn btn-primary"
+                                    href="/trials"
+                                >
+                                    Open listings
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h2 class="h5">
+                                    Session information
+                                </h2>
+
+                                <p class="mb-1">
+                                    Username:
+                                    <strong>
+                                        {{ user.username }}
+                                    </strong>
+                                </p>
+
+                                <p class="mb-0">
+                                    Idle timeout:
+                                    <strong>
+                                        {{ idle_timeout }} seconds
+                                    </strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+ 
+                <a
+                    class="btn btn-outline-danger"
+                    href="/logout"
+                >
+                    Log out
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

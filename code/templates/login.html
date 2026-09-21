@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}
+Login · Clinical Trial Portal
+{% endblock %} 
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-sm-10 col-md-7 col-lg-5">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+                <h1 class="h3 mb-3">
+                    User login
+                </h1>
+
+                <p class="text-secondary">
+                    Enter your portal credentials to continue.
+                </p>
+
+                {% if message %}
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                >
+                    {{ message }}
+                </div>
+                {% endif %}
+
+                {% if error %}
+                <div
+                    class="alert alert-danger"
+                    role="alert"
+                >
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                <form
+                    action="/login"
+                    method="post"
+                >
+                    <div class="mb-3">
+                        <label
+                            class="form-label"
+                            for="username"
+                        >
+                            Username
+                        </label>
+
+                        <input
+                            class="form-control"
+                            id="username"
+                            name="username"
+                            type="text"
+                            value="{{ username }}"
+                            required
+                            autofocus
+                            autocomplete="username"
+                        >
+                    </div>
+
+                    <div class="mb-3">
+                        <label
+                            class="form-label"
+                            for="password"
+                        >
+                            Password
+                        </label>
+
+                        <input
+                            class="form-control"
+                            id="password"
+                            name="password"
+                            type="password"
+                            required
+                            autocomplete="current-password"
+                        >
+                    </div>
+
+                    <button
+                        class="btn btn-primary w-100"
+                        type="submit"
+                    >
+                        Log in
+                    </button>
+                </form>
+
+                <p class="small text-secondary mt-3 mb-0">
+                    Sessions expire after the configured period
+                    of inactivity.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

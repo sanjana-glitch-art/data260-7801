@@ -6,3 +6,13 @@ langgraph
 langchain-core
 langchain-ollama
 ollama
+jinja2
+itsdangerous
+llama-index
+llama-index-embeddings-huggingface
+sentence-transformers
+faiss-cpu
+numpy
+pandas
+pyyaml
+pypdf

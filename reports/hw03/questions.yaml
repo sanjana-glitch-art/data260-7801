@@ -1,0 +1,68 @@
+domain_id: 1
+domain: "Clinical Trial Listings"
+student: "Sanjana Thummalapalli"
+sid4: 7801
+
+questions:
+  - id: q1
+    question: >
+      Why is informed consent considered an ongoing process
+      rather than only obtaining a participant's signature?
+    expected_answer: >
+      Informed consent requires giving prospective participants
+      adequate information, helping them understand it, allowing
+      questions and time for consideration, obtaining voluntary
+      agreement, and continuing to provide relevant information
+      throughout the clinical investigation.
+    expected_source_file: "fda_informed_consent.txt"
+    source_specific: true
+
+  - id: q2
+    question: >
+      What protections must be present when an investigator
+      obtains informed consent from a clinical-trial participant?
+    expected_answer: >
+      Consent must be obtained under circumstances that provide
+      sufficient opportunity to decide, minimize coercion or undue
+      influence, use understandable language, and avoid language
+      that waives the participant's legal rights or releases others
+      from liability for negligence.
+    expected_source_file: "fda_informed_consent.txt"
+    source_specific: true
+
+  - id: q3
+    question: >
+      What factors should sponsors consider when developing a
+      risk-based monitoring plan for a clinical investigation?
+    expected_answer: >
+      Sponsors should consider the study's critical data and
+      processes, protocol complexity, types of endpoints, study
+      population, investigator experience, site performance,
+      electronic systems, and risks to participant safety and
+      data reliability.
+    expected_source_file: "fda_risk_based_monitoring.txt"
+    source_specific: true
+
+  - id: q4
+    question: >
+      Why can risk-based monitoring be more useful than relying
+      only on routine visits and complete source-data verification?
+    expected_answer: >
+      Risk-based monitoring directs attention and resources toward
+      the data and processes most important to participant safety
+      and reliable study results instead of treating every data
+      element and site as equally risky.
+    expected_source_file: "fda_risk_based_monitoring.txt"
+    source_specific: true
+
+  - id: q5
+    question: >
+      Why must clinical-trial researchers account for multiplicity
+      when a study evaluates multiple endpoints?
+    expected_answer: >
+      Testing multiple endpoints creates multiple opportunities for
+      a false-positive conclusion and can inflate the overall
+      Type I error rate, so the study's statistical analysis should
+      use an appropriate multiplicity-control strategy.
+    expected_source_file: "fda_clinical_trial_endpoints.txt"
+    source_specific: true

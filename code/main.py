@@ -1,3 +1,6 @@
+from __future__ import annotations
+
+import os
 from pathlib import Path
 from typing import Annotated
 
@@ -6,18 +9,36 @@ from fastapi import FastAPI, Form, HTTPException, Query, Response
 from fastapi.responses import FileResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
+from starlette.middleware.sessions import SessionMiddleware
+
+from code.auth import router as auth_router
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 STATIC_DIRECTORY = PROJECT_ROOT / "code" / "web_application"
 
 PORT_BASE = 8601
+PREFIX = "s7801"
+
+SESSION_SECRET = os.getenv(
+    "SESSION_SECRET",
+    "s7801-hw3-local-secret-change-me"
+)
+
+SESSION_IDLE_SECONDS = int(
+    os.getenv(
+        "SESSION_IDLE_SECONDS",
+        "120"
+    )
+)
 
 
 class ClinicalTrial(BaseModel):
     """A clinical-trial listing stored by the application."""
 
-    model_config = ConfigDict(validate_assignment=True)
+    model_config = ConfigDict(
+        validate_assignment=True
+    )
 
     id: int
     trial_title: str
@@ -38,7 +59,7 @@ class TrialCreate(BaseModel):
 
 
 class TrialUpdate(BaseModel):
-    """Primary and secondary values accepted during an update."""
+    """Values accepted when updating a trial."""
 
     trial_title: str = Field(min_length=1)
     sponsor_name: str = Field(min_length=1)
@@ -46,8 +67,20 @@ class TrialUpdate(BaseModel):
 
 app = FastAPI(
     title="Clinical Trial Listing API",
-    version="2.0.0"
+    version="3.0.0"
 )
+
+app.add_middleware(
+    SessionMiddleware,
+    secret_key=SESSION_SECRET,
+    session_cookie=f"{PREFIX}_session",
+    max_age=SESSION_IDLE_SECONDS,
+    same_site="lax",
+    https_only=True,
+    path="/"
+)
+
+app.include_router(auth_router)
 
 app.mount(
     "/static",
@@ -59,7 +92,9 @@ app.mount(
 trials: list[ClinicalTrial] = [
     ClinicalTrial(
         id=1,
-        trial_title="Sleep Quality and Academic Performance Study",
+        trial_title=(
+            "Sleep Quality and Academic Performance Study"
+        ),
         sponsor_name="San Jose State University",
         submitter_email="research@example.edu",
         trial_description=(
@@ -71,18 +106,23 @@ trials: list[ClinicalTrial] = [
     ClinicalTrial(
         id=2,
         trial_title="Digital Wellness Intervention Study",
-        sponsor_name="California Student Health Research Center",
+        sponsor_name=(
+            "California Student Health Research Center"
+        ),
         submitter_email="wellness@example.edu",
         trial_description=(
-            "This study evaluates a digital wellness intervention "
-            "for college students."
+            "This study evaluates a digital wellness "
+            "intervention for college students."
         ),
         trial_phase="Phase I"
     )
 ]
 
 
-def cleaned_required_value(value: str, field_name: str) -> str:
+def cleaned_required_value(
+    value: str,
+    field_name: str
+) -> str:
     """Strip a required string or raise an HTTP 400 error."""
 
     cleaned = value.strip()
@@ -101,9 +141,9 @@ def find_trial(trial_id: int) -> ClinicalTrial:
 
     trial = next(
         (
-            trial
-            for trial in trials
-            if trial.id == trial_id
+            current_trial
+            for current_trial in trials
+            if current_trial.id == trial_id
         ),
         None
     )
@@ -117,8 +157,10 @@ def find_trial(trial_id: int) -> ClinicalTrial:
     return trial
 
 
-def matching_trials(search: str = "") -> list[ClinicalTrial]:
-    """Return trials matching title or sponsor."""
+def matching_trials(
+    search: str = ""
+) -> list[ClinicalTrial]:
+    """Return trials matching a title or sponsor."""
 
     query = search.strip().casefold()
 
@@ -135,8 +177,8 @@ def matching_trials(search: str = "") -> list[ClinicalTrial]:
     ]
 
 
-@app.get("/")
-async def read_home() -> FileResponse:
+@app.get("/trials")
+async def read_trials_page() -> FileResponse:
     """Serve the clinical-trial web application."""
 
     return FileResponse(
@@ -202,12 +244,20 @@ async def create_trial_api(
         id=new_id,
         trial_title=trial_title,
         sponsor_name=sponsor_name,
-        submitter_email=trial_data.submitter_email.strip(),
-        trial_description=trial_data.trial_description.strip(),
-        trial_phase=trial_data.trial_phase.strip() or "Phase I"
+        submitter_email=(
+            trial_data.submitter_email.strip()
+        ),
+        trial_description=(
+            trial_data.trial_description.strip()
+        ),
+        trial_phase=(
+            trial_data.trial_phase.strip()
+            or "Phase I"
+        )
     )
 
     trials.append(new_trial)
+
     return new_trial
 
 
@@ -259,7 +309,7 @@ async def create_trial_form(
     trial_description: Annotated[str, Form()],
     trial_phase: Annotated[str, Form()]
 ) -> RedirectResponse:
-    """Create a trial from the HTML form and redirect home."""
+    """Create a trial from the HTML form."""
 
     await create_trial_api(
         TrialCreate(
@@ -272,7 +322,7 @@ async def create_trial_form(
     )
 
     return RedirectResponse(
-        url="/",
+        url="/trials",
         status_code=303
     )
 
@@ -282,7 +332,7 @@ async def update_trial_one_form(
     trial_title: Annotated[str, Form()],
     sponsor_name: Annotated[str, Form()]
 ) -> RedirectResponse:
-    """Update ID 1 and redirect to the home view."""
+    """Update trial ID 1 from the HTML form."""
 
     await update_trial_api(
         1,
@@ -293,19 +343,21 @@ async def update_trial_one_form(
     )
 
     return RedirectResponse(
-        url="/",
+        url="/trials",
         status_code=303
     )
 
 
 @app.post("/trials/delete-highest")
 async def delete_highest_trial_form() -> RedirectResponse:
-    """Delete the record with the highest ID."""
+    """Delete the trial with the highest ID."""
 
     if not trials:
         raise HTTPException(
             status_code=404,
-            detail="There are no clinical trials to delete."
+            detail=(
+                "There are no clinical trials to delete."
+            )
         )
 
     highest_id = max(
@@ -316,7 +368,7 @@ async def delete_highest_trial_form() -> RedirectResponse:
     await delete_trial_api(highest_id)
 
     return RedirectResponse(
-        url="/",
+        url="/trials",
         status_code=303
     )
 
