@@ -1,0 +1,34 @@
+{
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "top_k": 5,
+  "question_count": 6,
+  "techniques": {
+    "token": {
+      "chunk_count": 162,
+      "average_chunk_length": 2432.2901234567903,
+      "mean_top_1_cosine": 0.6765472513202714,
+      "mean_at_k_cosine": 0.6270999212798654,
+      "recall_at_k": 1,
+      "recall_at_k_percent": 100,
+      "mean_retrieval_latency_ms": 27.672066666127648
+    },
+    "semantic": {
+      "chunk_count": 90,
+      "average_chunk_length": 3824.511111111111,
+      "mean_top_1_cosine": 0.6154772208975102,
+      "mean_at_k_cosine": 0.5833342156176275,
+      "recall_at_k": 1,
+      "recall_at_k_percent": 100,
+      "mean_retrieval_latency_ms": 22.001799999998184
+    },
+    "sentence_window": {
+      "chunk_count": 1705,
+      "average_chunk_length": 1412.9812316715543,
+      "mean_top_1_cosine": 0.6841955897493202,
+      "mean_at_k_cosine": 0.6084336644091245,
+      "recall_at_k": 1,
+      "recall_at_k_percent": 100,
+      "mean_retrieval_latency_ms": 86.12700000109423
+    }
+  }
+}
