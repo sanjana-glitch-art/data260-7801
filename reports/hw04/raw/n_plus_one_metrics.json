@@ -1,0 +1,150 @@
+{
+  "experiment": "n_plus_one_comparison",
+  "totalRequests": 180,
+  "runsPerConfiguration": 30,
+  "pageSizes": [
+    10,
+    50,
+    100
+  ],
+  "versions": [
+    "naive",
+    "optimized"
+  ],
+  "percentileMethod": "linear interpolation",
+  "configurations": {
+    "naive_page_size_10": {
+      "version": "naive",
+      "pageSize": 10,
+      "runCount": 30,
+      "queryCount": {
+        "minimum": 11,
+        "maximum": 11,
+        "mean": 11.0
+      },
+      "clientLatencyMs": {
+        "mean": 154.804,
+        "p50": 41.821,
+        "p95": 306.498,
+        "p99": 2282.465
+      },
+      "serverLatencyMs": {
+        "mean": 41.864,
+        "p50": 23.865,
+        "p95": 102.131,
+        "p99": 352.658
+      }
+    },
+    "naive_page_size_50": {
+      "version": "naive",
+      "pageSize": 50,
+      "runCount": 30,
+      "queryCount": {
+        "minimum": 51,
+        "maximum": 51,
+        "mean": 51.0
+      },
+      "clientLatencyMs": {
+        "mean": 157.617,
+        "p50": 153.34,
+        "p95": 205.71,
+        "p99": 314.956
+      },
+      "serverLatencyMs": {
+        "mean": 144.319,
+        "p50": 140.016,
+        "p95": 192.524,
+        "p99": 301.397
+      }
+    },
+    "naive_page_size_100": {
+      "version": "naive",
+      "pageSize": 100,
+      "runCount": 30,
+      "queryCount": {
+        "minimum": 101,
+        "maximum": 101,
+        "mean": 101.0
+      },
+      "clientLatencyMs": {
+        "mean": 271.683,
+        "p50": 259.475,
+        "p95": 355.723,
+        "p99": 475.172
+      },
+      "serverLatencyMs": {
+        "mean": 258.445,
+        "p50": 247.895,
+        "p95": 342.805,
+        "p99": 459.714
+      }
+    },
+    "optimized_page_size_10": {
+      "version": "optimized",
+      "pageSize": 10,
+      "runCount": 30,
+      "queryCount": {
+        "minimum": 2,
+        "maximum": 2,
+        "mean": 2.0
+      },
+      "clientLatencyMs": {
+        "mean": 21.283,
+        "p50": 17.02,
+        "p95": 34.616,
+        "p99": 36.025
+      },
+      "serverLatencyMs": {
+        "mean": 8.681,
+        "p50": 8.08,
+        "p95": 10.551,
+        "p99": 18.256
+      }
+    },
+    "optimized_page_size_50": {
+      "version": "optimized",
+      "pageSize": 50,
+      "runCount": 30,
+      "queryCount": {
+        "minimum": 2,
+        "maximum": 2,
+        "mean": 2.0
+      },
+      "clientLatencyMs": {
+        "mean": 28.398,
+        "p50": 24.518,
+        "p95": 41.444,
+        "p99": 67.493
+      },
+      "serverLatencyMs": {
+        "mean": 15.745,
+        "p50": 13.556,
+        "p95": 22.35,
+        "p99": 51.339
+      }
+    },
+    "optimized_page_size_100": {
+      "version": "optimized",
+      "pageSize": 100,
+      "runCount": 30,
+      "queryCount": {
+        "minimum": 2,
+        "maximum": 2,
+        "mean": 2.0
+      },
+      "clientLatencyMs": {
+        "mean": 26.92,
+        "p50": 24.477,
+        "p95": 38.267,
+        "p99": 41.247
+      },
+      "serverLatencyMs": {
+        "mean": 11.835,
+        "p50": 11.12,
+        "p95": 15.217,
+        "p99": 17.22
+      }
+    }
+  },
+  "generatedAt": "2026-09-28T18:19:18.701390+00:00"
+}

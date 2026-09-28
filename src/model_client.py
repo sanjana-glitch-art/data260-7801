@@ -25,12 +25,14 @@ class ModelClient:
         base_url: str = "http://localhost:11434",
         temperature: float = 0.0,
         num_ctx: int = 2048,
-        num_predict: int = 256
+        num_predict: int = 256,
+        num_gpu: int | None = None
     ) -> None:
         self.model_name = model
         self.temperature = temperature
         self.num_ctx = num_ctx
         self.num_predict = num_predict
+        self.num_gpu = num_gpu
 
         self.turn_count = 0
         self.cumulative_input_tokens = 0
@@ -64,11 +66,15 @@ class ModelClient:
             }
         }
 
+        if self.num_gpu is not None:
+                request["options"]["num_gpu"] = self.num_gpu
+
         if tools:
             request["tools"] = tools
 
         if response_format is not None:
             request["format"] = response_format
+
 
         response = self._client.chat(
             **request

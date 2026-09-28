@@ -1,0 +1,1021 @@
+--- Page 1 ---
+10555fnlPRAupdate11-21-22.docx 
+ 
+ 
+Guidance for Industry 
+ 
+ 
+Oversight of Clinical 
+Investigations —  
+A Risk-Based Approach to 
+Monitoring  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+U.S. Department of Health and Human Services 
+Food and Drug Administration 
+Center for Drug Evaluation and Research (CDER) 
+Center for Biologics Evaluation and Research (CBER) 
+Center for Devices and Radiological Health (CDRH) 
+Office of Good Clinical Practice (OGCP) 
+Office of Regulatory Affairs (ORA) 
+ 
+August 2013 
+Procedural 
+ 
+ 
+OMB Control No. 0910-0014 
+Current expiration date available at https://www.reginfo.gov  
+(Search ICR and enter OMB control number 0910-0014)    
+See additional PRA statement in section VII of this guidance.
+
+--- Page 2 ---
+Guidance for Industry 
+ 
+Oversight of Clinical Investigations — A 
+Risk-Based Approach to Monitoring  
+ 
+ 
+Additional copies are available from: 
+Office of Communications 
+Division of Drug Information, WO51, Room 2201 
+Center for Drug Evaluation and Research 
+Food and Drug Administration 
+10903 New Hampshire Ave. 
+Silver Spring, MD 20993-0002 
+Phone:  301-796-3400; Fax:  301-847-8714 
+druginfo@fda.hhs.gov 
+http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Guidances/default.htm  
+ 
+or 
+ 
+Office of Communication, Outreach and Development,  HFM-40 
+Center for Biologics Evaluation and Research 
+Food and Drug Administration 
+1401 Rockville Pike, Suite 200N, Rockville, MD 20852-1448 
+ocod@fda.hhs.gov  Phone:  800-835-4709 or 301-827-1800 
+http://www.fda.gov/BiologicsBloodVaccines/GuidanceComplianceRegulatoryInformation/default.htm  
+  
+or 
+ 
+ Office of Communication and Education 
+Division of Small Manufacturers, International and Consumer Assistance 
+Center for Devices and Radiological Health 
+Food and Drug Administration 
+10903 New Hampshire Ave., Bldg. 66, rm. 4613 
+Silver Spring, MD 20993-0002 
+(Tel) 800-638-2041 or 301-796-7100; (Fax) 301-847-8149; (E-mail) dsmica@fda.hhs.gov 
+http://www.fda.gov/MedicalDevices/DeviceRegulationandGuidance/GuidanceDocuments/default.htm  
+ 
+ 
+U.S. Department of Health and Human Services 
+Food and Drug Administration 
+ 
+August 2013 
+Procedural
+
+--- Page 3 ---
+Contains Nonbinding Recommendations 
+ 
+TABLE OF CONTENTS 
+I. INTRODUCTION............................................................................................................. 1 
+II. BACKGROUND ............................................................................................................... 2 
+A.    Current Monitoring Practices and FDA Guidance .................................................................... 3 
+B.    FDA’s Rationale for Risk-Based Monitoring .............................................................................. 5 
+III. OVERVIEW OF MONITORING METHODS ............................................................. 6 
+A.    On-Site and Centralized Monitoring ........................................................................................... 6 
+1. On-Site Monitoring .......................................................................................................................... 6 
+2. Centralized Monitoring .................................................................................................................... 7 
+B.    Examples of Alternative Monitoring Techniques ....................................................................... 7 
+1. Communication with Study Site Staff ............................................................................................. 9 
+2. Review of Site’s Processes, Procedures, and Records ..................................................................... 9 
+3. Source Data Verification and Corroboration ................................................................................. 10 
+IV. RISK-BASED MONITORING...................................................................................... 10 
+A.    Identify Critical Data and Processes to be Monitored .............................................................. 11 
+B.    Risk Assessment ........................................................................................................................... 12 
+C.    Factors to Consider when Developing a Monitoring Plan ....................................................... 13 
+D.    Monitoring Plan ........................................................................................................................... 14 
+1.  Description of Monitoring Approaches .......................................................................................... 15 
+2. Communication of Monitoring Results.......................................................................................... 15 
+3. Management of Noncompliance .................................................................................................... 16 
+4. Ensuring Quality Monitoring ......................................................................................................... 16 
+5. Monitoring Plan Amendments ....................................................................................................... 17 
+V. DOCUMENTING MONITORING ACTIVITIES ...................................................... 17 
+VI. ADDITIONAL STRATEGIES TO ENSURE STUDY QUALITY ............................ 17 
+A.    Protocol and Case Report Form Design .................................................................................... 17 
+B.    Clinical Investigator Training and Communication ................................................................. 18 
+C.    Delegation of Monitoring Responsibilities to a CRO ................................................................ 18 
+D.    Clinical Investigator and Site Selection and Initiation ............................................................. 19 
+VII. PAPERWORK REDUCTION ACT OF 1995 .............................................................. 19
+
+--- Page 4 ---
+Contains Nonbinding Recommendations 
+ 1 
+Guidance for Industry1 
+Oversight of Clinical Investigations — A Risk-Based  
+Approach to Monitoring  
+ 
+ 
+ 
+This guidance represents the Food and Drug Administration’s (FDA’s) current thinking on this topic.  It 
+does not create or confer any rights for or on any person and does not operate to bind FDA or the public.  
+You can use an alternative approach if the approach satisfies the requirements of the applicable statutes 
+and regulations.  If you want to discuss an alternative approach, contact the FDA staff responsible for 
+implementing this guidance.  If you cannot identify the appropriate FDA staff, call the appropriate 
+number listed on the title page of this guidance. 
+  
+ 
+ 
+I. INTRODUCTION  
+ 
+This guidance assists sponsors of clinical investigations in developing risk-based monitoring 
+strategies and plans for investigational studies of medical products, including human drug and 
+biological products, medical devices, and combinations thereof.  The overarching goal of this 
+guidance is to enhance human subject protection and the quality of clinical trial data by focusing 
+sponsor oversight on the most important aspects of study conduct and reporting.   
+ 
+This guidance makes clear that sponsors can use a variety of approaches to fulfill their 
+responsibilities for monitoring clinical investigator (CI) conduct and performance in 
+investigational new drug (IND) studies conducted under 21 CFR part 312 or investigational 
+device exemption (IDE) studies conducted under 21 CFR part 812.  The guidance describes 
+strategies for monitoring activities that reflect a modern, risk-based approach that focuses on 
+critical study parameters and relies on a combination of monitoring activities to oversee a study 
+effectively.  For example, the guidance specifically encourages greater use of centralized 
+monitoring methods where appropriate. 
+ 
+FDA’s guidance documents, including this guidance, do not establish legally enforceable 
+responsibilities.  Rather, guidances describe the Agency’s current thinking on a topic and should 
+be viewed only as recommendations, unless specific regulatory or statutory requirements are 
+cited.  The use of the word should in Agency guidances means that something is suggested or 
+recommended, but not required. 
+ 
+ 
+1 This guidance has been prepared by the Office of Medical Policy in the Center for Drug Evaluation and Research 
+(CDER) in cooperation with CDER’s Office of Scientific Investigations in the Office of Compliance, CBER’s 
+Office of Compliance and Biologics Quality, CDRH’s Office of Compliance, Office of the Commissioner’s Office 
+of Good Clinical Practice, and the Office of Regulatory Affairs (ORA).
+
+--- Page 5 ---
+Contains Nonbinding Recommendations 
+ 2 
+II. BACKGROUND 
+ 
+Effective monitoring of clinical investigations by sponsors is critical to the protection of human 
+subjects and the conduct of high-quality studies.  Sponsors of clinical investigations involving 
+human drugs, biological products, medical devices, and combinations thereof are required to 
+provide oversight to ensure adequate protection of the rights, welfare, and safety of human 
+subjects and the quality of the clinical trial data submitted to FDA.2  FDA’s regulations require 
+sponsors to monitor the conduct and progress of their clinical investigations.3,4  The regulations 
+are not specific about how sponsors are to conduct such monitoring and are therefore compatible 
+with a range of approaches to monitoring (see section III) that will vary depending on multiple 
+factors (see section IV.C).   
+ 
+During the past two decades, the number and complexity of clinical trials have grown 
+dramatically.  These changes create new challenges to clinical trial oversight, particularly 
+increased variability in clinical investigator experience, site infrastructure, treatment choices, and 
+standards of health care,5 as well as challenges related to geographic dispersion.  At the same 
+time, increasing use of electronic systems and records and improvements in statistical 
+assessments, present opportunities for alternative monitoring approaches (e.g., centralized 
+monitoring) that can improve the quality and efficiency of sponsor oversight of clinical 
+investigations.  FDA encourages sponsors to develop monitoring plans that manage important 
+risks to human subjects and data quality and address the challenges of oversight in part by taking 
+advantage of the innovations in modern clinical trials.  A risk-based approach to monitoring does 
+not suggest any less vigilance in oversight of clinical investigations.  Rather, it focuses sponsor 
+oversight activities on preventing or mitigating important and likely risks to data quality and to 
+processes critical to human subject protection and trial integrity.  Moreover, a risk-based 
+approach is dynamic, more readily facilitating continual improvement in trial conduct and 
+oversight.  For example, monitoring findings should be evaluated to determine whether 
+additional actions (e.g., training of clinical investigator and site staff, clarification of protocol 
+requirements) are necessary to ensure human subject protection and data quality across sites.   
+ 
+This guidance focuses principally on monitoring, which is one aspect of the processes and 
+procedures needed to ensure clinical trial quality and subject safety.  Monitoring is a quality 
+control tool for determining whether study activities are being carried out as planned, so that 
+deficiencies can be identified and corrected.  Monitoring, or oversight, alone cannot ensure 
+quality.  Rather, quality is an overarching objective that must be built into the clinical trial 
+enterprise.  FDA recommends a quality risk management approach to clinical trials and is 
+considering the need for additional guidance describing this approach. 
+ 
+2 21 CFR part 312, subpart D generally (Responsibilities of Sponsors and Investigators) and 21 CFR part 812, 
+subpart C generally (Responsibilities of Sponsors). 
+3 21 CFR 312.50 requires a sponsor to, among other things, ensure “proper monitoring of the investigation(s)” and 
+“that the investigation(s) is conducted in accordance with the general investigational plan and protocols contained in 
+the IND.” 21 CFR 812.40 states that sponsors are responsible for, among other things, “ensuring proper monitoring 
+of the investigation, …” 
+4 See also 21 CFR 312.53(d), 312.56(a), 812.43(d), and 812.46. 
+5 Glickman et al. Ethical and Scientific Implications of the Globalization of Clinical Research. NEJM. 360: 816-823 
+(2009).
+
+--- Page 6 ---
+Contains Nonbinding Recommendations 
+ 3 
+We are aware that the term monitoring is used in different ways in the clinical trial context.  It 
+can refer to the assessment of CI conduct, oversight, and reporting of findings of a clinical trial; 
+to the ongoing evaluation of safety data and the emerging benefit-risk profile of an 
+investigational product; and to the monitoring of internal sponsor and contract research 
+organization (CRO) processes and systems integral to proposing, designing, performing, 
+recording, supervising, reviewing, or reporting clinical investigations.   
+ 
+For purposes of this guidance, monitoring refers to the methods used by sponsors of 
+investigational studies, or CROs delegated responsibilities for the conduct of IND studies, to 
+oversee the conduct of, and reporting of data from, clinical investigations, including appropriate 
+CI supervision of study site staff and third party contractors.  Monitoring activities include 
+communication with the CI and study site staff; review of the study site’s processes, procedures, 
+and records; and verification of the accuracy of data submitted to the sponsor. 
+ 
+A. Current Monitoring Practices and FDA Guidance 
+ 
+A survey conducted through the Clinical Trials Transformation Initiative (CTTI)6 indicated that 
+a range of practices has been used to monitor the conduct of clinical trials.  These practices vary 
+in intensity, focus, and methodology and include centralized monitoring of clinical data by 
+statistical and data management personnel; targeted on-site visits to higher risk CIs (e.g., where 
+centralized monitoring suggests problems at a site); and frequent, comprehensive on-site visits to 
+all CI sites by sponsor personnel or representatives (e.g., clinical monitors or clinical research 
+associates).7  See definitions of on-site and centralized monitoring in section III.A. 
+ 
+Although survey participants reported a range of monitoring methods, periodic, frequent visits to 
+each CI site to evaluate study conduct and review data for each enrolled subject remain the 
+predominant mechanism by which pharmaceutical, biotechnology, and medical device 
+companies monitor the progress of clinical investigations.  For major efficacy trials, companies 
+typically conduct on-site monitoring visits at approximately 4- to 8-week intervals,8 at least 
+partly because of the perception that the frequent on-site monitoring visit model, with 100% 
+verification of all data, historically has been FDA’s preferred way for sponsors to meet their 
+monitoring obligations.  In contrast, academic coordinating centers, cooperative groups, and 
+government organizations use on-site monitoring less extensively.  For example, some 
+government agencies and oncology cooperative groups typically visit sites only once every 2 or 3 
+years to qualify or certify clinical study sites9 to ensure they have the resources, training, and 
+safeguards to conduct clinical trials.  FDA also recognizes that regulators and practitioners have 
+relied on data from critical outcome studies (e.g., many National Institutes of Health-sponsored 
+trials, Medical Research Council-sponsored trials in the United Kingdom, ISIS (International 
+ 
+6 CTTI is a public-private partnership involving FDA, academia, industry representatives, patient and consumer 
+representatives, professional societies, investigator groups, and other government agencies, initiated in 2008. CTTI’s 
+mission is to identify practices that will increase the quality and efficiency of clinical trials.     
+7 Morrison et al. Monitoring the Quality of Conduct of Clinical Trials: A Survey of Current Practices. Clin Trials. 8: 
+342-349 (2011). 
+8 Usher, R. PhRMA BioResearch Monitoring Committee Perspective on Acceptable Approaches for Clinical Trial 
+Monitoring. Drug Inf J. 44: 477-483 (2010). 
+9 Id.
+
+--- Page 7 ---
+Contains Nonbinding Recommendations 
+ 4 
+Study of Infarct Survival) trials,10 and GISSI11), which had no regular on-site monitoring and 
+used primarily centralized and other alternative monitoring methods.12  These examples suggest 
+that use of alternative monitoring approaches should be considered by all sponsors, including 
+commercial sponsors, when developing risk-based monitoring strategies and plans.  
+ 
+The 1996 International Conference on Harmonisation of Technical Requirements for 
+Registration of Pharmaceuticals for Human Use (ICH) guidance on good clinical practice (ICH 
+E6) and the 2011 International Standards Organization (ISO) Clinical investigation of medical 
+devices for human subjects – good clinical practice (ISO 14155:2011) address monitoring.  Both 
+ICH E6 and ISO 14155:2011 specifically provide for flexibility in how trials are monitored.  ICH 
+E6 and ISO 14155:2011 advise sponsors to consider the objective, design, complexity, size, and 
+endpoints of a trial in determining the extent and nature of monitoring for a given trial.13,14  The 
+ISO standard further states that a sponsor’s assessment of these factors should be used to develop 
+a monitoring plan, a recommendation consistent with FDA’s recommendation for monitoring 
+plan development in this guidance.  Although the ICH guidance and ISO standard specifically 
+provide for the possibility of reduced, or even no, on-site monitoring, they also make clear that it 
+would be appropriate to rely entirely on centralized monitoring only in exceptional 
+circumstances.   
+ 
+FDA has communicated the goals of, and recommendations for, risk-based monitoring to FDA 
+staff in review, inspection, and compliance functions.  FDA’s bioresearch monitoring 
+compliance program guidance manuals (CPGMs) for sponsors, CROs, and monitors (CPGM 
+7348.810)15 and for CIs and sponsor-investigators (CPGM 7348.811)16 are compatible with the 
+approaches described in this guidance.  For example, CPGM 7348.810 informs FDA field staff 
+that the regulations do not prescribe a specific monitoring technique.  While CPGM 7348.810 
+refers to site visits and does not discuss centralized monitoring, the focus is on the review of 
+monitoring activities through documentation and whether these activities were carried out in 
+accordance with the sponsor’s (or CRO’s) monitoring procedures.    
+ 
+ 
+10 Califf et al. Developing Systems for Cost-Effective Auditing of Clinical Trials. Controlled Clinical Trials. 18: 
+651-660 (1997).   
+11 Gruppo Italiano per lo Studio della Sopravvivenza nell'Infarto Miocardico- Italian group for the study of the 
+survival of myocardial infarction. 
+12 Temple, R. Policy Developments in Regulatory Approval. Statistics in Medicine. 21: 2939-2948 (2002).  
+13 Guidance for industry, E6 Good Clinical Practice: Consolidated Guidance, 1996, section 5.18.3.  We update 
+guidances periodically.  To make sure you have the most recent version of a guidance, check the guidance Web site.  
+CDER guidance documents can be found at 
+http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Guidances/default.htm .  
+CBER guidance documents can be found at   
+http://www.fda.gov/BiologicsBloodVaccines/GuidanceComplianceRegulatoryInformation/Guidances/default.htm . 
+CDRH guidance documents can be found at 
+http://www.fda.gov/MedicalDevices/DeviceRegulationandGuidance/GuidanceDocuments/default.htm . 
+14 ISO 14155:2011, Clinical investigation of medical devices for human subjects – Good clinical practice, sections 
+5.7 and 6.3.  
+15 CPGM 7348.810: Sponsors, Contract Research Organizations and Monitors (March 11, 2011), available at:  
+http://www.fda.gov/ICECI/EnforcementActions/BioresearchMonitoring/ucm133777.htm .  
+16 CPGM 7348.811: Clinical Investigators and Sponsor-Investigators (December 8, 2008), available at: 
+http://www.fda.gov/ICECI/EnforcementActions/BioresearchMonitoring/ucm133562.htm .
+
+--- Page 8 ---
+Contains Nonbinding Recommendations 
+ 5 
+B. FDA’s Rationale for Risk-Based Monitoring  
+ 
+FDA is issuing this guidance to provide FDA’s current recommendations regarding monitoring 
+practices and to encourage sponsors to consider a change in approach to monitoring.  FDA 
+believes that risk-based monitoring could improve sponsor oversight of clinical investigations.  
+This guidance is therefore intended to make it clear that risk-based monitoring, including the 
+appropriate use of centralized monitoring (see section III.A.2 for discussion of centralized 
+monitoring) and reliance on technological advances (e.g., e-mail, webcasts, online training 
+modules), can meet statutory and regulatory requirements under appropriate circumstances. 
+ 
+There is a growing consensus that risk-based approaches to monitoring, focused on risks to the 
+most critical data elements and processes necessary to achieve study objectives, are more likely 
+than routine visits to all clinical sites and 100% data verification to ensure subject protection and 
+overall study quality.17,18,19,20  For example, incorporation of centralized monitoring practices, 
+where appropriate, should improve a sponsor’s ability to ensure the quality of clinical trial data.  
+Several publications suggest that certain data anomalies (e.g., fraud, including fabrication of 
+data, and other non-random data distributions) may be more readily detected by centralized 
+monitoring techniques than by on-site monitoring.21, 22, 23  It has been suggested that a statistical 
+approach to central monitoring can “help improve the effectiveness of on-site monitoring by 
+prioritizing site visits and by guiding site visits with central statistical data checks,” an approach 
+that is supported by illustrative examples using actual trial datasets.24  A recent review of on-site 
+monitoring findings collected during a multi-center international trial also suggests that 
+centralized monitoring can identify the great majority of on-site monitoring findings.  The review 
+determined that centralized monitoring activities could have identified more than 90% of the 
+findings identified during on-site monitoring visits.25   
+  
+FDA encourages sponsors to tailor monitoring plans to the needs of the trial (see section IV).  
+FDA recognizes that this guidance places greater emphasis on centralized monitoring than 
+appeared feasible at the time ICH E6 was finalized.  However, FDA considers the approach to 
+monitoring described in this guidance to be consistent with ICH E6 and ISO 14155:2011.  FDA 
+ 
+17 Usher, R. PhRMA BioResearch Monitoring Committee Perspective on Acceptable Approaches for Clinical Trial 
+Monitoring. Drug Inf J. 44: 477-483 (2010). 
+18 FDA, Concept Paper: Quality in FDA-Regulated Clinical Research; Background to HSP/BIMO Workshop 5/10-
+5/11/07, (4/26/07). 
+19 Brosteanu et al. Risk Analysis and Risk Adapted On-Site Monitoring in Noncommercial Clinical Trials. Clin 
+Trials. 6: 585-595 (2009). 
+20 Tantsyura et al. Risk-Based Source Data Verification Approaches: Pros and Cons. Drug Inf J. 44: 745-756 (2010). 
+21 Usher, R. PhRMA BioResearch Monitoring Committee Perspective on Acceptable Approaches for Clinical Trial 
+Monitoring. Drug Inf J. 44: 477-483 (2010). 
+22 Baigent et al. Ensuring Trial Validity by Data Quality Assurance and Diversification of Monitoring Methods. Clin 
+Trials. 5: 49-55 (2008).   
+23 Buyse et al. The Role of Biostatistics in the Prevention, Detection and Treatment of Fraud in Clinical Trials. 
+Statistics in Medicine. 18: 3435-51 (1999).   
+24 Venet et al. A Statistical Approach to Central Monitoring of Data Quality in Clinical Trials. Clin Trials. 0: 1-9 
+(2012). 
+25 Bakobaki et al. The Potential for Central Monitoring Techniques to Replace On- Site Monitoring: Findings from 
+an International Multi-Centre Clinical Trial. Clin Trials. 9: 257-264 (2012).
+
+--- Page 9 ---
+Contains Nonbinding Recommendations 
+ 6 
+believes it is reasonable to conclude that the flexibility described in ICH E6 and ISO 14155:2011 
+was intended to permit innovative approaches to improve the effectiveness of monitoring.  
+Notably, the advancement in electronic systems and increasing use of electronic records (i.e., 
+electronic data capture (EDC) systems) facilitate remote access to electronic data and, 
+increasingly, to some source data (see section III.B.2.b for further discussion of access to 
+electronic source data).  Additionally, statistical assessments using data submitted on paper CRFs 
+or via EDC may permit timely identification of clinical sites that require additional training, 
+monitoring, or both.  We expect that the pharmaceutical and device industries will, for the 
+foreseeable future, continue to use some amount of on-site monitoring, but we anticipate 
+decreased use of on-site monitoring with evolving monitoring methods and technological 
+capabilities. 
+ 
+The following sections reflect FDA’s current thinking on monitoring and include 
+recommendations on how to develop and implement a study-specific monitoring plan as well as 
+how to document monitoring activities.  FDA acknowledges that there are limited empirical data 
+to support the utility of the various methods employed to monitor clinical investigations (e.g., 
+superiority of one method versus another), including data to support on-site monitoring.26  As a 
+result, the recommendations are based, in part, on FDA’s experience from the review of 
+protocols during the IND or IDE phase, data submitted in pre-approval applications, results of 
+inspections conducted to ensure human subject protection and data integrity, and information 
+obtained from public outreach efforts conducted under the auspices of the CTTI. 
+ 
+III. OVERVIEW OF MONITORING METHODS 
+ 
+A. On-Site and Centralized Monitoring  
+ 
+This section is intended to assist sponsors in identifying and designing monitoring practices 
+appropriate to a given clinical trial.  It describes some of the capabilities of on-site and 
+centralized monitoring processes and factors to consider in determining which monitoring 
+practices may be appropriate for a given clinical trial.  See section IV.C for a discussion of 
+factors to consider when determining the types, frequency, and extent of monitoring activities 
+and section IV.D.1 for examples of events or results that would trigger a change in planned 
+monitoring activities.   
+ 
+1. On-Site Monitoring 
+ 
+On-site monitoring is an in-person evaluation carried out by sponsor personnel or representatives 
+at the sites at which the clinical investigation is being conducted.  On-site monitoring can 
+identify data entry errors (e.g., discrepancies between source records and case report forms 
+(CRFs)) and missing data in source records or CRFs; provide assurance that study 
+documentation exists; assess the familiarity of the site’s study staff with the protocol and 
+required procedures; and assess compliance with the protocol and investigational product 
+ 
+26 Two studies are on-going as of June 2013 that compare the effectiveness of on-site to alternative (e.g., centralized) 
+monitoring methods (OPTIMON study (https://ssl2.isped.u-bordeaux2.fr/optimon/Default.aspx) and ADAMON 
+study (http://ctj.sagepub.com/content/6/6/585.full.pdf+html)).
+
+--- Page 10 ---
+Contains Nonbinding Recommendations 
+ 7 
+accountability.  On-site monitoring can also provide a sense of the quality of the overall conduct 
+of the trial at a site (e.g., attention to detail, thoroughness of study documentation, appropriate 
+delegation of study tasks, appropriate CI supervision of site staff performing critical study 
+functions).  On-site monitoring can therefore be particularly helpful early in a study, especially if 
+the protocol is complex and includes novel procedures with which CIs may be unfamiliar.  
+Findings at the site may lead to training efforts at both the site visited and elsewhere (see section 
+VI.B).  
+ 
+2. Centralized Monitoring  
+ 
+Centralized monitoring is a remote evaluation carried out by sponsor personnel or 
+representatives (e.g., clinical monitors, data management personnel, or statisticians) at a location 
+other than the sites at which the clinical investigation is being conducted.  Centralized 
+monitoring processes can provide many of the capabilities of on-site monitoring as well as 
+additional capabilities. 
+ 
+FDA encourages greater use of centralized monitoring practices, where appropriate, than has 
+been the case historically, with correspondingly less emphasis on on-site monitoring.  The types 
+of monitoring activities and the extent to which centralized monitoring practices can be 
+employed depend on various factors, including the sponsor’s use of electronic systems; the 
+sponsor’s access to subjects’ electronic records, if applicable; the timeliness of data entry from 
+paper CRF, if applicable; and communication tools available to the sponsor and study site.  
+These may vary by study and by site.  Sponsors who plan to use centralized monitoring 
+processes should ensure that the processes and expectations for site record keeping, data entry, 
+and reporting are well-defined and ensure timely access to clinical trial data and supporting 
+documentation.27  If sponsors intend to rely heavily on centralized monitoring practices, they 
+should identify, in the monitoring plan, when one or more on-site monitoring visits would be 
+indicated.   
+ 
+B. Examples of Alternative Monitoring Techniques 
+ 
+As discussed in section II, monitoring activities broadly include communication with the CI and 
+study site staff; review of the study site’s processes, procedures, and records; and verification of 
+the accuracy of data submitted to the sponsor.  This section highlights areas for which centralized 
+monitoring techniques could be considered.  For certain monitoring activities, centralized 
+monitoring techniques can be considered in place of, or to complement, traditional monitoring 
+techniques.  Specific techniques used should be prospectively included in the monitoring plan 
+and should be informed by the risk assessment (see section IV.B for discussion of risk 
+assessment).   
+ 
+Centralized monitoring techniques should be used to the extent appropriate and feasible to: 
+ 
+27 See guidances for industry: Part 11, Electronic Records; Electronic Signatures –  Scope and Application and 
+Computerized Systems Used in Clinical Investigations.
+
+--- Page 11 ---
+Contains Nonbinding Recommendations 
+ 8 
+• Supplement or reduce the frequency and extent of on-site monitoring with monitoring 
+activities that can be done as well or better remotely or with monitoring activities that can be 
+accomplished using centralized processes only.  Examples include: 
+o Monitor data quality through routine review of submitted data to identify and 
+follow-up on missing data, inconsistent data, data outliers, and potential 
+protocol deviations that may be indicative of systemic or significant errors in 
+data collection and reporting at a site 
+o Conduct statistical analyses to identify data trends not easily detected by on-
+site monitoring, such as 
+ Standard checks of range, consistency, and completeness of data 
+ Checks for unusual distribution of data within and between study sites, 
+such as too little variance28 
+o Analyze site characteristics, performance metrics (e.g., high screen failure or 
+withdrawal rates, high frequency of eligibility violations, delays in reporting 
+data), and clinical data to identify trial sites with characteristics correlated 
+with poor performance or noncompliance 
+o Verify critical source data remotely as described in the monitoring plan, in 
+cases where such source data are accessible, or where CRF data are, according 
+to the protocol, source data 
+o Complete administrative and regulatory tasks.  Such tasks include, for 
+example, verifying continuous institutional review board (IRB) approval by 
+reviewing electronic IRB correspondence, if available; performing portions of 
+investigational product accountability, such as comparison of randomization 
+and CRF data, to preliminarily assess whether the subject was administered or 
+dispensed the assigned product and to evaluate consistency between 
+investigational product receipt, use, and disposition records; and verifying 
+whether previously requested CRF corrections were made. 
+Centralized techniques, including routine review of submitted data and statistical and other 
+analyses, may also be used to identify significant concerns (e.g., need for clarification of a 
+protocol procedure, indications of data fabrication) with non-critical data that may not have 
+otherwise been a focus of monitoring (e.g., source document verification). 
+• Target on-site monitoring by identifying higher risk clinical sites (e.g., sites with data 
+anomalies or a higher frequency of errors, protocol violations, or dropouts relative to other 
+sites), through the activities described above.  Such findings, whether related to critical or 
+non-critical data, may warrant more intensive and consideration of on-site monitoring. 
+The following sections provide additional descriptions of alternative monitoring techniques. 
+  
+ 
+28 Collins, Rory. (2010, October) Quality Design of Clinical Trials. Presentation at CTTI work stream 3 expert 
+meeting.  Available at: https://www.ctti-clinicaltrials.org/files/monitoring-
+collins_quality_design_of_clinical_trials_final.pdf.
+
+--- Page 12 ---
+Contains Nonbinding Recommendations 
+ 9 
+1. Communication with Study Site Staff 
+ 
+Communication between the monitor and the study site staff is an essential component of 
+monitoring.  Various modes of communication (e.g., teleconferences, videoconferencing, email) 
+could be considered for specific study time points (e.g., study initiation) and activities (e.g., to 
+discuss findings of a monitor’s eCRF review, training of new site staff).      
+ 
+2. Review of Site’s Processes, Procedures, and Records 
+ 
+Techniques for monitoring informed consent and site records are included here as examples of 
+approaches to monitoring site’s processes, procedures, and records. 
+  
+a. Informed Consent 
+ 
+Verification of subjects’ informed consent is a critical activity that should be monitored (see 
+section IV.A).  Alternatives to the traditional approach (monitors verifying the original signature 
+on the consent form for each subject at the site) may be more effective in identifying 
+inadequacies in the consent process and may be more efficient.  For example, the study site 
+electronically sends (e.g., fax, e-mail) the signed page(s) of consent forms to the monitor, or the 
+monitor performs remote comparison of dates of study procedures and documentation of 
+informed consent on CRFs.  An internet portal that enables the site staff to upload signed consent 
+forms and enables access by designated monitors is a tool that can be considered.  Use of 
+electronic informed consent may also facilitate sponsor oversight of human subject protection.  
+We recognize that sponsors must attend to privacy and confidentiality concerns when 
+considering techniques for monitoring informed consent remotely. 
+ 
+b. Site’s Records 
+ 
+A growing portion of source documents (e.g., laboratory and radiology reports, source 
+documents submitted by the CI for other purposes such as health records documenting serious 
+adverse events or adjudicated events) are electronic and may be available to the sponsor 
+remotely.  Furthermore, consistent with ICH E6 and ISO 14155:2011, original observations can 
+be entered directly into the eCRF or transmitted to the eCRF from various locations, devices, or 
+instruments.29  We recognize that sponsors may not have remote access to electronic health 
+records maintained by hospitals, universities, and other institutions because of data privacy and 
+security concerns as well as technological challenges.  Sponsors should consider risk-based 
+approaches to monitoring using the format of study information (i.e., electronic, paper, or 
+combination of electronic and paper), tools, and other resources available to them. 
+ 
+As discussed in this guidance, a variety of centralized monitoring techniques can be used to 
+replace, supplement, and target on-site monitoring activities.  The majority of these techniques 
+ 
+29 Section 6.4.9 of ICH E6 provides that the trial design description should include “The identification of any data to 
+be recorded directly on the CRFs (i.e., no prior written or electronic record of data), and to be considered to be 
+source data.” ISO 14155:2011, section 6.8.2, provides that the clinical investigation plan “shall specify which data 
+can be recorded directly in the CRFs.”
+
+--- Page 13 ---
+Contains Nonbinding Recommendations 
+ 10 
+(e.g., checks for completeness of data, sites with a higher frequency of protocol violations 
+relative to other sites, sites with high screen failure rates) can be performed regardless of the 
+extent of use of electronic records in the study.  For example, the majority of these techniques 
+can be performed using CRF data collected either using electronic data capture systems or 
+entered into a database from a paper CRF collected by the sponsor.  A recent publication 
+discusses statistical techniques for identifying various types of data errors.30  We recognize that 
+the statistical techniques described in this guidance may not be routinely used by all sponsors 
+and may not be appropriate for every trial, but they are included in this guidance as examples of 
+monitoring techniques that may be considered by sponsors.   
+ 
+Additional monitoring techniques, such as routine review of data as they are submitted, are 
+possible for studies that use electronic CRFs.  Although not a monitoring technique, another 
+method of ensuring data quality routinely implemented in eCRFs is the use of electronic prompts 
+in the eCRF to minimize errors and omissions at the time of data entry, particularly if data are 
+entered directly into the eCRF. 
+ 
+3. Source Data Verification and Corroboration 
+ 
+The sponsor should consider the quantity and types of source data that need to be verified against 
+CRFs or corroborated against other records (e.g., review of medical record to corroborate a 
+subject’s response of “no hospitalizations” since the previous visit on a CRF) during the 
+sponsor’s identification of critical data and processes or in the risk assessment, or both.  The 
+sponsor should include a description of the quantity and types of source records to verify or 
+corroborate in the monitoring plan.  The sponsor should consider which source records are likely 
+to provide the most meaningful information about a subject’s participation and the CI’s conduct 
+and oversight.  For example, for a particular study, there may be minimal benefit in comparing 
+100% of the source data for each subject to the CRFs for each study visit.  Rather, it may be 
+sufficient to compare the most critical data points for a sample of subjects and study visits as an 
+indicator of data accuracy.  Similarly, for a particular study, although collection of all 
+concomitant medications, body temperature, and body weight are required by the protocol and 
+are documented in the medical record and transcribed to a CRF, they may not be identified by 
+the sponsor as critical data, because a small error rate in those variables would not affect the 
+outcome of the trial.  In the absence of information indicating potential concerns with the data 
+(e.g., sites with data anomalies, inconsistent data), source document verification or corroboration 
+of these non-critical data may not provide significantly useful information to the sponsor.    
+ 
+                                                                                                                                                                                                                       
+IV. RISK-BASED MONITORING 
+ 
+No single approach to monitoring is appropriate or necessary for every clinical trial.  FDA 
+recommends that each sponsor design a monitoring plan that is tailored to the specific human 
+subject protection and data integrity risks of the trial.  Ordinarily, such a risk-based plan would 
+ 
+30 Venet et al. A Statistical Approach to Central Monitoring of Data Quality in Clinical Trials. Clin Trials. 0: 1-9 
+(2012).
+
+--- Page 14 ---
+Contains Nonbinding Recommendations 
+ 11 
+include a mix of centralized and on-site monitoring practices.  The monitoring plan should 
+identify the various methods intended to be used and the rationale for their use (see section IV.D 
+for recommendations on the components of a monitoring plan). 
+ 
+Monitoring activities should focus on preventing or mitigating important and likely sources of 
+error in the conduct, collection, and reporting of critical data and processes necessary for human 
+subject protection and trial integrity.  Sponsors should prospectively identify critical data and 
+processes, then perform a risk assessment to identify and understand the risks that could affect 
+the collection of critical data or the performance of critical processes, and then develop a 
+monitoring plan that focuses on the important and likely risks to critical data and processes.   
+ 
+A. Identify Critical Data and Processes to be Monitored 
+ 
+Sponsors should prospectively identify critical data and processes that if inaccurate, not 
+performed, or performed incorrectly, would threaten the protection of human subjects or the 
+integrity of the study results.  As examples, the following types of data and processes should 
+ordinarily be identified as critical: 
+ 
+• Verification that informed consent was obtained appropriately 
+• Adherence to protocol eligibility criteria designed to exclude individuals for whom the 
+investigational product may be less safe than the protocol intended and to include only 
+subjects from the targeted study population for whom the test article is most appropriate 
+• Procedures for documenting appropriate accountability and administration of the 
+investigational product (e.g., ensuring the integrity of randomization at the site level, where 
+appropriate) 
+• Conduct and documentation of procedures and assessments related to 
+– study endpoints 
+– protocol-required safety assessments 
+– evaluating, documenting, and reporting serious adverse events and unanticipated adverse 
+device effects, subject deaths, and withdrawals, especially when a withdrawal may be 
+related to an adverse event 
+• Conduct and documentation of procedures essential to trial integrity, such as ensuring the 
+study blind is maintained, both at the site level and at the sponsor level, as appropriate,  
+referring specified events for adjudication, and allocation concealment
+
+--- Page 15 ---
+Contains Nonbinding Recommendations 
+ 12 
+Other types of data (e.g., covariates such as concomitant treatments or demographic 
+characteristics, routine laboratory tests performed as part of subject monitoring that do not 
+address protocol specified safety or efficacy endpoints) and processes (e.g., a hospital 
+pharmacy’s storage of an investigational product with no specific critical handling instructions) 
+identified by the sponsor as non-critical often may be monitored less intensively.   
+ 
+There is increasing recognition that some types of errors in a clinical trial are more important 
+than others.31  For example, a low, but non-zero rate of errors in capturing certain baseline 
+characteristics of enrolled subjects (e.g., age, concomitant treatment, or concomitant illness) will 
+not, in general, have a significant effect on study results if the errors are distributed randomly.  In 
+contrast, a small number of errors related to study endpoints (e.g., not following protocol-
+specified definitions) can profoundly affect study results, as could failure to report rare but 
+important adverse events.  Based on FDA’s inspection and review experience, infrequent errors 
+in non-critical data are unlikely to alter FDA’s conclusions about whether a product is safe and 
+effective and whether participants’ safety was appropriately monitored.  
+ 
+B. Risk Assessment 
+   
+This guidance discusses the risk assessment, a component of risk management, as applied in the 
+context of clinical monitoring.  Risk assessment generally involves identifying risks, analyzing 
+risks, and then determining whether risks need to be modified by implementing controls (e.g., 
+processes, policies, or practices).  The risk assessment recommended in this guidance to inform 
+development of a monitoring plan may also support efforts to manage risks across a clinical trial 
+(e.g., through modifying the protocol design or implementation) or development program.  This 
+guidance does not provide comprehensive detail on how to perform a risk assessment.  There are 
+many risk assessment methodologies and tools from a variety of industries that can be applied to 
+clinical trials. 32,33    
+ 
+Following the identification of critical data and processes (section IV.A), sponsors should 
+perform a risk assessment to identify and understand the nature, sources, and potential causes of 
+risks that could affect the collection of critical data or the performance of critical processes.  
+Risks to critical data and processes most merit consideration during risk assessment, to ensure 
+that monitoring efforts are focused on preventing or mitigating important and likely sources of 
+error in their conduct, collection and reporting. 
+ 
+Risk identification for monitoring purposes should generally consider the types of data to be 
+collected, the specific activities required to collect these data, and the range of potential safety 
+and other human subject protection concerns that are inherent to the clinical investigation (e.g., 
+based on trial design or investigational product).   
+ 
+ 
+31 Baigent et al. Ensuring Trial Validity by Data Quality Assurance and Diversification of Monitoring M ethods. Clin 
+Trials. 5: 49-55 (2008).   
+32 Guidance for industry, Q9 Quality Risk Management, June 2006. 
+33 ISO 31010:2009 Risk Management – Risk Assessment Techniques.
+
+--- Page 16 ---
+Contains Nonbinding Recommendations 
+ 13 
+The identified risks should be assessed and prioritized by considering the following:  
+  
+• the likelihood of errors occurring 
+• the impact of such errors on human subject protection and trial integrity 
+• the extent to which such errors would be detectable 
+ 
+Sponsors should use the results of the risk assessment in developing the monitoring plan (e.g., 
+determining which risks may be addressed through monitoring, determining the types and 
+intensity of monitoring activities best suited to addressing these risks).  Sponsors may also 
+determine that some risks are better managed through activities other than monitoring, for 
+example, modifying the protocol to remove the source of the risk.  Sponsors should periodically 
+evaluate emerging risks and whether monitoring activities require modification to effectively 
+oversee the risks.  
+ 
+C. Factors to Consider when Developing a Monitoring Plan 
+ 
+A monitoring plan ordinarily should focus on preventing or mitigating important and likely risks, 
+identified by the risk assessment, to critical data and processes.  The types (e.g., on-site, 
+centralized), frequency (e.g., early, for initial assessment and training versus throughout the 
+study), and extent (e.g., comprehensive (100% data verification) versus targeted or random 
+review of certain data (less than 100% data verification)) of monitoring activities will depend to 
+some degree on a range of factors, considered during the risk assessment, including the 
+following: 
+• Complexity of the study design  
+More intensive monitoring (e.g., increased frequency and extent of review) may be necessary as 
+study design complexity increases.  Examples may include studies with adaptive designs, 
+stratified designs, complex dose titrations, or multiple device placement studies.   
+• Types of study endpoints  
+Endpoints that are more interpretative or subjective may require on-site visits to assess the 
+totality of subject records and to review application of protocol definitions with the CI.  More 
+objective endpoints (e.g., death, hospitalization, or clinical laboratory values and standard 
+measurements) may be more suitable for remote verification.  Endpoints for which inappropriate 
+subject withdrawal or lack of follow-up may impede study evaluation are likely to need more 
+intensive monitoring  to identify the reason(s) subjects are withdrawing and to determine 
+whether follow-up can be improved. 
+• Clinical complexity of the study population 
+A study that involves a population that is seriously ill or vulnerable may require more intensive 
+monitoring and consideration of on-site monitoring visits to be sure appropriate protection is 
+being provided. 
+• Geography 
+Sites in geographic areas where there are differences in standards of medical practice or subject 
+demographics, or where there is a less established clinical trial infrastructure may require more 
+intensive monitoring and consideration of on-site monitoring visits.
+
+--- Page 17 ---
+Contains Nonbinding Recommendations 
+ 14 
+• Relative experience of the CI and of the sponsor with the CI 
+CIs who lack significant experience in conducting and overseeing investigations, using a novel 
+or innovative medical device, or with the surgical procedure associated with medical device use 
+may benefit from more intensive monitoring and frequent communication to ensure CI 
+understanding of responsibilities.  In addition, the relative experience of a sponsor with the CI 
+may be a factor in determining an appropriate monitoring plan.  
+• Electronic data capture 
+Use of EDC systems with the capability to assess quality metrics (e.g., missing data, data error 
+rates, protocol violations) in real-time could help identify potentially higher risk sites for the 
+purpose of targeting sites in need of more intensive monitoring.   
+• Relative safety of the investigational product  
+A study of a product that has significant safety concerns or for which there is no prior experience 
+in human clinical trials (e.g., a phase 1 pharmaceutical investigation or a device feasibility study) 
+may require more intensive monitoring and consideration of on-site monitoring visits to ensure 
+appropriate CI oversight of subject safety. 
+• Stage of the study 
+A tapered approach to monitoring may be used where appropriate, with more intensive 
+monitoring at initiation and during early stages of a trial.  For example, a tapered approach could 
+be used for a complex study where more intensive and on-site monitoring might be required 
+early, but where, once procedures are established, less intensive monitoring might suffice.  
+Similarly, a tapered approach could be used for relatively inexperienced CIs.         
+• Quantity of data 
+Some centralized monitoring tools may be more useful as the quantity of data (e.g., size or 
+duration of trial, number of sites) collected increases.    
+ 
+D. Monitoring Plan 
+ 
+For each clinical trial, the sponsor should develop a monitoring plan that describes the 
+monitoring methods, responsibilities, and requirements for the trial.  The monitoring plan should 
+include a brief description of the study, its objectives, and the critical data and study procedures, 
+with particular attention to data and procedures that are unusual in relation to clinical routine and 
+require training of study site staff.  The plan should also communicate the specific risks to be 
+addressed by monitoring and should provide those involved in monitoring with adequate 
+information to effectively carry out their duties.  A monitoring plan may reference existing 
+policies and procedures (e.g., standard operating procedure describing general monitoring 
+processes or issue investigation and resolution).  All sponsor and CRO personnel involved with 
+monitoring, including those who review or determine appropriate action regarding potential 
+issues identified through monitoring, should review the monitoring plan and associated 
+documents (e.g., standard operating procedures or other documents referenced in the monitoring 
+plan).
+
+--- Page 18 ---
+Contains Nonbinding Recommendations 
+ 15 
+Sponsors of device studies wishing to solicit feedback on their monitoring procedures prior to the 
+submission of the application may either submit a Pre-Submission,34 or contact CDRH’s 
+Division of Bioresearch Monitoring.35  
+ 
+Sponsors of drug studies may include specific questions about a monitoring plan in a request for 
+a formal meeting with FDA (e.g., end of phase 2 meeting). 
+ 
+The components of a monitoring plan might include the following: 
+ 
+1. Description of Monitoring Approaches 
+ 
+• A description of each monitoring method to be employed during the study and how it will be 
+used to address important risks and ensure the validity of critical data 
+• Criteria for determining the timing, frequency, and extent of planned monitoring activities 
+• Specific activities required for each monitoring method employed during the study, including 
+reference to required tools, logs, or templates 
+• Definitions of events or results (e.g., findings from central monitoring activities) that would 
+trigger changes in planned monitoring activities for a particular CI   
+For example, if it is determined that a CI differs markedly from other CIs in making safety-
+related findings or other key safety metrics, in rate of enrollment, in the number of protocol 
+deviations, or in the rate of missing CRFs, the CI’s site should be considered for targeted on-
+site visits.  The establishment of acceptable variation for particular critical data and processes 
+would facilitate identification of significant deviations. 
+• Identification of possible deviations or failures that would be critical to study integrity and 
+how these are to be recorded and reported   
+For example, sponsors may wish to establish a specific mechanism for tracking and notifying 
+key study personnel of deviations related to collection or reporting of data necessary to 
+interpret the primary endpoint, regardless of which monitoring method identified a concern. 
+ 
+The study monitoring plan should also describe how various monitoring activities will be 
+documented, regardless of whether they are conducted on-site or centrally (see section V). 
+ 
+2. Communication of Monitoring Results 
+ 
+• Format, content, timing, and archiving requirements for reports and other documentation of 
+monitoring activities (see section V) 
+• Process for appropriate communication 
+ 
+34 For more information, see FDA’s draft guidance Medical Devices: The Pre-Submission Program and Meetings 
+with FDA Staff. When final, this guidance will represent the FDA’s current thinking on this topic.  
+35 IDE regulations (21 CFR 812.25(e)) require that written monitoring procedures be submitted as part of the IDE 
+application.
+
+--- Page 19 ---
+Contains Nonbinding Recommendations 
+ 16 
+– of routine monitoring results to management and other stakeholders (e.g., CRO, data 
+management)  
+– of immediate reporting of significant monitoring issues to appropriate parties (e.g., 
+sponsor management, CI and site staff, IRB, FDA), as necessary 
+– from study management and other stakeholders to monitors   
+For example, data management personnel may provide monitors with routine reports of 
+outstanding CRFs or of common data queries at or across sites that may enable effective 
+targeting of monitoring activities. 
+ 
+3. Management of Noncompliance 
+ 
+• Processes for addressing unresolved or significant issues (e.g., significant non-compliance 
+with the investigational plan, suspected or confirmed data falsification) identified by 
+monitoring, whether at a particular site or across study sites   
+• Processes to ensure that root cause analyses are conducted where important deviations are 
+discovered and that appropriate corrective and preventive actions (e.g., additional training on 
+a study or site level) are implemented to address issues identified by monitoring 
+• Other quality management practices applicable to the clinical investigation (e.g., reference to 
+any other written documents describing appropriate actions regarding non-compliance) 
+ 
+4. Ensuring Quality Monitoring 
+ 
+• Description of any specific training required for personnel carrying out monitoring activities, 
+including personnel conducting internal data monitoring, statistical monitoring, or other 
+centralized review activities.  Training should include principles of clinical investigations and 
+human subject protection.  In addition, study-specific training should include discussion of 
+the trial design, protocol requirements, the study monitoring plan, applicable standard 
+operating procedures, appropriate monitoring techniques, and applicable electronic systems. 
+• Planned audits of monitoring to ensure that sponsor and CRO staff conduct monitoring 
+activities in accordance with the monitoring plan, applicable regulations, guidance, and 
+sponsor policies, procedures, templates, and other study plans.  Auditing is a quality 
+assurance tool that can be used to evaluate the effectiveness of monitoring to ensure human 
+subject protection and data integrity.36  
+• Many sponsors have successfully implemented on-site co-monitoring visits (i.e., monitoring 
+visits performed by both a study monitor and the monitor’s supervisor or another evaluator 
+designated by the sponsor or CRO) to evaluate whether monitors are effectively carrying out 
+visit activities, in compliance with the study monitoring plan.  These visits may be conducted 
+either for randomly selected monitors or may be targeted to specific monitors, based upon 
+questions arising from review of monitoring visit documentation.   
+ 
+36 See ICH E6, section 5.19 and ISO 14155:2011, section 6.11 for additional information on audits.
+
+--- Page 20 ---
+Contains Nonbinding Recommendations 
+ 17 
+5. Monitoring Plan Amendments 
+ 
+Sponsors should consider what events would indicate a need for review and revision of the 
+monitoring plan and establish processes to permit timely updates where necessary.  For example, 
+a protocol amendment, change in the definition of significant protocol deviations, or 
+identification of new risks to study integrity could result in a change to the monitoring plan.  
+ 
+V. DOCUMENTING MONITORING ACTIVITIES 
+ 
+Documentation of monitoring activities should generally include the following: 
+ 
+• The date of the activity and the individual(s) conducting and participating in it 
+• A summary of the data or activities reviewed 
+• A description of any noncompliance, potential noncompliance, data irregularities, or other 
+deficiencies identified  
+• A description of any actions taken, to be taken, or recommended, including the person 
+responsible for completing actions and the anticipated date of completion 
+Documentation of monitoring should include sufficient detail to allow verification that the 
+monitoring plan was followed. 
+ 
+Monitoring documentation should be provided to appropriate management in a timely manner 
+for review and follow-up, as indicated. 
+ 
+VI. ADDITIONAL STRATEGIES TO ENSURE STUDY QUALITY 
+ 
+Although the focus of this guidance is on monitoring the oversight and conduct of, and reporting 
+of data from, clinical investigations, FDA considers monitoring to be just one component of a 
+multi-factor approach to ensuring the quality of clinical investigations.  Many other factors 
+contribute to the quality of a clinical investigation.  This section highlights additional areas that 
+complement monitoring and can affect study quality. 
+ 
+A fundamental component of ensuring quality monitoring is a sponsor’s compliance with 
+monitoring plans and any accompanying procedures.   
+ 
+A. Protocol and Case Report Form Design 
+ 
+The most important tool for ensuring human subject protection and high-quality data is a well-
+designed and articulated protocol.  A poorly designed or ambiguous protocol may introduce 
+systemic errors that can render a clinical investigation unreliable despite rigorous monitoring.  
+Additionally, the complexity of the trial design and the type and amount of data collected may 
+influence data quality.37  The CRF, which captures the data required by the protocol, is another 
+ 
+37 Sponsors are encouraged to consult the appropriate review division within FDA's medical product centers with 
+questions about quality aspects of clinical trial design.
+
+--- Page 21 ---
+Contains Nonbinding Recommendations 
+ 18 
+critical tool for which design directly affects the quality of trial data.  Care should be taken to 
+ensure that the CRF captures data accurately (e.g., as required by the protocol) and that the CRF 
+design and instructions facilitate consistent data collection across CI sites. 
+ 
+B.        Clinical Investigator Training and Communication 
+ 
+Clinical trial monitors conducting on-site visits have historically played an important role in 
+training the CI and site staff during a study.  On-site visits also have served as a primary means 
+of providing feedback to CIs and study personnel on study conduct.  Without meaningful 
+training prior to the conduct of a study and of appropriate instruction during the study (e.g., when 
+changes are made to the protocol), CIs and their staff may have difficulty carrying out a trial 
+correctly.  Sponsors who plan less frequent or limited on-site monitoring should consider the 
+following: 
+ 
+• Monitoring activities should include sufficient time for discussion of CI’s and site staff’s 
+responsibilities, feedback, and additional training, if needed, during the conduct of the study. 
+• It may be necessary to implement alternative training (e.g., teleconferences, webcasts, online 
+training modules) and communication methods (see section III.B.1) for providing and 
+documenting ongoing, timely training and feedback, as well as to provide notification of 
+significant changes to study conduct or other important information.   
+ 
+C. Delegation of Monitoring Responsibilities to a CRO 
+ 
+If a sponsor of an IND study delegates the responsibility for ensuring proper monitoring to a 
+CRO, FDA regulations (21 CFR 312.52) require the written transfer of any obligations from a 
+sponsor to a CRO and require the CRO to comply with the regulations.38  Although sponsors can 
+transfer responsibilities for monitoring to a CRO(s), they retain responsibility for oversight of the 
+work completed by the CRO(s) that assume this responsibility.  Sponsors should evaluate CRO 
+compliance with regulatory requirements and contractual obligations in an ongoing manner.  For 
+example, sponsor oversight of monitoring performed by a CRO may include the sponsor’s 
+periodic review of monitoring reports and vendor performance or quality metrics and 
+documented communication between the sponsor and CRO regarding monitoring progress and 
+findings.    
+ 
+Sponsors and CROs should consider additional factors when a sponsor transfers responsibilities 
+for monitoring to a CRO.  Sponsors and CROs should prospectively establish a clear 
+understanding of both parties’ responsibilities and of the expectations for the conduct of the 
+transferred obligations.  Sponsors should share information with a CRO that may inform 
+decisions a CRO may make regarding the monitoring practices for a trial (e.g., findings of a risk 
+assessment).  Sponsors should prospectively evaluate monitoring procedures and monitoring 
+plans developed by a CRO to ensure the monitoring approach is consistent with applicable 
+aspects of the trial.  In addition, sponsors and CROs should have processes in place for timely 
+ 
+38 The regulations for investigational device exemptions (21 CFR part 812) do not contain a provision for delegation 
+to a contract research organization.
+
+--- Page 22 ---
+Contains Nonbinding Recommendations 
+ 19 
+exchange of relevant information (e.g., significant monitoring findings, significant changes in 
+risk for a trial). 
+ 
+D. Clinical Investigator and Site Selection and Initiation 
+ 
+In addition to regulatory requirements for CI selection, sponsors should consider factors such as 
+sponsor’s previous experience with the CI or site, workload of the CI and study staff, and 
+resource availability at the study site during CI and site selection.   
+ 
+Site initiation is a critical study activity that often involves sponsor personnel from a range of 
+disciplines, including monitors.  Key components of site initiation include ensuring the CIs and 
+site staff understand their responsibilities, including applicable regulatory requirements as well 
+as study processes and procedures, including the sponsor’s processes for monitoring the 
+investigation.  Communication and documentation tools for monitoring discussed in this 
+guidance can also be used for site selection and initiation activities.   
+ 
+VII. PAPERWORK REDUCTION ACT OF 1995 
+ 
+This guidance contains information collection provisions that are subject to review by the Office of 
+Management and Budget (OMB) under the Paperwork Reduction Act of 1995 (44 U.S.C. 3501-
+3520).  
+ 
+The time required to complete this information collection is estimated to average 4 hours per 
+response, including the time to review instructions, search existing data resources, gather the data 
+needed, and complete and review the information collection.  Send comments regarding this burden 
+estimate or suggestions for reducing this burden to:  
+ 
+Food and Drug Administration  
+Center for Drug Evaluation and Research 
+Office of Medical Policy 
+10903 New Hampshire Avenue, Bldg. 51, rm. 6337 
+Silver Spring, MD 20993-0002 
+ 
+This guidance also refers to previously approved collections of information found in FDA 
+regulations.  The collections of information in part 312, including certain provisions under subpart D, 
+and part 812 have been approved under OMB control numbers 0910-0014 and 0910-0078.   
+ 
+An agency may not conduct or sponsor, and a person is not required to respond to, a collection 
+of information unless it displays a currently valid OMB control number.  The OMB control 
+number for this information collection is 0910-0014.  The current expiration date is available at 
+https://www.reginfo.gov (search ICR and enter OMB control number 0910-0014).

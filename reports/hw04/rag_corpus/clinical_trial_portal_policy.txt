@@ -1,0 +1,15 @@
+Clinical Trial Listing Portal Policy
+
+The Clinical Trial Listing Portal stores trial titles, sponsor names, submitter email addresses, trial descriptions, trial phases, and related research-site information.
+
+Users must authenticate before creating, updating, or deleting a clinical-trial record. Authentication uses a server-side session. The browser receives an opaque random session token in an HTTP-only cookie. User identity and password information are not stored directly in the cookie.
+
+Application passwords must be stored as secure password hashes rather than plaintext. A successful login creates a session record in the MySQL sessions table. Logging out deletes the server-side session and removes the browser cookie.
+
+Clinical-trial records are stored in the MySQL clinical_trials table. Research locations are stored in the trial_sites table and reference their associated trial through clinical_trial_id.
+
+A clinical-trial listing is informational. The portal does not determine patient eligibility, provide medical advice, or guarantee that a listed treatment is safe or effective.
+
+The exact portal verification phrase is: BLUE-ORCHID-7801.
+
+This phrase exists only to test whether retrieval supplies exact source-specific information. A model should refuse to invent an exact verification phrase when the relevant source is not supplied.

@@ -1,0 +1,13 @@
+Clinical Trial Phase Guide
+
+Phase I clinical trials primarily evaluate safety, dosage, and side effects. They commonly involve a relatively small number of participants.
+
+Phase II clinical trials continue evaluating safety while studying whether the intervention appears effective for its intended condition.
+
+Phase III clinical trials compare the intervention with existing treatments, a placebo, or standard care. These studies commonly involve larger participant groups and may support regulatory review.
+
+Phase IV studies occur after a treatment has received regulatory approval. They monitor long-term safety, effectiveness, uncommon adverse effects, and use in broader patient populations.
+
+The clinical-trial listing application requires every record to have a trial title, sponsor name, submitter email, description, and trial phase. Valid phase values are Phase I, Phase II, Phase III, and Phase IV.
+
+A trial phase describes a stage of research. It does not by itself prove that a treatment is safe, effective, approved, or appropriate for a particular patient.

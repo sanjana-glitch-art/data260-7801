@@ -1,249 +1,225 @@
 from __future__ import annotations
-
-import os
-from pathlib import Path
+from code.performance_api import router as performance_router
 from typing import Annotated
 
 import uvicorn
-from fastapi import FastAPI, Form, HTTPException, Query, Response
-from fastapi.responses import FileResponse, RedirectResponse
-from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel, ConfigDict, Field
-from starlette.middleware.sessions import SessionMiddleware
+from fastapi import (
+    Depends,
+    FastAPI,
+    HTTPException,
+    Query,
+    Response,
+    status,
+)
+from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy import or_, select
+from sqlalchemy.orm import Session
 
-from code.auth import router as auth_router
+from code.auth_api import (
+    CurrentUser,
+    router as auth_router,
+)
+from code.database import get_db
+from code.models import ClinicalTrial, User
+from code.schemas import (
+    ClinicalTrialResponse,
+    TrialCreate,
+    TrialUpdate,
+)
 
-
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-STATIC_DIRECTORY = PROJECT_ROOT / "code" / "web_application"
 
 PORT_BASE = 8601
-PREFIX = "s7801"
-
-SESSION_SECRET = os.getenv(
-    "SESSION_SECRET",
-    "s7801-hw3-local-secret-change-me"
-)
-
-SESSION_IDLE_SECONDS = int(
-    os.getenv(
-        "SESSION_IDLE_SECONDS",
-        "120"
-    )
-)
-
-
-class ClinicalTrial(BaseModel):
-    """A clinical-trial listing stored by the application."""
-
-    model_config = ConfigDict(
-        validate_assignment=True
-    )
-
-    id: int
-    trial_title: str
-    sponsor_name: str
-    submitter_email: str = ""
-    trial_description: str = ""
-    trial_phase: str = "Phase I"
-
-
-class TrialCreate(BaseModel):
-    """Values accepted when creating a trial."""
-
-    trial_title: str = Field(min_length=1)
-    sponsor_name: str = Field(min_length=1)
-    submitter_email: str = ""
-    trial_description: str = ""
-    trial_phase: str = "Phase I"
-
-
-class TrialUpdate(BaseModel):
-    """Values accepted when updating a trial."""
-
-    trial_title: str = Field(min_length=1)
-    sponsor_name: str = Field(min_length=1)
 
 
 app = FastAPI(
     title="Clinical Trial Listing API",
-    version="3.0.0"
+    description=(
+        "DATA-260 clinical-trial application with "
+        "React, FastAPI, MySQL, and server-side sessions."
+    ),
+    version="4.0.0",
 )
+
 
 app.add_middleware(
-    SessionMiddleware,
-    secret_key=SESSION_SECRET,
-    session_cookie=f"{PREFIX}_session",
-    max_age=SESSION_IDLE_SECONDS,
-    same_site="lax",
-    https_only=True,
-    path="/"
+    CORSMiddleware,
+    allow_origins=[
+        "http://127.0.0.1:5173",
+        "http://localhost:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=[
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "OPTIONS",
+    ],
+    allow_headers=["*"],
 )
 
-app.include_router(auth_router)
 
-app.mount(
-    "/static",
-    StaticFiles(directory=STATIC_DIRECTORY),
-    name="static"
+app.include_router(
+    auth_router
+)
+
+app.include_router(
+    performance_router
 )
 
 
-trials: list[ClinicalTrial] = [
-    ClinicalTrial(
-        id=1,
-        trial_title=(
-            "Sleep Quality and Academic Performance Study"
-        ),
-        sponsor_name="San Jose State University",
-        submitter_email="research@example.edu",
-        trial_description=(
-            "This clinical trial examines how sleep quality "
-            "affects university students."
-        ),
-        trial_phase="Phase II"
-    ),
-    ClinicalTrial(
-        id=2,
-        trial_title="Digital Wellness Intervention Study",
-        sponsor_name=(
-            "California Student Health Research Center"
-        ),
-        submitter_email="wellness@example.edu",
-        trial_description=(
-            "This study evaluates a digital wellness "
-            "intervention for college students."
-        ),
-        trial_phase="Phase I"
-    )
+DatabaseSession = Annotated[
+    Session,
+    Depends(get_db),
 ]
 
 
-def cleaned_required_value(
+def required_string(
     value: str,
-    field_name: str
+    field_name: str,
 ) -> str:
-    """Strip a required string or raise an HTTP 400 error."""
+    """Strip a required string or raise HTTP 400."""
 
     cleaned = value.strip()
 
     if not cleaned:
         raise HTTPException(
-            status_code=400,
-            detail=f"{field_name} is required."
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"{field_name} is required.",
         )
 
     return cleaned
 
 
-def find_trial(trial_id: int) -> ClinicalTrial:
-    """Return a trial by ID or raise an HTTP 404 error."""
+def find_trial(
+    trial_id: int,
+    database: Session,
+) -> ClinicalTrial:
+    """Return a trial by ID or raise HTTP 404."""
 
-    trial = next(
-        (
-            current_trial
-            for current_trial in trials
-            if current_trial.id == trial_id
-        ),
-        None
+    trial = database.get(
+        ClinicalTrial,
+        trial_id,
     )
 
     if trial is None:
         raise HTTPException(
-            status_code=404,
-            detail="Clinical trial not found."
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Clinical trial not found.",
         )
 
     return trial
 
 
-def matching_trials(
-    search: str = ""
-) -> list[ClinicalTrial]:
-    """Return trials matching a title or sponsor."""
+@app.get("/")
+def read_root() -> dict[str, str]:
+    """Return basic API information."""
 
-    query = search.strip().casefold()
-
-    if not query:
-        return list(trials)
-
-    return [
-        trial
-        for trial in trials
-        if (
-            query in trial.trial_title.casefold()
-            or query in trial.sponsor_name.casefold()
-        )
-    ]
+    return {
+        "application": "Clinical Trial Listing API",
+        "student": "Sanjana Thummalapalli",
+        "sid4": "7801",
+        "documentation": "/docs",
+        "frontend": "http://127.0.0.1:5173",
+    }
 
 
-@app.get("/trials")
-async def read_trials_page() -> FileResponse:
-    """Serve the clinical-trial web application."""
+@app.get("/health")
+def health_check() -> dict[str, str]:
+    """Return a simple application health response."""
 
-    return FileResponse(
-        STATIC_DIRECTORY / "index.html"
-    )
+    return {
+        "status": "ok",
+    }
 
 
 @app.get(
     "/api/trials",
-    response_model=list[ClinicalTrial]
+    response_model=list[ClinicalTrialResponse],
 )
-async def get_trials(
-    response: Response,
-    search: Annotated[str, Query()] = ""
+def get_trials(
+    user: CurrentUser,
+    database: DatabaseSession,
+    search: Annotated[
+        str,
+        Query(max_length=255),
+    ] = "",
 ) -> list[ClinicalTrial]:
-    """Return all trials or title/sponsor matches."""
+    """Return all trials or matching title/sponsor records."""
 
-    response.headers["Cache-Control"] = (
-        "no-cache, no-store, must-revalidate"
+    del user
+
+    statement = select(
+        ClinicalTrial
+    ).order_by(
+        ClinicalTrial.id
     )
 
-    return matching_trials(search)
+    cleaned_search = search.strip()
+
+    if cleaned_search:
+        search_pattern = (
+            f"%{cleaned_search}%"
+        )
+
+        statement = statement.where(
+            or_(
+                ClinicalTrial.trial_title.like(
+                    search_pattern
+                ),
+                ClinicalTrial.sponsor_name.like(
+                    search_pattern
+                ),
+            )
+        )
+
+    return list(
+        database.scalars(
+            statement
+        ).all()
+    )
 
 
 @app.get(
     "/api/trials/{trial_id}",
-    response_model=ClinicalTrial
+    response_model=ClinicalTrialResponse,
 )
-async def get_trial(
-    trial_id: int
+def get_trial(
+    trial_id: int,
+    user: CurrentUser,
+    database: DatabaseSession,
 ) -> ClinicalTrial:
     """Return one clinical trial."""
 
-    return find_trial(trial_id)
+    del user
+
+    return find_trial(
+        trial_id,
+        database,
+    )
 
 
 @app.post(
     "/api/trials",
-    response_model=ClinicalTrial,
-    status_code=201
+    response_model=ClinicalTrialResponse,
+    status_code=status.HTTP_201_CREATED,
 )
-async def create_trial_api(
-    trial_data: TrialCreate
+def create_trial(
+    trial_data: TrialCreate,
+    user: CurrentUser,
+    database: DatabaseSession,
 ) -> ClinicalTrial:
-    """Create a clinical trial through the JSON API."""
-
-    trial_title = cleaned_required_value(
-        trial_data.trial_title,
-        "Trial title"
-    )
-
-    sponsor_name = cleaned_required_value(
-        trial_data.sponsor_name,
-        "Sponsor name"
-    )
-
-    new_id = max(
-        (trial.id for trial in trials),
-        default=0
-    ) + 1
+    """Create a clinical-trial record."""
 
     new_trial = ClinicalTrial(
-        id=new_id,
-        trial_title=trial_title,
-        sponsor_name=sponsor_name,
+        trial_title=required_string(
+            trial_data.trial_title,
+            "Trial title",
+        ),
+        sponsor_name=required_string(
+            trial_data.sponsor_name,
+            "Sponsor name",
+        ),
         submitter_email=(
             trial_data.submitter_email.strip()
         ),
@@ -253,34 +229,69 @@ async def create_trial_api(
         trial_phase=(
             trial_data.trial_phase.strip()
             or "Phase I"
-        )
+        ),
+        created_by_user_id=user.id,
     )
 
-    trials.append(new_trial)
+    database.add(
+        new_trial
+    )
+
+    database.commit()
+
+    database.refresh(
+        new_trial
+    )
 
     return new_trial
 
 
 @app.put(
     "/api/trials/{trial_id}",
-    response_model=ClinicalTrial
+    response_model=ClinicalTrialResponse,
 )
-async def update_trial_api(
+def update_trial(
     trial_id: int,
-    trial_data: TrialUpdate
+    trial_data: TrialUpdate,
+    user: CurrentUser,
+    database: DatabaseSession,
 ) -> ClinicalTrial:
-    """Update a trial through the JSON API."""
+    """Update an existing clinical-trial record."""
 
-    trial = find_trial(trial_id)
+    del user
 
-    trial.trial_title = cleaned_required_value(
-        trial_data.trial_title,
-        "Trial title"
+    trial = find_trial(
+        trial_id,
+        database,
     )
 
-    trial.sponsor_name = cleaned_required_value(
+    trial.trial_title = required_string(
+        trial_data.trial_title,
+        "Trial title",
+    )
+
+    trial.sponsor_name = required_string(
         trial_data.sponsor_name,
-        "Sponsor name"
+        "Sponsor name",
+    )
+
+    trial.submitter_email = (
+        trial_data.submitter_email.strip()
+    )
+
+    trial.trial_description = (
+        trial_data.trial_description.strip()
+    )
+
+    trial.trial_phase = (
+        trial_data.trial_phase.strip()
+        or "Phase I"
+    )
+
+    database.commit()
+
+    database.refresh(
+        trial
     )
 
     return trial
@@ -288,95 +299,37 @@ async def update_trial_api(
 
 @app.delete(
     "/api/trials/{trial_id}",
-    status_code=204
+    status_code=status.HTTP_204_NO_CONTENT,
 )
-async def delete_trial_api(
-    trial_id: int
+def delete_trial(
+    trial_id: int,
+    user: CurrentUser,
+    database: DatabaseSession,
 ) -> Response:
-    """Delete a clinical trial through the JSON API."""
+    """Delete an existing clinical-trial record."""
 
-    trial = find_trial(trial_id)
-    trials.remove(trial)
+    del user
 
-    return Response(status_code=204)
-
-
-@app.post("/trials")
-async def create_trial_form(
-    trial_title: Annotated[str, Form()],
-    sponsor_name: Annotated[str, Form()],
-    submitter_email: Annotated[str, Form()],
-    trial_description: Annotated[str, Form()],
-    trial_phase: Annotated[str, Form()]
-) -> RedirectResponse:
-    """Create a trial from the HTML form."""
-
-    await create_trial_api(
-        TrialCreate(
-            trial_title=trial_title,
-            sponsor_name=sponsor_name,
-            submitter_email=submitter_email,
-            trial_description=trial_description,
-            trial_phase=trial_phase
-        )
+    trial = find_trial(
+        trial_id,
+        database,
     )
 
-    return RedirectResponse(
-        url="/trials",
-        status_code=303
+    database.delete(
+        trial
     )
 
+    database.commit()
 
-@app.post("/trials/1/update")
-async def update_trial_one_form(
-    trial_title: Annotated[str, Form()],
-    sponsor_name: Annotated[str, Form()]
-) -> RedirectResponse:
-    """Update trial ID 1 from the HTML form."""
-
-    await update_trial_api(
-        1,
-        TrialUpdate(
-            trial_title=trial_title,
-            sponsor_name=sponsor_name
-        )
-    )
-
-    return RedirectResponse(
-        url="/trials",
-        status_code=303
-    )
-
-
-@app.post("/trials/delete-highest")
-async def delete_highest_trial_form() -> RedirectResponse:
-    """Delete the trial with the highest ID."""
-
-    if not trials:
-        raise HTTPException(
-            status_code=404,
-            detail=(
-                "There are no clinical trials to delete."
-            )
-        )
-
-    highest_id = max(
-        trial.id
-        for trial in trials
-    )
-
-    await delete_trial_api(highest_id)
-
-    return RedirectResponse(
-        url="/trials",
-        status_code=303
+    return Response(
+        status_code=status.HTTP_204_NO_CONTENT
     )
 
 
 if __name__ == "__main__":
     uvicorn.run(
         "code.main:app",
-        host="0.0.0.0",
+        host="127.0.0.1",
         port=PORT_BASE,
-        reload=True
+        reload=True,
     )
