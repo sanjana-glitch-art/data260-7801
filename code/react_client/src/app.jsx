@@ -12,19 +12,15 @@ import {
 
 import Navigation from "./components/Navigation";
 import CreateRecord from "./pages/CreateRecord";
-import DeleteRecord from "./pages/DeleteRecord";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import UpdateRecord from "./pages/UpdateRecord";
 
 import {
     ApiError,
-    createTrial,
-    deleteTrial,
     getCurrentUser,
     login,
-    logout,
-    updateTrial
+    logout
 } from "./api";
 
 
@@ -41,59 +37,52 @@ function App() {
         setAuthLoading
     ] = useState(true);
 
-    const [
-        refreshKey,
-        setRefreshKey
-    ] = useState(0);
+    useEffect(() => {
+        let cancelled = false;
 
-    useEffect(
-        () => {
-            let cancelled = false;
+        const loadCurrentUser = async () => {
+            try {
+                const response = (
+                    await getCurrentUser()
+                );
 
-            const loadCurrentUser = async () => {
-                try {
-                    const response =
-                        await getCurrentUser();
-
-                    if (!cancelled) {
-                        setUser(
-                            response.user
-                            || response
-                        );
-                    }
-                } catch (error) {
-                    if (
-                        !cancelled
-                        && !(
-                            error
-                            instanceof ApiError
-                            && error.status === 401
-                        )
-                    ) {
-                        console.error(
-                            "Session check failed:",
-                            error
-                        );
-                    }
-
-                    if (!cancelled) {
-                        setUser(null);
-                    }
-                } finally {
-                    if (!cancelled) {
-                        setAuthLoading(false);
-                    }
+                if (!cancelled) {
+                    setUser(
+                        response.user || response
+                    );
                 }
-            };
+            } catch (error) {
+                const unauthorized = (
+                    error instanceof ApiError
+                    && error.status === 401
+                );
 
-            loadCurrentUser();
+                if (
+                    !cancelled
+                    && !unauthorized
+                ) {
+                    console.error(
+                        "Session check failed:",
+                        error
+                    );
+                }
 
-            return () => {
-                cancelled = true;
-            };
-        },
-        []
-    );
+                if (!cancelled) {
+                    setUser(null);
+                }
+            } finally {
+                if (!cancelled) {
+                    setAuthLoading(false);
+                }
+            }
+        };
+
+        loadCurrentUser();
+
+        return () => {
+            cancelled = true;
+        };
+    }, []);
 
     const handleLogin = async (
         email,
@@ -105,8 +94,7 @@ function App() {
         );
 
         const loggedInUser = (
-            response.user
-            || response
+            response.user || response
         );
 
         setUser(loggedInUser);
@@ -134,54 +122,6 @@ function App() {
         }
     };
 
-    const handleCreate = async (
-        trialData
-    ) => {
-        const createdRecord =
-            await createTrial(
-                trialData
-            );
-
-        setRefreshKey(
-            (currentValue) => (
-                currentValue + 1
-            )
-        );
-
-        return createdRecord;
-    };
-
-    const handleUpdate = async (
-        trialId,
-        trialData
-    ) => {
-        const updatedRecord =
-            await updateTrial(
-                trialId,
-                trialData
-            );
-
-        setRefreshKey(
-            (currentValue) => (
-                currentValue + 1
-            )
-        );
-
-        return updatedRecord;
-    };
-
-    const handleDelete = async (
-        trialId
-    ) => {
-        await deleteTrial(trialId);
-
-        setRefreshKey(
-            (currentValue) => (
-                currentValue + 1
-            )
-        );
-    };
-
     if (authLoading) {
         return (
             <div className="app-loading">
@@ -201,12 +141,7 @@ function App() {
                 <Route
                     path="/"
                     element={
-                        <Home
-                            user={user}
-                            refreshKey={
-                                refreshKey
-                            }
-                        />
+                        <Home user={user} />
                     }
                 />
 
@@ -215,69 +150,53 @@ function App() {
                     element={
                         <Login
                             user={user}
-                            onLogin={
-                                handleLogin
-                            }
+                            onLogin={handleLogin}
                         />
+                    }
+                />
+
+                <Route
+                    path="/trials/create"
+                    element={
+                        user
+                            ? (
+                                <CreateRecord
+                                    user={user}
+                                />
+                            )
+                            : (
+                                <Navigate
+                                    to="/login"
+                                    replace
+                                />
+                            )
+                    }
+                />
+
+                <Route
+                    path="/trials/:trialId/update"
+                    element={
+                        user
+                            ? (
+                                <UpdateRecord
+                                    user={user}
+                                />
+                            )
+                            : (
+                                <Navigate
+                                    to="/login"
+                                    replace
+                                />
+                            )
                     }
                 />
 
                 <Route
                     path="/create"
                     element={
-                        <CreateRecord
-                            user={user}
-                            onCreate={
-                                handleCreate
-                            }
-                        />
-                    }
-                />
-
-                <Route
-                    path="/update"
-                    element={
-                        <UpdateRecord
-                            user={user}
-                            onUpdate={
-                                handleUpdate
-                            }
-                        />
-                    }
-                />
-
-                <Route
-                    path="/update/:id"
-                    element={
-                        <UpdateRecord
-                            user={user}
-                            onUpdate={
-                                handleUpdate
-                            }
-                        />
-                    }
-                />
-
-                <Route
-                    path="/delete"
-                    element={
-                        <DeleteRecord
-                            user={user}
-                            onDelete={
-                                handleDelete
-                            }
-                        />
-                    }
-                />
-
-                <Route
-                    path="/delete/:id"
-                    element={
-                        <DeleteRecord
-                            user={user}
-                            onDelete={
-                                handleDelete
-                            }
+                        <Navigate
+                            to="/trials/create"
+                            replace
                         />
                     }
                 />

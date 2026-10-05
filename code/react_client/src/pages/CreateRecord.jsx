@@ -1,163 +1,256 @@
 import {
+    useEffect,
     useState
 } from "react";
 
 import {
-    Link,
-    Navigate,
+    useDispatch,
+    useSelector
+} from "react-redux";
+
+import {
     useNavigate
 } from "react-router-dom";
 
+import apiClient, {
+    getApiError
+} from "../api/client";
 
-function CreateRecord({
-    user,
-    onCreate
-}) {
+import TrialForm from "../components/TrialForm";
+
+import {
+    clearTrialError,
+    clearTrialSuccess,
+    createTrial
+} from "../features/trials/trialsSlice";
+
+
+const initialFormData = {
+    trial_title: "",
+    trial_code: "",
+    sponsor_id: "",
+    enrollment_target: "0",
+    submitter_email: "",
+    trial_description: "",
+    trial_phase: "Phase I"
+};
+
+
+function CreateRecord({ user }) {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const {
+        mutationLoading,
+        error
+    } = useSelector(
+        (state) => state.trials
+    );
+
     const [
-        trialTitle,
-        setTrialTitle
+        formData,
+        setFormData
+    ] = useState(initialFormData);
+
+    const [
+        sponsors,
+        setSponsors
+    ] = useState([]);
+
+    const [
+        sponsorsLoading,
+        setSponsorsLoading
+    ] = useState(true);
+
+    const [
+        sponsorsError,
+        setSponsorsError
     ] = useState("");
 
-    const [
-        sponsorName,
-        setSponsorName
-    ] = useState("");
+    useEffect(() => {
+        let cancelled = false;
 
-    const [
-        error,
-        setError
-    ] = useState("");
+        const loadSponsors = async () => {
+            try {
+                const response = await apiClient.get(
+                    "/sponsors",
+                    {
+                        params: {
+                            page: 1,
+                            page_size: 100
+                        }
+                    }
+                );
 
-    const [
-        submitting,
-        setSubmitting
-    ] = useState(false);
+                if (!cancelled) {
+                    setSponsors(
+                        response.data.items || []
+                    );
+                }
+            } catch (requestError) {
+                if (!cancelled) {
+                    setSponsorsError(
+                        getApiError(requestError)
+                    );
+                }
+            } finally {
+                if (!cancelled) {
+                    setSponsorsLoading(false);
+                }
+            }
+        };
 
-    if (!user) {
-        return (
-            <Navigate
-                to="/login"
-                replace
-            />
-        );
-    }
+        dispatch(clearTrialError());
+        dispatch(clearTrialSuccess());
 
-    const handleSubmit = async (
-        event
-    ) => {
+        loadSponsors();
+
+        return () => {
+            cancelled = true;
+        };
+    }, [dispatch]);
+
+    const handleChange = (event) => {
+        const {
+            name,
+            value
+        } = event.target;
+
+        setFormData((current) => ({
+            ...current,
+            [name]: value
+        }));
+    };
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
-        setError("");
-        setSubmitting(true);
+        dispatch(clearTrialError());
+        dispatch(clearTrialSuccess());
+
+        const payload = {
+            trial_title: (
+                formData.trial_title.trim()
+            ),
+            trial_code: (
+                formData.trial_code
+                    .trim()
+                    .toUpperCase()
+            ),
+            sponsor_id: Number(
+                formData.sponsor_id
+            ),
+            enrollment_target: Number(
+                formData.enrollment_target
+            ),
+            submitter_email: (
+                formData.submitter_email.trim()
+            ),
+            trial_description: (
+                formData.trial_description.trim()
+            ),
+            trial_phase: formData.trial_phase
+        };
 
         try {
-            await onCreate({
-                trial_title:
-                    trialTitle.trim(),
+            await dispatch(
+                createTrial(payload)
+            ).unwrap();
 
-                sponsor_name:
-                    sponsorName.trim()
-            });
-
-            navigate(
-                "/",
-                {
-                    replace: true
-                }
-            );
-        } catch (requestError) {
-            setError(
-                requestError.message
-                || "Unable to create record."
-            );
-        } finally {
-            setSubmitting(false);
+            navigate("/");
+        } catch {
+            // Redux stores and displays the rejected
+            // API request message.
         }
     };
 
-    return (
-        <main className="page centered-page">
-            <section className="card form-card">
-                <p className="eyebrow">
-                    Create record
+    if (!user) {
+        return (
+            <section className="page-card">
+                <h1>Authentication required</h1>
+
+                <p>
+                    Log in before creating a clinical
+                    trial.
                 </p>
 
-                <h1>
-                    Add a Clinical Trial
-                </h1>
-
-                {error && (
-                    <div
-                        className="alert error"
-                        role="alert"
-                    >
-                        {error}
-                    </div>
-                )}
-
-                <form
-                    className="form-grid"
-                    onSubmit={handleSubmit}
+                <button
+                    type="button"
+                    onClick={() => navigate("/login")}
                 >
-                    <label htmlFor="trialTitle">
-                        Trial title
-                    </label>
-
-                    <input
-                        id="trialTitle"
-                        name="trialTitle"
-                        value={trialTitle}
-                        onChange={(event) => {
-                            setTrialTitle(
-                                event.target.value
-                            );
-                        }}
-                        required
-                        autoFocus
-                    />
-
-                    <label htmlFor="sponsorName">
-                        Sponsor name
-                    </label>
-
-                    <input
-                        id="sponsorName"
-                        name="sponsorName"
-                        value={sponsorName}
-                        onChange={(event) => {
-                            setSponsorName(
-                                event.target.value
-                            );
-                        }}
-                        required
-                    />
-
-                    <div className="form-actions">
-                        <button
-                            className="primary-button"
-                            type="submit"
-                            disabled={submitting}
-                        >
-                            {submitting
-                                ? "Adding..."
-                                : "Add Clinical Trial"}
-                        </button>
-
-                        <Link
-                            className={
-                                "secondary-button " +
-                                "link-button"
-                            }
-                            to="/"
-                        >
-                            Cancel
-                        </Link>
-                    </div>
-                </form>
+                    Go to login
+                </button>
             </section>
-        </main>
+        );
+    }
+
+    if (sponsorsLoading) {
+        return (
+            <section className="page-card">
+                <p role="status">
+                    Loading sponsors...
+                </p>
+            </section>
+        );
+    }
+
+    if (sponsorsError) {
+        return (
+            <section className="page-card">
+                <h1>Unable to load sponsors</h1>
+
+                <p role="alert">
+                    {sponsorsError}
+                </p>
+
+                <button
+                    type="button"
+                    onClick={() => navigate("/")}
+                >
+                    Return home
+                </button>
+            </section>
+        );
+    }
+
+    return (
+        <section className="page-card">
+            <div className="page-heading">
+                <div>
+                    <p className="eyebrow">
+                        Create record
+                    </p>
+
+                    <h1>
+                        Add a clinical trial
+                    </h1>
+
+                    <p>
+                        Create a trial and connect it
+                        to an existing sponsor.
+                    </p>
+                </div>
+            </div>
+
+            {error && (
+                <div
+                    className="message error-message"
+                    role="alert"
+                >
+                    {error}
+                </div>
+            )}
+
+            <TrialForm
+                formData={formData}
+                sponsors={sponsors}
+                loading={mutationLoading}
+                submitLabel="Add Clinical Trial"
+                onChange={handleChange}
+                onSubmit={handleSubmit}
+                onCancel={() => navigate("/")}
+            />
+        </section>
     );
 }
 

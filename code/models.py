@@ -118,6 +118,54 @@ class ServerSession(Base):
     )
 
 
+class Sponsor(Base):
+    """An organization that sponsors clinical trials."""
+
+    __tablename__ = "sponsors"
+
+    id: Mapped[int] = mapped_column(
+        Integer,
+        primary_key=True,
+        autoincrement=True,
+    )
+
+    sponsor_name: Mapped[str] = mapped_column(
+        String(255),
+        nullable=False,
+        index=True,
+    )
+
+    headquarters: Mapped[str] = mapped_column(
+        String(255),
+        nullable=False,
+    )
+
+    contact_email: Mapped[str] = mapped_column(
+        String(255),
+        nullable=False,
+        unique=True,
+        index=True,
+    )
+
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime,
+        nullable=False,
+        default=utc_now,
+    )
+
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime,
+        nullable=False,
+        default=utc_now,
+        onupdate=utc_now,
+    )
+
+    trials: Mapped[list["ClinicalTrial"]] = relationship(
+        back_populates="sponsor",
+        passive_deletes=True,
+    )
+
+
 class ClinicalTrial(Base):
     """A clinical-trial listing stored in MySQL."""
 
@@ -135,10 +183,34 @@ class ClinicalTrial(Base):
         index=True,
     )
 
+    trial_code: Mapped[str] = mapped_column(
+        String(50),
+        nullable=False,
+        unique=True,
+        index=True,
+    )
+
+    enrollment_target: Mapped[int] = mapped_column(
+        Integer,
+        nullable=False,
+        default=0,
+    )
+
+    sponsor_id: Mapped[int] = mapped_column(
+        ForeignKey(
+            "sponsors.id",
+            ondelete="RESTRICT",
+        ),
+        nullable=False,
+        index=True,
+    )
+
+    # Retained for compatibility with the earlier frontend and
+    # Homework 4 data. The authoritative sponsor relationship
+    # is now sponsor_id.
     sponsor_name: Mapped[str] = mapped_column(
         String(255),
         nullable=False,
-        index=True,
     )
 
     submitter_email: Mapped[str] = mapped_column(
@@ -153,8 +225,6 @@ class ClinicalTrial(Base):
         default="",
     )
 
-    # This is intentionally not indexed yet.
-    # We will use it for the before/after index experiment.
     trial_phase: Mapped[str] = mapped_column(
         String(50),
         nullable=False,
@@ -181,6 +251,10 @@ class ClinicalTrial(Base):
         nullable=False,
         default=utc_now,
         onupdate=utc_now,
+    )
+
+    sponsor: Mapped["Sponsor"] = relationship(
+        back_populates="trials",
     )
 
     sites: Mapped[list["TrialSite"]] = relationship(

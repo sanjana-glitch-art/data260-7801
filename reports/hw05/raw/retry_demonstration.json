@@ -1,0 +1,84 @@
+[
+  {
+    "scenario": "success_first_attempt",
+    "planned_failures": [
+      false
+    ],
+    "result": {
+      "ok": true,
+      "data": {
+        "query": "Sleep",
+        "count": 1,
+        "trials": [
+          {
+            "id": 1,
+            "trial_code": "S7801-CT-000001",
+            "trial_title": "Sleep Quality and Academic Performance Study",
+            "trial_phase": "Phase II",
+            "enrollment_target": 67,
+            "sponsor_id": 7,
+            "sponsor_name": "San Jose State University"
+          }
+        ]
+      },
+      "error": null
+    },
+    "attempts": 1,
+    "retried": false,
+    "attempt_errors": [],
+    "latency_ms": 365.915
+  },
+  {
+    "scenario": "failure_then_retry_success",
+    "planned_failures": [
+      true,
+      false
+    ],
+    "result": {
+      "ok": true,
+      "data": {
+        "query": "Sleep",
+        "count": 1,
+        "trials": [
+          {
+            "id": 1,
+            "trial_code": "S7801-CT-000001",
+            "trial_title": "Sleep Quality and Academic Performance Study",
+            "trial_phase": "Phase II",
+            "enrollment_target": 67,
+            "sponsor_id": 7,
+            "sponsor_name": "San Jose State University"
+          }
+        ]
+      },
+      "error": null
+    },
+    "attempts": 2,
+    "retried": true,
+    "attempt_errors": [
+      "attempt 1: Reproducible injected failure."
+    ],
+    "latency_ms": 75.24
+  },
+  {
+    "scenario": "failure_after_all_retries",
+    "planned_failures": [
+      true,
+      true,
+      true
+    ],
+    "result": {
+      "ok": false,
+      "data": null,
+      "error": "Operation failed after 3 attempts."
+    },
+    "attempts": 3,
+    "retried": true,
+    "attempt_errors": [
+      "attempt 1: Reproducible injected failure.",
+      "attempt 2: Reproducible injected failure.",
+      "attempt 3: Reproducible injected failure."
+    ],
+    "latency_ms": 76.302
+  }
+]

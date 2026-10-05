@@ -1,115 +1,173 @@
+import { useEffect, useState } from "react";
 import {
-    useEffect,
-    useState
-} from "react";
-
+    useDispatch,
+    useSelector
+} from "react-redux";
 import {
-    Link
+    Link,
+    useNavigate
 } from "react-router-dom";
 
 import {
-    getTrials
-} from "../api";
+    clearTrialError,
+    clearTrialSuccess,
+    deleteTrial,
+    fetchTrials
+} from "../features/trials/trialsSlice";
 
 
 function Home({
-    user,
-    refreshKey
+    user
 }) {
-    const [
-        trials,
-        setTrials
-    ] = useState([]);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const [
-        loading,
-        setLoading
-    ] = useState(false);
-
-    const [
-        error,
-        setError
-    ] = useState("");
-
-    useEffect(
-        () => {
-            let cancelled = false;
-
-            if (!user) {
-                return () => {
-                    cancelled = true;
-                };
-            }
-
-            const loadTrials = async () => {
-                setLoading(true);
-                setError("");
-
-                try {
-                    const records =
-                        await getTrials();
-
-                    if (!cancelled) {
-                        setTrials(records);
-                    }
-                } catch (requestError) {
-                    if (!cancelled) {
-                        setError(
-                            requestError.message
-                            || (
-                                "Unable to load " +
-                                "clinical trials."
-                            )
-                        );
-                    }
-                } finally {
-                    if (!cancelled) {
-                        setLoading(false);
-                    }
-                }
-            };
-
-            loadTrials();
-
-            return () => {
-                cancelled = true;
-            };
-        },
-        [
-            user,
-            refreshKey
-        ]
+    const [searchInput, setSearchInput] = (
+        useState("")
     );
+
+    const [activeSearch, setActiveSearch] = (
+        useState("")
+    );
+
+    const {
+        items,
+        total,
+        page,
+        pageSize,
+        totalPages,
+        loading,
+        mutationLoading,
+        error,
+        successMessage
+    } = useSelector(
+        (state) => state.trials
+    );
+
+
+    useEffect(() => {
+        dispatch(
+            fetchTrials({
+                page: 1,
+                pageSize: 20,
+                search: ""
+            })
+        );
+    }, [dispatch]);
+
+
+    const handleSearch = (event) => {
+        event.preventDefault();
+
+        const cleanedSearch = (
+            searchInput.trim()
+        );
+
+        setActiveSearch(
+            cleanedSearch
+        );
+
+        dispatch(
+            fetchTrials({
+                page: 1,
+                pageSize,
+                search: cleanedSearch
+            })
+        );
+    };
+
+
+    const handleClearSearch = () => {
+        setSearchInput("");
+        setActiveSearch("");
+
+        dispatch(
+            fetchTrials({
+                page: 1,
+                pageSize,
+                search: ""
+            })
+        );
+    };
+
+
+    const changePage = (newPage) => {
+        if (
+            newPage < 1
+            || newPage > totalPages
+            || newPage === page
+        ) {
+            return;
+        }
+
+        dispatch(
+            fetchTrials({
+                page: newPage,
+                pageSize,
+                search: activeSearch
+            })
+        );
+    };
+
+
+    const handleDelete = async (
+        trial
+    ) => {
+        const confirmed = window.confirm(
+            (
+                `Delete "${trial.trial_title}"? `
+                + "This action cannot be undone."
+            )
+        );
+
+        if (!confirmed) {
+            return;
+        }
+
+        try {
+            await dispatch(
+                deleteTrial(
+                    trial.id
+                )
+            ).unwrap();
+
+            const shouldMoveBack = (
+                items.length === 1
+                && page > 1
+            );
+
+            const nextPage = (
+                shouldMoveBack
+                ? page - 1
+                : page
+            );
+
+            dispatch(
+                fetchTrials({
+                    page: nextPage,
+                    pageSize,
+                    search: activeSearch
+                })
+            );
+        } catch {
+            // Redux stores and displays the API error.
+        }
+    };
+
 
     if (!user) {
         return (
-            <main className="page centered-page">
-                <section className="card form-card">
-                    <p className="eyebrow">
-                        DATA 260 · Homework 4
-                    </p>
+            <main className="page-shell">
+                <section className="panel">
+                    <h1>Login required</h1>
 
-                    <h1>
-                        Clinical Trial Listings
-                    </h1>
-
-                    <div
-                        className="alert warning"
-                        role="alert"
-                    >
-                        Login required
-                    </div>
-
-                    <p className="muted">
+                    <p>
                         Log in to view and manage
                         clinical-trial records.
                     </p>
 
                     <Link
-                        className={
-                            "primary-button " +
-                            "link-button"
-                        }
+                        className="primary-button"
                         to="/login"
                     >
                         Go to login
@@ -119,143 +177,299 @@ function Home({
         );
     }
 
+
     return (
-        <main className="page">
-            <section className="page-heading">
+        <main className="page-shell">
+            <section className="hero-panel">
                 <div>
                     <p className="eyebrow">
-                        Authenticated records
+                        DATA 260 · HOMEWORK 5
                     </p>
 
                     <h1>
                         Clinical Trial Listings
                     </h1>
 
-                    <p className="muted">
-                        Welcome, {user.name}.
+                    <p>
+                        Records are loaded from MySQL through
+                        Redux Toolkit and Axios.
                     </p>
                 </div>
 
-                <Link
-                    className={
-                        "primary-button " +
-                        "link-button"
-                    }
-                    to="/create"
-                >
-                    Add Clinical Trial
-                </Link>
+                <div className="hero-actions">
+                    <span className="record-badge">
+                        {total} records
+                    </span>
+
+                    <Link
+                        className="primary-button"
+                        to="/trials/create"
+                    >
+                        Create trial
+                    </Link>
+                </div>
             </section>
 
-            {loading && (
-                <div className="state-card">
-                    Loading clinical trials...
-                </div>
-            )}
+            <section className="panel">
+                <div className="section-heading">
+                    <div>
+                        <p className="eyebrow">
+                            PRIMARY DOMAIN ENTITY
+                        </p>
 
-            {error && (
-                <div
-                    className="alert error"
-                    role="alert"
-                >
-                    {error}
+                        <h2>
+                            Clinical trials
+                        </h2>
+                    </div>
                 </div>
-            )}
 
-            {!loading
-                && !error
-                && trials.length === 0
-                && (
-                    <div className="state-card">
-                        No clinical trials found.
+                {successMessage && (
+                    <div
+                        className="success-message"
+                        role="status"
+                    >
+                        <span>
+                            {successMessage}
+                        </span>
+
+                        <button
+                            type="button"
+                            onClick={() => {
+                                dispatch(
+                                    clearTrialSuccess()
+                                );
+                            }}
+                        >
+                            Dismiss
+                        </button>
                     </div>
                 )}
 
-            {!loading
-                && !error
-                && trials.length > 0
-                && (
-                    <section className="card table-card">
-                        <div className="table-scroll">
+                {error && (
+                    <div
+                        className="error-message"
+                        role="alert"
+                    >
+                        <span>
+                            {error}
+                        </span>
+
+                        <button
+                            type="button"
+                            onClick={() => {
+                                dispatch(
+                                    clearTrialError()
+                                );
+                            }}
+                        >
+                            Dismiss
+                        </button>
+                    </div>
+                )}
+
+                <form
+                    className="search-row"
+                    onSubmit={handleSearch}
+                >
+                    <label
+                        className="visually-hidden"
+                        htmlFor="trialSearch"
+                    >
+                        Search clinical trials
+                    </label>
+
+                    <input
+                        id="trialSearch"
+                        type="search"
+                        value={searchInput}
+                        placeholder={
+                            "Search by title, code, or sponsor"
+                        }
+                        onChange={(event) => {
+                            setSearchInput(
+                                event.target.value
+                            );
+                        }}
+                    />
+
+                    <button
+                        className="primary-button"
+                        type="submit"
+                    >
+                        Search
+                    </button>
+
+                    <button
+                        className="secondary-button"
+                        type="button"
+                        onClick={handleClearSearch}
+                    >
+                        Clear
+                    </button>
+                </form>
+
+                {loading && (
+                    <div className="state-message">
+                        Loading clinical trials...
+                    </div>
+                )}
+
+                {!loading && items.length === 0 && (
+                    <div className="state-message">
+                        No clinical-trial records matched
+                        the current search.
+                    </div>
+                )}
+
+                {!loading && items.length > 0 && (
+                    <>
+                        <div className="table-wrapper">
                             <table>
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Trial code</th>
+                                        <th>Trial title</th>
+                                        <th>Sponsor</th>
+                                        <th>Phase</th>
                                         <th>
-                                            Trial title
+                                            Enrollment target
                                         </th>
-                                        <th>
-                                            Sponsor
-                                        </th>
-                                        <th>
-                                            Actions
-                                        </th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    {trials.map(
-                                        (trial) => (
-                                            <tr
-                                                key={
-                                                    trial.id
+                                    {items.map((trial) => (
+                                        <tr key={trial.id}>
+                                            <td>
+                                                {trial.id}
+                                            </td>
+
+                                            <td>
+                                                <code>
+                                                    {
+                                                        trial.trial_code
+                                                    }
+                                                </code>
+                                            </td>
+
+                                            <td>
+                                                {
+                                                    trial.trial_title
                                                 }
-                                            >
-                                                <td>
-                                                    {
-                                                        trial.id
+                                            </td>
+
+                                            <td>
+                                                {
+                                                    trial.sponsor
+                                                        ?.sponsor_name
+                                                    || trial.sponsor_name
+                                                }
+                                            </td>
+
+                                            <td>
+                                                {
+                                                    trial.trial_phase
+                                                }
+                                            </td>
+
+                                            <td>
+                                                {
+                                                    trial
+                                                        .enrollment_target
+                                                }
+                                            </td>
+
+                                            <td>
+                                                <div
+                                                    className={
+                                                        "table-actions"
                                                     }
-                                                </td>
+                                                >
+                                                    <button
+                                                        className={
+                                                            "small-button"
+                                                        }
+                                                        type="button"
+                                                        onClick={() => {
+                                                            navigate(
+                                                                (
+                                                                    "/trials/"
+                                                                    + `${trial.id}`
+                                                                    + "/update"
+                                                                )
+                                                            );
+                                                        }}
+                                                    >
+                                                        Update
+                                                    </button>
 
-                                                <td>
-                                                    {
-                                                        trial
-                                                            .trial_title
-                                                    }
-                                                </td>
-
-                                                <td>
-                                                    {
-                                                        trial
-                                                            .sponsor_name
-                                                    }
-                                                </td>
-
-                                                <td>
-                                                    <div className="actions">
-                                                        <Link
-                                                            className={
-                                                                "secondary-button " +
-                                                                "link-button"
-                                                            }
-                                                            to={
-                                                                `/update/${trial.id}`
-                                                            }
-                                                        >
-                                                            Update
-                                                        </Link>
-
-                                                        <Link
-                                                            className={
-                                                                "danger-button " +
-                                                                "link-button"
-                                                            }
-                                                            to={
-                                                                `/delete/${trial.id}`
-                                                            }
-                                                        >
-                                                            Delete
-                                                        </Link>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        )
-                                    )}
+                                                    <button
+                                                        className={
+                                                            "small-button "
+                                                            + "danger-button"
+                                                        }
+                                                        type="button"
+                                                        disabled={
+                                                            mutationLoading
+                                                        }
+                                                        onClick={() => {
+                                                            handleDelete(
+                                                                trial
+                                                            );
+                                                        }}
+                                                    >
+                                                        Delete
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
                         </div>
-                    </section>
+
+                        <div className="pagination-row">
+                            <button
+                                className="secondary-button"
+                                type="button"
+                                disabled={page <= 1}
+                                onClick={() => {
+                                    changePage(
+                                        page - 1
+                                    );
+                                }}
+                            >
+                                Previous
+                            </button>
+
+                            <span>
+                                Page {page} of{" "}
+                                {Math.max(
+                                    totalPages,
+                                    1
+                                )}
+                            </span>
+
+                            <button
+                                className="secondary-button"
+                                type="button"
+                                disabled={
+                                    page >= totalPages
+                                }
+                                onClick={() => {
+                                    changePage(
+                                        page + 1
+                                    );
+                                }}
+                            >
+                                Next
+                            </button>
+                        </div>
+                    </>
                 )}
+            </section>
         </main>
     );
 }

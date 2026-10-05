@@ -8,7 +8,7 @@ function Navigation({
     user,
     onLogout
 }) {
-    const linkClass = ({
+    const navigationClass = ({
         isActive
     }) => (
         isActive
@@ -18,7 +18,7 @@ function Navigation({
 
     return (
         <header className="site-header">
-            <nav className="navbar">
+            <nav className="navigation">
                 <Link
                     className="brand"
                     to="/"
@@ -26,40 +26,49 @@ function Navigation({
                     Clinical Trial Portal
                 </Link>
 
-                <div className="nav-links">
+                <div className="navigation-links">
                     <NavLink
-                        className={linkClass}
+                        className={navigationClass}
                         to="/"
+                        end
                     >
-                        Home
+                        Trial listings
                     </NavLink>
 
                     {user && (
                         <NavLink
-                            className={linkClass}
-                            to="/create"
+                            className={navigationClass}
+                            to="/trials/create"
                         >
-                            Add Record
+                            Create trial
                         </NavLink>
                     )}
 
-                    {!user && (
+                    {user ? (
+                        <>
+                            <span className="signed-in-user">
+                                {(
+                                    user.display_name
+                                    || user.email
+                                    || user.username
+                                )}
+                            </span>
+
+                            <button
+                                className="logout-button"
+                                type="button"
+                                onClick={onLogout}
+                            >
+                                Log out
+                            </button>
+                        </>
+                    ) : (
                         <NavLink
-                            className={linkClass}
+                            className={navigationClass}
                             to="/login"
                         >
-                            Login
+                            Log in
                         </NavLink>
-                    )}
-
-                    {user && (
-                        <button
-                            className="button-link"
-                            type="button"
-                            onClick={onLogout}
-                        >
-                            Logout
-                        </button>
                     )}
                 </div>
             </nav>

@@ -1,0 +1,40 @@
+{
+  "assignment": "DATA-260 Homework 5",
+  "student": "Sanjana Thummalapalli",
+  "sid4": 7801,
+  "verifySeed": 267801,
+  "timestamp": "2026-10-05T21:52:06.919287+00:00",
+  "passed": true,
+  "checks": [
+    {
+      "name": "required_files",
+      "passed": true,
+      "details": "All required files exist."
+    },
+    {
+      "name": "fault_injection_records",
+      "passed": true,
+      "details": "Records=150, rates=['None']"
+    },
+    {
+      "name": "agent_scenarios",
+      "passed": true,
+      "details": "Scenarios=4, safety_block=True"
+    },
+    {
+      "name": "reflection_word_count",
+      "passed": true,
+      "details": "Words=265"
+    },
+    {
+      "name": "offline_tests",
+      "passed": true,
+      "details": "9/9 tests passed."
+    },
+    {
+      "name": "agent_jsonl_log",
+      "passed": true,
+      "details": "Valid JSONL records=51"
+    }
+  ]
+}

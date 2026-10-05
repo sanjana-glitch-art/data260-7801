@@ -1,0 +1,42 @@
+{
+  "experiment": "hw5_fault_injection",
+  "verifySeed": 267801,
+  "callsPerRate": 50,
+  "totalCalls": 150,
+  "maxAttempts": 3,
+  "timeoutSeconds": 3.0,
+  "backoffSeconds": [
+    0.025,
+    0.05
+  ],
+  "rates": {
+    "0.0": {
+      "injectedFailureRate": 0.0,
+      "callCount": 50,
+      "successCount": 50,
+      "successRatePercent": 100.0,
+      "retriedCallCount": 0,
+      "meanLatencyMs": 8.872,
+      "p99LatencyMs": 12.712
+    },
+    "0.2": {
+      "injectedFailureRate": 0.2,
+      "callCount": 50,
+      "successCount": 49,
+      "successRatePercent": 98.0,
+      "retriedCallCount": 7,
+      "meanLatencyMs": 19.17,
+      "p99LatencyMs": 84.758
+    },
+    "0.5": {
+      "injectedFailureRate": 0.5,
+      "callCount": 50,
+      "successCount": 47,
+      "successRatePercent": 94.0,
+      "retriedCallCount": 23,
+      "meanLatencyMs": 31.251,
+      "p99LatencyMs": 90.977
+    }
+  },
+  "generatedAt": "2026-10-05T21:12:43.353165+00:00"
+}
