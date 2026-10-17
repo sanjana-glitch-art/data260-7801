@@ -1,0 +1,39 @@
+<!-- last-consolidated: 2026-10-17T21:26:16.818069+00:00 -->
+# Durable Conversation Memory
+
+- The student name is Sanjana Thummalapalli.
+- The student SID4 is 7801.
+- The project domain is Clinical Trial Listings.
+- The application manages clinical-trial records.
+- The backend uses FastAPI.
+- The document database uses MongoDB.
+- The MongoDB database is named s7801_doc.
+- The local model is qwen3:4b.
+- The application uses the existing ModelClient adapter.
+- The API runs locally on port 8601.
+- The student prefers trials with Recruiting status.
+- The student prefers university-sponsored trials.
+- San Jose State University is a relevant sponsor.
+- The student wants concise assistant responses.
+- The assistant must preserve durable user preferences.
+- Short-term memory stores recent conversation turns.
+- Long-term summaries preserve older conversation context.
+- Episodic memory stores searchable durable facts.
+- Sentence-transformer embeddings support retrieval.
+- The embedding model is all-MiniLM-L6-v2.
+- Memory records include user and session identifiers.
+- Session summaries are updated periodically.
+- Lifetime summaries combine information across sessions.
+- MongoDB memory persists after application restarts.
+- MEMORY.md stores inspectable durable facts.
+- AGENT.md stores durable project instructions.
+- Memory consolidation merges duplicate facts.
+- Memory consolidation must document contradictions.
+- The assistant must not reveal private credentials.
+- The assistant must not expose submitter email addresses.
+- Invalid MongoDB documents must be rejected.
+- Trial phase values must follow the allowed enumeration.
+- Trial status values must follow the allowed enumeration.
+- The chat API records user and assistant messages.
+- Additional retained facts from consolidation: Memory probes measure recall quality from one to five. | The short-term experiment tests N values 4, 12, and 30. | The compression policy removes redundant prompt content. | Compression should retain durable user preferences. | Experiment results are stored under reports/hw06/raw. | The recommended short-term setting is N equals 12. | The N equals 12 probe-quality score is 4.2. | The compression policy saved 11.83 percent of prompt tokens. | The system must remain reproducible using documented commands. | CONTRADICTION RESOLVED: Phase II is the current preferred trial phase; the Phase III preference is retained as an outdated conflict. | CONTRADICTION RESOLVED: San Jose is the current preferred study location; Santa Clara is retained as an outdated conflicting location. | CONTRADICTION RESOLVED: Session summaries are generated every five user messages; the ten-message interval is retained as outdated.
+- Remember that the preferred production memory configuration is SHORT_TERM_N equals 12.
