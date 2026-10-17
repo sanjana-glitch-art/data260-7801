@@ -1,0 +1,11 @@
+timestamp,user_id,session_id,short_term_n,short_term_count,episodic_top_k,episodic_fact_count,prompt_tokens,completion_tokens,total_tokens,system_primer_tokens,long_term_summary_tokens,short_term_tokens,episodic_fact_tokens,latency_ms,session_summary_created,lifetime_summary_created
+2026-10-17T19:22:12.000033Z,hw6-demo-user,hw6-ten-message-demo,12,0,3,0,144,256,400,75,13,2,2,32509.632,False,False
+2026-10-17T19:22:24.101223Z,hw6-demo-user,hw6-ten-message-demo,12,2,3,1,234,256,490,75,13,82,29,12001.652,False,False
+2026-10-17T19:22:39.371085Z,hw6-demo-user,hw6-ten-message-demo,12,4,3,2,531,256,787,75,13,421,50,15251.171,False,False
+2026-10-17T19:22:55.721465Z,hw6-demo-user,hw6-ten-message-demo,12,6,3,3,830,256,1086,75,13,778,71,16314.037,False,False
+2026-10-17T19:23:29.327546Z,hw6-demo-user,hw6-ten-message-demo,12,8,3,3,1103,256,1359,75,13,1141,71,33573.966,True,False
+2026-10-17T19:23:53.182788Z,hw6-demo-user,hw6-ten-message-demo,12,10,3,3,1552,256,1808,75,257,1447,71,23789.364,False,False
+2026-10-17T19:24:13.101912Z,hw6-demo-user,hw6-ten-message-demo,12,12,3,3,1817,256,2073,75,257,1751,66,19907.344,False,False
+2026-10-17T19:24:44.172821Z,hw6-demo-user,hw6-ten-message-demo,12,12,3,3,2033,256,2289,75,257,2011,71,31020.722,False,False
+2026-10-17T19:25:13.093538Z,hw6-demo-user,hw6-ten-message-demo,12,12,3,3,2038,256,2294,75,257,2009,74,28824.827,False,False
+2026-10-17T19:25:55.987281Z,hw6-demo-user,hw6-ten-message-demo,12,12,3,3,1026,256,1282,75,257,1967,71,42881.468,True,True

@@ -1,0 +1,41 @@
+services:
+  mongodb:
+    image: mongo:7
+    container_name: s7801-mongodb
+    restart: unless-stopped
+
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: s7801_app
+      MONGO_INITDB_ROOT_PASSWORD: s7801_mongo_7801
+      MONGO_INITDB_DATABASE: s7801_doc
+
+    ports:
+      - "27017:27017"
+
+    volumes:
+      - s7801_mongodb_data:/data/db
+
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mongosh",
+          "--quiet",
+          "--username",
+          "s7801_app",
+          "--password",
+          "s7801_mongo_7801",
+          "--authenticationDatabase",
+          "admin",
+          "--eval",
+          "db.adminCommand('ping')"
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+
+volumes:
+  s7801_mongodb_data:
+    name: s7801_mongodb_data

@@ -1,0 +1,129 @@
+{
+  "experiment": "hw6_fixed_30_message_conversation",
+  "student": "Sanjana Thummalapalli",
+  "sid4": 7801,
+  "verify_seed": 267801,
+  "message_count": 30,
+  "messages": [
+    {
+      "turn": 1,
+      "message": "My name is Sanjana, and I am building a clinical-trial listing application."
+    },
+    {
+      "turn": 2,
+      "message": "My preferred clinical trial phase is Phase II."
+    },
+    {
+      "turn": 3,
+      "message": "My preferred recruitment status is Recruiting."
+    },
+    {
+      "turn": 4,
+      "message": "I prefer clinical trials sponsored by universities."
+    },
+    {
+      "turn": 5,
+      "message": "San Jose State University is a sponsor relevant to my work."
+    },
+    {
+      "turn": 6,
+      "message": "The application must never reveal private submitter email addresses."
+    },
+    {
+      "turn": 7,
+      "message": "I am especially interested in clinical studies about sleep quality."
+    },
+    {
+      "turn": 8,
+      "message": "The main study I am tracking examines sleep and academic performance."
+    },
+    {
+      "turn": 9,
+      "message": "I want answers to be concise and contain no more than five bullet points."
+    },
+    {
+      "turn": 10,
+      "message": "Please acknowledge the application preferences I have provided so far."
+    },
+    {
+      "turn": 11,
+      "message": "Clinical-trial records include a title, description, phase, recruitment status, and start date."
+    },
+    {
+      "turn": 12,
+      "message": "The trial title is the primary short-text field in my document model."
+    },
+    {
+      "turn": 13,
+      "message": "The trial description is optional and may contain additional study information."
+    },
+    {
+      "turn": 14,
+      "message": "Recruitment status is stored as a constrained category."
+    },
+    {
+      "turn": 15,
+      "message": "Trial phase is also stored as a constrained category."
+    },
+    {
+      "turn": 16,
+      "message": "MongoDB stores the document-oriented clinical-trial records."
+    },
+    {
+      "turn": 17,
+      "message": "MySQL continues to store the relational clinical-trial and sponsor records."
+    },
+    {
+      "turn": 18,
+      "message": "Short-term memory should use a sliding window of recent conversation messages."
+    },
+    {
+      "turn": 19,
+      "message": "Long-term memory should summarize important conversation information."
+    },
+    {
+      "turn": 20,
+      "message": "Episodic memory should retrieve relevant facts using embedding similarity."
+    },
+    {
+      "turn": 21,
+      "message": "The local language model used by the application is qwen3:4b."
+    },
+    {
+      "turn": 22,
+      "message": "The application backend runs on port 8601."
+    },
+    {
+      "turn": 23,
+      "message": "The MongoDB database for this assignment is named s7801_doc."
+    },
+    {
+      "turn": 24,
+      "message": "The messages collection stores user and assistant conversation turns."
+    },
+    {
+      "turn": 25,
+      "message": "The summaries collection stores session and lifetime summaries."
+    },
+    {
+      "turn": 26,
+      "message": "The episodes collection stores extracted facts, importance scores, and embeddings."
+    },
+    {
+      "turn": 27,
+      "message": "Validation errors should return clear messages and appropriate HTTP status codes."
+    },
+    {
+      "turn": 28,
+      "message": "Memory experiments should use the same conversation for every short-term window setting."
+    },
+    {
+      "turn": 29,
+      "message": "The final experiment must compare quality, token usage, and latency."
+    },
+    {
+      "turn": 30,
+      "message": "Before the memory probes, briefly confirm that you are ready to answer questions about this conversation."
+    }
+  ]
+}

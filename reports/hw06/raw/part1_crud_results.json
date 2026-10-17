@@ -1,0 +1,184 @@
+{
+  "generated_at": "2026-10-17T18:36:45.354902+00:00",
+  "tests": [
+    {
+      "name": "create valid document",
+      "method": "POST",
+      "url": "http://127.0.0.1:8601/api/document-trials",
+      "expected_status": 201,
+      "actual_status": 201,
+      "passed": true,
+      "response": {
+        "id": "6ad3c03de16146e5ee16edb2",
+        "trial_title": "Memory and Clinical Decision Study",
+        "description": "A study of memory-supported clinical decision workflows.",
+        "trial_phase": "Phase II",
+        "recruitment_status": "Recruiting",
+        "start_date": "2027-02-01T09:00:00Z",
+        "created_at": "2026-10-17T18:36:45.380000Z",
+        "updated_at": "2026-10-17T18:36:45.380000Z"
+      }
+    },
+    {
+      "name": "retrieve all documents",
+      "method": "GET",
+      "url": "http://127.0.0.1:8601/api/document-trials",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true,
+      "response": [
+        {
+          "id": "6ad3c03de16146e5ee16edb2",
+          "trial_title": "Memory and Clinical Decision Study",
+          "description": "A study of memory-supported clinical decision workflows.",
+          "trial_phase": "Phase II",
+          "recruitment_status": "Recruiting",
+          "start_date": "2027-02-01T09:00:00Z",
+          "created_at": "2026-10-17T18:36:45.380000Z",
+          "updated_at": "2026-10-17T18:36:45.380000Z"
+        },
+        {
+          "id": "6ad3bf83e16146e5ee16edb0",
+          "trial_title": "Sleep Quality and Academic Performance Study",
+          "description": "Updated study of sleep quality, concentration, memory, and academic performance among university students.",
+          "trial_phase": "Phase III",
+          "recruitment_status": "Active",
+          "start_date": "2026-11-01T16:00:00Z",
+          "created_at": "2026-10-17T18:33:39.946000Z",
+          "updated_at": "2026-10-17T18:35:32.531000Z"
+        }
+      ]
+    },
+    {
+      "name": "retrieve one document",
+      "method": "GET",
+      "url": "http://127.0.0.1:8601/api/document-trials/6ad3c03de16146e5ee16edb2",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true,
+      "response": {
+        "id": "6ad3c03de16146e5ee16edb2",
+        "trial_title": "Memory and Clinical Decision Study",
+        "description": "A study of memory-supported clinical decision workflows.",
+        "trial_phase": "Phase II",
+        "recruitment_status": "Recruiting",
+        "start_date": "2027-02-01T09:00:00Z",
+        "created_at": "2026-10-17T18:36:45.380000Z",
+        "updated_at": "2026-10-17T18:36:45.380000Z"
+      }
+    },
+    {
+      "name": "update document",
+      "method": "PUT",
+      "url": "http://127.0.0.1:8601/api/document-trials/6ad3c03de16146e5ee16edb2",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true,
+      "response": {
+        "id": "6ad3c03de16146e5ee16edb2",
+        "trial_title": "Memory and Clinical Decision Study",
+        "description": "A study of memory-supported clinical decision workflows.",
+        "trial_phase": "Phase II",
+        "recruitment_status": "Active",
+        "start_date": "2027-02-01T09:00:00Z",
+        "created_at": "2026-10-17T18:36:45.380000Z",
+        "updated_at": "2026-10-17T18:36:45.621000Z"
+      }
+    },
+    {
+      "name": "missing required title",
+      "method": "POST",
+      "url": "http://127.0.0.1:8601/api/document-trials",
+      "expected_status": 422,
+      "actual_status": 422,
+      "passed": true,
+      "response": {
+        "detail": [
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "trial_title"
+            ],
+            "msg": "Field required",
+            "input": {
+              "trial_phase": "Phase II",
+              "start_date": "2027-02-01T09:00:00Z"
+            },
+            "url": "https://errors.pydantic.dev/2.13/v/missing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "invalid enum",
+      "method": "POST",
+      "url": "http://127.0.0.1:8601/api/document-trials",
+      "expected_status": 422,
+      "actual_status": 422,
+      "passed": true,
+      "response": {
+        "detail": [
+          {
+            "type": "enum",
+            "loc": [
+              "body",
+              "trial_phase"
+            ],
+            "msg": "Input should be 'Phase I', 'Phase II', 'Phase III' or 'Phase IV'",
+            "input": "Phase V",
+            "ctx": {
+              "expected": "'Phase I', 'Phase II', 'Phase III' or 'Phase IV'"
+            },
+            "url": "https://errors.pydantic.dev/2.13/v/enum"
+          }
+        ]
+      }
+    },
+    {
+      "name": "invalid date type",
+      "method": "POST",
+      "url": "http://127.0.0.1:8601/api/document-trials",
+      "expected_status": 422,
+      "actual_status": 422,
+      "passed": true,
+      "response": {
+        "detail": [
+          {
+            "type": "datetime_type",
+            "loc": [
+              "body",
+              "start_date"
+            ],
+            "msg": "Input should be a valid datetime",
+            "input": {
+              "invalid": "date"
+            },
+            "url": "https://errors.pydantic.dev/2.13/v/datetime_type"
+          }
+        ]
+      }
+    },
+    {
+      "name": "invalid object ID",
+      "method": "GET",
+      "url": "http://127.0.0.1:8601/api/document-trials/not-a-valid-id",
+      "expected_status": 400,
+      "actual_status": 400,
+      "passed": true,
+      "response": {
+        "detail": "The supplied document ID is not valid."
+      }
+    },
+    {
+      "name": "delete document",
+      "method": "DELETE",
+      "url": "http://127.0.0.1:8601/api/document-trials/6ad3c03de16146e5ee16edb2",
+      "expected_status": 204,
+      "actual_status": 204,
+      "passed": true,
+      "response": null
+    }
+  ],
+  "passed": true
+}

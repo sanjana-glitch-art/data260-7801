@@ -1,0 +1,35 @@
+{
+  "user_id": "hw6-demo-user",
+  "daily_message_counts": [
+    {
+      "date": "2026-10-17",
+      "count": 20
+    }
+  ],
+  "recent_summaries": [
+    {
+      "id": "6ad3cbc3c9920bcac7eb9761",
+      "user_id": "hw6-demo-user",
+      "session_id": null,
+      "scope": "user",
+      "text": "Hmm, the user wants me to condense session summaries into a durable lifetime summary with specific constraints. They've provided some context about Sanjana working on clinical-trial listing applications.\n\nLet me carefully analyze what I have from the memory:\n- Sanj: Working on clinical-trial listing application\n- Preferred phase: Phase II\n- Preferred sponsor: University-sponsored\n- Privacy requirement: Must never reveal private submitter email addresses\n- Interest area: Sleep quality studies\n\nI need to create no more than 8 bullet points that preserve stable preferences, recurring goals, important facts, and unresolved issues. I should merge duplicates and not invent anything.\n\nLooking at the key points:\n1. User identity: Sanjana (clinical-trial listing specialist)\n2. Phase preference: Phase II\n3. Sponsor preference: University-sponsored\n4. Privacy rule: Never disclose private submitter email addresses\n5. Research interest: Sleep quality studies\n\nI don't see any other important facts or unresolved issues mentioned. The memory shows no other preferences or constraints. The sleep quality studies interest is specifically mentioned as",
+      "created_at": "2026-10-17T19:25:55.982000Z"
+    },
+    {
+      "id": "6ad3cbb8c9920bcac7eb9760",
+      "user_id": "hw6-demo-user",
+      "session_id": "hw6-ten-message-demo",
+      "scope": "session",
+      "text": "Okay, let me tackle this step by step. The user is asking for a concise summary of their preferred trial phase, sponsor type, privacy rule, and research interest - all based on the memory I've been working with. \n\nFirst, I'll cross-check the memory against what they've provided:\n- Preferred clinical trial phase: Definitely Phase II (from the initial memory)\n- Preferred sponsor type: University-sponsored (explicitly stated)\n- Privacy rule: Must never reveal private submitter email addresses (clearly specified)\n- Research interest: Sleep quality studies (the memory shows this with high importance)\n\nThe user also mentioned San Jose State University earlier, but that's just an example of a university sponsor - not the general preference type. And they're tracking a sleep-academic performance study, but that's new information beyond the core preferences they've established.\n\nI need to be careful not to add any",
+      "created_at": "2026-10-17T19:25:44.717000Z"
+    },
+    {
+      "id": "6ad3cb31c9920bcac7eb9750",
+      "user_id": "hw6-demo-user",
+      "session_id": "hw6-ten-message-demo",
+      "scope": "session",
+      "text": "Hmm, the user wants me to summarize a clinical-trial assistant conversation with specific constraints. I need to be careful not to invent facts and stick strictly to the provided text.\n\nLooking at the conversation history: Sanjana is working on a clinical-trial listing application. She first specified her preferred phase is Phase II. Then she mentioned she prefers university-sponsored studies. Later she added that the application must never reveal private submitter email addresses. Finally she expressed interest in sleep quality studies.\n\nThe key points I need to preserve:\n- User identity: Sanjana (working on clinical-trial listing)\n- Phase preference: Phase II\n- Sponsor preference: University-sponsored\n- Privacy requirement: Never reveal private submitter email addresses\n- Interest area: Sleep quality studies\n\nI should note that the memory shows no relevant information about sleep quality studies specifically - that's important context. Also the privacy requirement is",
+      "created_at": "2026-10-17T19:23:29.307000Z"
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "experiment": "hw6_memory_cost",
+  "student": "Sanjana Thummalapalli",
+  "sid4": 7801,
+  "verifySeed": 267801,
+  "model": "qwen3:4b",
+  "systemPrimerApproxTokens": 101,
+  "conversationMessageCount": 30,
+  "probeCount": 5,
+  "configurations": {
+    "SHORT_TERM_N=4": {
+      "setting": "SHORT_TERM_N=4",
+      "shortTermN": 4,
+      "compression": false,
+      "conversationTurns": 30,
+      "probeCount": 5,
+      "meanPromptTokensPerTurn": 869.433,
+      "meanCompletionTokensPerTurn": 160.0,
+      "meanLatencyMs": 12144.905,
+      "meanProbeQuality": 3.8,
+      "estimatedInputTokensPerConversation": 26083.0,
+      "estimatedOutputTokensPerConversation": 4800.0,
+      "estimatedCostPerConversationUsd": 0.050083,
+      "estimatedCostFor10000ConversationsUsd": 500.83
+    },
+    "SHORT_TERM_N=12": {
+      "setting": "SHORT_TERM_N=12",
+      "shortTermN": 12,
+      "compression": false,
+      "conversationTurns": 30,
+      "probeCount": 5,
+      "meanPromptTokensPerTurn": 1479.4,
+      "meanCompletionTokensPerTurn": 160.0,
+      "meanLatencyMs": 17831.934,
+      "meanProbeQuality": 4.2,
+      "estimatedInputTokensPerConversation": 44382.0,
+      "estimatedOutputTokensPerConversation": 4800.0,
+      "estimatedCostPerConversationUsd": 0.068382,
+      "estimatedCostFor10000ConversationsUsd": 683.82
+    },
+    "SHORT_TERM_N=30": {
+      "setting": "SHORT_TERM_N=30",
+      "shortTermN": 30,
+      "compression": false,
+      "conversationTurns": 30,
+      "probeCount": 5,
+      "meanPromptTokensPerTurn": 1059.467,
+      "meanCompletionTokensPerTurn": 160.0,
+      "meanLatencyMs": 12478.687,
+      "meanProbeQuality": 1.4,
+      "estimatedInputTokensPerConversation": 31784.0,
+      "estimatedOutputTokensPerConversation": 4800.0,
+      "estimatedCostPerConversationUsd": 0.055784,
+      "estimatedCostFor10000ConversationsUsd": 557.84
+    },
+    "compression_policy": {
+      "setting": "compression_policy",
+      "shortTermN": 30,
+      "compression": true,
+      "conversationTurns": 30,
+      "probeCount": 5,
+      "meanPromptTokensPerTurn": 934.167,
+      "meanCompletionTokensPerTurn": 160.0,
+      "meanLatencyMs": 12065.704,
+      "meanProbeQuality": 3.8,
+      "estimatedInputTokensPerConversation": 28025.0,
+      "estimatedOutputTokensPerConversation": 4800.0,
+      "estimatedCostPerConversationUsd": 0.052025,
+      "estimatedCostFor10000ConversationsUsd": 520.25
+    }
+  },
+  "compressionComparison": {
+    "policy": "Keep the four newest messages and compress durable older user facts into deduplicated bullets.",
+    "baselineSetting": "SHORT_TERM_N=30",
+    "baselineMeanPromptTokens": 1059.467,
+    "compressedMeanPromptTokens": 934.167,
+    "tokenSavingsPercent": 11.83,
+    "baselineProbeQuality": 1.4,
+    "compressedProbeQuality": 3.8,
+    "probeQualityChange": 2.4
+  },
+  "bestSetting": "SHORT_TERM_N=12",
+  "worstSetting": "SHORT_TERM_N=30",
+  "selectionMethod": "Best prioritizes higher probe quality and then lower prompt tokens. Worst prioritizes lower probe quality and then higher prompt tokens.",
+  "pricing": {
+    "inputPerMillionTokensUsd": 1,
+    "outputPerMillionTokensUsd": 5
+  },
+  "generatedAt": "2026-10-17T20:45:54.591939+00:00"
+}

@@ -1,0 +1,317 @@
+[
+  {
+    "setting": "SHORT_TERM_N=4",
+    "probe_id": "probe_1",
+    "question": "What clinical trial phase and recruitment status do I prefer?",
+    "answer": "We are given a current user message: \"What clinical trial phase and recruitment status do I prefer?\"\n\nWe must answer directly without describing reasoning. We can only use the supplied memory when it is relevant.\n\nThe supplied memory (RELEVANT EPISODIC FACTS) has:\n- My preferred clinical trial phase is Phase II. (importance=0.75, similarity=0.714)\n- Clinical-trial records include a title, description, phase, recruitment status, and start date. (importance=0.75, similarity=0.660)\n- I prefer clinical trials sponsored by universities. (importance=0.75, similarity=0.610)\n\nThe user is asking about two specific preferences: \n1. Clinical trial",
+    "score": 3,
+    "matched_keywords": [
+      "Phase II"
+    ],
+    "missing_keywords": [
+      "Recruiting"
+    ],
+    "coverage": 0.5,
+    "prompt_tokens": 998,
+    "latency_ms": 19409.082
+  },
+  {
+    "setting": "SHORT_TERM_N=4",
+    "probe_id": "probe_2",
+    "question": "What type of sponsor do I prefer, and which university sponsor is relevant to my work?",
+    "answer": "We are given a current user message: \"What type of sponsor do I prefer, and which university sponsor is relevant to my work?\"\n\nWe must answer directly without describing reasoning. We can only use the supplied memory when it is relevant.\n\nThe supplied memory (RELEVANT EPISODIC FACTS) has:\n- San Jose State University is a sponsor relevant to my work. (importance=0.75, similarity=0.673)\n- I prefer clinical trials sponsored by universities. (importance=0.75, similarity=0.446)\n- My name is Sanjana, and I am building a clinical-trial listing application. (importance=0.75, similarity=0.231)\n\nThe user is asking two",
+    "score": 5,
+    "matched_keywords": [
+      "university",
+      "San Jose State University"
+    ],
+    "missing_keywords": [],
+    "coverage": 1.0,
+    "prompt_tokens": 1007,
+    "latency_ms": 10590.513
+  },
+  {
+    "setting": "SHORT_TERM_N=4",
+    "probe_id": "probe_3",
+    "question": "What privacy rule must the clinical-trial application follow?",
+    "answer": "We are given a current user message: \"What privacy rule must the clinical-trial application follow?\"\n\nWe must answer directly without describing reasoning. We can only use the supplied memory when it is relevant.\n\nThe supplied memory (RELEVANT EPISODIC FACTS) has:\n- The trial description is optional and may contain additional study information. (importance=0.75, similarity=0.558)\n- My name is Sanjana, and I am building a clinical-trial listing application. (importance=0.75, similarity=0.535)\n- Clinical-trial records include a title, description, phase, recruitment status, and start date. (importance=0.75, similarity=0.517)\n\nNone",
+    "score": 1,
+    "matched_keywords": [],
+    "missing_keywords": [
+      "submitter",
+      "email",
+      "not reveal"
+    ],
+    "coverage": 0.0,
+    "prompt_tokens": 1011,
+    "latency_ms": 9666.77
+  },
+  {
+    "setting": "SHORT_TERM_N=4",
+    "probe_id": "probe_4",
+    "question": "What research topic and main study am I interested in?",
+    "answer": "We are given a current user message: \"What research topic and main study am I interested in?\"\n\nWe must answer directly without describing reasoning. We can only use the supplied memory when it is relevant.\n\nThe supplied memory (RELEVANT EPISODIC FACTS) has:\n- The main study I am tracking examines sleep and academic performance. (importance=0.75, similarity=0.403)\n- I am especially interested in clinical studies about sleep quality. (importance=0.55, similarity=0.395)\n- I prefer clinical trials sponsored by universities. (importance=0.75, similarity=0.333)\n\nThe user is asking about the research topic and main study they are interested in.\n\nFrom the memory",
+    "score": 5,
+    "matched_keywords": [
+      "sleep",
+      "quality",
+      "academic performance"
+    ],
+    "missing_keywords": [],
+    "coverage": 1.0,
+    "prompt_tokens": 993,
+    "latency_ms": 8444.699
+  },
+  {
+    "setting": "SHORT_TERM_N=4",
+    "probe_id": "probe_5",
+    "question": "How should you format answers for me?",
+    "answer": "We are given a current user message: \"How should you format answers for me?\"\n\nWe must answer directly without describing reasoning. We can only use the supplied memory when it is relevant.\n\nThe supplied memory (RELEVANT EPISODIC FACTS) has:\n- I want answers to be concise and contain no more than five bullet points. (importance=0.55, similarity=0.343)\n- My name is Sanjana, and I am building a clinical-trial listing application. (importance=0.75, similarity=0.154)\n- The trial title is the primary short-text field in my document model. (importance=0.75, similarity=0.148)\n\nThe user is asking about the",
+    "score": 5,
+    "matched_keywords": [
+      "concise",
+      "five",
+      "bullet"
+    ],
+    "missing_keywords": [],
+    "coverage": 1.0,
+    "prompt_tokens": 1006,
+    "latency_ms": 8654.136
+  },
+  {
+    "setting": "SHORT_TERM_N=12",
+    "probe_id": "probe_1",
+    "question": "What clinical trial phase and recruitment status do I prefer?",
+    "answer": "We are given a current user message: \"What clinical trial phase and recruitment status do I prefer?\"\n\nWe must answer directly without describing reasoning. We can only use the supplied memory when relevant.\n\nFrom the long-term memory session summary (as provided in the problem description), we have:\n\n1. User introduced herself: \"My name is Sanjana, and I am building a clinical-trial listing application.\"\n2. User stated: \"My preferred clinical trial phase is Phase II.\"\n3. User stated: \"My preferred recruitment status is Recruiting.\"\n4. User stated: \"I prefer clinical trials sponsored by universities.\"\n5. User stated: \"San Jose State University is a sponsor relevant to my work.\"\n\nAlso, in the RELEVANT EPISODIC FACTS section, we have:",
+    "score": 5,
+    "matched_keywords": [
+      "Phase II",
+      "Recruiting"
+    ],
+    "missing_keywords": [],
+    "coverage": 1.0,
+    "prompt_tokens": 1713,
+    "latency_ms": 21945.747
+  },
+  {
+    "setting": "SHORT_TERM_N=12",
+    "probe_id": "probe_2",
+    "question": "What type of sponsor do I prefer, and which university sponsor is relevant to my work?",
+    "answer": "We are given a current user message: \"What type of sponsor do I prefer, and which university sponsor is relevant to my work?\"\n\nWe must use the supplied memory only when relevant. The memory we have is from the long-term memory session summary and the RELEVANT EPISODIC FACTS.\n\nFrom the RELEVANT EPISODIC FACTS (which are the most important facts with high importance scores):\n- \"I prefer clinical trials sponsored by universities.\" (importance=0.75)\n- \"San Jose State University is a sponsor relevant to my work.\" (importance=0.75)\n\nAlso, from the long-term memory session summary (the initial description):\n- User introduced herself: \"My name is Sanjana, and I am building a clinical-tr",
+    "score": 5,
+    "matched_keywords": [
+      "university",
+      "San Jose State University"
+    ],
+    "missing_keywords": [],
+    "coverage": 1.0,
+    "prompt_tokens": 1722,
+    "latency_ms": 9877.469
+  },
+  {
+    "setting": "SHORT_TERM_N=12",
+    "probe_id": "probe_3",
+    "question": "What privacy rule must the clinical-trial application follow?",
+    "answer": "We are given a current user message: \"What privacy rule must the clinical-trial application follow?\"\n\nWe must use the supplied memory only when relevant. The memory provided in the problem (LONG-TERM MEMORY and SHORT-TERM CONVERSATION) does not contain any specific information about privacy rules for the clinical-trial application. \n\nLooking at the memory:\n- The long-term memory session summary describes Sanjana building a clinical-trial listing app with preferences (Phase II, Recruiting, university sponsors, SJU relevant).\n- The short-term conversation messages are about the system's memory structure but don't mention privacy rules.\n\nAdditionally, the RELEVANT EPISODIC FACTS section has:\n- The trial description is optional and may contain additional study information. (importance=0.7",
+    "score": 1,
+    "matched_keywords": [],
+    "missing_keywords": [
+      "submitter",
+      "email",
+      "not reveal"
+    ],
+    "coverage": 0.0,
+    "prompt_tokens": 1726,
+    "latency_ms": 9801.607
+  },
+  {
+    "setting": "SHORT_TERM_N=12",
+    "probe_id": "probe_4",
+    "question": "What research topic and main study am I interested in?",
+    "answer": "We are given a current user message: \"What research topic and main study am I interested in?\"\n\nWe must use the supplied memory only when relevant. The memory provided in the problem (the long-term memory session summary) and the RELEVANT EPISODIC FACTS section are the only sources.\n\nFrom the RELEVANT EPISODIC FACTS section (which is part of the memory):\n- The main study I am tracking examines sleep and academic performance. (importance=0.75, similarity=0.403)\n- I am especially interested in clinical studies about sleep quality. (importance=0.55, similarity=0.395)\n- I prefer clinical trials sponsored by universities. (importance=0.75, similarity=",
+    "score": 5,
+    "matched_keywords": [
+      "sleep",
+      "quality",
+      "academic performance"
+    ],
+    "missing_keywords": [],
+    "coverage": 1.0,
+    "prompt_tokens": 1708,
+    "latency_ms": 9622.587
+  },
+  {
+    "setting": "SHORT_TERM_N=12",
+    "probe_id": "probe_5",
+    "question": "How should you format answers for me?",
+    "answer": "Okay, the user is asking about how to format answers for them. Let me check the memory to see what's relevant.\n\nFrom the long-term memory session summary:\n- User is Sanjana building a clinical-trial listing app\n- Preferences: Phase II, Recruiting status, university sponsors (with SJU relevant)\n- Lifetime summary mentions no more than five concise bullet points\n\nThe user's current message is \"How should you format answers for me?\" - they want to know the answer format rules.\n\nLooking at the memory, there's a specific instruction: \"Answer directly without describing your reasoning process. Use the supplied memory only when it is relevant to the current request. Do not invent clinical facts. Clearly say when requested information is not available. Do not reveal private submitter contact information.",
+    "score": 5,
+    "matched_keywords": [
+      "concise",
+      "five",
+      "bullet"
+    ],
+    "missing_keywords": [],
+    "coverage": 1.0,
+    "prompt_tokens": 1721,
+    "latency_ms": 9744.083
+  },
+  {
+    "setting": "SHORT_TERM_N=30",
+    "probe_id": "probe_1",
+    "question": "What clinical trial phase and recruitment status do I prefer?",
+    "answer": "Okay, let me tackle this step by step. The user is asking about their preferred clinical trial phase and recruitment status. I need to check the memory for relevant information.\n\nFirst, I'll look at the memory section provided. The relevant episodic facts listed are:\n\n1. Clinical-trial records include a title, description, phase, recruitment status, and start date. (importance=0.75, similarity=0.561)\n2. My name is Sanjana, and I am building a clinical-trial listing application. (importance=0.75, similarity=0.470)\n3. MongoDB stores the document-oriented clinical-trial records. (importance=0.7)\n\nAdditionally, there's a section labeled \"RELEVANT EP",
+    "score": 1,
+    "matched_keywords": [],
+    "missing_keywords": [
+      "Phase II",
+      "Recruiting"
+    ],
+    "coverage": 0.0,
+    "prompt_tokens": 1026,
+    "latency_ms": 15523.029
+  },
+  {
+    "setting": "SHORT_TERM_N=30",
+    "probe_id": "probe_2",
+    "question": "What type of sponsor do I prefer, and which university sponsor is relevant to my work?",
+    "answer": "Okay, let me tackle this user query step by step. The user is asking two specific questions: \n\n1. What type of sponsor do I prefer?\n2. Which university sponsor is relevant to my work?\n\nFirst, I need to check the memory section provided to see what's relevant here. The memory has several entries with importance and similarity scores. Let me scan through them:\n\n- \"Clinical-trial records include a title, description, phase, recruitment status, and start date.\" (importance=0.75, similarity=0.561) → This is about record structure, not directly relevant to sponsors.\n- \"My name is Sanjana, and I am building a clinical-trial listing application.\" (importance=0.75, similarity=0.",
+    "score": 3,
+    "matched_keywords": [
+      "university"
+    ],
+    "missing_keywords": [
+      "San Jose State University"
+    ],
+    "coverage": 0.5,
+    "prompt_tokens": 1026,
+    "latency_ms": 14700.214
+  },
+  {
+    "setting": "SHORT_TERM_N=30",
+    "probe_id": "probe_3",
+    "question": "What privacy rule must the clinical-trial application follow?",
+    "answer": "Okay, let me tackle this user query. The user is asking: \"What privacy rule must the clinical-trial application follow?\" \n\nFirst, I need to check the memory provided to see if there's any relevant information about privacy rules for the clinical-trial application. The memory section lists several episodic facts with their importance and similarity scores.\n\nLooking at the memory entries:\n\n1. Clinical-trial records include a title, description, phase, recruitment status, and start date. (importance=0.75, similarity=0.561)\n2. My name is Sanjana, and I am building a clinical-trial listing application. (importance=0.75, similarity=0.470)\n3. MongoDB stores the document-oriented clinical-trial",
+    "score": 1,
+    "matched_keywords": [],
+    "missing_keywords": [
+      "submitter",
+      "email",
+      "not reveal"
+    ],
+    "coverage": 0.0,
+    "prompt_tokens": 1026,
+    "latency_ms": 13776.114
+  },
+  {
+    "setting": "SHORT_TERM_N=30",
+    "probe_id": "probe_4",
+    "question": "What research topic and main study am I interested in?",
+    "answer": "Okay, let me tackle this step by step. The user is asking about their research topic and main study interest based on the supplied memory. \n\nFirst, I need to carefully check what's in the memory section. From the conversation history provided earlier, there are several relevant episodic facts listed with their importance and similarity scores:\n\n1. Clinical-trial records include a title, description, phase, recruitment status, and start date. (importance=0.75, similarity=0.561)\n2. My name is Sanjana, and I am building a clinical-trial listing application. (importance=0.75, similarity=0.470)\n3. MongoDB stores the document-oriented clinical-trial records. (importance=0.7)",
+    "score": 1,
+    "matched_keywords": [],
+    "missing_keywords": [
+      "sleep",
+      "quality",
+      "academic performance"
+    ],
+    "coverage": 0.0,
+    "prompt_tokens": 1026,
+    "latency_ms": 14219.113
+  },
+  {
+    "setting": "SHORT_TERM_N=30",
+    "probe_id": "probe_5",
+    "question": "How should you format answers for me?",
+    "answer": "Okay, let me tackle this step by step. The user is asking about how to format answers, specifically referencing the \"supplied memory\" and the context of clinical-trial conversations. \n\nFirst, I need to recall what's in the memory section from the conversation history provided earlier. The relevant episodic facts listed are:\n\n1. Clinical-trial records include a title, description, phase, recruitment status, and start date. (importance=0.75, similarity=0.561)\n2. My name is Sanjana, and I am building a clinical-trial listing application. (importance=0.75, similarity=0.470)\n3. MongoDB stores the document-oriented clinical-trial records. (importance=0.7)",
+    "score": 1,
+    "matched_keywords": [],
+    "missing_keywords": [
+      "concise",
+      "five",
+      "bullet"
+    ],
+    "coverage": 0.0,
+    "prompt_tokens": 1026,
+    "latency_ms": 12875.651
+  },
+  {
+    "setting": "compression_policy",
+    "probe_id": "probe_1",
+    "question": "What clinical trial phase and recruitment status do I prefer?",
+    "answer": "We are given a current user message: \"What clinical trial phase and recruitment status do I prefer?\"\n\nWe must use the supplied memory only when relevant. The memory provided in the \"RELEVANT EPISODIC FACTS\" section is:\n\n- My preferred clinical trial phase is Phase II. (importance=0.75, similarity=0.714)\n- Clinical-trial records include a title, description, phase, recruitment status, and start date. (importance=0.75, similarity=0.660)\n- I prefer clinical trials sponsored by universities. (importance=0.75, similarity=0.610)\n\nThe user is asking specifically about the preferred clinical trial phase and recruitment status.\n\nFrom the memory, we have",
+    "score": 3,
+    "matched_keywords": [
+      "Phase II"
+    ],
+    "missing_keywords": [
+      "Recruiting"
+    ],
+    "coverage": 0.5,
+    "prompt_tokens": 1008,
+    "latency_ms": 15308.088
+  },
+  {
+    "setting": "compression_policy",
+    "probe_id": "probe_2",
+    "question": "What type of sponsor do I prefer, and which university sponsor is relevant to my work?",
+    "answer": "We are given a current user message: \"What type of sponsor do I prefer, and which university sponsor is relevant to my work?\"\n\nWe must use the supplied memory only when relevant. The memory provided (in the \"RELEVANT EPISODIC FACTS\" section) has three facts:\n\n1. \"San Jose State University is a sponsor relevant to my work.\" (importance=0.75, similarity=0.673)\n2. \"I prefer clinical trials sponsored by universities.\" (importance=0.75, similarity=0.446)\n3. \"My name is Sanjana, and I am building a clinical-trial listing application.\" (importance=0.75, similarity=0.231)\n\nThe user",
+    "score": 5,
+    "matched_keywords": [
+      "university",
+      "San Jose State University"
+    ],
+    "missing_keywords": [],
+    "coverage": 1.0,
+    "prompt_tokens": 1017,
+    "latency_ms": 8738.549
+  },
+  {
+    "setting": "compression_policy",
+    "probe_id": "probe_3",
+    "question": "What privacy rule must the clinical-trial application follow?",
+    "answer": "We are given a current user message: \"What privacy rule must the clinical-trial application follow?\"\n\nWe must use the supplied memory only when relevant to this current request.\n\nLooking at the memory sections:\n\nLONG-TERM MEMORY (Session summary):\n- We are given a conversation between a user and an assistant about a clinical-trial application.\n- The user has been providing specific details about the application's configuration.\n\nRELEVANT EPISODIC FACTS:\n- The trial description is optional and may contain additional study information. (importance=0.75, similarity=0.558)\n- My name is Sanjana, and I am building a clinical-trial listing application. (importance=0.75, similarity=0.535)\n- Clinical-tr",
+    "score": 1,
+    "matched_keywords": [],
+    "missing_keywords": [
+      "submitter",
+      "email",
+      "not reveal"
+    ],
+    "coverage": 0.0,
+    "prompt_tokens": 1021,
+    "latency_ms": 9423.257
+  },
+  {
+    "setting": "compression_policy",
+    "probe_id": "probe_4",
+    "question": "What research topic and main study am I interested in?",
+    "answer": "We are given a current user message: \"What research topic and main study am I interested in?\"\n\nWe must use the supplied memory only when relevant to this current request.\n\nLooking at the memory:\n\nThe RELEVANT EPISODIC FACTS section states:\n- The main study I am tracking examines sleep and academic performance. (importance=0.75, similarity=0.403)\n- I am especially interested in clinical studies about sleep quality. (importance=0.55, similarity=0.395)\n- I prefer clinical trials sponsored by universities. (importance=0.75, similarity=0.333)\n\nAlso, from the LONG-TERM MEMORY (session summary) we have:\n- Sanjana is building a clinical",
+    "score": 5,
+    "matched_keywords": [
+      "sleep",
+      "quality",
+      "academic performance"
+    ],
+    "missing_keywords": [],
+    "coverage": 1.0,
+    "prompt_tokens": 1003,
+    "latency_ms": 8356.418
+  },
+  {
+    "setting": "compression_policy",
+    "probe_id": "probe_5",
+    "question": "How should you format answers for me?",
+    "answer": "Okay, let me tackle this step by step. The user is asking about how answers should be formatted. I need to check the supplied memory to see what's relevant here.\n\nFirst, looking at the memory sections provided:\n\nIn the LONG-TERM MEMORY section, there's a session summary that mentions Sanjana is building a clinical-trial app with specific preferences like Phase II trials, \"Recruiting\" status, university-sponsored (especially San Jose State), sleep quality focus, and email privacy.\n\nThen in the RELEVANT EPISODIC FACTS section, it says: \"I want answers to be concise and contain no more than five bullet points.\" (importance=0.55, similarity=0.343) and \"My name is Sanjana, and",
+    "score": 5,
+    "matched_keywords": [
+      "concise",
+      "five",
+      "bullet"
+    ],
+    "missing_keywords": [],
+    "coverage": 1.0,
+    "prompt_tokens": 1016,
+    "latency_ms": 8914.261
+  }
+]

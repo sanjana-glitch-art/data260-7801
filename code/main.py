@@ -16,7 +16,16 @@ from code.sponsors_api import (
 from code.trials_api import (
     router as trials_router,
 )
-
+from code.mongo_database import (
+    MONGODB_DATABASE,
+    ping_mongodb,
+)
+from code.mongo_trials_api import (
+    router as mongo_trials_router,
+)
+from code.memory_api import (
+    router as memory_router,
+)
 
 PORT_BASE = 8601
 
@@ -26,9 +35,10 @@ app = FastAPI(
     description=(
         "DATA-260 Clinical Trial Listing service "
         "with React, Redux Toolkit, FastAPI, "
-        "MySQL, MCP tools, and server-side sessions."
+        "MySQL, MongoDB, MCP tools, memory, "
+        "and local Ollama integration."
     ),
-    version="5.0.0",
+    version="6.0.0",
 )
 
 
@@ -62,6 +72,14 @@ app.include_router(
     trials_router
 )
 
+app.include_router(
+    mongo_trials_router
+)
+
+app.include_router(
+    memory_router
+)
+
 # Retained from Homework 4 for reproducibility.
 app.include_router(
     performance_router
@@ -77,13 +95,13 @@ def read_root() -> dict[str, str]:
             "Clinical Trial Listing API"
         ),
         "assignment": (
-            "DATA 260 Homework 5"
+            "DATA 260 Homework 6"
         ),
         "student": (
             "Sanjana Thummalapalli"
         ),
         "sid4": "7801",
-        "version": "5.0.0",
+        "version": "6.0.0",
         "documentation": "/docs",
         "frontend": (
             "http://127.0.0.1:5173"
@@ -98,9 +116,33 @@ def health_check() -> dict[str, str]:
     return {
         "status": "ok",
         "database": "s7801_rel",
-        "assignment": "hw5",
+        "assignment": "hw6",
     }
 
+@app.get("/health/mongodb")
+def mongodb_health_check() -> dict[str, str]:
+    """Check the Homework 6 MongoDB connection."""
+
+    try:
+        connected = ping_mongodb()
+    except Exception as error:
+        return {
+            "status": "error",
+            "database": MONGODB_DATABASE,
+            "detail": (
+                f"{type(error).__name__}: "
+                f"{error}"
+            ),
+        }
+
+    return {
+        "status": (
+            "ok"
+            if connected
+            else "error"
+        ),
+        "database": MONGODB_DATABASE,
+    }
 
 if __name__ == "__main__":
     uvicorn.run(

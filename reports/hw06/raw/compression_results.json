@@ -1,0 +1,10 @@
+{
+  "policy": "Keep the four newest messages and compress durable older user facts into deduplicated bullets.",
+  "baselineSetting": "SHORT_TERM_N=30",
+  "baselineMeanPromptTokens": 1059.467,
+  "compressedMeanPromptTokens": 934.167,
+  "tokenSavingsPercent": 11.83,
+  "baselineProbeQuality": 1.4,
+  "compressedProbeQuality": 3.8,
+  "probeQualityChange": 2.4
+}

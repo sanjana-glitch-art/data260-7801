@@ -1,0 +1,93 @@
+experiment: hw6_memory_probes
+student: Sanjana Thummalapalli
+sid4: 7801
+verify_seed: 267801
+
+scoring_scale:
+  1: "Incorrect, unsupported, or no useful answer."
+  2: "Recalls only a small part of the expected information."
+  3: "Partially correct but misses an important required detail."
+  4: "Correct and complete with only a minor wording or formatting issue."
+  5: "Fully correct, concise, and satisfies every expected criterion."
+
+probes:
+  - id: probe_1
+    question: "What clinical trial phase and recruitment status do I prefer?"
+    expected_criteria:
+      - description: "States that the preferred trial phase is Phase II."
+        keywords:
+          - "Phase II"
+      - description: "States that the preferred recruitment status is Recruiting."
+        keywords:
+          - "Recruiting"
+    scoring_rubric:
+      1: "Neither preference is recalled correctly."
+      2: "One preference is vaguely mentioned but is incorrect or incomplete."
+      3: "Exactly one of the two preferences is recalled correctly."
+      4: "Both preferences are correct, but the response includes a minor unnecessary statement."
+      5: "Clearly and concisely states Phase II and Recruiting."
+
+  - id: probe_2
+    question: "What type of sponsor do I prefer, and which university sponsor is relevant to my work?"
+    expected_criteria:
+      - description: "States that university-sponsored studies are preferred."
+        keywords:
+          - "university"
+      - description: "Identifies San Jose State University as a relevant sponsor."
+        keywords:
+          - "San Jose State University"
+    scoring_rubric:
+      1: "Neither sponsor preference nor university is recalled."
+      2: "Mentions sponsors generally without the expected information."
+      3: "Correctly recalls either the sponsor type or the university."
+      4: "Recalls both facts with a minor wording issue."
+      5: "Clearly states the university-sponsor preference and San Jose State University."
+
+  - id: probe_3
+    question: "What privacy rule must the clinical-trial application follow?"
+    expected_criteria:
+      - description: "States that private submitter email addresses must not be revealed."
+        keywords:
+          - "submitter"
+          - "email"
+          - "not reveal"
+    scoring_rubric:
+      1: "Provides an incorrect or unsafe privacy rule."
+      2: "Mentions privacy without identifying the protected information."
+      3: "Identifies email information but does not clearly prohibit disclosure."
+      4: "Correctly prohibits disclosure with minor unnecessary text."
+      5: "Clearly states that private submitter email addresses must never be revealed."
+
+  - id: probe_4
+    question: "What research topic and main study am I interested in?"
+    expected_criteria:
+      - description: "Mentions an interest in sleep-quality research."
+        keywords:
+          - "sleep"
+          - "quality"
+      - description: "States that the main study examines sleep and academic performance."
+        keywords:
+          - "academic performance"
+    scoring_rubric:
+      1: "Does not recall the research interest."
+      2: "Provides only a vague or unrelated research topic."
+      3: "Recalls sleep research but not the academic-performance study."
+      4: "Recalls both facts with a minor omission."
+      5: "Clearly states the sleep-quality interest and the sleep-and-academic-performance study."
+
+  - id: probe_5
+    question: "How should you format answers for me?"
+    expected_criteria:
+      - description: "States that answers should be concise."
+        keywords:
+          - "concise"
+      - description: "States that answers should contain no more than five bullet points."
+        keywords:
+          - "five"
+          - "bullet"
+    scoring_rubric:
+      1: "Does not recall the requested format."
+      2: "Mentions brevity without a clear formatting rule."
+      3: "Recalls either concise answers or the five-bullet limit."
+      4: "Recalls both requirements with minor unnecessary text."
+      5: "Clearly states that answers must be concise and use no more than five bullet points."
