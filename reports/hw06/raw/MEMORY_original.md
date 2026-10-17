@@ -1,0 +1,56 @@
+<!-- last-consolidated: 2026-10-15T00:00:00Z -->
+- The student name is Sanjana Thummalapalli.
+- The student SID4 is 7801.
+- The project domain is Clinical Trial Listings.
+- The application manages clinical-trial records.
+- The backend uses FastAPI.
+- The document database uses MongoDB.
+- The MongoDB database is named s7801_doc.
+- The local model is qwen3:4b.
+- The application uses the existing ModelClient adapter.
+- The API runs locally on port 8601.
+- The student prefers Phase II clinical trials.
+- The student prefers trials with Recruiting status.
+- The student prefers university-sponsored trials.
+- San Jose State University is a relevant sponsor.
+- The student prefers studies located near San Jose.
+- The student wants concise assistant responses.
+- The assistant must preserve durable user preferences.
+- Short-term memory stores recent conversation turns.
+- Long-term summaries preserve older conversation context.
+- Episodic memory stores searchable durable facts.
+- Sentence-transformer embeddings support retrieval.
+- The embedding model is all-MiniLM-L6-v2.
+- Memory records include user and session identifiers.
+- Session summaries are updated periodically.
+- Lifetime summaries combine information across sessions.
+- MongoDB memory persists after application restarts.
+- MEMORY.md stores inspectable durable facts.
+- AGENT.md stores durable project instructions.
+- Memory consolidation merges duplicate facts.
+- Memory consolidation must document contradictions.
+- The student name is Sanjana Thummalapalli.
+- The project domain is Clinical Trial Listings.
+- The local model is qwen3:4b.
+- The student prefers Phase II clinical trials.
+- The student prefers studies located near San Jose.
+- The backend uses FastAPI.
+- The student prefers Phase III clinical trials.
+- The student prefers studies located near Santa Clara.
+- Session summaries should be generated every five user messages.
+- Session summaries should be generated every ten user messages.
+- The assistant must not reveal private credentials.
+- The assistant must not expose submitter email addresses.
+- Invalid MongoDB documents must be rejected.
+- Trial phase values must follow the allowed enumeration.
+- Trial status values must follow the allowed enumeration.
+- The chat API records user and assistant messages.
+- Memory probes measure recall quality from one to five.
+- The short-term experiment tests N values 4, 12, and 30.
+- The compression policy removes redundant prompt content.
+- Compression should retain durable user preferences.
+- Experiment results are stored under reports/hw06/raw.
+- The recommended short-term setting is N equals 12.
+- The N equals 12 probe-quality score is 4.2.
+- The compression policy saved 11.83 percent of prompt tokens.
+- The system must remain reproducible using documented commands.
