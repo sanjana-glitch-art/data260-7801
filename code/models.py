@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
-from typing import Optional
+from code.database import Base
+from datetime import UTC, datetime
 
 from sqlalchemy import (
     Boolean,
@@ -17,14 +17,12 @@ from sqlalchemy.orm import (
     relationship,
 )
 
-from code.database import Base
-
 
 def utc_now() -> datetime:
     """Return the current UTC time without timezone metadata."""
 
     return datetime.now(
-        timezone.utc
+        UTC
     ).replace(
         tzinfo=None
     )
@@ -39,6 +37,13 @@ class User(Base):
         Integer,
         primary_key=True,
         autoincrement=True,
+    )
+
+    username: Mapped[str] = mapped_column(
+        String(80),
+        unique=True,
+        index=True,
+        nullable=False,
     )
 
     display_name: Mapped[str] = mapped_column(
@@ -58,6 +63,12 @@ class User(Base):
         nullable=False,
     )
 
+    role: Mapped[str] = mapped_column(
+        String(20),
+        nullable=False,
+        default="reader",
+    )
+
     is_active: Mapped[bool] = mapped_column(
         Boolean,
         nullable=False,
@@ -70,7 +81,7 @@ class User(Base):
         default=utc_now,
     )
 
-    sessions: Mapped[list["ServerSession"]] = relationship(
+    sessions: Mapped[list[ServerSession]] = relationship(
         back_populates="user",
         cascade="all, delete-orphan",
     )
@@ -113,7 +124,7 @@ class ServerSession(Base):
         index=True,
     )
 
-    user: Mapped["User"] = relationship(
+    user: Mapped[User] = relationship(
         back_populates="sessions",
     )
 
@@ -160,7 +171,7 @@ class Sponsor(Base):
         onupdate=utc_now,
     )
 
-    trials: Mapped[list["ClinicalTrial"]] = relationship(
+    trials: Mapped[list[ClinicalTrial]] = relationship(
         back_populates="sponsor",
         passive_deletes=True,
     )
@@ -231,7 +242,7 @@ class ClinicalTrial(Base):
         default="Phase I",
     )
 
-    created_by_user_id: Mapped[Optional[int]] = mapped_column(
+    created_by_user_id: Mapped[int | None] = mapped_column(
         ForeignKey(
             "users.id",
             ondelete="SET NULL",
@@ -253,11 +264,11 @@ class ClinicalTrial(Base):
         onupdate=utc_now,
     )
 
-    sponsor: Mapped["Sponsor"] = relationship(
+    sponsor: Mapped[Sponsor] = relationship(
         back_populates="trials",
     )
 
-    sites: Mapped[list["TrialSite"]] = relationship(
+    sites: Mapped[list[TrialSite]] = relationship(
         back_populates="trial",
         cascade="all, delete-orphan",
     )
@@ -303,6 +314,6 @@ class TrialSite(Base):
         nullable=False,
     )
 
-    trial: Mapped["ClinicalTrial"] = relationship(
+    trial: Mapped[ClinicalTrial] = relationship(
         back_populates="sites",
     )

@@ -15,7 +15,7 @@ import CreateRecord from "./pages/CreateRecord";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import UpdateRecord from "./pages/UpdateRecord";
-
+import BikeShare from "./pages/BikeShare";
 import {
     ApiError,
     getCurrentUser,
@@ -198,6 +198,13 @@ function App() {
                             to="/trials/create"
                             replace
                         />
+                    }
+                />
+
+                <Route
+                    path="/bikeshare"
+                    element={
+                        <BikeShare />
                     }
                 />
 

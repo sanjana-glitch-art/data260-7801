@@ -1,0 +1,515 @@
+{
+  "experiment": "hw7_bikeshare_scenarios",
+  "pricing_url": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+  "scenario_count": 2,
+  "all_passed": true,
+  "summaries": [
+    {
+      "scenario_label": "membership_wins",
+      "dataset_row_count": 600,
+      "target_ride_count": 80,
+      "average_duration_minutes": 35.5,
+      "pay_per_use_cost": 509.2,
+      "membership_cost": 19.0,
+      "break_even_rides": 3.81,
+      "decision": "Buy Monthly Membership",
+      "step_count": 7,
+      "total_time_ms": 382.587,
+      "stop_reason": "success",
+      "snapshot_sha256": "58f6a8dd9d4e13dbc8369b828205d9594cc7d7f1632fae002a94f0aa82d3513d",
+      "source_url": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+      "accessed_at": "2026-11-04T21:16:13.235946+00:00"
+    },
+    {
+      "scenario_label": "pay_per_use_wins",
+      "dataset_row_count": 600,
+      "target_ride_count": 3,
+      "average_duration_minutes": 14.0,
+      "pay_per_use_cost": 14.97,
+      "membership_cost": 19.0,
+      "break_even_rides": 3.81,
+      "decision": "Pay Per Ride/Minute",
+      "step_count": 7,
+      "total_time_ms": 306.272,
+      "stop_reason": "success",
+      "snapshot_sha256": "58f6a8dd9d4e13dbc8369b828205d9594cc7d7f1632fae002a94f0aa82d3513d",
+      "source_url": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+      "accessed_at": "2026-11-04T21:16:13.548344+00:00"
+    }
+  ],
+  "scenarios": [
+    {
+      "csv_path": "C:\\Users\\ADS-Research-001\\Desktop\\sanjana\\data260-7801\\reports\\hw07\\cases\\bikeshare_membership_wins.csv",
+      "pricing_url": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+      "scenario_label": "membership_wins",
+      "timeline": [
+        {
+          "step": 1,
+          "tool": "csv_sql",
+          "inputs": {
+            "sql": "Monthly usage summary"
+          },
+          "observation": {
+            "rows": [
+              {
+                "dataset_row_count": 600,
+                "ride_count": 80,
+                "average_duration_minutes": 35.5
+              }
+            ],
+            "row_count": 1,
+            "source": "uploaded.csv"
+          }
+        },
+        {
+          "step": 2,
+          "tool": "csv_sql",
+          "inputs": {
+            "sql": "Weekly usage breakdown"
+          },
+          "observation": {
+            "rows": [
+              {
+                "week_number": 1,
+                "ride_count": 21,
+                "average_duration_minutes": 35.81,
+                "estimated_pay_spend": 135.29,
+                "estimated_membership_spend": 4.75
+              },
+              {
+                "week_number": 2,
+                "ride_count": 21,
+                "average_duration_minutes": 35.19,
+                "estimated_pay_spend": 132.04,
+                "estimated_membership_spend": 4.75
+              },
+              {
+                "week_number": 3,
+                "ride_count": 21,
+                "average_duration_minutes": 35.33,
+                "estimated_pay_spend": 132.77,
+                "estimated_membership_spend": 4.75
+              },
+              {
+                "week_number": 4,
+                "ride_count": 17,
+                "average_duration_minutes": 35.71,
+                "estimated_pay_spend": 109.1,
+                "estimated_membership_spend": 4.75
+              }
+            ],
+            "row_count": 4,
+            "source": "uploaded.csv"
+          }
+        },
+        {
+          "step": 3,
+          "tool": "policy_retriever",
+          "inputs": {
+            "url": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+            "query": "single ride price monthly membership price included ride minutes overage per-minute fee",
+            "k": 8
+          },
+          "observation": {
+            "passage_count": 4,
+            "passages": [
+              {
+                "text": "Machine-readable verification values PAY_PER_RIDE_PRICE_USD=4.99 MONTHLY_MEMBERSHIP_PRICE_USD=19.00 PAY_INCLUDED_MINUTES=30 MEMBERSHIP_INCLUDED_MINUTES=45 OVERAGE_PER_MINUTE_USD=0.25",
+                "source": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+                "score": 0.8182
+              },
+              {
+                "text": "Overage Ride time beyond the included duration costs $0.25 per minute.",
+                "source": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+                "score": 0.4545
+              },
+              {
+                "text": "Citi Bike Pricing Scenario Fixture Citi Bike Pricing Single Ride A single ride costs $4.99 and includes the first 30 minutes.",
+                "source": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+                "score": 0.2727
+              },
+              {
+                "text": "Monthly Membership Monthly membership costs $19.00 and includes rides up to 45 minutes.",
+                "source": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+                "score": 0.2727
+              }
+            ]
+          }
+        },
+        {
+          "step": 4,
+          "tool": "csv_sql",
+          "inputs": {
+            "sql": "Calculate overage minutes"
+          },
+          "observation": {
+            "rows": [
+              {
+                "pay_overage_minutes": 440.0,
+                "membership_overage_minutes": 0.0
+              }
+            ],
+            "row_count": 1,
+            "source": "uploaded.csv"
+          }
+        },
+        {
+          "step": 5,
+          "tool": "calculator",
+          "inputs": {
+            "expression": "(80 * 4.99) + (440.0 * 0.25)",
+            "units": "USD"
+          },
+          "observation": {
+            "value": 509.20000000000005,
+            "units": "USD"
+          }
+        },
+        {
+          "step": 6,
+          "tool": "calculator",
+          "inputs": {
+            "expression": "19.0 + (0.0 * 0.25)",
+            "units": "USD"
+          },
+          "observation": {
+            "value": 19.0,
+            "units": "USD"
+          }
+        },
+        {
+          "step": 7,
+          "tool": "calculator",
+          "inputs": {
+            "expression": "19.0 / 4.99",
+            "units": "rides"
+          },
+          "observation": {
+            "value": 3.8076152304609217,
+            "units": "rides"
+          }
+        }
+      ],
+      "dataset_row_count": 600,
+      "ride_count": 80,
+      "average_duration_minutes": 35.5,
+      "weekly_rows": [
+        {
+          "week_number": 1,
+          "ride_count": 21,
+          "average_duration_minutes": 35.81,
+          "estimated_pay_spend": 135.29,
+          "estimated_membership_spend": 4.75
+        },
+        {
+          "week_number": 2,
+          "ride_count": 21,
+          "average_duration_minutes": 35.19,
+          "estimated_pay_spend": 132.04,
+          "estimated_membership_spend": 4.75
+        },
+        {
+          "week_number": 3,
+          "ride_count": 21,
+          "average_duration_minutes": 35.33,
+          "estimated_pay_spend": 132.77,
+          "estimated_membership_spend": 4.75
+        },
+        {
+          "week_number": 4,
+          "ride_count": 17,
+          "average_duration_minutes": 35.71,
+          "estimated_pay_spend": 109.1,
+          "estimated_membership_spend": 4.75
+        }
+      ],
+      "policy_passages": [
+        {
+          "text": "Machine-readable verification values PAY_PER_RIDE_PRICE_USD=4.99 MONTHLY_MEMBERSHIP_PRICE_USD=19.00 PAY_INCLUDED_MINUTES=30 MEMBERSHIP_INCLUDED_MINUTES=45 OVERAGE_PER_MINUTE_USD=0.25",
+          "source": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+          "score": 0.8182
+        },
+        {
+          "text": "Overage Ride time beyond the included duration costs $0.25 per minute.",
+          "source": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+          "score": 0.4545
+        },
+        {
+          "text": "Citi Bike Pricing Scenario Fixture Citi Bike Pricing Single Ride A single ride costs $4.99 and includes the first 30 minutes.",
+          "source": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+          "score": 0.2727
+        },
+        {
+          "text": "Monthly Membership Monthly membership costs $19.00 and includes rides up to 45 minutes.",
+          "source": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+          "score": 0.2727
+        }
+      ],
+      "policy_text": "Citi Bike Pricing Scenario Fixture Citi Bike Pricing Single Ride A single ride costs $4.99 and includes the first 30 minutes. Monthly Membership Monthly membership costs $19.00 and includes rides up to 45 minutes. Overage Ride time beyond the included duration costs $0.25 per minute. Machine-readable verification values PAY_PER_RIDE_PRICE_USD=4.99 MONTHLY_MEMBERSHIP_PRICE_USD=19.00 PAY_INCLUDED_MINUTES=30 MEMBERSHIP_INCLUDED_MINUTES=45 OVERAGE_PER_MINUTE_USD=0.25",
+      "policy_source": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+      "snapshot": {
+        "source_url": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+        "accessed_at": "2026-11-04T21:16:13.235946+00:00",
+        "sha256": "58f6a8dd9d4e13dbc8369b828205d9594cc7d7f1632fae002a94f0aa82d3513d",
+        "snapshot_path": "C:\\Users\\ADS-Research-001\\Desktop\\sanjana\\data260-7801\\reports\\hw07\\raw\\pricing_snapshots\\membership_wins.txt"
+      },
+      "pricing": {
+        "pay_per_ride_price": 4.99,
+        "monthly_membership_price": 19.0,
+        "overage_per_minute": 0.25,
+        "pay_included_minutes": 30.0,
+        "membership_included_minutes": 45.0
+      },
+      "pay_per_use_cost": 509.2,
+      "membership_cost": 19.0,
+      "break_even_rides": 3.81,
+      "decision": "Buy Monthly Membership",
+      "justification": "The uploaded dataset contains 600 rows, with 80 rides included in this rider scenario. Pay-per-use is estimated at $509.20, while monthly membership plus residual charges is estimated at $19.00. The estimated break-even point is 3.81 rides, compared with 80 actual rides. Therefore, the recommendation is Buy Monthly Membership, with estimated savings of $490.20. Pricing evidence was retrieved from http://127.0.0.1:55301/bikeshare_clean_pricing.html.",
+      "assumptions": [
+        "Rows with analysis_target=true represent the rider being evaluated; remaining rows provide the required dataset context.",
+        "Each target row represents one completed ride during the analyzed month.",
+        "Taxes, promotions, credits, e-bike fees, and station availability are excluded unless explicitly stated in the retrieved policy."
+      ],
+      "citations": [
+        {
+          "source": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+          "text": "Machine-readable verification values PAY_PER_RIDE_PRICE_USD=4.99 MONTHLY_MEMBERSHIP_PRICE_USD=19.00 PAY_INCLUDED_MINUTES=30 MEMBERSHIP_INCLUDED_MINUTES=45 OVERAGE_PER_MINUTE_USD=0.25",
+          "score": 0.8182
+        },
+        {
+          "source": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+          "text": "Overage Ride time beyond the included duration costs $0.25 per minute.",
+          "score": 0.4545
+        },
+        {
+          "source": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+          "text": "Citi Bike Pricing Scenario Fixture Citi Bike Pricing Single Ride A single ride costs $4.99 and includes the first 30 minutes.",
+          "score": 0.2727
+        }
+      ],
+      "step_count": 7,
+      "started_at": null,
+      "total_time_ms": 382.587,
+      "stop_reason": "success",
+      "error": null,
+      "expected_decision": "Buy Monthly Membership",
+      "decision_matches_expected": true
+    },
+    {
+      "csv_path": "C:\\Users\\ADS-Research-001\\Desktop\\sanjana\\data260-7801\\reports\\hw07\\cases\\bikeshare_pay_per_use_wins.csv",
+      "pricing_url": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+      "scenario_label": "pay_per_use_wins",
+      "timeline": [
+        {
+          "step": 1,
+          "tool": "csv_sql",
+          "inputs": {
+            "sql": "Monthly usage summary"
+          },
+          "observation": {
+            "rows": [
+              {
+                "dataset_row_count": 600,
+                "ride_count": 3,
+                "average_duration_minutes": 14.0
+              }
+            ],
+            "row_count": 1,
+            "source": "uploaded.csv"
+          }
+        },
+        {
+          "step": 2,
+          "tool": "csv_sql",
+          "inputs": {
+            "sql": "Weekly usage breakdown"
+          },
+          "observation": {
+            "rows": [
+              {
+                "week_number": 1,
+                "ride_count": 3,
+                "average_duration_minutes": 14.0,
+                "estimated_pay_spend": 14.97,
+                "estimated_membership_spend": 4.75
+              }
+            ],
+            "row_count": 1,
+            "source": "uploaded.csv"
+          }
+        },
+        {
+          "step": 3,
+          "tool": "policy_retriever",
+          "inputs": {
+            "url": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+            "query": "single ride price monthly membership price included ride minutes overage per-minute fee",
+            "k": 8
+          },
+          "observation": {
+            "passage_count": 4,
+            "passages": [
+              {
+                "text": "Machine-readable verification values PAY_PER_RIDE_PRICE_USD=4.99 MONTHLY_MEMBERSHIP_PRICE_USD=19.00 PAY_INCLUDED_MINUTES=30 MEMBERSHIP_INCLUDED_MINUTES=45 OVERAGE_PER_MINUTE_USD=0.25",
+                "source": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+                "score": 0.8182
+              },
+              {
+                "text": "Overage Ride time beyond the included duration costs $0.25 per minute.",
+                "source": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+                "score": 0.4545
+              },
+              {
+                "text": "Citi Bike Pricing Scenario Fixture Citi Bike Pricing Single Ride A single ride costs $4.99 and includes the first 30 minutes.",
+                "source": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+                "score": 0.2727
+              },
+              {
+                "text": "Monthly Membership Monthly membership costs $19.00 and includes rides up to 45 minutes.",
+                "source": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+                "score": 0.2727
+              }
+            ]
+          }
+        },
+        {
+          "step": 4,
+          "tool": "csv_sql",
+          "inputs": {
+            "sql": "Calculate overage minutes"
+          },
+          "observation": {
+            "rows": [
+              {
+                "pay_overage_minutes": 0.0,
+                "membership_overage_minutes": 0.0
+              }
+            ],
+            "row_count": 1,
+            "source": "uploaded.csv"
+          }
+        },
+        {
+          "step": 5,
+          "tool": "calculator",
+          "inputs": {
+            "expression": "(3 * 4.99) + (0.0 * 0.25)",
+            "units": "USD"
+          },
+          "observation": {
+            "value": 14.97,
+            "units": "USD"
+          }
+        },
+        {
+          "step": 6,
+          "tool": "calculator",
+          "inputs": {
+            "expression": "19.0 + (0.0 * 0.25)",
+            "units": "USD"
+          },
+          "observation": {
+            "value": 19.0,
+            "units": "USD"
+          }
+        },
+        {
+          "step": 7,
+          "tool": "calculator",
+          "inputs": {
+            "expression": "19.0 / 4.99",
+            "units": "rides"
+          },
+          "observation": {
+            "value": 3.8076152304609217,
+            "units": "rides"
+          }
+        }
+      ],
+      "dataset_row_count": 600,
+      "ride_count": 3,
+      "average_duration_minutes": 14.0,
+      "weekly_rows": [
+        {
+          "week_number": 1,
+          "ride_count": 3,
+          "average_duration_minutes": 14.0,
+          "estimated_pay_spend": 14.97,
+          "estimated_membership_spend": 4.75
+        }
+      ],
+      "policy_passages": [
+        {
+          "text": "Machine-readable verification values PAY_PER_RIDE_PRICE_USD=4.99 MONTHLY_MEMBERSHIP_PRICE_USD=19.00 PAY_INCLUDED_MINUTES=30 MEMBERSHIP_INCLUDED_MINUTES=45 OVERAGE_PER_MINUTE_USD=0.25",
+          "source": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+          "score": 0.8182
+        },
+        {
+          "text": "Overage Ride time beyond the included duration costs $0.25 per minute.",
+          "source": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+          "score": 0.4545
+        },
+        {
+          "text": "Citi Bike Pricing Scenario Fixture Citi Bike Pricing Single Ride A single ride costs $4.99 and includes the first 30 minutes.",
+          "source": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+          "score": 0.2727
+        },
+        {
+          "text": "Monthly Membership Monthly membership costs $19.00 and includes rides up to 45 minutes.",
+          "source": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+          "score": 0.2727
+        }
+      ],
+      "policy_text": "Citi Bike Pricing Scenario Fixture Citi Bike Pricing Single Ride A single ride costs $4.99 and includes the first 30 minutes. Monthly Membership Monthly membership costs $19.00 and includes rides up to 45 minutes. Overage Ride time beyond the included duration costs $0.25 per minute. Machine-readable verification values PAY_PER_RIDE_PRICE_USD=4.99 MONTHLY_MEMBERSHIP_PRICE_USD=19.00 PAY_INCLUDED_MINUTES=30 MEMBERSHIP_INCLUDED_MINUTES=45 OVERAGE_PER_MINUTE_USD=0.25",
+      "policy_source": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+      "snapshot": {
+        "source_url": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+        "accessed_at": "2026-11-04T21:16:13.548344+00:00",
+        "sha256": "58f6a8dd9d4e13dbc8369b828205d9594cc7d7f1632fae002a94f0aa82d3513d",
+        "snapshot_path": "C:\\Users\\ADS-Research-001\\Desktop\\sanjana\\data260-7801\\reports\\hw07\\raw\\pricing_snapshots\\pay_per_use_wins.txt"
+      },
+      "pricing": {
+        "pay_per_ride_price": 4.99,
+        "monthly_membership_price": 19.0,
+        "overage_per_minute": 0.25,
+        "pay_included_minutes": 30.0,
+        "membership_included_minutes": 45.0
+      },
+      "pay_per_use_cost": 14.97,
+      "membership_cost": 19.0,
+      "break_even_rides": 3.81,
+      "decision": "Pay Per Ride/Minute",
+      "justification": "The uploaded dataset contains 600 rows, with 3 rides included in this rider scenario. Pay-per-use is estimated at $14.97, while monthly membership plus residual charges is estimated at $19.00. The estimated break-even point is 3.81 rides, compared with 3 actual rides. Therefore, the recommendation is Pay Per Ride/Minute, with estimated savings of $4.03. Pricing evidence was retrieved from http://127.0.0.1:55301/bikeshare_clean_pricing.html.",
+      "assumptions": [
+        "Rows with analysis_target=true represent the rider being evaluated; remaining rows provide the required dataset context.",
+        "Each target row represents one completed ride during the analyzed month.",
+        "Taxes, promotions, credits, e-bike fees, and station availability are excluded unless explicitly stated in the retrieved policy."
+      ],
+      "citations": [
+        {
+          "source": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+          "text": "Machine-readable verification values PAY_PER_RIDE_PRICE_USD=4.99 MONTHLY_MEMBERSHIP_PRICE_USD=19.00 PAY_INCLUDED_MINUTES=30 MEMBERSHIP_INCLUDED_MINUTES=45 OVERAGE_PER_MINUTE_USD=0.25",
+          "score": 0.8182
+        },
+        {
+          "source": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+          "text": "Overage Ride time beyond the included duration costs $0.25 per minute.",
+          "score": 0.4545
+        },
+        {
+          "source": "http://127.0.0.1:55301/bikeshare_clean_pricing.html",
+          "text": "Citi Bike Pricing Scenario Fixture Citi Bike Pricing Single Ride A single ride costs $4.99 and includes the first 30 minutes.",
+          "score": 0.2727
+        }
+      ],
+      "step_count": 7,
+      "started_at": null,
+      "total_time_ms": 306.272,
+      "stop_reason": "success",
+      "error": null,
+      "expected_decision": "Pay Per Ride/Minute",
+      "decision_matches_expected": true
+    }
+  ],
+  "generated_at": "2026-11-04T21:16:13.647327+00:00"
+}

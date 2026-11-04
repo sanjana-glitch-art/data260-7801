@@ -1,0 +1,3 @@
+scenario_label,dataset_row_count,target_ride_count,average_duration_minutes,pay_per_use_cost,membership_cost,break_even_rides,decision,step_count,total_time_ms,stop_reason,snapshot_sha256,source_url,accessed_at
+membership_wins,600,80,35.5,509.2,19.0,3.81,Buy Monthly Membership,7,382.587,success,58f6a8dd9d4e13dbc8369b828205d9594cc7d7f1632fae002a94f0aa82d3513d,http://127.0.0.1:55301/bikeshare_clean_pricing.html,2026-11-04T21:16:13.235946+00:00
+pay_per_use_wins,600,3,14.0,14.97,19.0,3.81,Pay Per Ride/Minute,7,306.272,success,58f6a8dd9d4e13dbc8369b828205d9594cc7d7f1632fae002a94f0aa82d3513d,http://127.0.0.1:55301/bikeshare_clean_pricing.html,2026-11-04T21:16:13.548344+00:00

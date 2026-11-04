@@ -1,0 +1,40 @@
+{
+  "experiment": "hw7_bikeshare_tool_tests",
+  "student": "Sanjana Thummalapalli",
+  "sid4": 7801,
+  "checks": {
+    "json_schemas": {
+      "passed": true,
+      "schemas": {
+        "csv_sql": "CSV_SQL_SCHEMA",
+        "policy_retriever": "POLICY_RETRIEVER_SCHEMA",
+        "calculator": "CALCULATOR_SCHEMA"
+      }
+    },
+    "csv_sql": {
+      "passed": true,
+      "selected_table": "trips",
+      "trip_count": 600,
+      "average_duration": 21.36,
+      "delete_blocked": true,
+      "delete_error": "csv_sql accepts only one read-only SELECT query."
+    },
+    "policy_retriever": {
+      "passed": true,
+      "passage_count": 3,
+      "first_passage": {
+        "text": "Overage policy Additional ride time costs $0.25 per minute after the included time.",
+        "source": "http://127.0.0.1:55607/pricing.html",
+        "score": 0.2857
+      }
+    },
+    "calculator": {
+      "passed": true,
+      "calculated_value": 61.88,
+      "units": "USD",
+      "unsafe_expression_blocked": true,
+      "unsafe_error": "Expression contains characters outside the arithmetic allowlist."
+    }
+  },
+  "passed": true
+}

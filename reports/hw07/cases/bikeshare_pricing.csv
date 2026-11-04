@@ -1,0 +1,4 @@
+plan_name,price_usd,duration_days,ride_limit_minutes,internal_notes
+Single Ride,4.99,1,30,public single-ride record
+Day Pass,15.00,1,30,public day-pass record
+Annual Membership,149.00,365,45,internal retention campaign

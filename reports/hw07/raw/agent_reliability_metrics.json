@@ -1,0 +1,29 @@
+{
+  "experiment": "hw7_agent_reliability",
+  "model": "qwen3:4b",
+  "model_settings": {
+    "temperature": 0.0,
+    "num_ctx": 2048,
+    "num_predict": 256
+  },
+  "attempt_count": 20,
+  "successful_attempt_count": 20,
+  "task_success_rate_percent": 100.0,
+  "well_formed_before_repair_count": 20,
+  "well_formed_before_repair_percent": 100.0,
+  "well_formed_after_repair_count": 20,
+  "well_formed_after_repair_percent": 100.0,
+  "attempts_using_repair": 0,
+  "repair_rate_percent": 0.0,
+  "failure_classification": {
+    "malformed_arguments": 0,
+    "unknown_tool": 0,
+    "text_when_tool_required": 0,
+    "lost_multi_step_chain": 0
+  },
+  "total_tool_calls": 53,
+  "mean_tool_calls": 2.65,
+  "mean_total_tokens": 2581.65,
+  "mean_latency_ms": 1786.656,
+  "generated_at": "2026-11-04T22:25:59.788493+00:00"
+}

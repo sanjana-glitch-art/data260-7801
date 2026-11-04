@@ -35,6 +35,19 @@ function Navigation({
                         Trial listings
                     </NavLink>
 
+                    <NavLink
+                        to="/bikeshare"
+                        className={
+                            ({ isActive }) => (
+                                isActive
+                                    ? "nav-link active"
+                                    : "nav-link"
+                            )
+                        }
+                    >
+                        Bike Share
+                    </NavLink>
+                    
                     {user && (
                         <NavLink
                             className={navigationClass}

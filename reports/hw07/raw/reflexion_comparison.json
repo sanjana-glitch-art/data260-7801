@@ -1,0 +1,31 @@
+{
+  "experiment": "hw7_original_vs_reflexion",
+  "model": "qwen3:4b",
+  "original_loop": {
+    "task_success_count": 3,
+    "task_success_rate_percent": 100.0,
+    "unsupported_claim_count": 0,
+    "retry_count": 0,
+    "retry_rate_percent": 0.0,
+    "total_tool_calls": 8,
+    "mean_tool_calls": 2.667,
+    "total_tokens": 7875,
+    "mean_tokens": 2625.0,
+    "mean_latency_ms": 2537.149,
+    "verifier_false_rejections": 0
+  },
+  "reflexion_loop": {
+    "task_success_count": 3,
+    "task_success_rate_percent": 100.0,
+    "unsupported_claim_count": 0,
+    "retry_count": 1,
+    "retry_rate_percent": 33.33,
+    "total_tool_calls": 14,
+    "mean_tool_calls": 4.667,
+    "total_tokens": 19337,
+    "mean_tokens": 6445.667,
+    "mean_latency_ms": 3758.324,
+    "verifier_false_rejections": 0
+  },
+  "verifier_false_rejection_note": "No verifier false rejections were observed. The intentional task_c diagnostic perturbation produced a genuine incomplete tool chain and was correctly rejected before a successful bounded retry."
+}
