@@ -10,15 +10,10 @@ TRIALS: tuple[
     ...,
 ] = (
     {
-        "trial_title": (
-            "Sleep Quality and Academic "
-            "Performance Study"
-        ),
+        "trial_title": ("Sleep Quality and Academic Performance Study"),
         "trial_code": "S7801-CT-000001",
         "enrollment_target": 120,
-        "submitter_email": (
-            "sleep@example.edu"
-        ),
+        "submitter_email": ("sleep@example.edu"),
         "trial_description": (
             "This clinical trial examines sleep "
             "quality, concentration, memory, and "
@@ -27,14 +22,10 @@ TRIALS: tuple[
         "trial_phase": "Phase II",
     },
     {
-        "trial_title": (
-            "Digital Wellness Intervention Study"
-        ),
+        "trial_title": ("Digital Wellness Intervention Study"),
         "trial_code": "S7801-CT-000002",
         "enrollment_target": 180,
-        "submitter_email": (
-            "wellness@example.edu"
-        ),
+        "submitter_email": ("wellness@example.edu"),
         "trial_description": (
             "This study evaluates a digital wellness "
             "intervention for university students."
@@ -42,15 +33,10 @@ TRIALS: tuple[
         "trial_phase": "Phase I",
     },
     {
-        "trial_title": (
-            "Student Memory and Cognitive "
-            "Performance Trial"
-        ),
+        "trial_title": ("Student Memory and Cognitive Performance Trial"),
         "trial_code": "S7801-CT-000003",
         "enrollment_target": 90,
-        "submitter_email": (
-            "memory@example.edu"
-        ),
+        "submitter_email": ("memory@example.edu"),
         "trial_description": (
             "This clinical trial evaluates memory "
             "and cognitive performance among "
@@ -59,14 +45,10 @@ TRIALS: tuple[
         "trial_phase": "Phase III",
     },
     {
-        "trial_title": (
-            "Remote Clinical Monitoring Study"
-        ),
+        "trial_title": ("Remote Clinical Monitoring Study"),
         "trial_code": "S7801-CT-000004",
         "enrollment_target": 250,
-        "submitter_email": (
-            "monitoring@example.edu"
-        ),
+        "submitter_email": ("monitoring@example.edu"),
         "trial_description": (
             "This study evaluates remote monitoring "
             "methods for participants in clinical "
@@ -190,12 +172,8 @@ def main() -> None:
                 {
                     **trial,
                     "sponsor_id": sponsor_id,
-                    "sponsor_name": (
-                        "San Jose State University"
-                    ),
-                    "created_by_user_id": (
-                        writer_id
-                    ),
+                    "sponsor_name": ("San Jose State University"),
+                    "created_by_user_id": (writer_id),
                 },
             )
 

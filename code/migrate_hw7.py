@@ -7,9 +7,7 @@ from pwdlib import PasswordHash
 from sqlalchemy import inspect, text
 from sqlalchemy.engine import Connection
 
-PASSWORD_HASH = (
-    PasswordHash.recommended()
-)
+PASSWORD_HASH = PasswordHash.recommended()
 
 VALID_ROLES = {
     "reader",
@@ -24,41 +22,23 @@ DEMO_USERS: tuple[
 ] = (
     {
         "username": "reader7801",
-        "display_name": (
-            "Homework 7 Reader"
-        ),
-        "email": (
-            "reader7801@example.edu"
-        ),
-        "password": (
-            "Data260Reader!7801"
-        ),
+        "display_name": ("Homework 7 Reader"),
+        "email": ("reader7801@example.edu"),
+        "password": ("Data260Reader!7801"),
         "role": "reader",
     },
     {
         "username": "writer7801",
-        "display_name": (
-            "Homework 7 Writer"
-        ),
-        "email": (
-            "writer7801@example.edu"
-        ),
-        "password": (
-            "Data260Writer!7801"
-        ),
+        "display_name": ("Homework 7 Writer"),
+        "email": ("writer7801@example.edu"),
+        "password": ("Data260Writer!7801"),
         "role": "writer",
     },
     {
         "username": "moderator7801",
-        "display_name": (
-            "Homework 7 Moderator"
-        ),
-        "email": (
-            "moderator7801@example.edu"
-        ),
-        "password": (
-            "Data260Moderator!7801"
-        ),
+        "display_name": ("Homework 7 Moderator"),
+        "email": ("moderator7801@example.edu"),
+        "password": ("Data260Moderator!7801"),
         "role": "moderator",
     },
 )
@@ -67,16 +47,9 @@ DEMO_USERS: tuple[
 def column_names() -> set[str]:
     """Return existing columns in the users table."""
 
-    inspector = inspect(
-        engine
-    )
+    inspector = inspect(engine)
 
-    return {
-        str(column["name"])
-        for column in inspector.get_columns(
-            "users"
-        )
-    }
+    return {str(column["name"]) for column in inspector.get_columns("users")}
 
 
 def index_exists(
@@ -100,9 +73,7 @@ def index_exists(
         },
     ).scalar_one()
 
-    return bool(
-        count
-    )
+    return bool(count)
 
 
 def add_username_column(
@@ -123,13 +94,9 @@ def add_username_column(
             )
         )
 
-        print(
-            "Added users.username."
-        )
+        print("Added users.username.")
     else:
-        print(
-            "users.username already exists."
-        )
+        print("users.username already exists.")
 
     connection.execute(
         text(
@@ -169,13 +136,9 @@ def add_username_column(
             )
         )
 
-        print(
-            "Created unique username index."
-        )
+        print("Created unique username index.")
     else:
-        print(
-            "Unique username index already exists."
-        )
+        print("Unique username index already exists.")
 
 
 def add_role_column(
@@ -197,13 +160,9 @@ def add_role_column(
             )
         )
 
-        print(
-            "Added users.role."
-        )
+        print("Added users.role.")
     else:
-        print(
-            "users.role already exists."
-        )
+        print("users.role already exists.")
 
     connection.execute(
         text(
@@ -227,22 +186,12 @@ def seed_demo_users(
     """Insert or update the three RBAC users."""
 
     for user in DEMO_USERS:
-        role = str(
-            user["role"]
-        )
+        role = str(user["role"])
 
         if role not in VALID_ROLES:
-            raise ValueError(
-                f"Invalid role: {role}"
-            )
+            raise ValueError(f"Invalid role: {role}")
 
-        password_hash = (
-            PASSWORD_HASH.hash(
-                str(
-                    user["password"]
-                )
-            )
-        )
+        password_hash = PASSWORD_HASH.hash(str(user["password"]))
 
         connection.execute(
             text(
@@ -278,16 +227,10 @@ def seed_demo_users(
                 """
             ),
             {
-                "username": (
-                    user["username"]
-                ),
-                "display_name": (
-                    user["display_name"]
-                ),
+                "username": (user["username"]),
+                "display_name": (user["display_name"]),
                 "email": user["email"],
-                "password_hash": (
-                    password_hash
-                ),
+                "password_hash": (password_hash),
                 "role": role,
             },
         )
@@ -305,9 +248,10 @@ def validate_migration(
 ) -> None:
     """Validate the required users and roles."""
 
-    rows = connection.execute(
-        text(
-            """
+    rows = (
+        connection.execute(
+            text(
+                """
             SELECT
                 username,
                 role,
@@ -320,70 +264,43 @@ def validate_migration(
             )
             ORDER BY username
             """
+            )
         )
-    ).mappings().all()
+        .mappings()
+        .all()
+    )
 
     if len(rows) != 3:
-        raise RuntimeError(
-            "Expected three Homework 7 users."
-        )
+        raise RuntimeError("Expected three Homework 7 users.")
 
-    observed = {
-        str(row["role"])
-        for row in rows
-    }
+    observed = {str(row["role"]) for row in rows}
 
     if observed != VALID_ROLES:
-        raise RuntimeError(
-            "The required RBAC roles "
-            "were not seeded correctly."
-        )
+        raise RuntimeError("The required RBAC roles were not seeded correctly.")
 
-    if not all(
-        bool(row["is_active"])
-        for row in rows
-    ):
-        raise RuntimeError(
-            "All Homework 7 users "
-            "must be active."
-        )
+    if not all(bool(row["is_active"]) for row in rows):
+        raise RuntimeError("All Homework 7 users must be active.")
 
-    print(
-        "Homework 7 user validation passed."
-    )
+    print("Homework 7 user validation passed.")
 
 
 def main() -> None:
     """Run the Homework 7 user migration."""
 
-    print(
-        "Starting Homework 7 database migration."
-    )
+    print("Starting Homework 7 database migration.")
 
     with engine.begin() as connection:
-        add_username_column(
-            connection
-        )
+        add_username_column(connection)
 
-        add_role_column(
-            connection
-        )
+        add_role_column(connection)
 
-        seed_demo_users(
-            connection
-        )
+        seed_demo_users(connection)
 
-        validate_migration(
-            connection
-        )
+        validate_migration(connection)
 
-    print(
-        "\nHomework 7 migration complete."
-    )
+    print("\nHomework 7 migration complete.")
 
-    print(
-        "\nDemo credentials:"
-    )
+    print("\nDemo credentials:")
 
     for user in DEMO_USERS:
         print(

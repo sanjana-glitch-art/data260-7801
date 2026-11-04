@@ -18,17 +18,9 @@ from src.model_client import (
     ModelClient,
 )
 
-PROJECT_ROOT = Path(
-    __file__
-).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
-DEFAULT_LOG_PATH = (
-    PROJECT_ROOT
-    / "reports"
-    / "hw07"
-    / "raw"
-    / "agent_tool_calls.jsonl"
-)
+DEFAULT_LOG_PATH = PROJECT_ROOT / "reports" / "hw07" / "raw" / "agent_tool_calls.jsonl"
 
 MODEL_NAME = os.getenv(
     "HW7_MODEL",
@@ -130,9 +122,7 @@ Multi-step requirements:
 def utc_timestamp() -> str:
     """Return a timezone-aware UTC timestamp."""
 
-    return datetime.now(
-        UTC
-    ).isoformat()
+    return datetime.now(UTC).isoformat()
 
 
 def append_jsonl(
@@ -167,9 +157,7 @@ def parse_decision(
 
     cleaned = content.strip()
 
-    if cleaned.startswith(
-        "```"
-    ):
+    if cleaned.startswith("```"):
         cleaned = re.sub(
             r"^```(?:json)?\s*",
             "",
@@ -184,9 +172,7 @@ def parse_decision(
         )
 
     try:
-        parsed = json.loads(
-            cleaned
-        )
+        parsed = json.loads(cleaned)
     except json.JSONDecodeError:
         object_match = re.search(
             r"\{.*\}",
@@ -195,26 +181,18 @@ def parse_decision(
         )
 
         if object_match is None:
-            raise ValueError(
-                "Model response was not a JSON object."
-            ) from None
+            raise ValueError("Model response was not a JSON object.") from None
 
         try:
-            parsed = json.loads(
-                object_match.group(0)
-            )
+            parsed = json.loads(object_match.group(0))
         except json.JSONDecodeError as error:
-            raise ValueError(
-                "Model response contained malformed JSON."
-            ) from error
+            raise ValueError("Model response contained malformed JSON.") from error
 
     if not isinstance(
         parsed,
         dict,
     ):
-        raise TypeError(
-            "Model decision must be a JSON object."
-        )
+        raise TypeError("Model decision must be a JSON object.")
 
     return parsed
 
@@ -231,27 +209,15 @@ def classify_decision_problem(
         "answer",
     }
 
-    missing_fields = (
-        required_fields
-        - set(decision)
-    )
+    missing_fields = required_fields - set(decision)
 
     if missing_fields:
         return (
             "malformed_arguments",
-            (
-                "Missing fields: "
-                + ", ".join(
-                    sorted(
-                        missing_fields
-                    )
-                )
-            ),
+            ("Missing fields: " + ", ".join(sorted(missing_fields))),
         )
 
-    action = decision.get(
-        "action"
-    )
+    action = decision.get("action")
 
     if action not in {
         "tool",
@@ -259,23 +225,14 @@ def classify_decision_problem(
     }:
         return (
             "malformed_arguments",
-            (
-                "action must be either "
-                "'tool' or 'final'."
-            ),
+            ("action must be either 'tool' or 'final'."),
         )
 
-    tool_name = decision.get(
-        "tool_name"
-    )
+    tool_name = decision.get("tool_name")
 
-    arguments = decision.get(
-        "arguments"
-    )
+    arguments = decision.get("arguments")
 
-    answer = decision.get(
-        "answer"
-    )
+    answer = decision.get("answer")
 
     if not isinstance(
         tool_name,
@@ -308,50 +265,32 @@ def classify_decision_problem(
         if tool_name not in TOOL_NAMES:
             return (
                 "unknown_tool",
-                (
-                    f"Unknown tool '{tool_name}'. "
-                    "Use only: "
-                    + ", ".join(
-                        TOOL_NAMES
-                    )
-                ),
+                (f"Unknown tool '{tool_name}'. Use only: " + ", ".join(TOOL_NAMES)),
             )
 
         if answer.strip():
             return (
                 "malformed_arguments",
-                (
-                    "answer must be empty "
-                    "during a tool call."
-                ),
+                ("answer must be empty during a tool call."),
             )
 
     if action == "final":
         if tool_name:
             return (
                 "malformed_arguments",
-                (
-                    "tool_name must be empty "
-                    "for a final answer."
-                ),
+                ("tool_name must be empty for a final answer."),
             )
 
         if arguments:
             return (
                 "malformed_arguments",
-                (
-                    "arguments must be empty "
-                    "for a final answer."
-                ),
+                ("arguments must be empty for a final answer."),
             )
 
         if not answer.strip():
             return (
                 "text_when_tool_required",
-                (
-                    "A final response must contain "
-                    "a non-empty answer."
-                ),
+                ("A final response must contain a non-empty answer."),
             )
 
     return (
@@ -380,16 +319,12 @@ def safe_json_result(
     """Parse a tool envelope for logs and messages."""
 
     try:
-        parsed = json.loads(
-            result_text
-        )
+        parsed = json.loads(result_text)
     except json.JSONDecodeError:
         return {
             "ok": False,
             "data": None,
-            "error": (
-                "Tool returned malformed JSON."
-            ),
+            "error": ("Tool returned malformed JSON."),
         }
 
     if not isinstance(
@@ -399,9 +334,7 @@ def safe_json_result(
         return {
             "ok": False,
             "data": None,
-            "error": (
-                "Tool returned a non-object result."
-            ),
+            "error": ("Tool returned a non-object result."),
         }
 
     return parsed
@@ -426,14 +359,10 @@ def run_agent(
     cleaned_input = user_input.strip()
 
     if not cleaned_input:
-        raise ValueError(
-            "user_input must not be empty."
-        )
+        raise ValueError("user_input must not be empty.")
 
     if max_iterations < 1:
-        raise ValueError(
-            "max_iterations must be positive."
-        )
+        raise ValueError("max_iterations must be positive.")
 
     active_model = (
         model
@@ -446,14 +375,9 @@ def run_agent(
         )
     )
 
-    run_id = (
-        f"{run_label}-"
-        f"{datetime.now(UTC):%Y%m%dT%H%M%S%fZ}"
-    )
+    run_id = f"{run_label}-{datetime.now(UTC):%Y%m%dT%H%M%S%fZ}"
 
-    messages: list[
-        dict[str, str]
-    ] = [
+    messages: list[dict[str, str]] = [
         {
             "role": "system",
             "content": SYSTEM_PROMPT,
@@ -466,9 +390,7 @@ def run_agent(
 
     started_at = time.perf_counter()
 
-    tool_calls: list[
-        dict[str, Any]
-    ] = []
+    tool_calls: list[dict[str, Any]] = []
 
     failures: list[str] = []
 
@@ -483,107 +405,60 @@ def run_agent(
         max_iterations + 1,
     ):
         try:
-            completion = (
-                active_model.complete(
-                    messages=messages,
-                    response_format=(
-                        DECISION_SCHEMA
-                    ),
-                )
+            completion = active_model.complete(
+                messages=messages,
+                response_format=(DECISION_SCHEMA),
             )
         except ResponseError as error:
             return {
                 "run_id": run_id,
-                "answer": (
-                    "The agent stopped cleanly "
-                    "after a model runtime error."
-                ),
+                "answer": ("The agent stopped cleanly after a model runtime error."),
                 "messages": messages,
                 "tool_calls": tool_calls,
-                "tool_call_count": len(
-                    tool_calls
-                ),
+                "tool_call_count": len(tool_calls),
                 "iteration_count": iteration,
                 "repair_count": repair_count,
-                "failure_classification": [
-                    "runtime_error"
-                ],
+                "failure_classification": ["runtime_error"],
                 "well_formed_before_repair": (
-                    valid_initial_decision_count
-                    == initial_decision_count
+                    valid_initial_decision_count == initial_decision_count
                     and initial_decision_count > 0
                 ),
                 "well_formed_after_repair": False,
                 "input_tokens": input_tokens,
-                "output_tokens": (
-                    output_tokens
-                ),
-                "total_tokens": (
-                    input_tokens
-                    + output_tokens
-                ),
+                "output_tokens": (output_tokens),
+                "total_tokens": (input_tokens + output_tokens),
                 "latency_ms": round(
-                    (
-                        time.perf_counter()
-                        - started_at
-                    )
-                    * 1000,
+                    (time.perf_counter() - started_at) * 1000,
                     3,
                 ),
-                "stop_reason": (
-                    "runtime_error"
-                ),
-                "runtime_error": (
-                    f"{type(error).__name__}: "
-                    f"{error}"
-                ),
+                "stop_reason": ("runtime_error"),
+                "runtime_error": (f"{type(error).__name__}: {error}"),
             }
 
-        input_tokens += (
-            completion.input_tokens
-        )
+        input_tokens += completion.input_tokens
 
-        output_tokens += (
-            completion.output_tokens
-        )
+        output_tokens += completion.output_tokens
 
         initial_decision_count += 1
 
         try:
-            decision = parse_decision(
-                completion.content
-            )
+            decision = parse_decision(completion.content)
         except (
             TypeError,
             ValueError,
         ) as error:
-            classification = (
-                "text_when_tool_required"
-            )
+            classification = "text_when_tool_required"
 
-            problem = str(
-                error
-            )
+            problem = str(error)
         else:
-            classification, problem = (
-                classify_decision_problem(
-                    decision
-                )
-            )
+            classification, problem = classify_decision_problem(decision)
 
         if problem is not None:
-            failures.append(
-                classification
-                or "malformed_arguments"
-            )
+            failures.append(classification or "malformed_arguments")
 
             if repair_count >= 1:
                 elapsed = round(
-                    (
-                        time.perf_counter()
-                        - started_at
-                    )
-                    * 1000,
+                    (time.perf_counter() - started_at) * 1000,
                     3,
                 )
 
@@ -596,141 +471,85 @@ def run_agent(
                     ),
                     "messages": messages,
                     "tool_calls": tool_calls,
-                    "tool_call_count": len(
-                        tool_calls
-                    ),
-                    "iteration_count": (
-                        iteration
-                    ),
-                    "repair_count": (
-                        repair_count
-                    ),
-                    "failure_classification": (
-                        failures
-                    ),
-                    "well_formed_before_repair": (
-                        False
-                    ),
-                    "well_formed_after_repair": (
-                        False
-                    ),
-                    "input_tokens": (
-                        input_tokens
-                    ),
-                    "output_tokens": (
-                        output_tokens
-                    ),
-                    "total_tokens": (
-                        input_tokens
-                        + output_tokens
-                    ),
+                    "tool_call_count": len(tool_calls),
+                    "iteration_count": (iteration),
+                    "repair_count": (repair_count),
+                    "failure_classification": (failures),
+                    "well_formed_before_repair": (False),
+                    "well_formed_after_repair": (False),
+                    "input_tokens": (input_tokens),
+                    "output_tokens": (output_tokens),
+                    "total_tokens": (input_tokens + output_tokens),
                     "latency_ms": elapsed,
-                    "stop_reason": (
-                        "repair_failed"
-                    ),
+                    "stop_reason": ("repair_failed"),
                     "runtime_error": None,
                 }
 
             repair_count += 1
 
-            messages.append({
-                "role": "assistant",
-                "content": (
-                    completion.content
-                ),
-            })
+            messages.append(
+                {
+                    "role": "assistant",
+                    "content": (completion.content),
+                }
+            )
 
-            messages.append({
-                "role": "user",
-                "content": (
-                    repair_message(
-                        problem
-                    )
-                ),
-            })
+            messages.append(
+                {
+                    "role": "user",
+                    "content": (repair_message(problem)),
+                }
+            )
 
             continue
 
         valid_initial_decision_count += 1
 
-        messages.append({
-            "role": "assistant",
-            "content": json.dumps(
-                decision,
-                ensure_ascii=False,
-            ),
-        })
+        messages.append(
+            {
+                "role": "assistant",
+                "content": json.dumps(
+                    decision,
+                    ensure_ascii=False,
+                ),
+            }
+        )
 
-        if decision["action"] == (
-            "final"
-        ):
+        if decision["action"] == ("final"):
             elapsed = round(
-                (
-                    time.perf_counter()
-                    - started_at
-                )
-                * 1000,
+                (time.perf_counter() - started_at) * 1000,
                 3,
             )
 
             return {
                 "run_id": run_id,
-                "answer": (
-                    decision[
-                        "answer"
-                    ].strip()
-                ),
+                "answer": (decision["answer"].strip()),
                 "messages": messages,
                 "tool_calls": tool_calls,
-                "tool_call_count": len(
-                    tool_calls
-                ),
-                "iteration_count": (
-                    iteration
-                ),
-                "repair_count": (
-                    repair_count
-                ),
-                "failure_classification": (
-                    failures
-                ),
-                "well_formed_before_repair": (
-                    repair_count == 0
-                ),
+                "tool_call_count": len(tool_calls),
+                "iteration_count": (iteration),
+                "repair_count": (repair_count),
+                "failure_classification": (failures),
+                "well_formed_before_repair": (repair_count == 0),
                 "well_formed_after_repair": True,
-                "input_tokens": (
-                    input_tokens
-                ),
-                "output_tokens": (
-                    output_tokens
-                ),
-                "total_tokens": (
-                    input_tokens
-                    + output_tokens
-                ),
+                "input_tokens": (input_tokens),
+                "output_tokens": (output_tokens),
+                "total_tokens": (input_tokens + output_tokens),
                 "latency_ms": elapsed,
-                "stop_reason": (
-                    "normal_completion"
-                ),
+                "stop_reason": ("normal_completion"),
                 "runtime_error": None,
             }
 
-        tool_name = decision[
-            "tool_name"
-        ]
+        tool_name = decision["tool_name"]
 
-        arguments = decision[
-            "arguments"
-        ]
+        arguments = decision["arguments"]
 
         tool_result_text = execute_tool(
             tool_name,
             arguments,
         )
 
-        tool_result = safe_json_result(
-            tool_result_text
-        )
+        tool_result = safe_json_result(tool_result_text)
 
         invocation = {
             "run_id": run_id,
@@ -738,78 +557,50 @@ def run_agent(
             "tool_name": tool_name,
             "inputs": arguments,
             "result": tool_result,
-            "timestamp": (
-                utc_timestamp()
-            ),
+            "timestamp": (utc_timestamp()),
         }
 
-        tool_calls.append(
-            invocation
-        )
+        tool_calls.append(invocation)
 
         append_jsonl(
             log_path,
             invocation,
         )
 
-        messages.append({
-            "role": "tool",
-            "content": json.dumps(
-                {
-                    "tool_name": (
-                        tool_name
-                    ),
-                    "observation": (
-                        tool_result
-                    ),
-                },
-                ensure_ascii=False,
-                default=str,
-            ),
-        })
+        messages.append(
+            {
+                "role": "tool",
+                "content": json.dumps(
+                    {
+                        "tool_name": (tool_name),
+                        "observation": (tool_result),
+                    },
+                    ensure_ascii=False,
+                    default=str,
+                ),
+            }
+        )
 
     elapsed = round(
-        (
-            time.perf_counter()
-            - started_at
-        )
-        * 1000,
+        (time.perf_counter() - started_at) * 1000,
         3,
     )
 
     return {
         "run_id": run_id,
-        "answer": (
-            "The agent stopped after reaching "
-            "the hard iteration ceiling."
-        ),
+        "answer": ("The agent stopped after reaching the hard iteration ceiling."),
         "messages": messages,
         "tool_calls": tool_calls,
-        "tool_call_count": len(
-            tool_calls
-        ),
-        "iteration_count": (
-            max_iterations
-        ),
+        "tool_call_count": len(tool_calls),
+        "iteration_count": (max_iterations),
         "repair_count": repair_count,
-        "failure_classification": (
-            failures
-        ),
-        "well_formed_before_repair": (
-            repair_count == 0
-        ),
-        "well_formed_after_repair": (
-            False
-        ),
+        "failure_classification": (failures),
+        "well_formed_before_repair": (repair_count == 0),
+        "well_formed_after_repair": (False),
         "input_tokens": input_tokens,
         "output_tokens": output_tokens,
-        "total_tokens": (
-            input_tokens
-            + output_tokens
-        ),
+        "total_tokens": (input_tokens + output_tokens),
         "latency_ms": elapsed,
-        "stop_reason": (
-            "iteration_ceiling"
-        ),
+        "stop_reason": ("iteration_ceiling"),
         "runtime_error": None,
     }

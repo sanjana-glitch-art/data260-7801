@@ -30,9 +30,7 @@ def observation_evidence(
 
     return {
         "stop_reason": result.get("stop_reason"),
-        "answer_excerpt": str(
-            result.get("answer", "")
-        )[:300],
+        "answer_excerpt": str(result.get("answer", ""))[:300],
         "tool_call_count": result.get(
             "tool_call_count",
             0,
@@ -47,9 +45,7 @@ def revised_strategy(
 ) -> str:
     """Create a deterministic revised strategy."""
 
-    expected = " -> ".join(
-        task["expected_tools"]
-    )
+    expected = " -> ".join(task["expected_tools"])
 
     if "lost_multi_step_chain" in failures:
         return (
@@ -83,8 +79,7 @@ def create_reflection(
         "task_id": task["task_id"],
         "attempt_number": attempt_number,
         "failure_explanation": (
-            "Deterministic verification failed: "
-            + ", ".join(failures)
+            "Deterministic verification failed: " + ", ".join(failures)
         ),
         "revised_strategy": revised_strategy(
             task,
@@ -106,12 +101,8 @@ def prompt_with_reflection(
     """Add isolated reflection data to a retry prompt."""
 
     safe_reflection = {
-        "failure_explanation": reflection[
-            "failure_explanation"
-        ],
-        "revised_strategy": reflection[
-            "revised_strategy"
-        ],
+        "failure_explanation": reflection["failure_explanation"],
+        "revised_strategy": reflection["revised_strategy"],
         "evidence": reflection["evidence"],
     }
 
@@ -138,8 +129,7 @@ def diagnostic_first_prompt(
         return task["prompt"]
 
     return (
-        task["prompt"]
-        + "\n\nDIAGNOSTIC PERTURBATION: For this first "
+        task["prompt"] + "\n\nDIAGNOSTIC PERTURBATION: For this first "
         "attempt only, stop after the first tool call."
     )
 
@@ -180,21 +170,12 @@ def run_reflexion_task(
             prompt,
             model=model,
             log_path=log_path,
-            run_label=(
-                f"reflexion-{task['task_id']}-"
-                f"attempt-{attempt_index + 1}"
-            ),
+            run_label=(f"reflexion-{task['task_id']}-attempt-{attempt_index + 1}"),
         )
 
-        attempt_tools = int(
-            result.get("tool_call_count", 0)
-        )
-        attempt_tokens = int(
-            result.get("total_tokens", 0)
-        )
-        attempt_latency = float(
-            result.get("latency_ms", 0.0)
-        )
+        attempt_tools = int(result.get("tool_call_count", 0))
+        attempt_tokens = int(result.get("total_tokens", 0))
+        attempt_latency = float(result.get("latency_ms", 0.0))
         total_tool_calls += attempt_tools
         total_tokens += attempt_tokens
         total_latency_ms += attempt_latency
@@ -203,15 +184,11 @@ def run_reflexion_task(
 
         if total_tool_calls > max_tool_calls:
             verified = False
-            failures = sorted(
-                set(failures + ["tool_budget_exceeded"])
-            )
+            failures = sorted(set(failures + ["tool_budget_exceeded"]))
 
         if total_tokens > max_total_tokens:
             verified = False
-            failures = sorted(
-                set(failures + ["token_budget_exceeded"])
-            )
+            failures = sorted(set(failures + ["token_budget_exceeded"]))
 
         attempts.append(
             {
@@ -226,10 +203,7 @@ def run_reflexion_task(
             stop_reason = "success"
             break
 
-        if (
-            total_tool_calls >= max_tool_calls
-            or total_tokens >= max_total_tokens
-        ):
+        if total_tool_calls >= max_tool_calls or total_tokens >= max_total_tokens:
             stop_reason = "budget_exhausted"
             break
 
@@ -249,11 +223,7 @@ def run_reflexion_task(
             reflection,
         )
 
-    final_result = (
-        attempts[-1]["result"]
-        if attempts
-        else {}
-    )
+    final_result = attempts[-1]["result"] if attempts else {}
 
     record = {
         "task_id": task["task_id"],

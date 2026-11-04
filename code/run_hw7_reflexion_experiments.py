@@ -28,9 +28,7 @@ def mean(values: list[float]) -> float:
 def original_records() -> list[dict[str, Any]]:
     """Load the Part 2 showcase records."""
 
-    document = json.loads(
-        PART2_PATH.read_text(encoding="utf-8")
-    )
+    document = json.loads(PART2_PATH.read_text(encoding="utf-8"))
     return document["tasks"]
 
 
@@ -40,10 +38,7 @@ def original_metrics(
     """Summarize the original Part 2 loop."""
 
     results = [record["result"] for record in records]
-    success_count = sum(
-        bool(record.get("success"))
-        for record in records
-    )
+    success_count = sum(bool(record.get("success")) for record in records)
 
     return {
         "task_success_count": success_count,
@@ -55,30 +50,17 @@ def original_metrics(
         "retry_count": 0,
         "retry_rate_percent": 0.0,
         "total_tool_calls": sum(
-            int(result.get("tool_call_count", 0))
-            for result in results
+            int(result.get("tool_call_count", 0)) for result in results
         ),
         "mean_tool_calls": mean(
-            [
-                float(result.get("tool_call_count", 0))
-                for result in results
-            ]
+            [float(result.get("tool_call_count", 0)) for result in results]
         ),
-        "total_tokens": sum(
-            int(result.get("total_tokens", 0))
-            for result in results
-        ),
+        "total_tokens": sum(int(result.get("total_tokens", 0)) for result in results),
         "mean_tokens": mean(
-            [
-                float(result.get("total_tokens", 0))
-                for result in results
-            ]
+            [float(result.get("total_tokens", 0)) for result in results]
         ),
         "mean_latency_ms": mean(
-            [
-                float(result.get("latency_ms", 0.0))
-                for result in results
-            ]
+            [float(result.get("latency_ms", 0.0)) for result in results]
         ),
         "verifier_false_rejections": 0,
     }
@@ -89,14 +71,8 @@ def reflexion_metrics(
 ) -> dict[str, Any]:
     """Summarize bounded Reflexion results."""
 
-    success_count = sum(
-        bool(record["success"])
-        for record in records
-    )
-    retry_count = sum(
-        int(record["retry_count"])
-        for record in records
-    )
+    success_count = sum(bool(record["success"]) for record in records)
+    retry_count = sum(int(record["retry_count"]) for record in records)
 
     return {
         "task_success_count": success_count,
@@ -107,39 +83,17 @@ def reflexion_metrics(
         "unsupported_claim_count": 0,
         "retry_count": retry_count,
         "retry_rate_percent": round(
-            sum(
-                record["retry_count"] > 0
-                for record in records
-            )
-            / len(records)
-            * 100,
+            sum(record["retry_count"] > 0 for record in records) / len(records) * 100,
             2,
         ),
-        "total_tool_calls": sum(
-            int(record["total_tool_calls"])
-            for record in records
-        ),
+        "total_tool_calls": sum(int(record["total_tool_calls"]) for record in records),
         "mean_tool_calls": mean(
-            [
-                float(record["total_tool_calls"])
-                for record in records
-            ]
+            [float(record["total_tool_calls"]) for record in records]
         ),
-        "total_tokens": sum(
-            int(record["total_tokens"])
-            for record in records
-        ),
-        "mean_tokens": mean(
-            [
-                float(record["total_tokens"])
-                for record in records
-            ]
-        ),
+        "total_tokens": sum(int(record["total_tokens"]) for record in records),
+        "mean_tokens": mean([float(record["total_tokens"]) for record in records]),
         "mean_latency_ms": mean(
-            [
-                float(record["total_latency_ms"])
-                for record in records
-            ]
+            [float(record["total_latency_ms"]) for record in records]
         ),
         "verifier_false_rejections": 0,
     }
@@ -188,10 +142,7 @@ def main() -> None:
         "experiment": "hw7_bounded_reflexion",
         "model": MODEL_NAME,
         "task_count": len(reflexion_records),
-        "all_passed": all(
-            record["success"]
-            for record in reflexion_records
-        ),
+        "all_passed": all(record["success"] for record in reflexion_records),
         "results": reflexion_records,
     }
     RESULTS_PATH.write_text(
@@ -210,9 +161,7 @@ def main() -> None:
         "experiment": "hw7_original_vs_reflexion",
         "model": MODEL_NAME,
         "original_loop": original_metrics(originals),
-        "reflexion_loop": reflexion_metrics(
-            reflexion_records
-        ),
+        "reflexion_loop": reflexion_metrics(reflexion_records),
         "verifier_false_rejection_note": (
             "No verifier false rejections were observed. The "
             "intentional task_c diagnostic perturbation produced "

@@ -71,8 +71,7 @@ def require_success(
 
     if not result.get("success"):
         raise RuntimeError(
-            f"{tool_name} failed: "
-            f"{result.get('error', 'unknown error')}"
+            f"{tool_name} failed: {result.get('error', 'unknown error')}"
         )
 
     data = result.get("data")
@@ -81,9 +80,7 @@ def require_success(
         data,
         dict,
     ):
-        raise TypeError(
-            f"{tool_name} returned invalid data."
-        )
+        raise TypeError(f"{tool_name} returned invalid data.")
 
     return data
 
@@ -103,14 +100,9 @@ def number_from_patterns(
         )
 
         if match:
-            return float(
-                match.group(1)
-            )
+            return float(match.group(1))
 
-    raise ValueError(
-        f"Could not determine {label} "
-        "from the pricing policy."
-    )
+    raise ValueError(f"Could not determine {label} from the pricing policy.")
 
 
 def parse_pricing_policy(
@@ -118,9 +110,7 @@ def parse_pricing_policy(
 ) -> dict[str, float]:
     """Extract pricing values from retrieved policy text."""
 
-    normalized = " ".join(
-        policy_text.split()
-    )
+    normalized = " ".join(policy_text.split())
 
     pay_per_ride = number_from_patterns(
         normalized,
@@ -225,21 +215,11 @@ def parse_pricing_policy(
     )
 
     return {
-        "pay_per_ride_price": (
-            pay_per_ride
-        ),
-        "monthly_membership_price": (
-            monthly_membership
-        ),
-        "overage_per_minute": (
-            overage_per_minute
-        ),
-        "pay_included_minutes": (
-            pay_included_minutes
-        ),
-        "membership_included_minutes": (
-            membership_included_minutes
-        ),
+        "pay_per_ride_price": (pay_per_ride),
+        "monthly_membership_price": (monthly_membership),
+        "overage_per_minute": (overage_per_minute),
+        "pay_included_minutes": (pay_included_minutes),
+        "membership_included_minutes": (membership_included_minutes),
     }
 
 
@@ -248,13 +228,9 @@ def usage_node(
 ) -> dict[str, Any]:
     """Use csv_sql to calculate usage statistics."""
 
-    timeline = list(
-        state["timeline"]
-    )
+    timeline = list(state["timeline"])
 
-    configure_csv(
-        state["csv_path"]
-    )
+    configure_csv(state["csv_path"])
 
     summary_sql = """
         SELECT
@@ -278,9 +254,7 @@ def usage_node(
         FROM trips
     """
 
-    summary_result = csv_sql(
-        summary_sql
-    )
+    summary_result = csv_sql(summary_sql)
 
     summary_data = require_success(
         summary_result,
@@ -301,9 +275,7 @@ def usage_node(
     rows = summary_data["rows"]
 
     if not rows:
-        raise ValueError(
-            "CSV summary returned no rows."
-        )
+        raise ValueError("CSV summary returned no rows.")
 
     summary = rows[0]
 
@@ -321,9 +293,7 @@ def usage_node(
         ORDER BY week_number
     """
 
-    weekly_result = csv_sql(
-        weekly_sql
-    )
+    weekly_result = csv_sql(weekly_sql)
 
     weekly_data = require_success(
         weekly_result,
@@ -343,21 +313,10 @@ def usage_node(
 
     return {
         "timeline": timeline,
-        "dataset_row_count": int(
-            summary["dataset_row_count"]
-        ),
-        "ride_count": int(
-            summary["ride_count"] or 0
-        ),
-        "average_duration_minutes": float(
-            summary[
-                "average_duration_minutes"
-            ]
-            or 0
-        ),
-        "weekly_rows": (
-            weekly_data["rows"]
-        ),
+        "dataset_row_count": int(summary["dataset_row_count"]),
+        "ride_count": int(summary["ride_count"] or 0),
+        "average_duration_minutes": float(summary["average_duration_minutes"] or 0),
+        "weekly_rows": (weekly_data["rows"]),
         "step_count": 2,
     }
 
@@ -367,9 +326,7 @@ def policy_node(
 ) -> dict[str, Any]:
     """Retrieve policy passages and save exact evidence."""
 
-    timeline = list(
-        state["timeline"]
-    )
+    timeline = list(state["timeline"])
 
     query = (
         "single ride price monthly membership price "
@@ -387,55 +344,39 @@ def policy_node(
         "policy_retriever",
     )
 
-    passages = data.get(
-        "passages"
-    )
+    passages = data.get("passages")
 
     if not isinstance(
         passages,
         list,
     ):
-        raise TypeError(
-            "Policy passages must be a list."
-        )
+        raise TypeError("Policy passages must be a list.")
 
     timeline.append(
         tool_event(
             step=3,
             tool_name="policy_retriever",
             inputs={
-                "url": state[
-                    "pricing_url"
-                ],
+                "url": state["pricing_url"],
                 "query": query,
                 "k": 8,
             },
             observation={
-                "passage_count": len(
-                    passages
-                ),
+                "passage_count": len(passages),
                 "passages": passages,
             },
         )
     )
 
-    page_text, final_url = (
-        fetch_policy_text(
-            state["pricing_url"]
-        )
-    )
+    page_text, final_url = fetch_policy_text(state["pricing_url"])
 
     snapshot = save_policy_snapshot(
         page_text,
         final_url,
-        label=state[
-            "scenario_label"
-        ],
+        label=state["scenario_label"],
     )
 
-    pricing = parse_pricing_policy(
-        page_text
-    )
+    pricing = parse_pricing_policy(page_text)
 
     return {
         "timeline": timeline,
@@ -453,15 +394,11 @@ def cost_node(
 ) -> dict[str, Any]:
     """Calculate both pricing alternatives."""
 
-    timeline = list(
-        state["timeline"]
-    )
+    timeline = list(state["timeline"])
 
     pricing = state["pricing"]
 
-    configure_csv(
-        state["csv_path"]
-    )
+    configure_csv(state["csv_path"])
 
     minutes_sql = f"""
         SELECT
@@ -470,11 +407,7 @@ def cost_node(
                     WHEN analysis_target = true
                     THEN GREATEST(
                         duration_minutes
-                        - {
-                            pricing[
-                                "pay_included_minutes"
-                            ]
-                        },
+                        - {pricing["pay_included_minutes"]},
                         0
                     )
                     ELSE 0
@@ -485,11 +418,7 @@ def cost_node(
                     WHEN analysis_target = true
                     THEN GREATEST(
                         duration_minutes
-                        - {
-                            pricing[
-                                "membership_included_minutes"
-                            ]
-                        },
+                        - {pricing["membership_included_minutes"]},
                         0
                     )
                     ELSE 0
@@ -498,41 +427,25 @@ def cost_node(
         FROM trips
     """
 
-    minutes_result = csv_sql(
-        minutes_sql
-    )
+    minutes_result = csv_sql(minutes_sql)
 
     minutes_data = require_success(
         minutes_result,
         "csv_sql",
     )
 
-    minutes = minutes_data[
-        "rows"
-    ][0]
+    minutes = minutes_data["rows"][0]
 
-    pay_overage_minutes = float(
-        minutes[
-            "pay_overage_minutes"
-        ]
-        or 0
-    )
+    pay_overage_minutes = float(minutes["pay_overage_minutes"] or 0)
 
-    membership_overage_minutes = float(
-        minutes[
-            "membership_overage_minutes"
-        ]
-        or 0
-    )
+    membership_overage_minutes = float(minutes["membership_overage_minutes"] or 0)
 
     timeline.append(
         tool_event(
             step=4,
             tool_name="csv_sql",
             inputs={
-                "sql": (
-                    "Calculate overage minutes"
-                ),
+                "sql": ("Calculate overage minutes"),
             },
             observation=minutes_data,
         )
@@ -588,9 +501,7 @@ def cost_node(
             step=6,
             tool_name="calculator",
             inputs={
-                "expression": (
-                    membership_expression
-                ),
+                "expression": (membership_expression),
                 "units": "USD",
             },
             observation=membership_data,
@@ -598,8 +509,7 @@ def cost_node(
     )
 
     break_even_expression = (
-        f"{pricing['monthly_membership_price']} "
-        f"/ {pricing['pay_per_ride_price']}"
+        f"{pricing['monthly_membership_price']} / {pricing['pay_per_ride_price']}"
     )
 
     break_even_result = calculator(
@@ -617,9 +527,7 @@ def cost_node(
             step=7,
             tool_name="calculator",
             inputs={
-                "expression": (
-                    break_even_expression
-                ),
+                "expression": (break_even_expression),
                 "units": "rides",
             },
             observation=break_even_data,
@@ -629,21 +537,15 @@ def cost_node(
     return {
         "timeline": timeline,
         "pay_per_use_cost": round(
-            float(
-                pay_data["value"]
-            ),
+            float(pay_data["value"]),
             2,
         ),
         "membership_cost": round(
-            float(
-                membership_data["value"]
-            ),
+            float(membership_data["value"]),
             2,
         ),
         "break_even_rides": round(
-            float(
-                break_even_data["value"]
-            ),
+            float(break_even_data["value"]),
             2,
         ),
         "step_count": 7,
@@ -655,23 +557,13 @@ def finalize_node(
 ) -> dict[str, Any]:
     """Create the exact decision and concise rationale."""
 
-    if (
-        state["membership_cost"]
-        < state["pay_per_use_cost"]
-    ):
-        decision = (
-            "Buy Monthly Membership"
-        )
+    if state["membership_cost"] < state["pay_per_use_cost"]:
+        decision = "Buy Monthly Membership"
     else:
-        decision = (
-            "Pay Per Ride/Minute"
-        )
+        decision = "Pay Per Ride/Minute"
 
     savings = round(
-        abs(
-            state["pay_per_use_cost"]
-            - state["membership_cost"]
-        ),
+        abs(state["pay_per_use_cost"] - state["membership_cost"]),
         2,
     )
 
@@ -698,10 +590,7 @@ def finalize_node(
             "the rider being evaluated; remaining rows "
             "provide the required dataset context."
         ),
-        (
-            "Each target row represents one completed "
-            "ride during the analyzed month."
-        ),
+        ("Each target row represents one completed ride during the analyzed month."),
         (
             "Taxes, promotions, credits, e-bike fees, "
             "and station availability are excluded unless "
@@ -711,27 +600,15 @@ def finalize_node(
 
     citations = [
         {
-            "source": passage.get(
-                "source"
-            ),
-            "text": passage.get(
-                "text"
-            ),
-            "score": passage.get(
-                "score"
-            ),
+            "source": passage.get("source"),
+            "text": passage.get("text"),
+            "score": passage.get("score"),
         }
-        for passage in (
-            state["policy_passages"][:3]
-        )
+        for passage in (state["policy_passages"][:3])
     ]
 
     elapsed_ms = round(
-        (
-            time.perf_counter()
-            - state["started_at"]
-        )
-        * 1000,
+        (time.perf_counter() - state["started_at"]) * 1000,
         3,
     )
 
@@ -748,9 +625,7 @@ def finalize_node(
 def build_bikeshare_graph() -> Any:
     """Compile the Bike Share MRKL workflow."""
 
-    graph = StateGraph(
-        BikeShareState
-    )
+    graph = StateGraph(BikeShareState)
 
     graph.add_node(
         "analyze_usage",
@@ -772,9 +647,7 @@ def build_bikeshare_graph() -> Any:
         finalize_node,
     )
 
-    graph.set_entry_point(
-        "analyze_usage"
-    )
+    graph.set_entry_point("analyze_usage")
 
     graph.add_edge(
         "analyze_usage",
@@ -799,9 +672,7 @@ def build_bikeshare_graph() -> Any:
     return graph.compile()
 
 
-BIKESHARE_GRAPH = (
-    build_bikeshare_graph()
-)
+BIKESHARE_GRAPH = build_bikeshare_graph()
 
 
 def run_bikeshare_agent(
@@ -815,13 +686,9 @@ def run_bikeshare_agent(
     started_at = time.perf_counter()
 
     initial_state: BikeShareState = {
-        "csv_path": str(
-            Path(csv_path).resolve()
-        ),
+        "csv_path": str(Path(csv_path).resolve()),
         "pricing_url": pricing_url,
-        "scenario_label": (
-            scenario_label
-        ),
+        "scenario_label": (scenario_label),
         "timeline": [],
         "dataset_row_count": 0,
         "ride_count": 0,
@@ -847,11 +714,7 @@ def run_bikeshare_agent(
     }
 
     try:
-        final_state = (
-            BIKESHARE_GRAPH.invoke(
-                initial_state
-            )
-        )
+        final_state = BIKESHARE_GRAPH.invoke(initial_state)
     except (
         FileNotFoundError,
         RuntimeError,
@@ -862,22 +725,13 @@ def run_bikeshare_agent(
             **initial_state,
             "started_at": None,
             "stop_reason": "error",
-            "error": (
-                f"{type(error).__name__}: "
-                f"{error}"
-            ),
+            "error": (f"{type(error).__name__}: {error}"),
             "total_time_ms": round(
-                (
-                    time.perf_counter()
-                    - started_at
-                )
-                * 1000,
+                (time.perf_counter() - started_at) * 1000,
                 3,
             ),
         }
 
     final_state["started_at"] = None
 
-    return dict(
-        final_state
-    )
+    return dict(final_state)

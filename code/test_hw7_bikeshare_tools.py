@@ -17,21 +17,11 @@ from http.server import (
 from pathlib import Path
 from typing import Any
 
-PROJECT_ROOT = Path(
-    __file__
-).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
-RESULTS_DIRECTORY = (
-    PROJECT_ROOT
-    / "reports"
-    / "hw07"
-    / "raw"
-)
+RESULTS_DIRECTORY = PROJECT_ROOT / "reports" / "hw07" / "raw"
 
-RESULTS_PATH = (
-    RESULTS_DIRECTORY
-    / "bikeshare_tool_test_results.json"
-)
+RESULTS_PATH = RESULTS_DIRECTORY / "bikeshare_tool_test_results.json"
 
 
 ToolFunction = Callable[
@@ -71,41 +61,20 @@ def create_trip_csv(
             1,
             row_count + 1,
         ):
-            week_number = (
-                (index - 1) % 4
-            ) + 1
+            week_number = ((index - 1) % 4) + 1
 
-            duration = (
-                8
-                + (index % 28)
+            duration = 8 + (index % 28)
+
+            writer.writerow(
+                {
+                    "ride_id": (f"ride-{index:04d}"),
+                    "started_at": (f"2026-10-{((index - 1) % 28) + 1:02d}T08:00:00"),
+                    "ended_at": (f"2026-10-{((index - 1) % 28) + 1:02d}T08:30:00"),
+                    "duration_minutes": (duration),
+                    "week_number": (week_number),
+                    "member_type": ("casual" if index % 3 else "member"),
+                }
             )
-
-            writer.writerow({
-                "ride_id": (
-                    f"ride-{index:04d}"
-                ),
-                "started_at": (
-                    "2026-10-"
-                    f"{((index - 1) % 28) + 1:02d}"
-                    "T08:00:00"
-                ),
-                "ended_at": (
-                    "2026-10-"
-                    f"{((index - 1) % 28) + 1:02d}"
-                    "T08:30:00"
-                ),
-                "duration_minutes": (
-                    duration
-                ),
-                "week_number": (
-                    week_number
-                ),
-                "member_type": (
-                    "casual"
-                    if index % 3
-                    else "member"
-                ),
-            })
 
 
 def create_pricing_page(
@@ -158,9 +127,7 @@ def create_pricing_page(
     )
 
 
-class QuietRequestHandler(
-    SimpleHTTPRequestHandler
-):
+class QuietRequestHandler(SimpleHTTPRequestHandler):
     """HTTP handler without console request logs."""
 
     def log_message(
@@ -194,18 +161,14 @@ def local_http_server(
 
     thread.start()
 
-    host, port = (
-        server.server_address
-    )
+    host, port = server.server_address
 
     try:
         yield f"http://{host}:{port}"
     finally:
         server.shutdown()
         server.server_close()
-        thread.join(
-            timeout=5
-        )
+        thread.join(timeout=5)
 
 
 def configure_csv_path(
@@ -218,17 +181,11 @@ def configure_csv_path(
     uploaded file is normally configured separately.
     """
 
-    os.environ[
-        "HW7_BIKESHARE_CSV"
-    ] = str(csv_path)
+    os.environ["HW7_BIKESHARE_CSV"] = str(csv_path)
 
-    os.environ[
-        "BIKESHARE_CSV_PATH"
-    ] = str(csv_path)
+    os.environ["BIKESHARE_CSV_PATH"] = str(csv_path)
 
-    os.environ[
-        "UPLOADED_CSV_PATH"
-    ] = str(csv_path)
+    os.environ["UPLOADED_CSV_PATH"] = str(csv_path)
 
     setter_names = (
         "configure_csv",
@@ -255,9 +212,7 @@ def configure_csv_path(
         "UPLOADED_CSV_PATH",
     )
 
-    for attribute_name in (
-        path_attribute_names
-    ):
+    for attribute_name in path_attribute_names:
         if hasattr(
             tools,
             attribute_name,
@@ -282,13 +237,9 @@ def call_tool(
     dictionary input object.
     """
 
-    signature = inspect.signature(
-        function
-    )
+    signature = inspect.signature(function)
 
-    parameters = list(
-        signature.parameters.values()
-    )
+    parameters = list(signature.parameters.values())
 
     keyword_arguments: dict[
         str,
@@ -299,30 +250,21 @@ def call_tool(
         name = parameter.name
 
         if name in payload:
-            keyword_arguments[
-                name
-            ] = payload[name]
+            keyword_arguments[name] = payload[name]
 
-        elif (
-            csv_path is not None
-            and name
-            in {
-                "csv_path",
-                "file_path",
-                "uploaded_csv",
-                "uploaded_csv_path",
-            }
-        ):
-            keyword_arguments[
-                name
-            ] = csv_path
+        elif csv_path is not None and name in {
+            "csv_path",
+            "file_path",
+            "uploaded_csv",
+            "uploaded_csv_path",
+        }:
+            keyword_arguments[name] = csv_path
 
     required_parameters = [
         parameter
         for parameter in parameters
         if (
-            parameter.default
-            is inspect.Parameter.empty
+            parameter.default is inspect.Parameter.empty
             and parameter.kind
             not in {
                 inspect.Parameter.VAR_POSITIONAL,
@@ -333,26 +275,18 @@ def call_tool(
 
     if (
         len(required_parameters) == 1
-        and required_parameters[0].name
-        not in payload
-        and required_parameters[0].name
-        not in keyword_arguments
+        and required_parameters[0].name not in payload
+        and required_parameters[0].name not in keyword_arguments
     ):
-        result = function(
-            payload
-        )
+        result = function(payload)
     else:
-        result = function(
-            **keyword_arguments
-        )
+        result = function(**keyword_arguments)
 
     if not isinstance(
         result,
         dict,
     ):
-        raise TypeError(
-            "Tool result must be a dictionary."
-        )
+        raise TypeError("Tool result must be a dictionary.")
 
     return result
 
@@ -362,9 +296,7 @@ def validate_common_shape(
 ) -> None:
     """Validate the required common tool envelope."""
 
-    assert "success" in result, (
-        "Missing required success field."
-    )
+    assert "success" in result, "Missing required success field."
 
     assert isinstance(
         result["success"],
@@ -372,13 +304,9 @@ def validate_common_shape(
     )
 
     if result["success"]:
-        assert "data" in result, (
-            "A successful result must contain data."
-        )
+        assert "data" in result, "A successful result must contain data."
     else:
-        assert result.get("error"), (
-            "A failed result must contain an error."
-        )
+        assert result.get("error"), "A failed result must contain an error."
 
 
 def successful_data(
@@ -386,14 +314,9 @@ def successful_data(
 ) -> Any:
     """Return data from a successful tool result."""
 
-    validate_common_shape(
-        result
-    )
+    validate_common_shape(result)
 
-    assert result["success"] is True, (
-        result.get("error")
-        or "Tool call failed."
-    )
+    assert result["success"] is True, result.get("error") or "Tool call failed."
 
     return result["data"]
 
@@ -409,13 +332,9 @@ def run_csv_sql_test(
         None,
     )
 
-    assert callable(csv_sql), (
-        "hw7_bikeshare_tools.py must define csv_sql."
-    )
+    assert callable(csv_sql), "hw7_bikeshare_tools.py must define csv_sql."
 
-    configure_csv_path(
-        csv_path
-    )
+    configure_csv_path(csv_path)
 
     candidate_table_names = (
         "trips",
@@ -423,17 +342,13 @@ def run_csv_sql_test(
         "uploaded_csv",
     )
 
-    select_result: (
-        dict[str, Any] | None
-    ) = None
+    select_result: dict[str, Any] | None = None
 
     selected_table: str | None = None
 
     errors: list[str] = []
 
-    for table_name in (
-        candidate_table_names
-    ):
+    for table_name in candidate_table_names:
         result = call_tool(
             csv_sql,
             {
@@ -449,101 +364,62 @@ def run_csv_sql_test(
             csv_path=csv_path,
         )
 
-        validate_common_shape(
-            result
-        )
+        validate_common_shape(result)
 
         if result["success"]:
             select_result = result
             selected_table = table_name
             break
 
-        errors.append(
-            str(
-                result.get("error")
-            )
-        )
+        errors.append(str(result.get("error")))
 
     assert select_result is not None, (
-        "csv_sql could not query an uploaded table. "
-        f"Errors: {errors}"
+        f"csv_sql could not query an uploaded table. Errors: {errors}"
     )
 
-    select_data = successful_data(
-        select_result
-    )
+    select_data = successful_data(select_result)
 
     assert isinstance(
         select_data,
         dict,
     )
 
-    rows = select_data.get(
-        "rows"
-    )
+    rows = select_data.get("rows")
 
     assert isinstance(
         rows,
         list,
     )
 
-    assert rows, (
-        "csv_sql returned no aggregate row."
-    )
+    assert rows, "csv_sql returned no aggregate row."
 
-    trip_count = int(
-        rows[0]["trip_count"]
-    )
+    trip_count = int(rows[0]["trip_count"])
 
-    assert trip_count == 600, (
-        "Expected 600 CSV rows, "
-        f"received {trip_count}."
-    )
+    assert trip_count == 600, f"Expected 600 CSV rows, received {trip_count}."
 
-    assert (
-        select_data.get("row_count")
-        == 1
-    )
+    assert select_data.get("row_count") == 1
 
     blocked_result = call_tool(
         csv_sql,
         {
-            "sql": (
-                f"DELETE FROM "
-                f"{selected_table}"
-            ),
+            "sql": (f"DELETE FROM {selected_table}"),
         },
         csv_path=csv_path,
     )
 
-    validate_common_shape(
-        blocked_result
-    )
+    validate_common_shape(blocked_result)
 
-    assert (
-        blocked_result["success"]
-        is False
-    ), (
-        "csv_sql allowed a DELETE statement."
-    )
+    assert blocked_result["success"] is False, "csv_sql allowed a DELETE statement."
 
-    assert blocked_result.get(
-        "error"
-    )
+    assert blocked_result.get("error")
 
     return {
         "passed": True,
-        "selected_table": (
-            selected_table
-        ),
+        "selected_table": (selected_table),
         "trip_count": trip_count,
-        "average_duration": rows[0].get(
-            "average_duration"
-        ),
+        "average_duration": rows[0].get("average_duration"),
         "delete_blocked": True,
-        "delete_error": (
-            blocked_result["error"]
-        ),
+        "delete_error": (blocked_result["error"]),
     }
 
 
@@ -552,13 +428,9 @@ def run_policy_retriever_test(
 ) -> dict[str, Any]:
     """Test retrieval from the local pricing page."""
 
-    previous_setting = os.environ.get(
-        "HW7_ALLOW_LOCAL_POLICY_TEST"
-    )
+    previous_setting = os.environ.get("HW7_ALLOW_LOCAL_POLICY_TEST")
 
-    os.environ[
-        "HW7_ALLOW_LOCAL_POLICY_TEST"
-    ] = "1"
+    os.environ["HW7_ALLOW_LOCAL_POLICY_TEST"] = "1"
 
     retriever = getattr(
         tools,
@@ -566,20 +438,14 @@ def run_policy_retriever_test(
         None,
     )
 
-    assert callable(retriever), (
-        "hw7_bikeshare_tools.py must define "
-        "policy_retriever."
-    )
+    assert callable(retriever), "hw7_bikeshare_tools.py must define policy_retriever."
 
     try:
         result = call_tool(
             retriever,
             {
                 "url": pricing_url,
-                "query": (
-                    "monthly membership price "
-                    "included minutes overage fee"
-                ),
+                "query": ("monthly membership price included minutes overage fee"),
                 "k": 3,
             },
         )
@@ -590,31 +456,23 @@ def run_policy_retriever_test(
                 None,
             )
         else:
-            os.environ[
-                "HW7_ALLOW_LOCAL_POLICY_TEST"
-            ] = previous_setting
+            os.environ["HW7_ALLOW_LOCAL_POLICY_TEST"] = previous_setting
 
-    data = successful_data(
-        result
-    )
+    data = successful_data(result)
 
     assert isinstance(
         data,
         dict,
     )
 
-    passages = data.get(
-        "passages"
-    )
+    passages = data.get("passages")
 
     assert isinstance(
         passages,
         list,
     )
 
-    assert passages, (
-        "policy_retriever returned no passages."
-    )
+    assert passages, "policy_retriever returned no passages."
 
     for passage in passages:
         assert isinstance(
@@ -622,39 +480,23 @@ def run_policy_retriever_test(
             dict,
         )
 
-        assert passage.get(
-            "text"
-        )
+        assert passage.get("text")
 
-        assert passage.get(
-            "source"
-        )
+        assert passage.get("source")
 
         assert isinstance(
             passage.get("score"),
             (int, float),
         )
 
-    joined_text = " ".join(
-        str(
-            passage["text"]
-        )
-        for passage in passages
-    ).casefold()
+    joined_text = " ".join(str(passage["text"]) for passage in passages).casefold()
 
-    assert (
-        "membership" in joined_text
-        or "$19.00" in joined_text
-    )
+    assert "membership" in joined_text or "$19.00" in joined_text
 
     return {
         "passed": True,
-        "passage_count": len(
-            passages
-        ),
-        "first_passage": (
-            passages[0]
-        ),
+        "passage_count": len(passages),
+        "first_passage": (passages[0]),
     }
 
 
@@ -667,75 +509,49 @@ def run_calculator_test() -> dict[str, Any]:
         None,
     )
 
-    assert callable(calculator), (
-        "hw7_bikeshare_tools.py must define calculator."
-    )
+    assert callable(calculator), "hw7_bikeshare_tools.py must define calculator."
 
     valid_result = call_tool(
         calculator,
         {
-            "expression": (
-                "(4.99 * 12) + "
-                "(0.25 * 8)"
-            ),
+            "expression": ("(4.99 * 12) + (0.25 * 8)"),
             "units": "USD",
         },
     )
 
-    valid_data = successful_data(
-        valid_result
-    )
+    valid_data = successful_data(valid_result)
 
     assert isinstance(
         valid_data,
         dict,
     )
 
-    value = float(
-        valid_data["value"]
-    )
+    value = float(valid_data["value"])
 
-    assert abs(
-        value - 61.88
-    ) < 0.0001
+    assert abs(value - 61.88) < 0.0001
 
-    assert (
-        valid_data.get("units")
-        == "USD"
-    )
+    assert valid_data.get("units") == "USD"
 
     unsafe_result = call_tool(
         calculator,
         {
-            "expression": (
-                "__import__('os').system("
-                "'echo unsafe')"
-            ),
+            "expression": ("__import__('os').system('echo unsafe')"),
             "units": "USD",
         },
     )
 
-    validate_common_shape(
-        unsafe_result
-    )
+    validate_common_shape(unsafe_result)
 
-    assert (
-        unsafe_result["success"]
-        is False
-    ), (
+    assert unsafe_result["success"] is False, (
         "Calculator allowed a non-arithmetic expression."
     )
 
     return {
         "passed": True,
         "calculated_value": value,
-        "units": (
-            valid_data.get("units")
-        ),
+        "units": (valid_data.get("units")),
         "unsafe_expression_blocked": True,
-        "unsafe_error": (
-            unsafe_result.get("error")
-        ),
+        "unsafe_error": (unsafe_result.get("error")),
     }
 
 
@@ -759,9 +575,7 @@ def run_schema_test() -> dict[str, Any]:
 
     found: dict[str, str] = {}
 
-    for tool_name, names in (
-        possible_schema_names.items()
-    ):
+    for tool_name, names in possible_schema_names.items():
         for name in names:
             schema = getattr(
                 tools,
@@ -773,22 +587,12 @@ def run_schema_test() -> dict[str, Any]:
                 schema,
                 dict,
             ):
-                found[
-                    tool_name
-                ] = name
+                found[tool_name] = name
                 break
 
-    missing = sorted(
-        set(
-            possible_schema_names
-        )
-        - set(found)
-    )
+    missing = sorted(set(possible_schema_names) - set(found))
 
-    assert not missing, (
-        "Missing JSON schemas for: "
-        + ", ".join(missing)
-    )
+    assert not missing, "Missing JSON schemas for: " + ", ".join(missing)
 
     return {
         "passed": True,
@@ -804,58 +608,31 @@ def main() -> None:
         exist_ok=True,
     )
 
-    print(
-        "DATA-260 Homework 7 Part 4"
-    )
+    print("DATA-260 Homework 7 Part 4")
 
-    print(
-        "Bike Share MRKL Tool Tests"
-    )
+    print("Bike Share MRKL Tool Tests")
 
     results: dict[str, Any] = {
-        "experiment": (
-            "hw7_bikeshare_tool_tests"
-        ),
-        "student": (
-            "Sanjana Thummalapalli"
-        ),
+        "experiment": ("hw7_bikeshare_tool_tests"),
+        "student": ("Sanjana Thummalapalli"),
         "sid4": 7801,
         "checks": {},
         "passed": False,
     }
 
-    with tempfile.TemporaryDirectory(
-        prefix="hw7_bikeshare_"
-    ) as temporary_directory:
-        sandbox = Path(
-            temporary_directory
-        )
+    with tempfile.TemporaryDirectory(prefix="hw7_bikeshare_") as temporary_directory:
+        sandbox = Path(temporary_directory)
 
-        csv_path = (
-            sandbox
-            / "uploaded.csv"
-        )
+        csv_path = sandbox / "uploaded.csv"
 
-        pricing_path = (
-            sandbox
-            / "pricing.html"
-        )
+        pricing_path = sandbox / "pricing.html"
 
-        create_trip_csv(
-            csv_path
-        )
+        create_trip_csv(csv_path)
 
-        create_pricing_page(
-            pricing_path
-        )
+        create_pricing_page(pricing_path)
 
-        with local_http_server(
-            sandbox
-        ) as base_url:
-            pricing_url = (
-                f"{base_url}/"
-                f"{pricing_path.name}"
-            )
+        with local_http_server(sandbox) as base_url:
+            pricing_url = f"{base_url}/{pricing_path.name}"
 
             checks: tuple[
                 tuple[
@@ -873,19 +650,11 @@ def main() -> None:
                 ),
                 (
                     "csv_sql",
-                    lambda: (
-                        run_csv_sql_test(
-                            csv_path
-                        )
-                    ),
+                    lambda: (run_csv_sql_test(csv_path)),
                 ),
                 (
                     "policy_retriever",
-                    lambda: (
-                        run_policy_retriever_test(
-                            pricing_url
-                        )
-                    ),
+                    lambda: (run_policy_retriever_test(pricing_url)),
                 ),
                 (
                     "calculator",
@@ -898,32 +667,19 @@ def main() -> None:
             for name, check in checks:
                 try:
                     details = check()
-                except Exception as error: # noqa: BLE001
+                except Exception as error:  # noqa: BLE001
                     all_passed = False
 
-                    results["checks"][
-                        name
-                    ] = {
+                    results["checks"][name] = {
                         "passed": False,
-                        "error": (
-                            f"{type(error).__name__}: "
-                            f"{error}"
-                        ),
+                        "error": (f"{type(error).__name__}: {error}"),
                     }
 
-                    print(
-                        f"FAIL | {name} | "
-                        f"{type(error).__name__}: "
-                        f"{error}"
-                    )
+                    print(f"FAIL | {name} | {type(error).__name__}: {error}")
                 else:
-                    results["checks"][
-                        name
-                    ] = details
+                    results["checks"][name] = details
 
-                    print(
-                        f"PASS | {name}"
-                    )
+                    print(f"PASS | {name}")
 
     results["passed"] = all_passed
 
@@ -939,16 +695,10 @@ def main() -> None:
 
     print(
         "\nOverall:",
-        (
-            "PASS"
-            if all_passed
-            else "FAIL"
-        ),
+        ("PASS" if all_passed else "FAIL"),
     )
 
-    print(
-        f"Results: {RESULTS_PATH}"
-    )
+    print(f"Results: {RESULTS_PATH}")
 
     if not all_passed:
         raise SystemExit(1)

@@ -57,18 +57,9 @@ def find_trial(
     """Return a clinical trial or raise HTTP 404."""
 
     trial = database.scalar(
-        select(
-            ClinicalTrial
-        )
-        .options(
-            selectinload(
-                ClinicalTrial.sponsor
-            )
-        )
-        .where(
-            ClinicalTrial.id
-            == trial_id
-        )
+        select(ClinicalTrial)
+        .options(selectinload(ClinicalTrial.sponsor))
+        .where(ClinicalTrial.id == trial_id)
     )
 
     if trial is None:
@@ -115,23 +106,12 @@ def trial_code_is_used(
 ) -> bool:
     """Return whether another trial uses a trial code."""
 
-    statement = select(
-        ClinicalTrial.id
-    ).where(
-        ClinicalTrial.trial_code
-        == trial_code
-    )
+    statement = select(ClinicalTrial.id).where(ClinicalTrial.trial_code == trial_code)
 
     if excluded_trial_id is not None:
-        statement = statement.where(
-            ClinicalTrial.id
-            != excluded_trial_id
-        )
+        statement = statement.where(ClinicalTrial.id != excluded_trial_id)
 
-    return (
-        database.scalar(statement)
-        is not None
-    )
+    return database.scalar(statement) is not None
 
 
 @router.post(
@@ -151,9 +131,7 @@ def create_trial(
         database,
     )
 
-    trial_code = normalized_trial_code(
-        trial_data.trial_code
-    )
+    trial_code = normalized_trial_code(trial_data.trial_code)
 
     if trial_code_is_used(
         database,
@@ -161,37 +139,22 @@ def create_trial(
     ):
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
-            detail=(
-                "A clinical trial with this "
-                "trial code already exists."
-            ),
+            detail=("A clinical trial with this trial code already exists."),
         )
 
     trial = ClinicalTrial(
         trial_title=trial_data.trial_title,
         trial_code=trial_code,
-        enrollment_target=(
-            trial_data.enrollment_target
-        ),
+        enrollment_target=(trial_data.enrollment_target),
         sponsor_id=sponsor.id,
-        sponsor_name=(
-            sponsor.sponsor_name
-        ),
-        submitter_email=str(
-            trial_data.submitter_email
-        ).strip().casefold(),
-        trial_description=(
-            trial_data.trial_description
-        ),
-        trial_phase=(
-            trial_data.trial_phase
-        ),
+        sponsor_name=(sponsor.sponsor_name),
+        submitter_email=str(trial_data.submitter_email).strip().casefold(),
+        trial_description=(trial_data.trial_description),
+        trial_phase=(trial_data.trial_phase),
         created_by_user_id=user.id,
     )
 
-    database.add(
-        trial
-    )
+    database.add(trial)
 
     try:
         database.commit()
@@ -207,9 +170,7 @@ def create_trial(
             ),
         ) from error
 
-    database.refresh(
-        trial
-    )
+    database.refresh(trial)
 
     # Load the related sponsor for response serialization.
     trial = find_trial(
@@ -253,21 +214,13 @@ def list_trials(
     cleaned_search = search.strip()
 
     if cleaned_search:
-        pattern = (
-            f"%{cleaned_search}%"
-        )
+        pattern = f"%{cleaned_search}%"
 
         filters.append(
             or_(
-                ClinicalTrial.trial_title.like(
-                    pattern
-                ),
-                ClinicalTrial.trial_code.like(
-                    pattern
-                ),
-                ClinicalTrial.sponsor_name.like(
-                    pattern
-                ),
+                ClinicalTrial.trial_title.like(pattern),
+                ClinicalTrial.trial_code.like(pattern),
+                ClinicalTrial.sponsor_name.like(pattern),
             )
         )
 
@@ -277,68 +230,28 @@ def list_trials(
             database,
         )
 
-        filters.append(
-            ClinicalTrial.sponsor_id
-            == sponsor_id
-        )
+        filters.append(ClinicalTrial.sponsor_id == sponsor_id)
 
-    count_statement = select(
-        func.count(
-            ClinicalTrial.id
-        )
-    )
+    count_statement = select(func.count(ClinicalTrial.id))
 
-    statement = (
-        select(
-            ClinicalTrial
-        )
-        .options(
-            selectinload(
-                ClinicalTrial.sponsor
-            )
-        )
-    )
+    statement = select(ClinicalTrial).options(selectinload(ClinicalTrial.sponsor))
 
     if filters:
-        count_statement = (
-            count_statement.where(
-                *filters
-            )
-        )
+        count_statement = count_statement.where(*filters)
 
-        statement = statement.where(
-            *filters
-        )
+        statement = statement.where(*filters)
 
-    total = int(
-        database.scalar(
-            count_statement
-        )
-        or 0
-    )
+    total = int(database.scalar(count_statement) or 0)
 
-    offset = (
-        page - 1
-    ) * page_size
+    offset = (page - 1) * page_size
 
     trials = list(
         database.scalars(
-            statement
-            .order_by(
-                ClinicalTrial.id
-            )
-            .offset(offset)
-            .limit(page_size)
+            statement.order_by(ClinicalTrial.id).offset(offset).limit(page_size)
         ).all()
     )
 
-    total_pages = (
-        math.ceil(
-            total / page_size
-        )
-        if total
-        else 0
-    )
+    total_pages = math.ceil(total / page_size) if total else 0
 
     return TrialListResponse(
         items=trials,
@@ -392,9 +305,7 @@ def update_trial(
         database,
     )
 
-    trial_code = normalized_trial_code(
-        trial_data.trial_code
-    )
+    trial_code = normalized_trial_code(trial_data.trial_code)
 
     if trial_code_is_used(
         database,
@@ -403,40 +314,25 @@ def update_trial(
     ):
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
-            detail=(
-                "Another clinical trial already "
-                "uses this trial code."
-            ),
+            detail=("Another clinical trial already uses this trial code."),
         )
 
-    trial.trial_title = (
-        trial_data.trial_title
-    )
+    trial.trial_title = trial_data.trial_title
 
     trial.trial_code = trial_code
 
-    trial.enrollment_target = (
-        trial_data.enrollment_target
-    )
+    trial.enrollment_target = trial_data.enrollment_target
 
     trial.sponsor_id = sponsor.id
 
     # Keep the legacy value synchronized.
-    trial.sponsor_name = (
-        sponsor.sponsor_name
-    )
+    trial.sponsor_name = sponsor.sponsor_name
 
-    trial.submitter_email = str(
-        trial_data.submitter_email
-    ).strip().casefold()
+    trial.submitter_email = str(trial_data.submitter_email).strip().casefold()
 
-    trial.trial_description = (
-        trial_data.trial_description
-    )
+    trial.trial_description = trial_data.trial_description
 
-    trial.trial_phase = (
-        trial_data.trial_phase
-    )
+    trial.trial_phase = trial_data.trial_phase
 
     try:
         database.commit()
@@ -452,9 +348,7 @@ def update_trial(
             ),
         ) from error
 
-    database.refresh(
-        trial
-    )
+    database.refresh(trial)
 
     return find_trial(
         trial.id,
@@ -480,9 +374,7 @@ def delete_trial(
         database,
     )
 
-    database.delete(
-        trial
-    )
+    database.delete(trial)
 
     try:
         database.commit()
@@ -497,6 +389,4 @@ def delete_trial(
             ),
         ) from error
 
-    return Response(
-        status_code=status.HTTP_204_NO_CONTENT
-    )
+    return Response(status_code=status.HTTP_204_NO_CONTENT)

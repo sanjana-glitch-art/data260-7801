@@ -92,9 +92,7 @@ DESTRUCTIVE_PATTERNS: tuple[
 def utc_timestamp() -> str:
     """Return the current UTC time in ISO format."""
 
-    return datetime.now(
-        UTC
-    ).isoformat()
+    return datetime.now(UTC).isoformat()
 
 
 def success_envelope(
@@ -136,30 +134,19 @@ def _sandbox_path(
 ) -> Path:
     """Resolve a path and ensure it remains in the sandbox."""
 
-    root = Path(
-        sandbox_root
-    ).resolve()
+    root = Path(sandbox_root).resolve()
 
-    candidate_path = Path(
-        requested_path
-    )
+    candidate_path = Path(requested_path)
 
     if candidate_path.is_absolute():
         candidate = candidate_path.resolve()
     else:
-        candidate = (
-            root
-            / candidate_path
-        ).resolve()
+        candidate = (root / candidate_path).resolve()
 
     try:
-        candidate.relative_to(
-            root
-        )
+        candidate.relative_to(root)
     except ValueError as error:
-        raise ValueError(
-            "Path escapes the course sandbox."
-        ) from error
+        raise ValueError("Path escapes the course sandbox.") from error
 
     return candidate
 
@@ -172,14 +159,8 @@ def read_file(
 ) -> dict[str, Any]:
     """Read a sandboxed text file with a line limit."""
 
-    if (
-        not isinstance(max_lines, int)
-        or isinstance(max_lines, bool)
-        or max_lines <= 0
-    ):
-        return error_envelope(
-            "max_lines must be a positive integer."
-        )
+    if not isinstance(max_lines, int) or isinstance(max_lines, bool) or max_lines <= 0:
+        return error_envelope("max_lines must be a positive integer.")
 
     try:
         target = _sandbox_path(
@@ -188,34 +169,19 @@ def read_file(
         )
 
         if not target.is_file():
-            return error_envelope(
-                "File not found."
-            )
+            return error_envelope("File not found.")
 
-        lines = target.read_text(
-            encoding="utf-8"
-        ).splitlines()
+        lines = target.read_text(encoding="utf-8").splitlines()
 
-        selected_lines = lines[
-            :max_lines
-        ]
+        selected_lines = lines[:max_lines]
 
         return success_envelope(
             {
                 "path": str(target),
-                "content": "\n".join(
-                    selected_lines
-                ),
-                "returned_lines": len(
-                    selected_lines
-                ),
-                "total_lines": len(
-                    lines
-                ),
-                "truncated": (
-                    len(lines)
-                    > max_lines
-                ),
+                "content": "\n".join(selected_lines),
+                "returned_lines": len(selected_lines),
+                "total_lines": len(lines),
+                "truncated": (len(lines) > max_lines),
             },
             source=str(target),
         )
@@ -224,9 +190,7 @@ def read_file(
         UnicodeError,
         ValueError,
     ) as error:
-        return error_envelope(
-            f"{type(error).__name__}: {error}"
-        )
+        return error_envelope(f"{type(error).__name__}: {error}")
 
 
 def write_file(
@@ -239,9 +203,7 @@ def write_file(
     """Write a text file inside the sandbox."""
 
     if not isinstance(content, str):
-        return error_envelope(
-            "content must be a string."
-        )
+        return error_envelope("content must be a string.")
 
     try:
         target = _sandbox_path(
@@ -249,13 +211,9 @@ def write_file(
             path,
         )
 
-        if (
-            target.exists()
-            and not overwrite
-        ):
+        if target.exists() and not overwrite:
             return error_envelope(
-                "File already exists; "
-                "set overwrite=True to replace it."
+                "File already exists; set overwrite=True to replace it."
             )
 
         target.parent.mkdir(
@@ -271,9 +229,7 @@ def write_file(
         return success_envelope(
             {
                 "path": str(target),
-                "characters_written": len(
-                    content
-                ),
+                "characters_written": len(content),
             },
             source=str(target),
         )
@@ -282,9 +238,7 @@ def write_file(
         UnicodeError,
         ValueError,
     ) as error:
-        return error_envelope(
-            f"{type(error).__name__}: {error}"
-        )
+        return error_envelope(f"{type(error).__name__}: {error}")
 
 
 def edit_file(
@@ -302,14 +256,10 @@ def edit_file(
         new_text,
         str,
     ):
-        return error_envelope(
-            "old_text and new_text must be strings."
-        )
+        return error_envelope("old_text and new_text must be strings.")
 
     if not old_text:
-        return error_envelope(
-            "old_text must not be empty."
-        )
+        return error_envelope("old_text must not be empty.")
 
     try:
         target = _sandbox_path(
@@ -318,27 +268,17 @@ def edit_file(
         )
 
         if not target.is_file():
-            return error_envelope(
-                "File not found."
-            )
+            return error_envelope("File not found.")
 
-        original = target.read_text(
-            encoding="utf-8"
-        )
+        original = target.read_text(encoding="utf-8")
 
-        occurrence_count = original.count(
-            old_text
-        )
+        occurrence_count = original.count(old_text)
 
         if occurrence_count == 0:
-            return error_envelope(
-                "old_text was not found."
-            )
+            return error_envelope("old_text was not found.")
 
         if occurrence_count > 1:
-            return error_envelope(
-                "old_text is not unique."
-            )
+            return error_envelope("old_text is not unique.")
 
         updated = original.replace(
             old_text,
@@ -365,13 +305,8 @@ def edit_file(
             {
                 "path": str(target),
                 "replacements": 1,
-                "diff": "\n".join(
-                    diff_lines[:60]
-                ),
-                "diff_truncated": (
-                    len(diff_lines)
-                    > 60
-                ),
+                "diff": "\n".join(diff_lines[:60]),
+                "diff_truncated": (len(diff_lines) > 60),
             },
             source=str(target),
         )
@@ -380,9 +315,7 @@ def edit_file(
         UnicodeError,
         ValueError,
     ) as error:
-        return error_envelope(
-            f"{type(error).__name__}: {error}"
-        )
+        return error_envelope(f"{type(error).__name__}: {error}")
 
 
 def glob_files(
@@ -391,41 +324,30 @@ def glob_files(
 ) -> dict[str, Any]:
     """Return files matching a sandbox-relative pattern."""
 
-    if not isinstance(
-        pattern,
-        str,
-    ) or not pattern.strip():
-        return error_envelope(
-            "pattern must not be empty."
+    if (
+        not isinstance(
+            pattern,
+            str,
         )
+        or not pattern.strip()
+    ):
+        return error_envelope("pattern must not be empty.")
 
     try:
-        root = Path(
-            sandbox_root
-        ).resolve()
+        root = Path(sandbox_root).resolve()
 
         matches: list[str] = []
 
-        for candidate in root.glob(
-            pattern
-        ):
+        for candidate in root.glob(pattern):
             resolved = candidate.resolve()
 
             try:
-                resolved.relative_to(
-                    root
-                )
+                resolved.relative_to(root)
             except ValueError:
                 continue
 
             if resolved.is_file():
-                matches.append(
-                    str(
-                        resolved.relative_to(
-                            root
-                        )
-                    )
-                )
+                matches.append(str(resolved.relative_to(root)))
 
         matches.sort()
 
@@ -441,9 +363,7 @@ def glob_files(
         OSError,
         ValueError,
     ) as error:
-        return error_envelope(
-            f"{type(error).__name__}: {error}"
-        )
+        return error_envelope(f"{type(error).__name__}: {error}")
 
 
 def search_in_files(
@@ -455,46 +375,36 @@ def search_in_files(
 ) -> dict[str, Any]:
     """Search matching sandbox files for a text query."""
 
-    if not isinstance(
-        query,
-        str,
-    ) or not query:
-        return error_envelope(
-            "query must not be empty."
+    if (
+        not isinstance(
+            query,
+            str,
         )
+        or not query
+    ):
+        return error_envelope("query must not be empty.")
 
-    if not isinstance(
-        file_pattern,
-        str,
-    ) or not file_pattern:
-        return error_envelope(
-            "file_pattern must not be empty."
+    if (
+        not isinstance(
+            file_pattern,
+            str,
         )
+        or not file_pattern
+    ):
+        return error_envelope("file_pattern must not be empty.")
 
     try:
-        root = Path(
-            sandbox_root
-        ).resolve()
+        root = Path(sandbox_root).resolve()
 
-        normalized_query = (
-            query
-            if case_sensitive
-            else query.casefold()
-        )
+        normalized_query = query if case_sensitive else query.casefold()
 
-        matches: list[
-            dict[str, Any]
-        ] = []
+        matches: list[dict[str, Any]] = []
 
-        for candidate in root.glob(
-            file_pattern
-        ):
+        for candidate in root.glob(file_pattern):
             resolved = candidate.resolve()
 
             try:
-                resolved.relative_to(
-                    root
-                )
+                resolved.relative_to(root)
             except ValueError:
                 continue
 
@@ -502,9 +412,7 @@ def search_in_files(
                 continue
 
             try:
-                lines = resolved.read_text(
-                    encoding="utf-8"
-                ).splitlines()
+                lines = resolved.read_text(encoding="utf-8").splitlines()
             except (
                 OSError,
                 UnicodeError,
@@ -515,37 +423,22 @@ def search_in_files(
                 lines,
                 start=1,
             ):
-                compared_line = (
-                    line
-                    if case_sensitive
-                    else line.casefold()
-                )
+                compared_line = line if case_sensitive else line.casefold()
 
-                if (
-                    normalized_query
-                    in compared_line
-                ):
-                    matches.append({
-                        "path": str(
-                            resolved.relative_to(
-                                root
-                            )
-                        ),
-                        "line_number": (
-                            line_number
-                        ),
-                        "line": line,
-                    })
+                if normalized_query in compared_line:
+                    matches.append(
+                        {
+                            "path": str(resolved.relative_to(root)),
+                            "line_number": (line_number),
+                            "line": line,
+                        }
+                    )
 
         return success_envelope(
             {
                 "query": query,
-                "file_pattern": (
-                    file_pattern
-                ),
-                "match_count": len(
-                    matches
-                ),
+                "file_pattern": (file_pattern),
+                "match_count": len(matches),
                 "matches": matches,
             },
             source=str(root),
@@ -554,9 +447,7 @@ def search_in_files(
         OSError,
         ValueError,
     ) as error:
-        return error_envelope(
-            f"{type(error).__name__}: {error}"
-        )
+        return error_envelope(f"{type(error).__name__}: {error}")
 
 
 def destructive_reason(
@@ -564,13 +455,9 @@ def destructive_reason(
 ) -> str | None:
     """Return the matched destructive-command category."""
 
-    normalized = " ".join(
-        command.strip().casefold().split()
-    )
+    normalized = " ".join(command.strip().casefold().split())
 
-    for pattern, reason in (
-        DESTRUCTIVE_PATTERNS
-    ):
+    for pattern, reason in DESTRUCTIVE_PATTERNS:
         if re.search(
             pattern,
             normalized,
@@ -615,61 +502,42 @@ def confirm_bash(
             "reason": "Command must not be empty.",
         }
 
-    destructive, category = is_destructive(
-        cleaned_command
-    )
+    destructive, category = is_destructive(cleaned_command)
 
     if destructive:
         if auto_approve:
             return {
                 "allowed": True,
                 "destructive": True,
-                "reason": (
-                    "Explicit confirmation supplied for: "
-                    f"{category}."
-                ),
+                "reason": (f"Explicit confirmation supplied for: {category}."),
             }
 
         return {
             "allowed": False,
             "destructive": True,
-            "reason": (
-                "Blocked pending explicit confirmation: "
-                f"{category}."
-            ),
+            "reason": (f"Blocked pending explicit confirmation: {category}."),
         }
 
-    normalized_command = (
-        cleaned_command.casefold()
-    )
+    normalized_command = cleaned_command.casefold()
 
-    if normalized_command.startswith(
-        SAFE_PREFIXES
-    ):
+    if normalized_command.startswith(SAFE_PREFIXES):
         return {
             "allowed": True,
             "destructive": False,
-            "reason": (
-                "Command matches SAFE_PREFIXES."
-            ),
+            "reason": ("Command matches SAFE_PREFIXES."),
         }
 
     if auto_approve:
         return {
             "allowed": True,
             "destructive": False,
-            "reason": (
-                "Command was explicitly confirmed."
-            ),
+            "reason": ("Command was explicitly confirmed."),
         }
 
     return {
         "allowed": False,
         "destructive": False,
-        "reason": (
-            "Command is outside SAFE_PREFIXES "
-            "and requires confirmation."
-        ),
+        "reason": ("Command is outside SAFE_PREFIXES and requires confirmation."),
     }
 
 
@@ -688,19 +556,13 @@ def bash(
     )
 
     if not decision["allowed"]:
-        return error_envelope(
-            decision["reason"]
-        )
+        return error_envelope(decision["reason"])
 
     if timeout_seconds <= 0:
-        return error_envelope(
-            "timeout_seconds must be positive."
-        )
+        return error_envelope("timeout_seconds must be positive.")
 
     try:
-        root = Path(
-            sandbox_root
-        ).resolve()
+        root = Path(sandbox_root).resolve()
 
         root.mkdir(
             parents=True,
@@ -720,9 +582,7 @@ def bash(
         return success_envelope(
             {
                 "command": command,
-                "return_code": (
-                    completed.returncode
-                ),
+                "return_code": (completed.returncode),
                 "stdout": completed.stdout,
                 "stderr": completed.stderr,
                 "safety_decision": decision,
@@ -733,6 +593,4 @@ def bash(
         OSError,
         subprocess.SubprocessError,
     ) as error:
-        return error_envelope(
-            f"{type(error).__name__}: {error}"
-        )
+        return error_envelope(f"{type(error).__name__}: {error}")
