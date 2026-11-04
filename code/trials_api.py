@@ -1,6 +1,22 @@
 from __future__ import annotations
 
 import math
+from code.auth_api import (
+    CurrentUser,
+    ModeratorUser,
+    WriterUser,
+)
+from code.database import get_db
+from code.models import (
+    ClinicalTrial,
+    Sponsor,
+)
+from code.schemas import (
+    ClinicalTrialResponse,
+    TrialCreate,
+    TrialListResponse,
+    TrialUpdate,
+)
 from typing import Annotated
 
 from fastapi import (
@@ -21,20 +37,6 @@ from sqlalchemy.orm import (
     Session,
     selectinload,
 )
-
-from code.auth_api import CurrentUser
-from code.database import get_db
-from code.models import (
-    ClinicalTrial,
-    Sponsor,
-)
-from code.schemas import (
-    ClinicalTrialResponse,
-    TrialCreate,
-    TrialListResponse,
-    TrialUpdate,
-)
-
 
 router = APIRouter(
     prefix="/api/trials",
@@ -139,7 +141,7 @@ def trial_code_is_used(
 )
 def create_trial(
     trial_data: TrialCreate,
-    user: CurrentUser,
+    user: WriterUser,
     database: DatabaseSession,
 ) -> ClinicalTrial:
     """Create a clinical-trial record."""
@@ -466,7 +468,7 @@ def update_trial(
 )
 def delete_trial(
     trial_id: int,
-    user: CurrentUser,
+    user: ModeratorUser,
     database: DatabaseSession,
 ) -> Response:
     """Delete an existing clinical trial."""

@@ -325,3 +325,203 @@ tbody tr:hover {
         width: 100%;
     }
 }
+
+.bikeshare-page {
+    width: min(1180px, calc(100% - 2rem));
+    margin: 0 auto;
+    padding: 2rem 0 4rem;
+}
+
+.page-heading {
+    margin-bottom: 1.5rem;
+}
+
+.page-heading h1 {
+    margin: 0.25rem 0 0.75rem;
+}
+
+.eyebrow {
+    margin: 0;
+    color: #2563eb;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.panel {
+    margin-bottom: 1.25rem;
+    padding: 1.35rem;
+    border: 1px solid #dbe3ef;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 28px rgb(15 23 42 / 7%);
+}
+
+.bikeshare-form {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr auto;
+    gap: 1rem;
+    align-items: end;
+}
+
+.bikeshare-form label {
+    display: grid;
+    gap: 0.45rem;
+}
+
+.bikeshare-form label span {
+    font-weight: 700;
+}
+
+.bikeshare-form input {
+    width: 100%;
+    min-height: 44px;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+}
+
+.bikeshare-form button {
+    min-height: 44px;
+    padding: 0.7rem 1rem;
+    border: 0;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #ffffff;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.bikeshare-form button:disabled {
+    opacity: 0.65;
+    cursor: wait;
+}
+
+.selected-file {
+    margin-bottom: 0;
+}
+
+.metrics-strip,
+.cost-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.metrics-strip article,
+.cost-grid article {
+    padding: 1rem;
+    border: 1px solid #dbe3ef;
+    border-radius: 14px;
+    background: #f8fafc;
+}
+
+.metrics-strip span,
+.cost-grid span {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: #64748b;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.metrics-strip strong,
+.cost-grid strong {
+    color: #0f172a;
+    font-size: 1.2rem;
+}
+
+.decision-panel {
+    border-left: 6px solid #2563eb;
+}
+
+.table-scroll {
+    overflow-x: auto;
+}
+
+.table-scroll table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-scroll th,
+.table-scroll td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #e2e8f0;
+    text-align: left;
+}
+
+.timeline {
+    display: grid;
+    gap: 1rem;
+    padding-left: 1.4rem;
+}
+
+.timeline li {
+    padding: 1rem;
+    border-left: 4px solid #2563eb;
+    background: #f8fafc;
+}
+
+.timeline details {
+    margin-top: 0.65rem;
+}
+
+.timeline pre {
+    max-height: 320px;
+    overflow: auto;
+    padding: 1rem;
+    border-radius: 8px;
+    background: #0f172a;
+    color: #e2e8f0;
+    white-space: pre-wrap;
+}
+
+.citation-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.citation-list blockquote {
+    margin: 0 0 0.35rem;
+    padding-left: 1rem;
+    border-left: 4px solid #94a3b8;
+}
+
+.hash-value {
+    overflow-wrap: anywhere;
+    font-family: monospace;
+}
+
+.error-message {
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    background: #fef2f2;
+    color: #991b1b;
+}
+
+.empty-results {
+    color: #64748b;
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+    .bikeshare-form,
+    .metrics-strip,
+    .cost-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .bikeshare-form,
+    .metrics-strip,
+    .cost-grid {
+        grid-template-columns: 1fr;
+    }
+}

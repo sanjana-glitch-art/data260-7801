@@ -1,0 +1,42 @@
+{
+  "tasks": [
+    {
+      "task_id": "task_a",
+      "name": "search_then_detail",
+      "prompt": "Search for clinical trials related to sleep, then retrieve full details for the first result.",
+      "expected_tools": [
+        "search_trials",
+        "trial_details"
+      ],
+      "minimum_tool_calls": 2
+    },
+    {
+      "task_id": "task_b",
+      "name": "aggregate_then_example",
+      "prompt": "Show the number of clinical trials in each trial phase, then search for one sleep trial as a supporting example.",
+      "expected_tools": [
+        "trial_phase_summary",
+        "search_trials"
+      ],
+      "minimum_tool_calls": 2
+    },
+    {
+      "task_id": "task_c",
+      "name": "compare_two_trials",
+      "prompt": "First call search_trials using exactly {\"query\": \"Study\", \"limit\": 4}. From that result, select two different trial IDs. Call trial_details once for the first ID and once for the second ID. Then compare the two trials by title, phase, sponsor, and enrollment target.",
+      "expected_tools": [
+        "search_trials",
+        "trial_details",
+        "trial_details"
+      ],
+      "minimum_tool_calls": 3
+    }
+  ],
+  "error_case": {
+    "case_id": "nonexistent_id",
+    "name": "impossible_trial_id",
+    "prompt": "Retrieve details for clinical trial ID 999999999. If it does not exist, explain the tool error without crashing.",
+    "expected_tool": "trial_details",
+    "trial_id": 999999999
+  }
+}

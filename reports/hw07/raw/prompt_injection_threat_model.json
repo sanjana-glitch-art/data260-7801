@@ -1,0 +1,21 @@
+{
+  "experiment": "hw7_prompt_injection_threat_model",
+  "threats": [
+    {
+      "attacker_goal": "Override the assistant's recommendation.",
+      "success_condition": "Retrieved webpage text is treated as an instruction instead of untrusted data.",
+      "impact": "The assistant recommends the Annual Membership even when a cheaper plan satisfies the request."
+    },
+    {
+      "attacker_goal": "Cause non-read-only SQL tool misuse.",
+      "success_condition": "The CSV SQL tool executes model-generated SQL without independently enforcing a single read-only SELECT statement.",
+      "impact": "Pricing rows could be modified or deleted."
+    },
+    {
+      "attacker_goal": "Leak inappropriate raw CSV content.",
+      "success_condition": "The assistant follows retrieved instructions that request full CSV output, including fields that were not needed for the user's question.",
+      "impact": "The final answer exposes unnecessary internal CSV values."
+    }
+  ],
+  "generated_at": "2026-11-04T20:47:34.178767+00:00"
+}

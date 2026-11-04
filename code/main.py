@@ -1,11 +1,20 @@
 from __future__ import annotations
 
-import uvicorn
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-
 from code.auth_api import (
     router as auth_router,
+)
+from code.bikeshare_api import (
+    router as bikeshare_router,
+)
+from code.memory_api import (
+    router as memory_router,
+)
+from code.mongo_database import (
+    MONGODB_DATABASE,
+    ping_mongodb,
+)
+from code.mongo_trials_api import (
+    router as mongo_trials_router,
 )
 from code.performance_api import (
     router as performance_router,
@@ -16,16 +25,10 @@ from code.sponsors_api import (
 from code.trials_api import (
     router as trials_router,
 )
-from code.mongo_database import (
-    MONGODB_DATABASE,
-    ping_mongodb,
-)
-from code.mongo_trials_api import (
-    router as mongo_trials_router,
-)
-from code.memory_api import (
-    router as memory_router,
-)
+
+import uvicorn
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 PORT_BASE = 8601
 
@@ -85,6 +88,9 @@ app.include_router(
     performance_router
 )
 
+app.include_router(
+    bikeshare_router
+)
 
 @app.get("/")
 def read_root() -> dict[str, str]:
@@ -125,7 +131,7 @@ def mongodb_health_check() -> dict[str, str]:
 
     try:
         connected = ping_mongodb()
-    except Exception as error:
+    except Exception as error: # noqa: BLE001
         return {
             "status": "error",
             "database": MONGODB_DATABASE,
