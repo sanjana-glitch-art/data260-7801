@@ -14,7 +14,7 @@
     "matched_file": "beta.py",
     "matched_line": "LOG_LEVEL = \"DEBUG\"",
     "read_content": "LOG_LEVEL = \"DEBUG\"\nMESSAGE = \"target file\"",
-    "edit_diff": "--- C:\\Users\\ADS-Research-001\\AppData\\Local\\Temp\\s7801_hw7_5bpj1o_i\\beta.py\n+++ C:\\Users\\ADS-Research-001\\AppData\\Local\\Temp\\s7801_hw7_5bpj1o_i\\beta.py\n@@ -1,2 +1,2 @@\n LOG_LEVEL = \"DEBUG\"\n-MESSAGE = \"target file\"\n+MESSAGE = \"verified target file\"",
+    "edit_diff": "--- C:\\Users\\ADS-Research-001\\AppData\\Local\\Temp\\s7801_hw7_51r9umy4\\beta.py\n+++ C:\\Users\\ADS-Research-001\\AppData\\Local\\Temp\\s7801_hw7_51r9umy4\\beta.py\n@@ -1,2 +1,2 @@\n LOG_LEVEL = \"DEBUG\"\n-MESSAGE = \"target file\"\n+MESSAGE = \"verified target file\"",
     "tool_sequence": [
       "write_file",
       "glob_files",
