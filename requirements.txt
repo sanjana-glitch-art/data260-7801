@@ -27,3 +27,4 @@ httpx
 pymongo>=4.10,<5
 PyYAML>=6,<7
 sentence-transformers>=3,<6
+confluent-kafka>=2.6,<4

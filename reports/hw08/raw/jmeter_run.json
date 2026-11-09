@@ -1,0 +1,15 @@
+﻿{
+    "ramp_up_seconds":  10,
+    "result_file":  "reports\\hw08\\raw\\jmeter_results_20261106_141507.csv",
+    "test_plan":  "reports\\hw08\\raw\\hw8_jmeter_test.jmx",
+    "samples":  100,
+    "threads":  100,
+    "html_report":  "reports\\hw08\\raw\\jmeter_report_20261106_141507",
+    "loop_count":  1,
+    "throughput_per_second":  10,
+    "minimum_ms":  63,
+    "error_percent":  0,
+    "average_ms":  72,
+    "maximum_ms":  169,
+    "passed":  true
+}

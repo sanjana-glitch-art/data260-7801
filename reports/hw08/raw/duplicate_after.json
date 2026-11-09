@@ -1,0 +1,21 @@
+{
+  "experiment": "hw8_duplicate_delivery",
+  "label": "after",
+  "correlation_id": "885f1ad2-8684-495b-8588-ec50a342c9a7",
+  "first_response": {
+    "correlation_id": "885f1ad2-8684-495b-8588-ec50a342c9a7",
+    "success": true,
+    "entity_id": "45b7ff1c-c0f8-4c47-a2ce-000404a5f9f2",
+    "message": "Clinical trial created",
+    "idempotent_replay": false
+  },
+  "second_response": {
+    "correlation_id": "885f1ad2-8684-495b-8588-ec50a342c9a7",
+    "success": true,
+    "entity_id": "45b7ff1c-c0f8-4c47-a2ce-000404a5f9f2",
+    "message": "Clinical trial created",
+    "idempotent_replay": true
+  },
+  "duplicate_side_effect": false,
+  "idempotency_passed": true
+}

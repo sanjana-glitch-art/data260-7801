@@ -1,0 +1,41 @@
+{
+  "experiment": "hw8_poison_message",
+  "poison_correlation_id": "d79d973f-f9b6-48d6-8802-d8460f4499bf",
+  "valid_correlation_id": "a5e6a940-96f6-4b11-91e0-ce48f15ca824",
+  "maximum_attempts": 3,
+  "dead_letter_message": {
+    "correlation_id": "d79d973f-f9b6-48d6-8802-d8460f4499bf",
+    "source_topic": "s7801_tasks",
+    "source_partition": 0,
+    "source_offset": 0,
+    "attempts": 3,
+    "error_type": "TypeError",
+    "error": "plan must be a list.",
+    "original_message": {
+      "correlation_id": "d79d973f-f9b6-48d6-8802-d8460f4499bf",
+      "question": "This message intentionally contains an invalid plan.",
+      "plan": "not-a-list",
+      "entity_key": "clinical-trials",
+      "stage": "planned",
+      "created_at": "2026-11-05T23:03:02.528904+00:00"
+    },
+    "failed_at": "2026-11-05T23:03:03.113061+00:00"
+  },
+  "valid_draft": {
+    "correlation_id": "a5e6a940-96f6-4b11-91e0-ce48f15ca824",
+    "question": "How does Kafka support clinical-trial coordination?",
+    "plan": [
+      "Explain Kafka message coordination.",
+      "Relate the explanation to clinical trials."
+    ],
+    "draft": "Kafka improves clinical-trial coordination by decoupling request producers from the services that process trial work. Each message keeps a correlation ID, allowing the system to connect plans, drafts, and reviewed answers even though the agents run as independent processes. Kafka also stores messages durably so work can continue after a consumer restart. The response to the question 'How does Kafka support clinical-trial coordination?' follows this plan: 1) Explain Kafka message coordination. 2) Relate the explanation to clinical trials.",
+    "entity_key": "clinical-trials",
+    "stage": "drafted",
+    "created_at": "2026-11-05T23:03:03.205731+00:00"
+  },
+  "retry_limit_passed": true,
+  "dead_letter_passed": true,
+  "worker_recovery_passed": true,
+  "overall_passed": true,
+  "generated_at": "2026-11-05T23:03:03.259386+00:00"
+}

@@ -1,0 +1,77 @@
+{
+  "homework": 8,
+  "student": "Sanjana Thummalapalli",
+  "sid4": 7801,
+  "commit_hash": "ebdc415eff6a9868f643f64c0e794aa5a83f04e3",
+  "configuration": {
+    "prefix": "s7801",
+    "port_base": 8601,
+    "seed": 7801,
+    "verify_seed": 267801,
+    "domain_id": 1,
+    "domain": "Clinical Trials",
+    "kafka_bootstrap_servers": "localhost:9092",
+    "model": "Deterministic Kafka agents; no LLM required"
+  },
+  "checks": [
+    {
+      "name": "personal_configuration",
+      "passed": true,
+      "details": "SID4=7801, PREFIX=s7801, SEED=7801, VERIFY_SEED=267801"
+    },
+    {
+      "name": "required_kafka_topics",
+      "passed": true,
+      "details": "All required topics exist."
+    },
+    {
+      "name": "tasks_topic_two_partitions",
+      "passed": true,
+      "details": "s7801_tasks has 2 partitions."
+    },
+    {
+      "name": "create_get_round_trip",
+      "passed": true,
+      "details": "CREATE followed by GET passed."
+    },
+    {
+      "name": "correlation_id_preserved",
+      "passed": true,
+      "details": "Correlation ID was preserved."
+    },
+    {
+      "name": "duplicate_before_demonstrated",
+      "passed": true,
+      "details": "duplicate_before.json: duplicate_side_effect=True"
+    },
+    {
+      "name": "duplicate_after_idempotent",
+      "passed": true,
+      "details": "duplicate_after.json: idempotency_passed=True"
+    },
+    {
+      "name": "poison_message_recovery",
+      "passed": true,
+      "details": "poison_message_results.json: overall_passed=True"
+    },
+    {
+      "name": "ordering_experiment",
+      "passed": true,
+      "details": "ordering_results.json: overall_passed=True"
+    },
+    {
+      "name": "three_agent_pipeline",
+      "passed": true,
+      "details": "Final status=approved"
+    },
+    {
+      "name": "consumer_death_redelivery",
+      "passed": true,
+      "details": "Redelivered and completed IDs: dff8be9d-a81a-4ec8-bdbe-c9ff13dbb3d5"
+    }
+  ],
+  "passed_count": 11,
+  "check_count": 11,
+  "overall_passed": true,
+  "generated_at": "2026-11-09T10:10:05.295507+00:00"
+}

@@ -1,0 +1,18 @@
+﻿FROM python:3.11-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONPATH=/app
+
+WORKDIR /app
+
+RUN pip install --no-cache-dir \
+    "fastapi==0.109.0" \
+    "uvicorn[standard]==0.27.0" \
+    "pydantic>=2.12,<3" \
+    "confluent-kafka>=2.6,<4" \
+    "requests>=2.32"
+
+COPY code /app/code
+
+EXPOSE 8601
