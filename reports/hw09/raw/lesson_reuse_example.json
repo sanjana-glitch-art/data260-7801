@@ -1,0 +1,22 @@
+{
+  "question": "Report both the phase and enrollment target for the digital wellness trial.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "answer": "Digital Wellness Intervention Study: Phase: Phase I. Enrollment target: 180.",
+      "loaded_lesson_ids": [
+        "lesson_001"
+      ],
+      "evaluation_result": "PASS",
+      "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+      "feedback": "",
+      "missing_fields": []
+    }
+  ],
+  "attempt_count": 1,
+  "final_answer": "Digital Wellness Intervention Study: Phase: Phase I. Enrollment target: 180.",
+  "final_evaluation": "PASS",
+  "success": true,
+  "latency_ms": 5.848,
+  "stop_reason": "passed"
+}

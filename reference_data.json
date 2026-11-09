@@ -1,0 +1,39 @@
+﻿{
+  "domain": "Clinical Trials",
+  "student": "Sanjana Thummalapalli",
+  "sid4": 7801,
+  "facts": {
+    "sleep_quality": {
+      "trial_code": "S7801-CT-000001",
+      "trial_title": "Sleep Quality and Academic Performance Study",
+      "trial_phase": "Phase II",
+      "enrollment_target": 120,
+      "sponsor_name": "San Jose State University",
+      "description": "Examines sleep quality, concentration, memory, and academic performance."
+    },
+    "digital_wellness": {
+      "trial_code": "S7801-CT-000002",
+      "trial_title": "Digital Wellness Intervention Study",
+      "trial_phase": "Phase I",
+      "enrollment_target": 180,
+      "sponsor_name": "San Jose State University",
+      "description": "Evaluates a digital wellness intervention for university students."
+    },
+    "memory_cognitive": {
+      "trial_code": "S7801-CT-000003",
+      "trial_title": "Student Memory and Cognitive Performance Trial",
+      "trial_phase": "Phase III",
+      "enrollment_target": 90,
+      "sponsor_name": "San Jose State University",
+      "description": "Evaluates memory and cognitive performance among university students."
+    },
+    "remote_monitoring": {
+      "trial_code": "S7801-CT-000004",
+      "trial_title": "Remote Clinical Monitoring Study",
+      "trial_phase": "Phase IV",
+      "enrollment_target": 250,
+      "sponsor_name": "San Jose State University",
+      "description": "Evaluates remote monitoring methods for participants in clinical research."
+    }
+  }
+}

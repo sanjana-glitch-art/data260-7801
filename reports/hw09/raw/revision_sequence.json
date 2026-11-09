@@ -1,0 +1,31 @@
+{
+  "question": "Give the phase and enrollment target of the sleep quality trial.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "answer": "Sleep Quality and Academic Performance Study: Phase: Phase II.",
+      "loaded_lesson_ids": [],
+      "evaluation_result": "REVISE",
+      "evaluation_explanation": "The answer is incomplete relative to the reference dataset.",
+      "feedback": "Add the following missing ground-truth facts: enrollment_target=120.",
+      "missing_fields": [
+        "enrollment_target"
+      ]
+    },
+    {
+      "attempt": 2,
+      "answer": "Sleep Quality and Academic Performance Study: Phase: Phase II. Enrollment target: 120.",
+      "loaded_lesson_ids": [],
+      "evaluation_result": "PASS",
+      "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+      "feedback": "",
+      "missing_fields": []
+    }
+  ],
+  "attempt_count": 2,
+  "final_answer": "Sleep Quality and Academic Performance Study: Phase: Phase II. Enrollment target: 120.",
+  "final_evaluation": "PASS",
+  "success": true,
+  "latency_ms": 0.069,
+  "stop_reason": "passed"
+}

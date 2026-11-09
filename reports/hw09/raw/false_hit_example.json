@@ -1,0 +1,17 @@
+{
+  "threshold": 0.75,
+  "case_id": "similar_different_01",
+  "category": "similar_different_answer",
+  "cached_query": "What phase is the sleep quality trial?",
+  "incoming_query": "What is the enrollment target of the sleep quality trial?",
+  "should_hit": false,
+  "predicted_hit": true,
+  "similarity": 0.830932,
+  "false_hit": true,
+  "false_miss": false,
+  "lookup_latency_ms": 6.865,
+  "estimated_end_to_end_latency_ms": 6.865,
+  "cached_answer": "The sleep quality trial is Phase II.",
+  "returned_answer": "The sleep quality trial is Phase II.",
+  "correct_answer": "The sleep quality trial has an enrollment target of 120."
+}

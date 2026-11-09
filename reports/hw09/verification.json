@@ -1,0 +1,89 @@
+{
+  "homework": 9,
+  "student": "Sanjana Thummalapalli",
+  "sid4": 7801,
+  "prefix": "s7801",
+  "domain": "Clinical Trials",
+  "commit_hash": "2ad460bf1c8971e61c28a4923dab37a19fa6f7bd",
+  "checks": [
+    {
+      "name": "personal_configuration",
+      "passed": true,
+      "details": "SID4=7801, PREFIX=s7801, embedding_dimensions=384"
+    },
+    {
+      "name": "redis_connection",
+      "passed": true,
+      "details": "Redis PING succeeded."
+    },
+    {
+      "name": "redis_vector_index",
+      "passed": true,
+      "details": "Indexes=['s7801:semantic_cache:index']; expected=s7801:semantic_cache:index"
+    },
+    {
+      "name": "redis_key_prefix",
+      "passed": true,
+      "details": "Checked 1 Redis keys; all begin with s7801."
+    },
+    {
+      "name": "database_view_column",
+      "passed": true,
+      "details": "clinical_trials.view_count exists."
+    },
+    {
+      "name": "redis_view_counter",
+      "passed": true,
+      "details": "25 accesses, database syncs at 10 and 20, and PASS found."
+    },
+    {
+      "name": "semantic_cache_performance",
+      "passed": true,
+      "details": "queries=10, hits=3, hit_rate=30.0%, cached_latency=7.922 ms, miss_latency=7105.463 ms"
+    },
+    {
+      "name": "labeled_cache_cases",
+      "passed": true,
+      "details": "cases=40, categories={'exact_duplicate': 10, 'paraphrase': 10, 'similar_different_answer': 10, 'unrelated': 10}"
+    },
+    {
+      "name": "threshold_sweep",
+      "passed": true,
+      "details": "thresholds=[0.75, 0.8, 0.85, 0.9, 0.95], recommended=0.9"
+    },
+    {
+      "name": "complete_false_hit",
+      "passed": true,
+      "details": "False-hit evidence includes both queries, similarity, cached answer and correct answer."
+    },
+    {
+      "name": "stale_cache_invalidation",
+      "passed": true,
+      "details": "Stale hit demonstrated, stale entry deleted, and refreshed answer verified."
+    },
+    {
+      "name": "agent_datasets",
+      "passed": true,
+      "details": "reference_facts=4, training=8, validation=8, test=8, input_only=True"
+    },
+    {
+      "name": "evaluator_revision",
+      "passed": true,
+      "details": "Initial attempt REVISE; second attempt PASS."
+    },
+    {
+      "name": "lesson_memory_reuse",
+      "passed": true,
+      "details": "lessons=1, use_count=11"
+    },
+    {
+      "name": "validated_four_variants",
+      "passed": true,
+      "details": "variants=4, before=4, after=8, regressions=[]"
+    }
+  ],
+  "passed_count": 15,
+  "check_count": 15,
+  "overall_passed": true,
+  "generated_at": "2026-11-09T11:52:00.052261+00:00"
+}

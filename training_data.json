@@ -1,0 +1,35 @@
+﻿[
+  {
+    "input_id": "train_01",
+    "question": "Give the phase and enrollment target of the sleep quality trial.",
+    "controlled_failure": true
+  },
+  {
+    "input_id": "train_02",
+    "question": "Who sponsors the digital wellness trial?"
+  },
+  {
+    "input_id": "train_03",
+    "question": "Give the phase and enrollment target of the memory and cognitive trial."
+  },
+  {
+    "input_id": "train_04",
+    "question": "What is the enrollment target of the remote monitoring study?"
+  },
+  {
+    "input_id": "train_05",
+    "question": "Describe the sleep quality trial."
+  },
+  {
+    "input_id": "train_06",
+    "question": "What phase is the digital wellness intervention study?"
+  },
+  {
+    "input_id": "train_07",
+    "question": "Who sponsors the memory and cognitive trial?"
+  },
+  {
+    "input_id": "train_08",
+    "question": "Describe the remote clinical monitoring study."
+  }
+]

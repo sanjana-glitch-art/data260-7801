@@ -1,0 +1,869 @@
+{
+  "experiment": "hw9_self_improving_agents",
+  "student": "Sanjana Thummalapalli",
+  "sid4": 7801,
+  "reference_dataset": "reference_data.json",
+  "training_dataset": "training_data.json",
+  "validation_dataset": "validation_data.json",
+  "test_dataset": "test_data.json",
+  "maximum_attempts": 2,
+  "revision_sequence": {
+    "question": "Give the phase and enrollment target of the sleep quality trial.",
+    "attempts": [
+      {
+        "attempt": 1,
+        "answer": "Sleep Quality and Academic Performance Study: Phase: Phase II.",
+        "loaded_lesson_ids": [],
+        "evaluation_result": "REVISE",
+        "evaluation_explanation": "The answer is incomplete relative to the reference dataset.",
+        "feedback": "Add the following missing ground-truth facts: enrollment_target=120.",
+        "missing_fields": [
+          "enrollment_target"
+        ]
+      },
+      {
+        "attempt": 2,
+        "answer": "Sleep Quality and Academic Performance Study: Phase: Phase II. Enrollment target: 120.",
+        "loaded_lesson_ids": [],
+        "evaluation_result": "PASS",
+        "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+        "feedback": "",
+        "missing_fields": []
+      }
+    ],
+    "attempt_count": 2,
+    "final_answer": "Sleep Quality and Academic Performance Study: Phase: Phase II. Enrollment target: 120.",
+    "final_evaluation": "PASS",
+    "success": true,
+    "latency_ms": 0.069,
+    "stop_reason": "passed"
+  },
+  "repeated_failure_count": 2,
+  "candidate_lesson": {
+    "lesson_id": "lesson_001",
+    "failure_pattern": "The answer omits the requested enrollment target.",
+    "correction": "When a question requests both phase and enrollment, or asks for trial details, include the numeric enrollment target.",
+    "created_at": "2026-11-09",
+    "use_count": 11
+  },
+  "validation": {
+    "correct_before": 4,
+    "correct_after": 8,
+    "improved_cases": [
+      "validation_01",
+      "validation_02",
+      "validation_06",
+      "validation_08"
+    ],
+    "regressions": [],
+    "lesson_kept": true
+  },
+  "lesson_reuse_example": {
+    "question": "Report both the phase and enrollment target for the digital wellness trial.",
+    "attempts": [
+      {
+        "attempt": 1,
+        "answer": "Digital Wellness Intervention Study: Phase: Phase I. Enrollment target: 180.",
+        "loaded_lesson_ids": [
+          "lesson_001"
+        ],
+        "evaluation_result": "PASS",
+        "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+        "feedback": "",
+        "missing_fields": []
+      }
+    ],
+    "attempt_count": 1,
+    "final_answer": "Digital Wellness Intervention Study: Phase: Phase I. Enrollment target: 180.",
+    "final_evaluation": "PASS",
+    "success": true,
+    "latency_ms": 5.848,
+    "stop_reason": "passed"
+  },
+  "variants": [
+    {
+      "variant": "Baseline",
+      "correct_answers": 4,
+      "incorrect_answers": 4,
+      "average_attempts": 1,
+      "average_latency_ms": 0.022,
+      "results": [
+        {
+          "input_id": "test_01",
+          "question": "State the phase and enrollment target of the sleep quality study.",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Sleep Quality and Academic Performance Study: Phase: Phase II.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "REVISE",
+              "evaluation_explanation": "The answer is incomplete relative to the reference dataset.",
+              "feedback": "Add the following missing ground-truth facts: enrollment_target=120.",
+              "missing_fields": [
+                "enrollment_target"
+              ]
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Sleep Quality and Academic Performance Study: Phase: Phase II.",
+          "final_evaluation": "REVISE",
+          "success": false,
+          "latency_ms": 0.052,
+          "stop_reason": "maximum_attempts_reached"
+        },
+        {
+          "input_id": "test_02",
+          "question": "State the phase and enrollment target of the digital wellness study.",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Digital Wellness Intervention Study: Phase: Phase I.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "REVISE",
+              "evaluation_explanation": "The answer is incomplete relative to the reference dataset.",
+              "feedback": "Add the following missing ground-truth facts: enrollment_target=180.",
+              "missing_fields": [
+                "enrollment_target"
+              ]
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Digital Wellness Intervention Study: Phase: Phase I.",
+          "final_evaluation": "REVISE",
+          "success": false,
+          "latency_ms": 0.021,
+          "stop_reason": "maximum_attempts_reached"
+        },
+        {
+          "input_id": "test_03",
+          "question": "What organization sponsors the remote monitoring study?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Remote Clinical Monitoring Study: Sponsor: San Jose State University.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Remote Clinical Monitoring Study: Sponsor: San Jose State University.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 0.02,
+          "stop_reason": "passed"
+        },
+        {
+          "input_id": "test_04",
+          "question": "What is the enrollment target of the memory and cognitive trial?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Student Memory and Cognitive Performance Trial: Enrollment target: 90.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Student Memory and Cognitive Performance Trial: Enrollment target: 90.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 0.017,
+          "stop_reason": "passed"
+        },
+        {
+          "input_id": "test_05",
+          "question": "Describe the remote monitoring clinical trial.",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Remote Clinical Monitoring Study: Evaluates remote monitoring methods for participants in clinical research. Phase: Phase IV. Sponsor: San Jose State University.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "REVISE",
+              "evaluation_explanation": "The answer is incomplete relative to the reference dataset.",
+              "feedback": "Add the following missing ground-truth facts: enrollment_target=250.",
+              "missing_fields": [
+                "enrollment_target"
+              ]
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Remote Clinical Monitoring Study: Evaluates remote monitoring methods for participants in clinical research. Phase: Phase IV. Sponsor: San Jose State University.",
+          "final_evaluation": "REVISE",
+          "success": false,
+          "latency_ms": 0.023,
+          "stop_reason": "maximum_attempts_reached"
+        },
+        {
+          "input_id": "test_06",
+          "question": "Which phase contains the student memory study?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Student Memory and Cognitive Performance Trial: Phase: Phase III.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Student Memory and Cognitive Performance Trial: Phase: Phase III.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 0.016,
+          "stop_reason": "passed"
+        },
+        {
+          "input_id": "test_07",
+          "question": "Describe the sleep quality and academic performance study.",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Sleep Quality and Academic Performance Study: Examines sleep quality, concentration, memory, and academic performance. Phase: Phase II. Sponsor: San Jose State University.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "REVISE",
+              "evaluation_explanation": "The answer is incomplete relative to the reference dataset.",
+              "feedback": "Add the following missing ground-truth facts: enrollment_target=120.",
+              "missing_fields": [
+                "enrollment_target"
+              ]
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Sleep Quality and Academic Performance Study: Examines sleep quality, concentration, memory, and academic performance. Phase: Phase II. Sponsor: San Jose State University.",
+          "final_evaluation": "REVISE",
+          "success": false,
+          "latency_ms": 0.017,
+          "stop_reason": "maximum_attempts_reached"
+        },
+        {
+          "input_id": "test_08",
+          "question": "Who sponsors the digital wellness intervention?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Digital Wellness Intervention Study: Sponsor: San Jose State University.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Digital Wellness Intervention Study: Sponsor: San Jose State University.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 0.014,
+          "stop_reason": "passed"
+        }
+      ]
+    },
+    {
+      "variant": "Evaluator Repair",
+      "correct_answers": 8,
+      "incorrect_answers": 0,
+      "average_attempts": 1.5,
+      "average_latency_ms": 0.028,
+      "results": [
+        {
+          "input_id": "test_01",
+          "question": "State the phase and enrollment target of the sleep quality study.",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Sleep Quality and Academic Performance Study: Phase: Phase II.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "REVISE",
+              "evaluation_explanation": "The answer is incomplete relative to the reference dataset.",
+              "feedback": "Add the following missing ground-truth facts: enrollment_target=120.",
+              "missing_fields": [
+                "enrollment_target"
+              ]
+            },
+            {
+              "attempt": 2,
+              "answer": "Sleep Quality and Academic Performance Study: Phase: Phase II. Enrollment target: 120.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 2,
+          "final_answer": "Sleep Quality and Academic Performance Study: Phase: Phase II. Enrollment target: 120.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 0.04,
+          "stop_reason": "passed"
+        },
+        {
+          "input_id": "test_02",
+          "question": "State the phase and enrollment target of the digital wellness study.",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Digital Wellness Intervention Study: Phase: Phase I.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "REVISE",
+              "evaluation_explanation": "The answer is incomplete relative to the reference dataset.",
+              "feedback": "Add the following missing ground-truth facts: enrollment_target=180.",
+              "missing_fields": [
+                "enrollment_target"
+              ]
+            },
+            {
+              "attempt": 2,
+              "answer": "Digital Wellness Intervention Study: Phase: Phase I. Enrollment target: 180.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 2,
+          "final_answer": "Digital Wellness Intervention Study: Phase: Phase I. Enrollment target: 180.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 0.074,
+          "stop_reason": "passed"
+        },
+        {
+          "input_id": "test_03",
+          "question": "What organization sponsors the remote monitoring study?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Remote Clinical Monitoring Study: Sponsor: San Jose State University.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Remote Clinical Monitoring Study: Sponsor: San Jose State University.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 0.017,
+          "stop_reason": "passed"
+        },
+        {
+          "input_id": "test_04",
+          "question": "What is the enrollment target of the memory and cognitive trial?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Student Memory and Cognitive Performance Trial: Enrollment target: 90.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Student Memory and Cognitive Performance Trial: Enrollment target: 90.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 0.013,
+          "stop_reason": "passed"
+        },
+        {
+          "input_id": "test_05",
+          "question": "Describe the remote monitoring clinical trial.",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Remote Clinical Monitoring Study: Evaluates remote monitoring methods for participants in clinical research. Phase: Phase IV. Sponsor: San Jose State University.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "REVISE",
+              "evaluation_explanation": "The answer is incomplete relative to the reference dataset.",
+              "feedback": "Add the following missing ground-truth facts: enrollment_target=250.",
+              "missing_fields": [
+                "enrollment_target"
+              ]
+            },
+            {
+              "attempt": 2,
+              "answer": "Remote Clinical Monitoring Study: Evaluates remote monitoring methods for participants in clinical research. Phase: Phase IV. Enrollment target: 250. Sponsor: San Jose State University.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 2,
+          "final_answer": "Remote Clinical Monitoring Study: Evaluates remote monitoring methods for participants in clinical research. Phase: Phase IV. Enrollment target: 250. Sponsor: San Jose State University.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 0.032,
+          "stop_reason": "passed"
+        },
+        {
+          "input_id": "test_06",
+          "question": "Which phase contains the student memory study?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Student Memory and Cognitive Performance Trial: Phase: Phase III.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Student Memory and Cognitive Performance Trial: Phase: Phase III.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 0.013,
+          "stop_reason": "passed"
+        },
+        {
+          "input_id": "test_07",
+          "question": "Describe the sleep quality and academic performance study.",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Sleep Quality and Academic Performance Study: Examines sleep quality, concentration, memory, and academic performance. Phase: Phase II. Sponsor: San Jose State University.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "REVISE",
+              "evaluation_explanation": "The answer is incomplete relative to the reference dataset.",
+              "feedback": "Add the following missing ground-truth facts: enrollment_target=120.",
+              "missing_fields": [
+                "enrollment_target"
+              ]
+            },
+            {
+              "attempt": 2,
+              "answer": "Sleep Quality and Academic Performance Study: Examines sleep quality, concentration, memory, and academic performance. Phase: Phase II. Enrollment target: 120. Sponsor: San Jose State University.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 2,
+          "final_answer": "Sleep Quality and Academic Performance Study: Examines sleep quality, concentration, memory, and academic performance. Phase: Phase II. Enrollment target: 120. Sponsor: San Jose State University.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 0.025,
+          "stop_reason": "passed"
+        },
+        {
+          "input_id": "test_08",
+          "question": "Who sponsors the digital wellness intervention?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Digital Wellness Intervention Study: Sponsor: San Jose State University.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Digital Wellness Intervention Study: Sponsor: San Jose State University.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 0.011,
+          "stop_reason": "passed"
+        }
+      ]
+    },
+    {
+      "variant": "Lesson Memory",
+      "correct_answers": 8,
+      "incorrect_answers": 0,
+      "average_attempts": 1,
+      "average_latency_ms": 3.357,
+      "results": [
+        {
+          "input_id": "test_01",
+          "question": "State the phase and enrollment target of the sleep quality study.",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Sleep Quality and Academic Performance Study: Phase: Phase II. Enrollment target: 120.",
+              "loaded_lesson_ids": [
+                "lesson_001"
+              ],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Sleep Quality and Academic Performance Study: Phase: Phase II. Enrollment target: 120.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 5.513,
+          "stop_reason": "passed"
+        },
+        {
+          "input_id": "test_02",
+          "question": "State the phase and enrollment target of the digital wellness study.",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Digital Wellness Intervention Study: Phase: Phase I. Enrollment target: 180.",
+              "loaded_lesson_ids": [
+                "lesson_001"
+              ],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Digital Wellness Intervention Study: Phase: Phase I. Enrollment target: 180.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 5.387,
+          "stop_reason": "passed"
+        },
+        {
+          "input_id": "test_03",
+          "question": "What organization sponsors the remote monitoring study?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Remote Clinical Monitoring Study: Sponsor: San Jose State University.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Remote Clinical Monitoring Study: Sponsor: San Jose State University.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 0.027,
+          "stop_reason": "passed"
+        },
+        {
+          "input_id": "test_04",
+          "question": "What is the enrollment target of the memory and cognitive trial?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Student Memory and Cognitive Performance Trial: Enrollment target: 90.",
+              "loaded_lesson_ids": [
+                "lesson_001"
+              ],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Student Memory and Cognitive Performance Trial: Enrollment target: 90.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 5.376,
+          "stop_reason": "passed"
+        },
+        {
+          "input_id": "test_05",
+          "question": "Describe the remote monitoring clinical trial.",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Remote Clinical Monitoring Study: Evaluates remote monitoring methods for participants in clinical research. Phase: Phase IV. Enrollment target: 250. Sponsor: San Jose State University.",
+              "loaded_lesson_ids": [
+                "lesson_001"
+              ],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Remote Clinical Monitoring Study: Evaluates remote monitoring methods for participants in clinical research. Phase: Phase IV. Enrollment target: 250. Sponsor: San Jose State University.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 5.038,
+          "stop_reason": "passed"
+        },
+        {
+          "input_id": "test_06",
+          "question": "Which phase contains the student memory study?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Student Memory and Cognitive Performance Trial: Phase: Phase III.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Student Memory and Cognitive Performance Trial: Phase: Phase III.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 0.028,
+          "stop_reason": "passed"
+        },
+        {
+          "input_id": "test_07",
+          "question": "Describe the sleep quality and academic performance study.",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Sleep Quality and Academic Performance Study: Examines sleep quality, concentration, memory, and academic performance. Phase: Phase II. Enrollment target: 120. Sponsor: San Jose State University.",
+              "loaded_lesson_ids": [
+                "lesson_001"
+              ],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Sleep Quality and Academic Performance Study: Examines sleep quality, concentration, memory, and academic performance. Phase: Phase II. Enrollment target: 120. Sponsor: San Jose State University.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 5.445,
+          "stop_reason": "passed"
+        },
+        {
+          "input_id": "test_08",
+          "question": "Who sponsors the digital wellness intervention?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Digital Wellness Intervention Study: Sponsor: San Jose State University.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Digital Wellness Intervention Study: Sponsor: San Jose State University.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 0.04,
+          "stop_reason": "passed"
+        }
+      ]
+    },
+    {
+      "variant": "Validated Improvement",
+      "correct_answers": 8,
+      "incorrect_answers": 0,
+      "average_attempts": 1,
+      "average_latency_ms": 3.46,
+      "results": [
+        {
+          "input_id": "test_01",
+          "question": "State the phase and enrollment target of the sleep quality study.",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Sleep Quality and Academic Performance Study: Phase: Phase II. Enrollment target: 120.",
+              "loaded_lesson_ids": [
+                "lesson_001"
+              ],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Sleep Quality and Academic Performance Study: Phase: Phase II. Enrollment target: 120.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 4.741,
+          "stop_reason": "passed"
+        },
+        {
+          "input_id": "test_02",
+          "question": "State the phase and enrollment target of the digital wellness study.",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Digital Wellness Intervention Study: Phase: Phase I. Enrollment target: 180.",
+              "loaded_lesson_ids": [
+                "lesson_001"
+              ],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Digital Wellness Intervention Study: Phase: Phase I. Enrollment target: 180.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 4.984,
+          "stop_reason": "passed"
+        },
+        {
+          "input_id": "test_03",
+          "question": "What organization sponsors the remote monitoring study?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Remote Clinical Monitoring Study: Sponsor: San Jose State University.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Remote Clinical Monitoring Study: Sponsor: San Jose State University.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 0.032,
+          "stop_reason": "passed"
+        },
+        {
+          "input_id": "test_04",
+          "question": "What is the enrollment target of the memory and cognitive trial?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Student Memory and Cognitive Performance Trial: Enrollment target: 90.",
+              "loaded_lesson_ids": [
+                "lesson_001"
+              ],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Student Memory and Cognitive Performance Trial: Enrollment target: 90.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 5.35,
+          "stop_reason": "passed"
+        },
+        {
+          "input_id": "test_05",
+          "question": "Describe the remote monitoring clinical trial.",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Remote Clinical Monitoring Study: Evaluates remote monitoring methods for participants in clinical research. Phase: Phase IV. Enrollment target: 250. Sponsor: San Jose State University.",
+              "loaded_lesson_ids": [
+                "lesson_001"
+              ],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Remote Clinical Monitoring Study: Evaluates remote monitoring methods for participants in clinical research. Phase: Phase IV. Enrollment target: 250. Sponsor: San Jose State University.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 7.289,
+          "stop_reason": "passed"
+        },
+        {
+          "input_id": "test_06",
+          "question": "Which phase contains the student memory study?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Student Memory and Cognitive Performance Trial: Phase: Phase III.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Student Memory and Cognitive Performance Trial: Phase: Phase III.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 0.025,
+          "stop_reason": "passed"
+        },
+        {
+          "input_id": "test_07",
+          "question": "Describe the sleep quality and academic performance study.",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Sleep Quality and Academic Performance Study: Examines sleep quality, concentration, memory, and academic performance. Phase: Phase II. Enrollment target: 120. Sponsor: San Jose State University.",
+              "loaded_lesson_ids": [
+                "lesson_001"
+              ],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Sleep Quality and Academic Performance Study: Examines sleep quality, concentration, memory, and academic performance. Phase: Phase II. Enrollment target: 120. Sponsor: San Jose State University.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 5.234,
+          "stop_reason": "passed"
+        },
+        {
+          "input_id": "test_08",
+          "question": "Who sponsors the digital wellness intervention?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Digital Wellness Intervention Study: Sponsor: San Jose State University.",
+              "loaded_lesson_ids": [],
+              "evaluation_result": "PASS",
+              "evaluation_explanation": "The answer contains all facts required by the reference dataset.",
+              "feedback": "",
+              "missing_fields": []
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Digital Wellness Intervention Study: Sponsor: San Jose State University.",
+          "final_evaluation": "PASS",
+          "success": true,
+          "latency_ms": 0.025,
+          "stop_reason": "passed"
+        }
+      ]
+    }
+  ],
+  "communication": "The Answering Agent produces an answer. The Evaluator Agent compares it with the reference dataset and returns PASS or REVISE plus feedback. The feedback is passed back to the Answering Agent for at most one revision.",
+  "stopping_condition": "Stop after PASS or after the second answer attempt.",
+  "validation_process": "The candidate lesson is evaluated on validation_data.json before it is retained. It is kept only when failed cases improve, previously correct cases do not regress, and unrelated question types remain grounded.",
+  "limitation": "The evaluator depends on curated reference facts and keyword-based trial identification, so unseen trial names require additional reference data or a stronger retrieval method."
+}
