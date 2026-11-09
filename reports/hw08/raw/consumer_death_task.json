@@ -1,0 +1,11 @@
+{
+  "correlation_id": "dff8be9d-a81a-4ec8-bdbe-c9ff13dbb3d5",
+  "question": "How does Kafka redeliver unfinished clinical-trial work?",
+  "plan": [
+    "Explain uncommitted Kafka offset behavior.",
+    "Explain redelivery after a Writer restart."
+  ],
+  "entity_key": "consumer-death-test",
+  "stage": "planned",
+  "created_at": "2026-11-05T23:29:41.372487+00:00"
+}

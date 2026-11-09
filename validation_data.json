@@ -1,0 +1,34 @@
+﻿[
+  {
+    "input_id": "validation_01",
+    "question": "Report both the phase and enrollment target for the digital wellness trial."
+  },
+  {
+    "input_id": "validation_02",
+    "question": "Report both the phase and enrollment target for the remote monitoring study."
+  },
+  {
+    "input_id": "validation_03",
+    "question": "Who is the sponsor of the sleep quality study?"
+  },
+  {
+    "input_id": "validation_04",
+    "question": "What phase is the memory and cognitive performance trial?"
+  },
+  {
+    "input_id": "validation_05",
+    "question": "How many participants are planned for the sleep quality trial?"
+  },
+  {
+    "input_id": "validation_06",
+    "question": "Describe the digital wellness intervention study."
+  },
+  {
+    "input_id": "validation_07",
+    "question": "Who sponsors the remote clinical monitoring study?"
+  },
+  {
+    "input_id": "validation_08",
+    "question": "Describe the student memory and cognitive performance trial."
+  }
+]

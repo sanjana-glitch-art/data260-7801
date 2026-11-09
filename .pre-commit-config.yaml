@@ -1,0 +1,10 @@
+﻿repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.14.3
+    hooks:
+      - id: ruff-check
+        args:
+          - --fix
+        files: ^code/(hw7_.*|run_hw7_.*|test_hw7_.*|auth_api|trials_api|migrate_hw7|seed_hw7_trials|bikeshare_api)\.py$
+      - id: ruff-format
+        files: ^code/(hw7_.*|run_hw7_.*|test_hw7_.*|auth_api|trials_api|migrate_hw7|seed_hw7_trials|bikeshare_api)\.py$

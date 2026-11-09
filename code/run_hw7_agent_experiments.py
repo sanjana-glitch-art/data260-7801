@@ -15,58 +15,25 @@ from typing import Any
 
 from src.model_client import ModelClient
 
-PROJECT_ROOT = Path(
-    __file__
-).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
-CASES_DIRECTORY = (
-    PROJECT_ROOT
-    / "reports"
-    / "hw07"
-    / "cases"
-)
+CASES_DIRECTORY = PROJECT_ROOT / "reports" / "hw07" / "cases"
 
-RAW_DIRECTORY = (
-    PROJECT_ROOT
-    / "reports"
-    / "hw07"
-    / "raw"
-)
+RAW_DIRECTORY = PROJECT_ROOT / "reports" / "hw07" / "raw"
 
-TASKS_PATH = (
-    CASES_DIRECTORY
-    / "agent_verification_tasks.json"
-)
+TASKS_PATH = CASES_DIRECTORY / "agent_verification_tasks.json"
 
-SHOWCASE_PATH = (
-    RAW_DIRECTORY
-    / "agent_verification_tasks.json"
-)
+SHOWCASE_PATH = RAW_DIRECTORY / "agent_verification_tasks.json"
 
-ERROR_PATH = (
-    RAW_DIRECTORY
-    / "agent_error_recovery.json"
-)
+ERROR_PATH = RAW_DIRECTORY / "agent_error_recovery.json"
 
-RESULTS_PATH = (
-    RAW_DIRECTORY
-    / "agent_reliability_results.json"
-)
+RESULTS_PATH = RAW_DIRECTORY / "agent_reliability_results.json"
 
-RESULTS_CSV_PATH = (
-    RAW_DIRECTORY
-    / "agent_reliability_results.csv"
-)
+RESULTS_CSV_PATH = RAW_DIRECTORY / "agent_reliability_results.csv"
 
-METRICS_PATH = (
-    RAW_DIRECTORY
-    / "agent_reliability_metrics.json"
-)
+METRICS_PATH = RAW_DIRECTORY / "agent_reliability_metrics.json"
 
-TOOL_LOG_PATH = (
-    RAW_DIRECTORY
-    / "agent_tool_calls.jsonl"
-)
+TOOL_LOG_PATH = RAW_DIRECTORY / "agent_tool_calls.jsonl"
 
 
 TASKS: tuple[
@@ -106,7 +73,7 @@ TASKS: tuple[
         "name": "compare_two_trials",
         "prompt": (
             "First call search_trials using exactly "
-            "{\"query\": \"Study\", \"limit\": 4}. "
+            '{"query": "Study", "limit": 4}. '
             "From that result, select two different "
             "trial IDs. Call trial_details once for "
             "the first ID and once for the second ID. "
@@ -139,9 +106,7 @@ ERROR_CASE = {
 def utc_timestamp() -> str:
     """Return a timezone-aware UTC timestamp."""
 
-    return datetime.now(
-        UTC
-    ).isoformat()
+    return datetime.now(UTC).isoformat()
 
 
 def is_subsequence(
@@ -153,20 +118,10 @@ def is_subsequence(
     expected_index = 0
 
     for tool_name in observed:
-        if (
-            expected_index
-            < len(expected)
-            and tool_name
-            == expected[
-                expected_index
-            ]
-        ):
+        if expected_index < len(expected) and tool_name == expected[expected_index]:
             expected_index += 1
 
-    return (
-        expected_index
-        == len(expected)
-    )
+    return expected_index == len(expected)
 
 
 def successful_tool_results(
@@ -179,9 +134,7 @@ def successful_tool_results(
         [],
     )
 
-    return bool(
-        calls
-    ) and all(
+    return bool(calls) and all(
         bool(
             call.get(
                 "result",
@@ -203,9 +156,7 @@ def distinct_detail_ids(
         "tool_calls",
         [],
     ):
-        if call.get(
-            "tool_name"
-        ) != "trial_details":
+        if call.get("tool_name") != "trial_details":
             continue
 
         raw_identifier = call.get(
@@ -214,9 +165,7 @@ def distinct_detail_ids(
         ).get("trial_id")
 
         try:
-            identifiers.add(
-                int(raw_identifier)
-            )
+            identifiers.add(int(raw_identifier))
         except (
             TypeError,
             ValueError,
@@ -242,65 +191,32 @@ def verify_task(
         )
     ]
 
-    if (
-        result.get("stop_reason")
-        != "normal_completion"
-    ):
-        failures.append(
-            "agent_did_not_complete"
-        )
+    if result.get("stop_reason") != "normal_completion":
+        failures.append("agent_did_not_complete")
 
-    if (
-        int(
-            result.get(
-                "tool_call_count",
-                0,
-            )
+    if int(
+        result.get(
+            "tool_call_count",
+            0,
         )
-        < int(
-            task[
-                "minimum_tool_calls"
-            ]
-        )
-    ):
-        failures.append(
-            "lost_multi_step_chain"
-        )
+    ) < int(task["minimum_tool_calls"]):
+        failures.append("lost_multi_step_chain")
 
     if not is_subsequence(
         task["expected_tools"],
         observed_tools,
     ):
-        failures.append(
-            "lost_multi_step_chain"
-        )
+        failures.append("lost_multi_step_chain")
 
-    if not successful_tool_results(
-        result
-    ):
-        failures.append(
-            "tool_execution_failure"
-        )
+    if not successful_tool_results(result):
+        failures.append("tool_execution_failure")
 
-    if (
-        task["task_id"]
-        == "task_c"
-        and len(
-            distinct_detail_ids(
-                result
-            )
-        )
-        < 2
-    ):
-        failures.append(
-            "lost_multi_step_chain"
-        )
+    if task["task_id"] == "task_c" and len(distinct_detail_ids(result)) < 2:
+        failures.append("lost_multi_step_chain")
 
     return (
         not failures,
-        sorted(
-            set(failures)
-        ),
+        sorted(set(failures)),
     )
 
 
@@ -316,24 +232,16 @@ def verify_error_case(
         [],
     )
 
-    observed_tools = [
-        call.get("tool_name")
-        for call in calls
-    ]
+    observed_tools = [call.get("tool_name") for call in calls]
 
-    if "trial_details" not in (
-        observed_tools
-    ):
-        failures.append(
-            "missing_error_tool_call"
-        )
+    if "trial_details" not in (observed_tools):
+        failures.append("missing_error_tool_call")
 
     failed_detail_results = [
         call
         for call in calls
         if (
-            call.get("tool_name")
-            == "trial_details"
+            call.get("tool_name") == "trial_details"
             and not call.get(
                 "result",
                 {},
@@ -342,17 +250,10 @@ def verify_error_case(
     ]
 
     if not failed_detail_results:
-        failures.append(
-            "missing_useful_tool_error"
-        )
+        failures.append("missing_useful_tool_error")
 
-    if (
-        result.get("stop_reason")
-        != "normal_completion"
-    ):
-        failures.append(
-            "agent_did_not_stop_cleanly"
-        )
+    if result.get("stop_reason") != "normal_completion":
+        failures.append("agent_did_not_stop_cleanly")
 
     answer = str(
         result.get(
@@ -370,15 +271,11 @@ def verify_error_case(
             "no clinical trial",
         )
     ):
-        failures.append(
-            "error_not_explained"
-        )
+        failures.append("error_not_explained")
 
     return (
         not failures,
-        sorted(
-            set(failures)
-        ),
+        sorted(set(failures)),
     )
 
 
@@ -389,11 +286,9 @@ def result_record(
 ) -> dict[str, Any]:
     """Create one raw reliability record."""
 
-    success, verifier_failures = (
-        verify_task(
-            task,
-            result,
-        )
+    success, verifier_failures = verify_task(
+        task,
+        result,
     )
 
     model_failures = list(
@@ -403,12 +298,7 @@ def result_record(
         )
     )
 
-    failures = sorted(
-        set(
-            model_failures
-            + verifier_failures
-        )
-    )
+    failures = sorted(set(model_failures + verifier_failures))
 
     observed_tools = [
         call.get("tool_name")
@@ -421,17 +311,11 @@ def result_record(
     return {
         "task_id": task["task_id"],
         "task_name": task["name"],
-        "attempt_number": (
-            attempt_number
-        ),
+        "attempt_number": (attempt_number),
         "prompt": task["prompt"],
         "success": success,
-        "observed_tools": (
-            observed_tools
-        ),
-        "expected_tools": (
-            task["expected_tools"]
-        ),
+        "observed_tools": (observed_tools),
+        "expected_tools": (task["expected_tools"]),
         "tool_call_count": (
             result.get(
                 "tool_call_count",
@@ -456,17 +340,9 @@ def result_record(
                 False,
             )
         ),
-        "failure_classification": (
-            failures
-        ),
-        "stop_reason": (
-            result.get(
-                "stop_reason"
-            )
-        ),
-        "answer": result.get(
-            "answer"
-        ),
+        "failure_classification": (failures),
+        "stop_reason": (result.get("stop_reason")),
+        "answer": result.get("answer"),
         "input_tokens": (
             result.get(
                 "input_tokens",
@@ -491,9 +367,7 @@ def result_record(
                 0,
             )
         ),
-        "run_id": result.get(
-            "run_id"
-        ),
+        "run_id": result.get("run_id"),
     }
 
 
@@ -502,13 +376,9 @@ def run_showcase(
 ) -> dict[str, Any]:
     """Run the three fixed tasks once."""
 
-    showcase_tasks: list[
-        dict[str, Any]
-    ] = []
+    showcase_tasks: list[dict[str, Any]] = []
 
-    print(
-        "\n=== PART 2 VERIFICATION TASKS ==="
-    )
+    print("\n=== PART 2 VERIFICATION TASKS ===")
 
     for task in TASKS:
         print(
@@ -523,16 +393,12 @@ def run_showcase(
             task["prompt"],
             model=model,
             log_path=TOOL_LOG_PATH,
-            run_label=task[
-                "task_id"
-            ],
+            run_label=task["task_id"],
         )
 
-        success, failures = (
-            verify_task(
-                task,
-                result,
-            )
+        success, failures = verify_task(
+            task,
+            result,
         )
 
         observed_tools = [
@@ -546,18 +412,12 @@ def run_showcase(
         showcase_record = {
             **task,
             "success": success,
-            "observed_tools": (
-                observed_tools
-            ),
-            "verifier_failures": (
-                failures
-            ),
+            "observed_tools": (observed_tools),
+            "verifier_failures": (failures),
             "result": result,
         }
 
-        showcase_tasks.append(
-            showcase_record
-        )
+        showcase_tasks.append(showcase_record)
 
         print(
             "Success:",
@@ -566,9 +426,7 @@ def run_showcase(
 
         print(
             "Tool calls:",
-            result[
-                "tool_call_count"
-            ],
+            result["tool_call_count"],
         )
 
         print(
@@ -578,16 +436,12 @@ def run_showcase(
 
         print(
             "Repairs:",
-            result[
-                "repair_count"
-            ],
+            result["repair_count"],
         )
 
         print(
             "Stop reason:",
-            result[
-                "stop_reason"
-            ],
+            result["stop_reason"],
         )
 
         print(
@@ -596,21 +450,12 @@ def run_showcase(
         )
 
     document = {
-        "experiment": (
-            "hw7_part2_showcase"
-        ),
+        "experiment": ("hw7_part2_showcase"),
         "model": MODEL_NAME,
-        "task_count": len(
-            showcase_tasks
-        ),
-        "all_passed": all(
-            task["success"]
-            for task in showcase_tasks
-        ),
+        "task_count": len(showcase_tasks),
+        "all_passed": all(task["success"] for task in showcase_tasks),
         "tasks": showcase_tasks,
-        "generated_at": (
-            utc_timestamp()
-        ),
+        "generated_at": (utc_timestamp()),
     }
 
     SHOWCASE_PATH.write_text(
@@ -632,9 +477,7 @@ def run_error_recovery(
 ) -> dict[str, Any]:
     """Run the required nonexistent-ID case."""
 
-    print(
-        "\n=== ERROR RECOVERY CASE ==="
-    )
+    print("\n=== ERROR RECOVERY CASE ===")
 
     result = run_agent(
         ERROR_CASE["prompt"],
@@ -643,29 +486,17 @@ def run_error_recovery(
         run_label="nonexistent-id",
     )
 
-    success, failures = (
-        verify_error_case(
-            result
-        )
-    )
+    success, failures = verify_error_case(result)
 
     document = {
-        "experiment": (
-            "hw7_part2_error_recovery"
-        ),
+        "experiment": ("hw7_part2_error_recovery"),
         "case": {
             **ERROR_CASE,
-            "handled_without_crash": (
-                success
-            ),
-            "verifier_failures": (
-                failures
-            ),
+            "handled_without_crash": (success),
+            "verifier_failures": (failures),
             "result": result,
         },
-        "generated_at": (
-            utc_timestamp()
-        ),
+        "generated_at": (utc_timestamp()),
     }
 
     ERROR_PATH.write_text(
@@ -686,16 +517,12 @@ def run_error_recovery(
 
     print(
         "Tool calls:",
-        result[
-            "tool_call_count"
-        ],
+        result["tool_call_count"],
     )
 
     print(
         "Stop reason:",
-        result[
-            "stop_reason"
-        ],
+        result["stop_reason"],
     )
 
     print(
@@ -711,20 +538,11 @@ def attempt_schedule(
 ) -> list[dict[str, Any]]:
     """Distribute attempts across the fixed tasks."""
 
-    return [
-        TASKS[
-            index % len(TASKS)
-        ]
-        for index in range(
-            attempt_count
-        )
-    ]
+    return [TASKS[index % len(TASKS)] for index in range(attempt_count)]
 
 
 def write_results_csv(
-    records: list[
-        dict[str, Any]
-    ],
+    records: list[dict[str, Any]],
 ) -> None:
     """Save flattened reliability records."""
 
@@ -761,74 +579,41 @@ def write_results_csv(
         writer.writeheader()
 
         for record in records:
-            writer.writerow({
-                field: (
-                    json.dumps(
-                        record[field]
+            writer.writerow(
+                {
+                    field: (
+                        json.dumps(record[field])
+                        if isinstance(
+                            record[field],
+                            list,
+                        )
+                        else record[field]
                     )
-                    if isinstance(
-                        record[field],
-                        list,
-                    )
-                    else record[field]
-                )
-                for field in fields
-            })
+                    for field in fields
+                }
+            )
 
 
 def calculate_metrics(
-    records: list[
-        dict[str, Any]
-    ],
+    records: list[dict[str, Any]],
 ) -> dict[str, Any]:
     """Calculate Part 2 reliability metrics."""
 
-    attempt_count = len(
-        records
-    )
+    attempt_count = len(records)
 
-    successful_count = sum(
-        bool(record["success"])
-        for record in records
-    )
+    successful_count = sum(bool(record["success"]) for record in records)
 
-    before_count = sum(
-        bool(
-            record[
-                "well_formed_before_repair"
-            ]
-        )
-        for record in records
-    )
+    before_count = sum(bool(record["well_formed_before_repair"]) for record in records)
 
-    after_count = sum(
-        bool(
-            record[
-                "well_formed_after_repair"
-            ]
-        )
-        for record in records
-    )
+    after_count = sum(bool(record["well_formed_after_repair"]) for record in records)
 
-    repaired_count = sum(
-        int(
-            record["repair_count"]
-        )
-        > 0
-        for record in records
-    )
+    repaired_count = sum(int(record["repair_count"]) > 0 for record in records)
 
-    failure_counts: Counter[
-        str
-    ] = Counter()
+    failure_counts: Counter[str] = Counter()
 
     for record in records:
-        for failure in record[
-            "failure_classification"
-        ]:
-            failure_counts[
-                failure
-            ] += 1
+        for failure in record["failure_classification"]:
+            failure_counts[failure] += 1
 
     required_failure_names = (
         "malformed_arguments",
@@ -842,117 +627,57 @@ def calculate_metrics(
             name,
             0,
         )
-        for name in (
-            required_failure_names
-        )
+        for name in (required_failure_names)
     }
 
-    for name, count in sorted(
-        failure_counts.items()
-    ):
-        if name not in (
-            classified_failures
-        ):
-            classified_failures[
-                name
-            ] = count
+    for name, count in sorted(failure_counts.items()):
+        if name not in (classified_failures):
+            classified_failures[name] = count
 
     return {
-        "experiment": (
-            "hw7_agent_reliability"
-        ),
+        "experiment": ("hw7_agent_reliability"),
         "model": MODEL_NAME,
         "model_settings": {
             "temperature": 0.0,
             "num_ctx": 2048,
             "num_predict": 256,
         },
-        "attempt_count": (
-            attempt_count
-        ),
-        "successful_attempt_count": (
-            successful_count
-        ),
+        "attempt_count": (attempt_count),
+        "successful_attempt_count": (successful_count),
         "task_success_rate_percent": round(
-            successful_count
-            / attempt_count
-            * 100,
+            successful_count / attempt_count * 100,
             2,
         ),
-        "well_formed_before_repair_count": (
-            before_count
-        ),
+        "well_formed_before_repair_count": (before_count),
         "well_formed_before_repair_percent": round(
-            before_count
-            / attempt_count
-            * 100,
+            before_count / attempt_count * 100,
             2,
         ),
-        "well_formed_after_repair_count": (
-            after_count
-        ),
+        "well_formed_after_repair_count": (after_count),
         "well_formed_after_repair_percent": round(
-            after_count
-            / attempt_count
-            * 100,
+            after_count / attempt_count * 100,
             2,
         ),
-        "attempts_using_repair": (
-            repaired_count
-        ),
+        "attempts_using_repair": (repaired_count),
         "repair_rate_percent": round(
-            repaired_count
-            / attempt_count
-            * 100,
+            repaired_count / attempt_count * 100,
             2,
         ),
-        "failure_classification": (
-            classified_failures
-        ),
-        "total_tool_calls": sum(
-            int(
-                record[
-                    "tool_call_count"
-                ]
-            )
-            for record in records
-        ),
+        "failure_classification": (classified_failures),
+        "total_tool_calls": sum(int(record["tool_call_count"]) for record in records),
         "mean_tool_calls": round(
-            fmean(
-                float(
-                    record[
-                        "tool_call_count"
-                    ]
-                )
-                for record in records
-            ),
+            fmean(float(record["tool_call_count"]) for record in records),
             3,
         ),
         "mean_total_tokens": round(
-            fmean(
-                float(
-                    record[
-                        "total_tokens"
-                    ]
-                )
-                for record in records
-            ),
+            fmean(float(record["total_tokens"]) for record in records),
             3,
         ),
         "mean_latency_ms": round(
-            fmean(
-                float(
-                    record[
-                        "latency_ms"
-                    ]
-                )
-                for record in records
-            ),
+            fmean(float(record["latency_ms"]) for record in records),
             3,
         ),
-        "generated_at": (
-            utc_timestamp()
-        ),
+        "generated_at": (utc_timestamp()),
     }
 
 
@@ -962,35 +687,21 @@ def run_reliability(
 ) -> dict[str, Any]:
     """Run the fixed reliability sweep."""
 
-    records: list[
-        dict[str, Any]
-    ] = []
+    records: list[dict[str, Any]] = []
 
-    print(
-        "\n=== RELIABILITY SWEEP ==="
-    )
+    print("\n=== RELIABILITY SWEEP ===")
 
     for attempt_number, task in enumerate(
-        attempt_schedule(
-            attempt_count
-        ),
+        attempt_schedule(attempt_count),
         start=1,
     ):
-        print(
-            f"Attempt {attempt_number}/"
-            f"{attempt_count} | "
-            f"{task['task_id']}"
-        )
+        print(f"Attempt {attempt_number}/{attempt_count} | {task['task_id']}")
 
         result = run_agent(
             task["prompt"],
             model=model,
             log_path=TOOL_LOG_PATH,
-            run_label=(
-                f"reliability-"
-                f"{attempt_number:02d}-"
-                f"{task['task_id']}"
-            ),
+            run_label=(f"reliability-{attempt_number:02d}-{task['task_id']}"),
         )
 
         record = result_record(
@@ -999,39 +710,25 @@ def run_reliability(
             result,
         )
 
-        records.append(
-            record
-        )
+        records.append(record)
 
         print(
             "  success =",
             record["success"],
             "| tools =",
-            record[
-                "observed_tools"
-            ],
+            record["observed_tools"],
             "| repairs =",
-            record[
-                "repair_count"
-            ],
+            record["repair_count"],
             "| stop =",
-            record[
-                "stop_reason"
-            ],
+            record["stop_reason"],
         )
 
     results_document = {
-        "experiment": (
-            "hw7_agent_reliability_results"
-        ),
+        "experiment": ("hw7_agent_reliability_results"),
         "model": MODEL_NAME,
-        "attempt_count": (
-            attempt_count
-        ),
+        "attempt_count": (attempt_count),
         "records": records,
-        "generated_at": (
-            utc_timestamp()
-        ),
+        "generated_at": (utc_timestamp()),
     }
 
     RESULTS_PATH.write_text(
@@ -1045,13 +742,9 @@ def run_reliability(
         encoding="utf-8",
     )
 
-    write_results_csv(
-        records
-    )
+    write_results_csv(records)
 
-    metrics = calculate_metrics(
-        records
-    )
+    metrics = calculate_metrics(records)
 
     METRICS_PATH.write_text(
         json.dumps(
@@ -1063,9 +756,7 @@ def run_reliability(
         encoding="utf-8",
     )
 
-    print(
-        "\n=== RELIABILITY METRICS ==="
-    )
+    print("\n=== RELIABILITY METRICS ===")
 
     print(
         json.dumps(
@@ -1089,9 +780,7 @@ def save_cases() -> None:
         json.dumps(
             {
                 "tasks": TASKS,
-                "error_case": (
-                    ERROR_CASE
-                ),
+                "error_case": (ERROR_CASE),
             },
             indent=2,
             ensure_ascii=False,
@@ -1126,9 +815,7 @@ def main() -> None:
     arguments = parse_arguments()
 
     if arguments.attempts < 20:
-        raise ValueError(
-            "Part 2 requires at least 20 attempts."
-        )
+        raise ValueError("Part 2 requires at least 20 attempts.")
 
     RAW_DIRECTORY.mkdir(
         parents=True,
@@ -1144,9 +831,7 @@ def main() -> None:
         num_predict=256,
     )
 
-    print(
-        "DATA-260 Homework 7 Part 2"
-    )
+    print("DATA-260 Homework 7 Part 2")
 
     print(
         "Model:",
@@ -1158,15 +843,9 @@ def main() -> None:
         len(TASKS),
     )
 
-    showcase = run_showcase(
-        model
-    )
+    showcase = run_showcase(model)
 
-    error_document = (
-        run_error_recovery(
-            model
-        )
-    )
+    error_document = run_error_recovery(model)
 
     if not arguments.showcase_only:
         run_reliability(
@@ -1181,16 +860,10 @@ def main() -> None:
 
     print(
         "Error recovery passed:",
-        error_document[
-            "case"
-        ][
-            "handled_without_crash"
-        ],
+        error_document["case"]["handled_without_crash"],
     )
 
-    print(
-        "\nPart 2 output files:"
-    )
+    print("\nPart 2 output files:")
 
     for path in (
         SHOWCASE_PATH,

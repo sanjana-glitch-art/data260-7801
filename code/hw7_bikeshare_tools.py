@@ -16,25 +16,13 @@ import duckdb
 import requests
 from bs4 import BeautifulSoup
 
-PROJECT_ROOT = Path(
-    __file__
-).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
-RAW_DIRECTORY = (
-    PROJECT_ROOT
-    / "reports"
-    / "hw07"
-    / "raw"
-)
+RAW_DIRECTORY = PROJECT_ROOT / "reports" / "hw07" / "raw"
 
-SNAPSHOT_DIRECTORY = (
-    RAW_DIRECTORY
-    / "pricing_snapshots"
-)
+SNAPSHOT_DIRECTORY = RAW_DIRECTORY / "pricing_snapshots"
 
-DEFAULT_PRICING_URL = (
-    "https://citibikenyc.com/pricing"
-)
+DEFAULT_PRICING_URL = "https://citibikenyc.com/pricing"
 
 CURRENT_CSV_PATH: Path | None = None
 
@@ -42,8 +30,7 @@ CURRENT_CSV_PATH: Path | None = None
 CSV_SQL_SCHEMA: dict[str, Any] = {
     "name": "csv_sql",
     "description": (
-        "Run one read-only SELECT query over the "
-        "currently uploaded Bike Share CSV."
+        "Run one read-only SELECT query over the currently uploaded Bike Share CSV."
     ),
     "input_schema": {
         "type": "object",
@@ -92,17 +79,13 @@ POLICY_RETRIEVER_SCHEMA: dict[str, Any] = {
 
 CALCULATOR_SCHEMA: dict[str, Any] = {
     "name": "calculator",
-    "description": (
-        "Safely evaluate a basic arithmetic expression."
-    ),
+    "description": ("Safely evaluate a basic arithmetic expression."),
     "input_schema": {
         "type": "object",
         "properties": {
             "expression": {
                 "type": "string",
-                "pattern": (
-                    r"^[0-9+\-*/().\s]+$"
-                ),
+                "pattern": (r"^[0-9+\-*/().\s]+$"),
             },
             "units": {
                 "type": "string",
@@ -126,9 +109,7 @@ TOOL_SCHEMAS: tuple[
 )
 
 
-ALLOWED_EXPRESSION_PATTERN = re.compile(
-    r"^[0-9+\-*/().\s]+$"
-)
+ALLOWED_EXPRESSION_PATTERN = re.compile(r"^[0-9+\-*/().\s]+$")
 
 
 PROHIBITED_SQL_PATTERN = re.compile(
@@ -158,9 +139,7 @@ ALLOWED_UNARY_OPERATORS = {
 def utc_timestamp() -> str:
     """Return a timezone-aware UTC timestamp."""
 
-    return datetime.now(
-        UTC
-    ).isoformat()
+    return datetime.now(UTC).isoformat()
 
 
 def success_envelope(
@@ -208,27 +187,16 @@ def configure_csv(
 
     global CURRENT_CSV_PATH
 
-    resolved_path = Path(
-        csv_path
-    ).resolve()
+    resolved_path = Path(csv_path).resolve()
 
     if not resolved_path.exists():
-        raise FileNotFoundError(
-            f"CSV file does not exist: {resolved_path}"
-        )
+        raise FileNotFoundError(f"CSV file does not exist: {resolved_path}")
 
     if not resolved_path.is_file():
-        raise ValueError(
-            "CSV path must identify a file."
-        )
+        raise ValueError("CSV path must identify a file.")
 
-    if (
-        resolved_path.suffix.casefold()
-        != ".csv"
-    ):
-        raise ValueError(
-            "Uploaded file must have a .csv extension."
-        )
+    if resolved_path.suffix.casefold() != ".csv":
+        raise ValueError("Uploaded file must have a .csv extension.")
 
     CURRENT_CSV_PATH = resolved_path
 
@@ -240,9 +208,7 @@ def validate_read_only_select(
 ) -> tuple[bool, str]:
     """Validate the single read-only SELECT contract."""
 
-    normalized_sql = " ".join(
-        sql.strip().split()
-    )
+    normalized_sql = " ".join(sql.strip().split())
 
     if not normalized_sql:
         return (
@@ -258,34 +224,21 @@ def validate_read_only_select(
     ):
         return (
             False,
-            (
-                "csv_sql accepts only one read-only "
-                "SELECT query."
-            ),
+            ("csv_sql accepts only one read-only SELECT query."),
         )
 
-    without_final_semicolon = (
-        normalized_sql.rstrip(";")
-    )
+    without_final_semicolon = normalized_sql.rstrip(";")
 
     if ";" in without_final_semicolon:
         return (
             False,
-            (
-                "csv_sql accepts exactly one "
-                "SQL statement."
-            ),
+            ("csv_sql accepts exactly one SQL statement."),
         )
 
-    if PROHIBITED_SQL_PATTERN.search(
-        normalized_sql
-    ):
+    if PROHIBITED_SQL_PATTERN.search(normalized_sql):
         return (
             False,
-            (
-                "csv_sql rejected a prohibited "
-                "non-read-only SQL keyword."
-            ),
+            ("csv_sql rejected a prohibited non-read-only SQL keyword."),
         )
 
     return (
@@ -309,11 +262,7 @@ def csv_sql(
             source="uploaded.csv",
         )
 
-    valid, validation_message = (
-        validate_read_only_select(
-            sql
-        )
-    )
+    valid, validation_message = validate_read_only_select(sql)
 
     if not valid:
         return error_envelope(
@@ -321,39 +270,26 @@ def csv_sql(
             source="uploaded.csv",
         )
 
-    csv_path_text = str(
-        CURRENT_CSV_PATH
-    ).replace(
+    csv_path_text = str(CURRENT_CSV_PATH).replace(
         "'",
         "''",
     )
 
-    connection = duckdb.connect(
-        database=":memory:"
-    )
+    connection = duckdb.connect(database=":memory:")
 
     try:
         connection.execute(
-            
-                "CREATE VIEW trips AS "
-                "SELECT * FROM read_csv_auto("
-                f"'{csv_path_text}', "
-                "header = true, "
-                "sample_size = -1"
-                ")"
-            
+            "CREATE VIEW trips AS "
+            "SELECT * FROM read_csv_auto("
+            f"'{csv_path_text}', "
+            "header = true, "
+            "sample_size = -1"
+            ")"
         )
 
-        result = connection.execute(
-            sql
-        )
+        result = connection.execute(sql)
 
-        column_names = [
-            description[0]
-            for description in (
-                result.description or []
-            )
-        ]
+        column_names = [description[0] for description in (result.description or [])]
 
         raw_rows = result.fetchall()
 
@@ -378,10 +314,7 @@ def csv_sql(
         )
     except duckdb.Error as error:
         return error_envelope(
-            (
-                "CSV query failed safely: "
-                f"{type(error).__name__}: {error}"
-            ),
+            (f"CSV query failed safely: {type(error).__name__}: {error}"),
             source="uploaded.csv",
         )
     finally:
@@ -398,13 +331,9 @@ def allowed_policy_url(
     automated-test environment variable is enabled.
     """
 
-    parsed = urlparse(
-        url
-    )
+    parsed = urlparse(url)
 
-    host = (
-        parsed.hostname or ""
-    ).casefold()
+    host = (parsed.hostname or "").casefold()
 
     allow_local_test_url = (
         os.getenv(
@@ -449,9 +378,7 @@ def split_passages(
     passages: list[str] = []
 
     for piece in pieces:
-        cleaned = " ".join(
-            piece.split()
-        )
+        cleaned = " ".join(piece.split())
 
         if len(cleaned) < 25:
             continue
@@ -459,9 +386,7 @@ def split_passages(
         if len(cleaned) > 500:
             cleaned = cleaned[:500]
 
-        passages.append(
-            cleaned
-        )
+        passages.append(cleaned)
 
     return passages
 
@@ -491,9 +416,7 @@ def lexical_score(
     if not query_terms:
         return 0.0
 
-    matches = len(
-        query_terms & passage_terms
-    )
+    matches = len(query_terms & passage_terms)
 
     return round(
         matches / len(query_terms),
@@ -507,17 +430,13 @@ def fetch_policy_text(
     """Fetch and extract text from an allowed policy URL."""
 
     if not allowed_policy_url(url):
-        raise ValueError(
-            "Policy URL is not in the allowed HTTPS domain list."
-        )
+        raise ValueError("Policy URL is not in the allowed HTTPS domain list.")
 
     response = requests.get(
         url,
         timeout=20,
         headers={
-            "User-Agent": (
-                "DATA260-HW7-S7801/1.0"
-            ),
+            "User-Agent": ("DATA260-HW7-S7801/1.0"),
         },
     )
 
@@ -573,32 +492,22 @@ def save_policy_snapshot(
     if not safe_label:
         safe_label = "snapshot"
 
-    snapshot_path = (
-        SNAPSHOT_DIRECTORY
-        / f"{safe_label}.txt"
-    )
+    snapshot_path = SNAPSHOT_DIRECTORY / f"{safe_label}.txt"
 
-    metadata_path = (
-        SNAPSHOT_DIRECTORY
-        / f"{safe_label}.json"
-    )
+    metadata_path = SNAPSHOT_DIRECTORY / f"{safe_label}.json"
 
     snapshot_path.write_text(
         text + "\n",
         encoding="utf-8",
     )
 
-    digest = hashlib.sha256(
-        text.encode("utf-8")
-    ).hexdigest()
+    digest = hashlib.sha256(text.encode("utf-8")).hexdigest()
 
     metadata = {
         "source_url": url,
         "accessed_at": utc_timestamp(),
         "sha256": digest,
-        "snapshot_path": str(
-            snapshot_path
-        ),
+        "snapshot_path": str(snapshot_path),
     }
 
     metadata_path.write_text(
@@ -628,31 +537,20 @@ def policy_retriever(
             source=url,
         )
 
-    if (
-        not isinstance(k, int)
-        or k < 1
-        or k > 10
-    ):
+    if not isinstance(k, int) or k < 1 or k > 10:
         return error_envelope(
             "k must be an integer from 1 through 10.",
             source=url,
         )
 
     try:
-        page_text, final_url = (
-            fetch_policy_text(
-                url
-            )
-        )
+        page_text, final_url = fetch_policy_text(url)
     except (
         requests.RequestException,
         ValueError,
     ) as error:
         return error_envelope(
-            (
-                "Policy retrieval failed safely: "
-                f"{type(error).__name__}: {error}"
-            ),
+            (f"Policy retrieval failed safely: {type(error).__name__}: {error}"),
             source=url,
         )
 
@@ -666,9 +564,7 @@ def policy_retriever(
                     cleaned_query,
                 ),
             }
-            for passage in split_passages(
-                page_text
-            )
+            for passage in split_passages(page_text)
         ),
         key=lambda item: (
             item["score"],
@@ -696,9 +592,7 @@ def evaluate_expression_node(
         node,
         ast.Expression,
     ):
-        return evaluate_expression_node(
-            node.body
-        )
+        return evaluate_expression_node(node.body)
 
     if isinstance(
         node,
@@ -711,40 +605,22 @@ def evaluate_expression_node(
                 float,
             ),
         ):
-            raise TypeError(
-                "Only numeric constants are allowed."
-            )
+            raise TypeError("Only numeric constants are allowed.")
 
-        return float(
-            node.value
-        )
+        return float(node.value)
 
     if isinstance(
         node,
         ast.BinOp,
     ):
-        operator_function = (
-            ALLOWED_BINARY_OPERATORS.get(
-                type(node.op)
-            )
-        )
+        operator_function = ALLOWED_BINARY_OPERATORS.get(type(node.op))
 
         if operator_function is None:
-            raise ValueError(
-                "Arithmetic operator is not allowed."
-            )
+            raise ValueError("Arithmetic operator is not allowed.")
 
-        left_value = (
-            evaluate_expression_node(
-                node.left
-            )
-        )
+        left_value = evaluate_expression_node(node.left)
 
-        right_value = (
-            evaluate_expression_node(
-                node.right
-            )
-        )
+        right_value = evaluate_expression_node(node.right)
 
         return float(
             operator_function(
@@ -757,28 +633,14 @@ def evaluate_expression_node(
         node,
         ast.UnaryOp,
     ):
-        operator_function = (
-            ALLOWED_UNARY_OPERATORS.get(
-                type(node.op)
-            )
-        )
+        operator_function = ALLOWED_UNARY_OPERATORS.get(type(node.op))
 
         if operator_function is None:
-            raise ValueError(
-                "Unary operator is not allowed."
-            )
+            raise ValueError("Unary operator is not allowed.")
 
-        return float(
-            operator_function(
-                evaluate_expression_node(
-                    node.operand
-                )
-            )
-        )
+        return float(operator_function(evaluate_expression_node(node.operand)))
 
-    raise ValueError(
-        "Expression contains an unsupported element."
-    )
+    raise ValueError("Expression contains an unsupported element.")
 
 
 def calculator(
@@ -787,23 +649,14 @@ def calculator(
 ) -> dict[str, Any]:
     """Safely evaluate basic arithmetic without eval."""
 
-    cleaned_expression = (
-        expression.strip()
-    )
+    cleaned_expression = expression.strip()
 
     if not cleaned_expression:
-        return error_envelope(
-            "Expression must not be empty."
-        )
+        return error_envelope("Expression must not be empty.")
 
-    if not ALLOWED_EXPRESSION_PATTERN.fullmatch(
-        cleaned_expression
-    ):
+    if not ALLOWED_EXPRESSION_PATTERN.fullmatch(cleaned_expression):
         return error_envelope(
-            
-                "Expression contains characters "
-                "outside the arithmetic allowlist."
-            
+            "Expression contains characters outside the arithmetic allowlist."
         )
 
     try:
@@ -812,9 +665,7 @@ def calculator(
             mode="eval",
         )
 
-        value = evaluate_expression_node(
-            expression_tree
-        )
+        value = evaluate_expression_node(expression_tree)
     except (
         SyntaxError,
         TypeError,
@@ -823,16 +674,11 @@ def calculator(
         OverflowError,
     ) as error:
         return error_envelope(
-            
-                "Calculation failed safely: "
-                f"{type(error).__name__}: {error}"
-            
+            f"Calculation failed safely: {type(error).__name__}: {error}"
         )
 
     if not math.isfinite(value):
-        return error_envelope(
-            "Calculation produced a non-finite value."
-        )
+        return error_envelope("Calculation produced a non-finite value.")
 
     data: dict[str, Any] = {
         "value": value,
@@ -841,6 +687,4 @@ def calculator(
     if units:
         data["units"] = units
 
-    return success_envelope(
-        data
-    )
+    return success_envelope(data)

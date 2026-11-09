@@ -1,0 +1,15 @@
+{
+  "experiment": "hw8_three_agent_pipeline",
+  "student": "Sanjana Thummalapalli",
+  "sid4": 7801,
+  "question": "How does Kafka improve coordination and reliability in a distributed clinical-trial processing system?",
+  "result": {
+    "correlation_id": "8afd51d5-421a-4ff6-bb3b-ae5c85902d61",
+    "question": "How does Kafka improve coordination and reliability in a distributed clinical-trial processing system?",
+    "status": "approved",
+    "answer": "Kafka improves clinical-trial coordination by decoupling request producers from the services that process trial work. Each message keeps a correlation ID, allowing the system to connect plans, drafts, and reviewed answers even though the agents run as independent processes. Kafka also stores messages durably so work can continue after a consumer restart. The response to the question 'How does Kafka improve coordination and reliability in a distributed clinical-trial processing system?' follows this plan: 1) Identify the main clinical-trial coordination concept in the question. 2) Explain how Kafka topics and correlation IDs support the workflow. 3) Provide a concise answer grounded in the clinical-trial domain. 4) Check that the answer directly addresses: How does Kafka improve coordination and reliability in a distributed clinical-trial processing system? Reviewer conclusion: the answer is complete, relevant, and approved.",
+    "entity_key": "clinical-trials",
+    "stage": "reviewed",
+    "created_at": "2026-11-05T22:40:17.928772+00:00"
+  }
+}

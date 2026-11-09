@@ -1,0 +1,19 @@
+{
+  "experiment": "hw9_stale_cache_invalidation",
+  "query": "What is the enrollment target of the sleep quality trial?",
+  "trial_id": 2,
+  "trial_code": "S7801-CT-000001",
+  "original_enrollment_target": 120,
+  "updated_enrollment_target": 145,
+  "version_before_update": "4:2026-11-04 22:06:44",
+  "version_after_update": "4:2026-11-09 10:57:37",
+  "stale_cached_answer": "The sleep quality trial has an enrollment target of 120.",
+  "correct_updated_answer": "The sleep quality trial has an enrollment target of 145.",
+  "stale_hit_demonstrated": true,
+  "stale_entries_deleted": 1,
+  "cache_miss_after_invalidation": true,
+  "refreshed_cache_correct": true,
+  "invalidation_strategy": "Delete semantic-cache entries whose stored data-version marker does not match the current clinical_trials data version.",
+  "trade_off": "Version checking prevents stale answers but adds a database version read and may invalidate more cached entries than a record-specific strategy.",
+  "overall_passed": true
+}

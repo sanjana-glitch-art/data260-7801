@@ -1,4 +1,4 @@
-fastapi==0.109.0
+﻿fastapi==0.109.0
 uvicorn[standard]==0.27.0
 python-multipart
 pydantic>=2.12,<3
@@ -11,9 +11,7 @@ jinja2
 itsdangerous
 llama-index
 llama-index-embeddings-huggingface
-sentence-transformers
 faiss-cpu
-numpy
 pandas
 pyyaml
 pypdf
@@ -26,4 +24,8 @@ mcp[cli]
 httpx
 pymongo>=4.10,<5
 PyYAML>=6,<7
-sentence-transformers>=3,<6
+confluent-kafka>=2.6,<4
+redis>=5,<7
+sentence-transformers==3.4.1
+transformers>=4.41,<5
+numpy>=1.26,<2.3

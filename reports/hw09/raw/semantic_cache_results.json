@@ -1,0 +1,102 @@
+{
+  "experiment": "hw9_semantic_cache",
+  "threshold": 0.85,
+  "query_count": 10,
+  "cache_hits": 3,
+  "cache_misses": 7,
+  "cache_hit_rate_percent": 30.0,
+  "average_cached_latency_ms": 7.922,
+  "average_non_cached_latency_ms": 7105.463,
+  "results": [
+    {
+      "query": "Find the sleep clinical trial.",
+      "answer": "The sleep clinical trial found is the 'Sleep Quality and Academic Performance Study' (ID: 2), a Phase II trial with an enrollment target of 120 participants sponsored by San Jose State University.",
+      "is_cached": false,
+      "similarity": null,
+      "latency_ms": 23376.987,
+      "cached_query": null,
+      "data_version": "4:2026-11-04 22:06:44"
+    },
+    {
+      "query": "Find the sleep clinical trial.",
+      "answer": "The sleep clinical trial found is the 'Sleep Quality and Academic Performance Study' (ID: 2), a Phase II trial with an enrollment target of 120 participants sponsored by San Jose State University.",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 7.497,
+      "cached_query": "Find the sleep clinical trial.",
+      "data_version": "4:2026-11-04 22:06:44"
+    },
+    {
+      "query": "Which trial studies sleep quality?",
+      "answer": "The clinical trial that studies sleep quality is the 'Sleep Quality and Academic Performance Study' (ID: S7801-CT-000001), a Phase II trial with an enrollment target of 120 participants, sponsored by San Jose State University.",
+      "is_cached": false,
+      "similarity": 0.844334,
+      "latency_ms": 4775.878,
+      "cached_query": "Find the sleep clinical trial.",
+      "data_version": "4:2026-11-04 22:06:44"
+    },
+    {
+      "query": "Summarize the clinical trial phases.",
+      "answer": "There are 4 clinical trial phases in the database: Phase I (1 trial), Phase II (1 trial), Phase III (1 trial), and Phase IV (1 trial).",
+      "is_cached": false,
+      "similarity": 0.545031,
+      "latency_ms": 3928.201,
+      "cached_query": "Find the sleep clinical trial.",
+      "data_version": "4:2026-11-04 22:06:44"
+    },
+    {
+      "query": "Summarize the clinical trial phases.",
+      "answer": "There are 4 clinical trial phases in the database: Phase I (1 trial), Phase II (1 trial), Phase III (1 trial), and Phase IV (1 trial).",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 7.493,
+      "cached_query": "Summarize the clinical trial phases.",
+      "data_version": "4:2026-11-04 22:06:44"
+    },
+    {
+      "query": "Find the digital wellness trial.",
+      "answer": "The digital wellness trial is the 'Digital Wellness Intervention Study' (ID: 3), a Phase I trial with an enrollment target of 180 university students, sponsored by San Jose State University.",
+      "is_cached": false,
+      "similarity": 0.473355,
+      "latency_ms": 4591.776,
+      "cached_query": "Find the sleep clinical trial.",
+      "data_version": "4:2026-11-04 22:06:44"
+    },
+    {
+      "query": "Find the digital wellness trial.",
+      "answer": "The digital wellness trial is the 'Digital Wellness Intervention Study' (ID: 3), a Phase I trial with an enrollment target of 180 university students, sponsored by San Jose State University.",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 8.776,
+      "cached_query": "Find the digital wellness trial.",
+      "data_version": "4:2026-11-04 22:06:44"
+    },
+    {
+      "query": "Find the remote monitoring study.",
+      "answer": "No clinical trials with the term 'remote monitoring' were found in the database. Please try a different search term or check if the study is active in another registry.",
+      "is_cached": false,
+      "similarity": 0.288656,
+      "latency_ms": 4562.632,
+      "cached_query": "Find the digital wellness trial.",
+      "data_version": "4:2026-11-04 22:06:44"
+    },
+    {
+      "query": "Which study uses remote monitoring?",
+      "answer": "No clinical trials with the term 'remote monitoring' were found in the database.",
+      "is_cached": false,
+      "similarity": 0.828433,
+      "latency_ms": 4373.712,
+      "cached_query": "Find the remote monitoring study.",
+      "data_version": "4:2026-11-04 22:06:44"
+    },
+    {
+      "query": "Find the memory and cognitive trial.",
+      "answer": "The memory and cognitive trial found is the 'Student Memory and Cognitive Performance Trial' (ID: S7801-CT-000003), a Phase III trial sponsored by San Jose State University with an enrollment target of 90 participants.",
+      "is_cached": false,
+      "similarity": 0.49542,
+      "latency_ms": 4129.058,
+      "cached_query": "Find the sleep clinical trial.",
+      "data_version": "4:2026-11-04 22:06:44"
+    }
+  ]
+}
