@@ -1,0 +1,106 @@
+{
+  "homework": 10,
+  "student": "Sanjana Thummalapalli",
+  "sid4": 7801,
+  "checks": [
+    {
+      "name": "personal_configuration",
+      "passed": true,
+      "details": "student=Sanjana Thummalapalli, SID4=7801, repeats=3, attempts=2, timeout=45.0"
+    },
+    {
+      "name": "frozen_evaluation_cases",
+      "passed": true,
+      "details": "cases=20, unique_ids=20, complete=True"
+    },
+    {
+      "name": "human_labels",
+      "passed": true,
+      "details": "rows=20, valid_rows=20"
+    },
+    {
+      "name": "labels_frozen_before_judge",
+      "passed": true,
+      "details": "cc896ff9b717c1ae89948e6ec4daace9957e9db6|Add frozen Homework 10 evaluation cases and human labels"
+    },
+    {
+      "name": "pipeline_geval_evaluation",
+      "passed": true,
+      "details": "plan=5, writer=2, final=5, success=True"
+    },
+    {
+      "name": "final_vs_draft_improvement",
+      "passed": true,
+      "details": "draft=2, final=5, difference=3"
+    },
+    {
+      "name": "bounded_local_judge",
+      "passed": true,
+      "details": "max_attempts=2, timeout=45.0, thinking_disabled=True"
+    },
+    {
+      "name": "human_vs_judge_validation",
+      "passed": true,
+      "details": "cases=20, Spearman=0.923904, MAD=0.35"
+    },
+    {
+      "name": "judge_repeatability",
+      "passed": true,
+      "details": "change_frequency=3.33%, mean_change=0.033333, max_change=1"
+    },
+    {
+      "name": "judge_deployment_decision",
+      "passed": true,
+      "details": "gate_passed=True; decision=The local judge passed the development deployment gate. Human review should still be retained for high-impact decisions."
+    },
+    {
+      "name": "required_trace_scenarios",
+      "passed": true,
+      "details": "hit=True, miss=True, failed=True"
+    },
+    {
+      "name": "trace_id_propagation",
+      "passed": true,
+      "details": "trace_id=83ff9c54-6cd2-4310-96ae-49dd033d00b0, stages=['cache_lookup', 'planner', 'writer', 'reviewer', 'evaluation']"
+    },
+    {
+      "name": "failed_trace_error_details",
+      "passed": true,
+      "details": "stage=writer, error_type=ValueError, error=Controlled Writer failure: plan payload must be a list of valid steps."
+    },
+    {
+      "name": "fifty_confirmed_cache_misses",
+      "passed": true,
+      "details": "requests=50, misses=50, unexpected_hits=0"
+    },
+    {
+      "name": "stage_p50_p95_metrics",
+      "passed": true,
+      "details": "stages=['cache_lookup', 'end_to_end', 'evaluation', 'planner', 'queue_wait_total', 'reviewer', 'writer'], percentiles_valid=True"
+    },
+    {
+      "name": "separate_cache_hit_latency",
+      "passed": true,
+      "details": "samples=20, p50=1.303, p95=1.532"
+    },
+    {
+      "name": "dominant_stage_analysis",
+      "passed": true,
+      "details": "stage=evaluation, share=99.819%, optimization=Reuse a warm local judge process, batch evaluations where appropriate, and move non-blocking evaluation outside the user-facing response path."
+    },
+    {
+      "name": "streamlit_dashboard",
+      "passed": true,
+      "details": "summary, evaluation, trace lookup, cached loaders, and required metrics found"
+    },
+    {
+      "name": "jsonl_trace_evidence",
+      "passed": true,
+      "details": "span_count=416, valid=True"
+    }
+  ],
+  "passed_count": 19,
+  "check_count": 19,
+  "overall_passed": true,
+  "generated_at": "2026-11-16T07:11:14.069065+00:00"
+}
