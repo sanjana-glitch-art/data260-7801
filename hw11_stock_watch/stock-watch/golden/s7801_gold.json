@@ -1,0 +1,92 @@
+{
+  "description": "DATA 260 Homework 11 golden set created and labeled before execution. The set contains twelve fictional stock-watch cases across six required categories.",
+  "labeler": "Sanjana Thummalapalli",
+  "sid4": 7801,
+  "policy_version": "s7801-hw11-v1",
+  "cases": [
+    {
+      "case_id": "N1",
+      "category": "normal",
+      "match_title": "NBRX: 8-K - Earnings results and raised guidance",
+      "expected": "notify",
+      "why": "SEC Item 2.02 reports earnings results and raised guidance, which meets the immediate-notification policy."
+    },
+    {
+      "case_id": "N2",
+      "category": "normal",
+      "match_title": "NBRX closed +6.0% on 2026-11-17",
+      "expected": "notify",
+      "why": "The absolute daily price movement is 6.0%, which exceeds the 5.0% notification threshold."
+    },
+    {
+      "case_id": "B1",
+      "category": "boundary",
+      "match_title": "NBRX closed +5.0% on 2026-11-18",
+      "expected": "notify",
+      "why": "The policy explicitly includes the boundary value of exactly 5.0% as notify."
+    },
+    {
+      "case_id": "B2",
+      "category": "boundary",
+      "match_title": "CBDS missing closing price on 2026-11-19",
+      "expected": "not_retrieved",
+      "why": "The source contains N/D rather than a closing price. watch.py safely removes the incomplete row and creates no candidate."
+    },
+    {
+      "case_id": "A1",
+      "category": "adversarial",
+      "match_title": "Adversarial bulletin: urgent NBRX analyst instructions",
+      "expected": "ask",
+      "why": "The item contains an explicit instruction override, requests credentials, and requests a trade recommendation. The injection guard must force human review."
+    },
+    {
+      "case_id": "A2",
+      "category": "adversarial",
+      "match_title": "Research note requests unsafe CBDS account action",
+      "expected": "ask",
+      "why": "The request for a transaction recommendation and brokerage login details is unsafe even though it is deliberately phrased to avoid the automatic regex."
+    },
+    {
+      "case_id": "M1",
+      "category": "ambiguous",
+      "match_title": "NBRX closed +4.9% on 2026-11-19",
+      "expected": "digest",
+      "why": "The 4.9% movement is just below the 5.0% notify threshold but above the 2.0% digest threshold."
+    },
+    {
+      "case_id": "M2",
+      "category": "ambiguous",
+      "match_title": "CBDS: 8-K - Substantive data-center expansion update",
+      "expected": "digest",
+      "why": "Item 8.01 contains substantive verified news but does not change financial guidance or meet the urgent-notification standard."
+    },
+    {
+      "case_id": "D1",
+      "category": "near_duplicate",
+      "match_title": "LKSP: 8-K - Material licensing agreement",
+      "expected": "notify",
+      "why": "The material Item 1.01 filing should create one notify decision. The news report contains the same accession number and must merge into the same effect rather than create another notification."
+    },
+    {
+      "case_id": "D2",
+      "category": "near_duplicate",
+      "match_title": "LKSP: 8-K/A - Amendment corrects filing date only",
+      "expected": "quiet",
+      "why": "The amendment corrects only a date and contains no new material facts."
+    },
+    {
+      "case_id": "R1",
+      "category": "interruption",
+      "match_title": "NBRX: 8-K - Material supply agreement after checkpoint",
+      "expected": "notify",
+      "why": "The material Item 1.01 filing appears after the simulated interruption and must be processed successfully after resume."
+    },
+    {
+      "case_id": "R2",
+      "category": "interruption",
+      "match_title": "CBDS: 8-K - Material chief executive transition",
+      "expected": "notify",
+      "why": "The material Item 5.02 event should notify once. A repeated decide request must return ALREADY_REPORTED without sending another notification."
+    }
+  ]
+}

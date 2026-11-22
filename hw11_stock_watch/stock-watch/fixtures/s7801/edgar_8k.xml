@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DATA 260 HW11 fictional SEC fixture created by Sanjana Thummalapalli. None of these companies or filings are real. -->
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Fictional EDGAR 8-K filings for HW11 evaluation</title>
+
+  <entry>
+    <id>urn:tag:sec.gov,2008:accession-number=0009999901-26-000201</id>
+    <updated>2026-11-19T16:30:00-05:00</updated>
+    <title>NBRX: 8-K - Earnings results and raised guidance</title>
+    <summary>(Fictional HW11 case N1.) NorthBay Robotics Inc. Item 2.02 Results of Operations and Financial Condition. Quarterly revenue increased 34 percent and full-year guidance was raised.</summary>
+    <link href="https://www.sec.gov/Archives/edgar/data/9999901/000999990126000201/0009999901-26-000201-index.htm" rel="alternate"/>
+  </entry>
+
+  <entry>
+    <id>urn:tag:sec.gov,2008:accession-number=0009999902-26-000202</id>
+    <updated>2026-11-19T15:15:00-05:00</updated>
+    <title>CBDS: 8-K - Substantive data-center expansion update</title>
+    <summary>(Fictional HW11 case M2.) Cobalt Data Systems Inc. Item 8.01 Other Events. The company announced a verified expansion of its primary research data center. The update is substantive but does not change financial guidance.</summary>
+    <link href="https://www.sec.gov/Archives/edgar/data/9999902/000999990226000202/0009999902-26-000202-index.htm" rel="alternate"/>
+  </entry>
+
+  <entry>
+    <id>urn:tag:sec.gov,2008:accession-number=0009999903-26-000203</id>
+    <updated>2026-11-19T14:00:00-05:00</updated>
+    <title>LKSP: 8-K - Material licensing agreement</title>
+    <summary>(Fictional HW11 case D1.) Larkspur Biotech Inc. Item 1.01 Entry into a Material Definitive Agreement. The company entered a material licensing agreement. Accession number 0009999903-26-000203.</summary>
+    <link href="https://www.sec.gov/Archives/edgar/data/9999903/000999990326000203/0009999903-26-000203-index.htm" rel="alternate"/>
+  </entry>
+
+  <entry>
+    <id>urn:tag:sec.gov,2008:accession-number=0009999903-26-000204</id>
+    <updated>2026-11-19T13:10:00-05:00</updated>
+    <title>LKSP: 8-K/A - Amendment corrects filing date only</title>
+    <summary>(Fictional HW11 case D2.) Larkspur Biotech Inc. Form 8-K/A. This amendment corrects a filing date and supplies no new material facts.</summary>
+    <link href="https://www.sec.gov/Archives/edgar/data/9999903/000999990326000204/0009999903-26-000204-index.htm" rel="alternate"/>
+  </entry>
+
+  <entry>
+    <id>urn:tag:sec.gov,2008:accession-number=0009999901-26-000205</id>
+    <updated>2026-11-19T12:20:00-05:00</updated>
+    <title>NBRX: 8-K - Material supply agreement after checkpoint</title>
+    <summary>(Fictional HW11 case R1.) NorthBay Robotics Inc. Item 1.01 Entry into a Material Definitive Agreement. This candidate is intended to be processed after an interrupted scan resumes.</summary>
+    <link href="https://www.sec.gov/Archives/edgar/data/9999901/000999990126000205/0009999901-26-000205-index.htm" rel="alternate"/>
+  </entry>
+
+  <entry>
+    <id>urn:tag:sec.gov,2008:accession-number=0009999902-26-000206</id>
+    <updated>2026-11-19T11:40:00-05:00</updated>
+    <title>CBDS: 8-K - Material chief executive transition</title>
+    <summary>(Fictional HW11 case R2.) Cobalt Data Systems Inc. Item 5.02 Departure and Appointment of Principal Officers. The company announced a material chief executive transition. The resulting alert will be retried to test idempotency.</summary>
+    <link href="https://www.sec.gov/Archives/edgar/data/9999902/000999990226000206/0009999902-26-000206-index.htm" rel="alternate"/>
+  </entry>
+
+</feed>
