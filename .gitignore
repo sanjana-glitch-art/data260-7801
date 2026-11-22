@@ -9,3 +9,7 @@ __pycache__/
 !.env.hw4.example
 node_modules/
 dist/
+# Homework 11 generated runtime files
+hw11_stock_watch/stock-watch/state/
+hw11_stock_watch/stock-watch/digests/
+hw11_stock_watch/stock-watch/demo_test_windows.sh
