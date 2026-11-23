@@ -1,0 +1,8 @@
+stage,sample_count,mean_ms,p50_ms,p95_ms,percent_of_cache_miss_e2e
+cache_lookup,50,1.448,1.283,2.502,0.014
+planner,50,0.004,0.004,0.007,0.0
+writer,50,0.007,0.004,0.007,0.0
+reviewer,50,0.005,0.004,0.009,0.0
+queue_wait_total,50,0.097,0.093,0.178,0.001
+evaluation,50,10130.191,9739.43,13909.063,99.819
+end_to_end,50,10148.588,9754.679,13945.422,100.0

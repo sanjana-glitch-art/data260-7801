@@ -1,0 +1,323 @@
+[
+  {
+    "case_id": "case_01",
+    "category": "complete_correct",
+    "question": "Give the phase and enrollment target of the sleep quality trial.",
+    "plan": [
+      "Find the sleep quality clinical trial.",
+      "Retrieve its phase and enrollment target.",
+      "Return both requested facts."
+    ],
+    "writer_draft": "The Sleep Quality and Academic Performance Study is a Phase II trial with an enrollment target of 120 participants.",
+    "reference_answer": "The Sleep Quality and Academic Performance Study is Phase II and has an enrollment target of 120 participants.",
+    "expected_fields": [
+      "trial_title",
+      "trial_phase",
+      "enrollment_target"
+    ]
+  },
+  {
+    "case_id": "case_02",
+    "category": "missing_enrollment",
+    "question": "Give the phase and enrollment target of the sleep quality trial.",
+    "plan": [
+      "Find the sleep quality clinical trial.",
+      "Retrieve its phase and enrollment target.",
+      "Return both requested facts."
+    ],
+    "writer_draft": "The Sleep Quality and Academic Performance Study is a Phase II trial.",
+    "reference_answer": "The Sleep Quality and Academic Performance Study is Phase II and has an enrollment target of 120 participants.",
+    "expected_fields": [
+      "trial_title",
+      "trial_phase",
+      "enrollment_target"
+    ]
+  },
+  {
+    "case_id": "case_03",
+    "category": "incorrect_phase",
+    "question": "What phase is the sleep quality trial?",
+    "plan": [
+      "Locate the sleep quality trial.",
+      "Return its clinical-trial phase."
+    ],
+    "writer_draft": "The Sleep Quality and Academic Performance Study is a Phase III trial.",
+    "reference_answer": "The Sleep Quality and Academic Performance Study is a Phase II trial.",
+    "expected_fields": [
+      "trial_title",
+      "trial_phase"
+    ]
+  },
+  {
+    "case_id": "case_04",
+    "category": "irrelevant",
+    "question": "Who sponsors the sleep quality trial?",
+    "plan": [
+      "Find the sleep quality trial.",
+      "Retrieve the sponsor name."
+    ],
+    "writer_draft": "Sleep is important for concentration, memory, and academic performance.",
+    "reference_answer": "The Sleep Quality and Academic Performance Study is sponsored by San Jose State University.",
+    "expected_fields": [
+      "trial_title",
+      "sponsor_name"
+    ]
+  },
+  {
+    "case_id": "case_05",
+    "category": "complete_correct",
+    "question": "Identify the digital wellness trial and give its phase.",
+    "plan": [
+      "Search for the digital wellness trial.",
+      "Retrieve its title and phase."
+    ],
+    "writer_draft": "The Digital Wellness Intervention Study is a Phase I clinical trial.",
+    "reference_answer": "The digital wellness trial is the Digital Wellness Intervention Study, and it is Phase I.",
+    "expected_fields": [
+      "trial_title",
+      "trial_phase"
+    ]
+  },
+  {
+    "case_id": "case_06",
+    "category": "missing_phase",
+    "question": "Identify the digital wellness trial and give its phase.",
+    "plan": [
+      "Search for the digital wellness trial.",
+      "Retrieve its title and phase."
+    ],
+    "writer_draft": "The matching trial is the Digital Wellness Intervention Study.",
+    "reference_answer": "The digital wellness trial is the Digital Wellness Intervention Study, and it is Phase I.",
+    "expected_fields": [
+      "trial_title",
+      "trial_phase"
+    ]
+  },
+  {
+    "case_id": "case_07",
+    "category": "incorrect_enrollment",
+    "question": "What is the enrollment target of the digital wellness trial?",
+    "plan": [
+      "Find the digital wellness trial.",
+      "Retrieve its enrollment target."
+    ],
+    "writer_draft": "The Digital Wellness Intervention Study has an enrollment target of 120 participants.",
+    "reference_answer": "The Digital Wellness Intervention Study has an enrollment target of 180 participants.",
+    "expected_fields": [
+      "trial_title",
+      "enrollment_target"
+    ]
+  },
+  {
+    "case_id": "case_08",
+    "category": "complete_correct",
+    "question": "Give the phase, sponsor, and enrollment target of the digital wellness trial.",
+    "plan": [
+      "Find the digital wellness trial.",
+      "Retrieve its phase, sponsor, and enrollment target.",
+      "Return all three facts."
+    ],
+    "writer_draft": "The Digital Wellness Intervention Study is Phase I, is sponsored by San Jose State University, and has an enrollment target of 180 participants.",
+    "reference_answer": "The Digital Wellness Intervention Study is Phase I, is sponsored by San Jose State University, and has an enrollment target of 180 participants.",
+    "expected_fields": [
+      "trial_title",
+      "trial_phase",
+      "sponsor_name",
+      "enrollment_target"
+    ]
+  },
+  {
+    "case_id": "case_09",
+    "category": "complete_correct",
+    "question": "Which clinical trial studies memory and cognitive performance?",
+    "plan": [
+      "Search for trials about memory and cognitive performance.",
+      "Return the matching trial title."
+    ],
+    "writer_draft": "The Student Memory and Cognitive Performance Trial studies memory and cognitive performance.",
+    "reference_answer": "The matching trial is the Student Memory and Cognitive Performance Trial.",
+    "expected_fields": [
+      "trial_title"
+    ]
+  },
+  {
+    "case_id": "case_10",
+    "category": "wrong_trial",
+    "question": "Which clinical trial studies memory and cognitive performance?",
+    "plan": [
+      "Search for trials about memory and cognitive performance.",
+      "Return the matching trial title."
+    ],
+    "writer_draft": "The matching study is the Digital Wellness Intervention Study.",
+    "reference_answer": "The matching trial is the Student Memory and Cognitive Performance Trial.",
+    "expected_fields": [
+      "trial_title"
+    ]
+  },
+  {
+    "case_id": "case_11",
+    "category": "missing_phase",
+    "question": "Give the phase and enrollment target of the memory and cognitive trial.",
+    "plan": [
+      "Find the memory and cognitive trial.",
+      "Retrieve its phase and enrollment target."
+    ],
+    "writer_draft": "The Student Memory and Cognitive Performance Trial has an enrollment target of 90 participants.",
+    "reference_answer": "The Student Memory and Cognitive Performance Trial is Phase III and has an enrollment target of 90 participants.",
+    "expected_fields": [
+      "trial_title",
+      "trial_phase",
+      "enrollment_target"
+    ]
+  },
+  {
+    "case_id": "case_12",
+    "category": "complete_correct",
+    "question": "Give the phase and enrollment target of the memory and cognitive trial.",
+    "plan": [
+      "Find the memory and cognitive trial.",
+      "Retrieve its phase and enrollment target."
+    ],
+    "writer_draft": "The Student Memory and Cognitive Performance Trial is Phase III and has an enrollment target of 90 participants.",
+    "reference_answer": "The Student Memory and Cognitive Performance Trial is Phase III and has an enrollment target of 90 participants.",
+    "expected_fields": [
+      "trial_title",
+      "trial_phase",
+      "enrollment_target"
+    ]
+  },
+  {
+    "case_id": "case_13",
+    "category": "complete_correct",
+    "question": "What is the title and phase of the remote monitoring trial?",
+    "plan": [
+      "Find the remote monitoring clinical trial.",
+      "Retrieve its title and phase."
+    ],
+    "writer_draft": "The remote monitoring trial is the Remote Clinical Monitoring Study, and it is Phase IV.",
+    "reference_answer": "The remote monitoring trial is the Remote Clinical Monitoring Study, and it is Phase IV.",
+    "expected_fields": [
+      "trial_title",
+      "trial_phase"
+    ]
+  },
+  {
+    "case_id": "case_14",
+    "category": "incorrect_phase",
+    "question": "What is the title and phase of the remote monitoring trial?",
+    "plan": [
+      "Find the remote monitoring clinical trial.",
+      "Retrieve its title and phase."
+    ],
+    "writer_draft": "The remote monitoring trial is the Remote Clinical Monitoring Study, and it is Phase II.",
+    "reference_answer": "The remote monitoring trial is the Remote Clinical Monitoring Study, and it is Phase IV.",
+    "expected_fields": [
+      "trial_title",
+      "trial_phase"
+    ]
+  },
+  {
+    "case_id": "case_15",
+    "category": "incomplete",
+    "question": "Summarize the remote monitoring trial with its phase, sponsor, and enrollment target.",
+    "plan": [
+      "Find the remote monitoring trial.",
+      "Retrieve its phase, sponsor, and enrollment target.",
+      "Produce a concise summary."
+    ],
+    "writer_draft": "The Remote Clinical Monitoring Study is a Phase IV clinical trial.",
+    "reference_answer": "The Remote Clinical Monitoring Study is Phase IV, is sponsored by San Jose State University, and has an enrollment target of 250 participants.",
+    "expected_fields": [
+      "trial_title",
+      "trial_phase",
+      "sponsor_name",
+      "enrollment_target"
+    ]
+  },
+  {
+    "case_id": "case_16",
+    "category": "complete_correct",
+    "question": "Summarize the remote monitoring trial with its phase, sponsor, and enrollment target.",
+    "plan": [
+      "Find the remote monitoring trial.",
+      "Retrieve its phase, sponsor, and enrollment target.",
+      "Produce a concise summary."
+    ],
+    "writer_draft": "The Remote Clinical Monitoring Study is Phase IV, is sponsored by San Jose State University, and has an enrollment target of 250 participants.",
+    "reference_answer": "The Remote Clinical Monitoring Study is Phase IV, is sponsored by San Jose State University, and has an enrollment target of 250 participants.",
+    "expected_fields": [
+      "trial_title",
+      "trial_phase",
+      "sponsor_name",
+      "enrollment_target"
+    ]
+  },
+  {
+    "case_id": "case_17",
+    "category": "partially_correct_comparison",
+    "question": "Compare the sleep quality trial and the digital wellness trial by phase and enrollment.",
+    "plan": [
+      "Retrieve the phase and enrollment of the sleep quality trial.",
+      "Retrieve the phase and enrollment of the digital wellness trial.",
+      "Compare the two trials."
+    ],
+    "writer_draft": "The sleep quality trial is Phase II with 120 participants. The digital wellness trial is Phase I.",
+    "reference_answer": "The sleep quality trial is Phase II with an enrollment target of 120, while the digital wellness trial is Phase I with an enrollment target of 180.",
+    "expected_fields": [
+      "sleep_trial_phase",
+      "sleep_trial_enrollment",
+      "digital_trial_phase",
+      "digital_trial_enrollment"
+    ]
+  },
+  {
+    "case_id": "case_18",
+    "category": "complete_correct_comparison",
+    "question": "Compare the sleep quality trial and the digital wellness trial by phase and enrollment.",
+    "plan": [
+      "Retrieve the phase and enrollment of the sleep quality trial.",
+      "Retrieve the phase and enrollment of the digital wellness trial.",
+      "Compare the two trials."
+    ],
+    "writer_draft": "The sleep quality trial is Phase II with an enrollment target of 120, while the digital wellness trial is Phase I with an enrollment target of 180.",
+    "reference_answer": "The sleep quality trial is Phase II with an enrollment target of 120, while the digital wellness trial is Phase I with an enrollment target of 180.",
+    "expected_fields": [
+      "sleep_trial_phase",
+      "sleep_trial_enrollment",
+      "digital_trial_phase",
+      "digital_trial_enrollment"
+    ]
+  },
+  {
+    "case_id": "case_19",
+    "category": "unsupported_claim",
+    "question": "Which listed clinical trial has the largest enrollment target?",
+    "plan": [
+      "Retrieve the enrollment target for each listed trial.",
+      "Compare the enrollment targets.",
+      "Return the trial with the largest target."
+    ],
+    "writer_draft": "The Digital Wellness Intervention Study has the largest enrollment target at 300 participants.",
+    "reference_answer": "The Remote Clinical Monitoring Study has the largest enrollment target at 250 participants.",
+    "expected_fields": [
+      "trial_title",
+      "enrollment_target"
+    ]
+  },
+  {
+    "case_id": "case_20",
+    "category": "complete_correct_aggregate",
+    "question": "Which listed clinical trial has the largest enrollment target?",
+    "plan": [
+      "Retrieve the enrollment target for each listed trial.",
+      "Compare the enrollment targets.",
+      "Return the trial with the largest target."
+    ],
+    "writer_draft": "The Remote Clinical Monitoring Study has the largest enrollment target at 250 participants.",
+    "reference_answer": "The Remote Clinical Monitoring Study has the largest enrollment target at 250 participants.",
+    "expected_fields": [
+      "trial_title",
+      "enrollment_target"
+    ]
+  }
+]
